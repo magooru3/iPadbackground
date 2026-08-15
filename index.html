@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Backdrop Buddies — Pick Your iPad Background!</title>
+<meta name="description" content="A fun, colorful gallery of 150+ iPad backgrounds for kids to browse, preview, and favorite.">
+<meta name="theme-color" content="#ff6fa5">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ============ Loading Screen ============ -->
+<div id="loading-screen" class="loading-screen" role="status" aria-live="polite">
+  <div class="loading-blob">
+    <span class="loading-emoji">🌈</span>
+  </div>
+  <p class="loading-text">Loading fun backgrounds<span class="dots"><span>.</span><span>.</span><span>.</span></span></p>
+</div>
+
+<!-- ============ Top Bar ============ -->
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-emoji">✨</span>
+    <h1>Backdrop Buddies</h1>
+  </div>
+
+  <div class="topbar-actions">
+    <div class="search-wrap">
+      <img class="search-icon" src="images/icons/search.svg" alt="">
+      <input id="search-input" type="search" placeholder="Search backgrounds…" aria-label="Search backgrounds" autocomplete="off">
+    </div>
+    <button id="random-btn" class="pill-btn random-btn" type="button">
+      <img src="images/icons/shuffle.svg" alt="">
+      <span>Random</span>
+    </button>
+    <button id="sound-toggle" class="icon-btn" type="button" aria-pressed="false" aria-label="Toggle sound effects">
+      <img id="sound-icon" src="images/icons/sound-off.svg" alt="">
+    </button>
+  </div>
+</header>
+
+<!-- ============ Category Tabs ============ -->
+<nav class="tabs-wrap" aria-label="Categories">
+  <div id="tabs" class="tabs"></div>
+</nav>
+
+<!-- ============ Grid View ============ -->
+<main id="grid-view" class="grid-view">
+  <p id="results-count" class="results-count"></p>
+  <div id="grid" class="grid" role="list"></div>
+  <p id="empty-state" class="empty-state" hidden>
+    <span>🔍</span> No backgrounds found. Try a different search or category!
+  </p>
+</main>
+
+<!-- ============ Preview View ============ -->
+<section id="preview-view" class="preview-view" hidden aria-modal="true" role="dialog" aria-label="Background preview">
+  <div class="preview-topbar">
+    <button id="preview-back" class="icon-btn preview-back" type="button" aria-label="Back to grid">
+      <img src="images/icons/back.svg" alt="">
+      <span>Back</span>
+    </button>
+    <div class="preview-title-wrap">
+      <p id="preview-title" class="preview-title"></p>
+      <p id="preview-category" class="preview-category"></p>
+    </div>
+    <button id="preview-fav" class="icon-btn preview-fav" type="button" aria-label="Add to favorites">
+      <img id="preview-fav-icon" src="images/icons/heart.svg" alt="">
+    </button>
+  </div>
+
+  <div class="preview-stage">
+    <button id="prev-btn" class="nav-arrow nav-arrow-left" type="button" aria-label="Previous background">
+      <img src="images/icons/arrow-left.svg" alt="">
+    </button>
+
+    <div id="preview-frame" class="preview-frame">
+      <img id="preview-img" class="preview-img" src="" alt="" draggable="false">
+      <div id="confetti-canvas-wrap" class="confetti-canvas-wrap"></div>
+      <div id="set-toast" class="set-toast" hidden>
+        <img src="images/icons/check.svg" alt="">
+        <span>Background Set!</span>
+      </div>
+    </div>
+
+    <button id="next-btn" class="nav-arrow nav-arrow-right" type="button" aria-label="Next background">
+      <img src="images/icons/arrow-right.svg" alt="">
+    </button>
+  </div>
+
+  <div class="preview-bottombar">
+    <button id="set-bg-btn" class="pill-btn set-btn" type="button">
+      <img src="images/icons/check.svg" alt="">
+      <span>Set as Background</span>
+    </button>
+    <button id="download-btn" class="pill-btn download-btn" type="button">
+      <img src="images/icons/download.svg" alt="">
+      <span>Download</span>
+    </button>
+  </div>
+</section>
+
+<audio id="chime-sound" preload="none"></audio>
+
+<script src="app.js"></script>
+</body>
+</html>

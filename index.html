@@ -35,7 +35,13 @@
   <p class="loading-text">Loading fun backgrounds<span class="dots"><span>.</span><span>.</span><span>.</span></span></p>
 </div>
 
-<!-- ============ Top Bar ============ -->
+<!-- ============ Sticky header stack ============ -->
+<!-- The top bar and both tab rows stick as one block. They used to be three
+     independently-sticky elements pinned at hard-coded offsets (72px/116px),
+     which broke as soon as the real heights disagreed with those numbers --
+     e.g. the top bar wraps to two rows on a narrow/split-screen iPad and then
+     sits *over* the style tabs. -->
+<div class="sticky-header">
 <header class="topbar">
   <div class="brand">
     <span class="brand-emoji">✨</span>
@@ -66,6 +72,7 @@
 <nav class="tabs-wrap" aria-label="Categories">
   <div id="tabs" class="tabs"></div>
 </nav>
+</div><!-- /.sticky-header -->
 
 <!-- ============ Grid View ============ -->
 <main id="grid-view" class="grid-view">
@@ -101,7 +108,10 @@
     <div id="preview-frame" class="preview-frame">
       <img id="preview-img" class="preview-img" src="" alt="" draggable="false">
       <div id="confetti-canvas-wrap" class="confetti-canvas-wrap"></div>
-      <div id="set-toast" class="set-toast" hidden>
+      <!-- Visibility is driven by the .show class, not [hidden]: the author
+           `display:flex` on .set-toast would override the hidden attribute
+           anyway, so carrying it here only misreported the toast as hidden. -->
+      <div id="set-toast" class="set-toast" role="status" aria-live="polite">
         <img src="images/icons/check.png" alt="">
         <span class="set-toast-text">
           <span id="set-toast-title" class="set-toast-title">Saved!</span>
@@ -126,8 +136,6 @@
     </button>
   </div>
 </section>
-
-<audio id="chime-sound" preload="none"></audio>
 
 <script src="app.js"></script>
 </body>

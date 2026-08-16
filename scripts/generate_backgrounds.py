@@ -14,6 +14,7 @@ import json
 import math
 import os
 import random
+import re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT_DIR = os.path.join(ROOT, "images", "backgrounds")
@@ -75,6 +76,14 @@ class Svg:
             f'<radialGradient id="{gid}" cx="{cx}%" cy="{cy}%" r="{r}%">{stops}</radialGradient>'
         )
         return f"url(#{gid})"
+
+    def blur_filter(self, std_dev):
+        fid = self.uid("blur")
+        self.add_def(
+            f'<filter id="{fid}" x="-60%" y="-60%" width="220%" height="220%">'
+            f'<feGaussianBlur stdDeviation="{std_dev}"/></filter>'
+        )
+        return fid
 
     def render(self):
         return (
@@ -645,6 +654,81 @@ def background_rect(svg, fill):
 
 
 # --------------------------------------------------------------------------
+# "Realistic style" rendering helpers
+# --------------------------------------------------------------------------
+# These don't fake photography -- they're a second, more polished vector
+# treatment layered around the same flat silhouette shapes used everywhere
+# else: a soft blurred-bokeh backdrop (instead of a flat gradient), a
+# blurred contact shadow under each subject, fine "fur"/texture strokes
+# over the body, a soft directional highlight, and a vignette. Together
+# these read as meaningfully more lifelike/detailed than the flat cartoon
+# style while staying 100% original vector art.
+
+def shadow_ellipse(cx, cy, rx, ry, blur_id, opacity=0.3):
+    return (f'<ellipse cx="{cx:.1f}" cy="{cy:.1f}" rx="{rx:.1f}" ry="{ry:.1f}" '
+            f'fill="#000000" opacity="{opacity:.2f}" filter="url(#{blur_id})"/>')
+
+
+def glow_highlight(svg, cx, cy, r, opacity=0.35):
+    gid = svg.radial_gradient(["#ffffffcc", "#ffffff00"], cx=40, cy=35, r=65)
+    return f'<circle cx="{cx:.1f}" cy="{cy:.1f}" r="{r:.1f}" fill="{gid}" opacity="{opacity:.2f}"/>'
+
+
+def vignette(svg, opacity=0.22):
+    gid = svg.radial_gradient(["#00000000", "#0b0b1a"], cx=50, cy=45, r=72)
+    return f'<rect x="0" y="0" width="{W}" height="{H}" fill="{gid}" opacity="{opacity:.2f}"/>'
+
+
+def fur_texture(cx, cy, r, color, count, rng, opacity_range=(0.25, 0.55), length_range=(6, 16)):
+    items = []
+    for _ in range(count):
+        a = rng.uniform(0, 2 * math.pi)
+        rad = rng.uniform(0.25, 0.92) * r
+        x0 = cx + rad * math.cos(a)
+        y0 = cy + rad * math.sin(a)
+        length = rng.uniform(*length_range)
+        items.append(line(x0, y0, x0 + math.cos(a) * length, y0 + math.sin(a) * length,
+                           color, 1.6, rng.uniform(*opacity_range)))
+    return "".join(items)
+
+
+def bokeh_backdrop(rng, colors, blur_id, n=12, r_range=(90, 300), opacity_range=(0.12, 0.3)):
+    items = []
+    for _ in range(n):
+        cx = rng.uniform(-100, W + 100)
+        cy = rng.uniform(-100, H + 100)
+        r = rng.uniform(*r_range)
+        items.append(f'<circle cx="{cx:.1f}" cy="{cy:.1f}" r="{r:.1f}" fill="{rng.choice(colors)}" '
+                     f'opacity="{rng.uniform(*opacity_range):.2f}" filter="url(#{blur_id})"/>')
+    return items
+
+
+def realistic_scene(motif_fn, palette, sky, count=5, size_range=(220, 340),
+                     texture_color=None, texture_count=24, blur_std=14, angle=100):
+    """Factory mirroring `scene()`, but composing the bokeh/shadow/texture/
+    highlight/vignette stack around each `motif_fn(cx, cy, size, rotation,
+    opacity)` instance for a "realistic style" background."""
+    def build(svg, rng):
+        grad_bg(svg, sky, angle)
+        blur_id = svg.blur_filter(blur_std)
+        for item in bokeh_backdrop(rng, palette, blur_id):
+            svg.add(item)
+        for _ in range(count):
+            cx = rng.uniform(180, W - 180)
+            cy = rng.uniform(240, H - 240)
+            s = rng.uniform(*size_range)
+            rot = rng.uniform(0, 360)
+            op = rng.uniform(0.94, 1.0)
+            svg.add(shadow_ellipse(cx, cy + s * 0.42, s * 0.34, s * 0.12, blur_id, 0.28))
+            svg.add(motif_fn(cx, cy, s, rot, op))
+            if texture_color:
+                svg.add(fur_texture(cx, cy, s * 0.5, texture_color, texture_count, rng))
+            svg.add(glow_highlight(svg, cx - s * 0.22, cy - s * 0.28, s * 0.38, 0.32))
+        svg.add(vignette(svg, 0.2))
+    return build
+
+
+# --------------------------------------------------------------------------
 # Category definitions
 # --------------------------------------------------------------------------
 # Each category: slug, name, list of 6 (title, builder_fn) pairs.
@@ -655,10 +739,21 @@ def grad_bg(svg, colors, angle=135):
 
 
 CATS = []
+CATS_BY_SLUG = {}
 
 
-def cat(slug, name, variants):
-    CATS.append({"slug": slug, "name": name, "variants": variants})
+def cat(slug, name, variants, style="illustrated"):
+    """Register (title, builder_fn) variants under `slug`. Calling this again
+    with a slug already used appends to that category's variant list instead
+    of creating a duplicate tab -- used to layer a second `style` (e.g.
+    "realistic") of artwork into an existing category."""
+    entry = CATS_BY_SLUG.get(slug)
+    if entry is None:
+        entry = {"slug": slug, "name": name, "variants": []}
+        CATS.append(entry)
+        CATS_BY_SLUG[slug] = entry
+    for title, builder in variants:
+        entry["variants"].append((title, builder, style))
 
 
 # ---- 1. Rainbow & Gradients ------------------------------------------------
@@ -2760,6 +2855,919 @@ cat("board-games-puzzles", "Board Games & Puzzles", [
 ])
 
 
+# ============================================================================
+# SECOND EXPANSION PACK -- 16 more illustrated categories, 25 variants each
+# (400 backgrounds), to grow the library toward 1000 and add a lot more tabs.
+# ============================================================================
+
+def titled_variants(seed, moods, palette_options, sky_options, factory, count=25, name=""):
+    """Deterministically builds `count` (title, builder) tuples by combining
+    moods x palettes x skies, keeping titles unique. `factory(colors, sky)`
+    must return a build(svg, rng) function -- typically `scene(...)`."""
+    rng_local = random.Random(seed)
+    combos = [(m, p, s) for m in moods for p in palette_options for s in sky_options]
+    rng_local.shuffle(combos)
+    seen = set()
+    out = []
+    for mood, (pname, pcolors), (sname, scolors) in combos:
+        title = f"{mood} {pname} {name}".replace("  ", " ").strip()
+        if title in seen:
+            continue
+        seen.add(title)
+        out.append((title, factory(pcolors, scolors)))
+        if len(out) >= count:
+            break
+    if len(out) < count:
+        raise ValueError(f"titled_variants({seed!r}): only {len(out)}/{count} unique titles")
+    return out
+
+
+def multi_kind_scene(shape_fn, kinds, colors, sky, count=6, size_range=(170, 260), angle=100):
+    """Like scene(), but shape_fn(cx, cy, size, colors, kind, opacity) picks a
+    random `kind` per instance via the real rng (kind varies breed/species)."""
+    def build(svg, rng):
+        grad_bg(svg, sky, angle)
+        scatter(svg, rng, lambda cx, cy, s, r, o: shape_fn(cx, cy, s, colors, rng.choice(kinds), o),
+                count, size_range=size_range, rotate=True)
+    return build
+
+
+# ---- Dogs & Puppies ---------------------------------------------------------
+
+def dog_breed_shape(cx, cy, size, colors, kind, opacity=1):
+    coat, accent = colors[0], (colors[1] if len(colors) > 1 else colors[0])
+    s = size / 100.0
+    items = []
+    if kind == "labrador":
+        items.append(ellipse(cx - 50 * s, cy - 10 * s, 16 * s, 34 * s, coat, opacity, transform=f"rotate(10 {cx-50*s} {cy-10*s})"))
+        items.append(ellipse(cx + 50 * s, cy - 10 * s, 16 * s, 34 * s, coat, opacity, transform=f"rotate(-10 {cx+50*s} {cy-10*s})"))
+    elif kind == "poodle":
+        items.append(cloud_shape(cx, cy - 8 * s, size * 0.75, coat, opacity))
+    elif kind == "corgi":
+        items.append(polygon([(cx-60*s, cy-40*s), (cx-30*s, cy-40*s), (cx-45*s, cy-85*s)], coat, opacity))
+        items.append(polygon([(cx+60*s, cy-40*s), (cx+30*s, cy-40*s), (cx+45*s, cy-85*s)], coat, opacity))
+    elif kind == "beagle":
+        items.append(ellipse(cx - 55 * s, cy, 18 * s, 40 * s, accent, opacity, transform=f"rotate(8 {cx-55*s} {cy})"))
+        items.append(ellipse(cx + 55 * s, cy, 18 * s, 40 * s, accent, opacity, transform=f"rotate(-8 {cx+55*s} {cy})"))
+    else:  # pug
+        items.append(ellipse(cx - 45 * s, cy - 35 * s, 14 * s, 18 * s, coat, opacity))
+        items.append(ellipse(cx + 45 * s, cy - 35 * s, 14 * s, 18 * s, coat, opacity))
+    items.append(circle(cx, cy, 60 * s, coat, opacity))
+    if kind == "beagle":
+        items.append(f'<path d="M {cx-60*s:.1f} {cy-10*s:.1f} A {60*s:.1f} {60*s:.1f} 0 0 1 {cx+10*s:.1f} {cy-58*s:.1f} '
+                     f'L {cx-10*s:.1f} {cy-20*s:.1f} Z" fill="{accent}" opacity="{opacity:.2f}"/>')
+    items.append(circle(cx - 22 * s, cy - 5 * s, 8 * s, "#2b2b2b", opacity))
+    items.append(circle(cx + 22 * s, cy - 5 * s, 8 * s, "#2b2b2b", opacity))
+    items.append(ellipse(cx, cy + 20 * s, 12 * s, 9 * s, "#2b2b2b", opacity))
+    if kind == "pug":
+        items.append(f'<path d="M {cx-14*s:.1f} {cy+28*s:.1f} Q {cx:.1f} {cy+20*s:.1f} {cx+14*s:.1f} {cy+28*s:.1f}" '
+                     f'fill="none" stroke="#5b4636" stroke-width="{3*s:.1f}" opacity="{opacity:.2f}"/>')
+    return group(items)
+
+
+DOG_KINDS = ["labrador", "poodle", "corgi", "beagle", "pug"]
+
+cat("dogs-puppies", "Dogs & Puppies", titled_variants(
+    "dogs-puppies",
+    moods=["Playful", "Sleepy", "Happy", "Curious", "Loyal", "Cheerful", "Bouncy"],
+    palette_options=[
+        ("Golden", ["#e8b84b", "#f4d78a"]), ("Chocolate", ["#6b4423", "#8a5a2b"]),
+        ("Black & White", ["#2b2b2b", "#f4f1ea"]), ("Cream", ["#f4ecd8", "#e8dcc0"]),
+    ],
+    sky_options=[("in the Park", ["#d8f3dc", "#b7e4c7"]), ("at Home", ["#fff3e0", "#ffe4c2"]),
+                 ("on a Walk", ["#eaf6ff", "#cdeffd"])],
+    factory=lambda colors, sky: multi_kind_scene(dog_breed_shape, DOG_KINDS, colors, sky, 6, (170, 250)),
+    name="Pup",
+))
+
+# ---- Horses & Ponies ---------------------------------------------------------
+
+def horse_shape(cx, cy, size, colors, opacity=1):
+    coat, mane = colors[0], (colors[1] if len(colors) > 1 else "#3a2a1a")
+    s = size / 100.0
+    items = [
+        ellipse(cx, cy + 15 * s, 45 * s, 55 * s, coat, opacity),
+        ellipse(cx, cy + 60 * s, 22 * s, 30 * s, coat, opacity),
+        polygon([(cx-35*s, cy-35*s), (cx-15*s, cy-35*s), (cx-25*s, cy-70*s)], coat, opacity),
+        polygon([(cx+35*s, cy-35*s), (cx+15*s, cy-35*s), (cx+25*s, cy-70*s)], coat, opacity),
+        circle(cx - 18 * s, cy + 5 * s, 7 * s, "#2b2b2b", opacity),
+        circle(cx + 18 * s, cy + 5 * s, 7 * s, "#2b2b2b", opacity),
+        ellipse(cx, cy + 80 * s, 9 * s, 6 * s, "#3a2a1a", opacity),
+    ]
+    for i in range(5):
+        mx, my = cx - 38 * s + i * 4 * s, cy - 40 * s + i * 14 * s
+        items.append(ellipse(mx, my, 9 * s, 16 * s, mane, opacity * 0.9, transform=f"rotate(-20 {mx} {my})"))
+    return group(items)
+
+
+cat("horses-ponies", "Horses & Ponies", titled_variants(
+    "horses-ponies",
+    moods=["Galloping", "Gentle", "Spirited", "Sweet", "Majestic", "Trotting", "Dreamy"],
+    palette_options=[
+        ("Chestnut", ["#8a5a2b", "#3a2a1a"]), ("Palomino", ["#e8c88a", "#fff3e0"]),
+        ("Dapple Grey", ["#adb5bd", "#495057"]), ("Black Stallion", ["#212529", "#495057"]),
+    ],
+    sky_options=[("Pony", ["#eafff1", "#d0f4de"]), ("Meadow Horse", ["#fff3e0", "#ffe4c2"]),
+                 ("Sunset Horse", ["#ff9f7b", "#ff6f91"])],
+    factory=lambda colors, sky: scene(lambda cx, cy, s, r, o: horse_shape(cx, cy, s, colors, o), sky, 5, (200, 300)),
+    name="",
+))
+
+# ---- Ballet & Dance -----------------------------------------------------------
+
+def tutu_shape(cx, cy, size, fill, opacity=1):
+    s = size / 100.0
+    items = [
+        circle(cx, cy - 70 * s, 22 * s, "#ffe0c2", opacity),
+        f'<path d="M {cx-70*s:.1f} {cy+50*s:.1f} Q {cx:.1f} {cy-10*s:.1f} {cx+70*s:.1f} {cy+50*s:.1f} '
+        f'Q {cx:.1f} {cy+30*s:.1f} {cx-70*s:.1f} {cy+50*s:.1f} Z" fill="{fill}" opacity="{opacity:.2f}"/>',
+        rect(cx - 8 * s, cy - 48 * s, 16 * s, 45 * s, "#ffe0c2", opacity=opacity),
+    ]
+    return group(items)
+
+
+def ballet_shoe_shape(cx, cy, size, fill, ribbon_color, opacity=1, rotation=0):
+    s = size / 100.0
+    items = [
+        f'<path d="M {cx-40*s:.1f} {cy:.1f} C {cx-45*s:.1f} {cy-30*s:.1f}, {cx-10*s:.1f} {cy-38*s:.1f}, {cx+15*s:.1f} {cy-25*s:.1f} '
+        f'C {cx+40*s:.1f} {cy-15*s:.1f}, {cx+45*s:.1f} {cy+15*s:.1f}, {cx+35*s:.1f} {cy+22*s:.1f} '
+        f'C {cx+10*s:.1f} {cy+30*s:.1f}, {cx-35*s:.1f} {cy+22*s:.1f}, {cx-40*s:.1f} {cy:.1f} Z" fill="{fill}" opacity="{opacity:.2f}"/>',
+        line(cx + 10 * s, cy + 15 * s, cx + 40 * s, cy + 70 * s, ribbon_color, 5 * s, opacity),
+        line(cx - 5 * s, cy + 18 * s, cx - 25 * s, cy + 75 * s, ribbon_color, 5 * s, opacity),
+    ]
+    t = f"rotate({rotation} {cx} {cy})" if rotation else None
+    return group(items, transform=t)
+
+
+cat("ballet-dance", "Ballet & Dance", titled_variants(
+    "ballet-dance",
+    moods=["Graceful", "Twirling", "Elegant", "Dreamy", "Sparkling", "Center Stage", "Prima"],
+    palette_options=[("Pink", ["#ff8fa3", "#ffd6e8"]), ("Lavender", ["#c8b6ff", "#e0d4ff"]),
+                      ("Sky Blue", ["#a6e3ff", "#caf0f8"]), ("Sunshine", ["#ffe066", "#fff3b0"])],
+    sky_options=[("Ballerina", ["#fff0f5", "#ffe6ee"]), ("Stage Lights", ["#2b2d42", "#3a0ca3"]),
+                 ("Studio", ["#f3e8ff", "#eae4ff"])],
+    factory=lambda colors, sky: scene(lambda cx, cy, s, r, o: tutu_shape(cx, cy, s, colors[0], o), sky, 5, (200, 300)),
+    name="Ballerina",
+))
+
+# ---- Autumn & Fall -------------------------------------------------------------
+
+def leaf_shape(cx, cy, size, fill, opacity=1, rotation=0):
+    s = size / 100.0
+    d = f"M {cx} {cy-60*s} C {cx+40*s} {cy-40*s}, {cx+40*s} {cy+30*s}, {cx} {cy+60*s} C {cx-40*s} {cy+30*s}, {cx-40*s} {cy-40*s}, {cx} {cy-60*s} Z"
+    items = [path(d, fill, opacity), line(cx, cy - 55 * s, cx, cy + 55 * s, "#6b4423", 2 * s, opacity * 0.6)]
+    t = f"rotate({rotation} {cx} {cy})" if rotation else None
+    return group(items, transform=t)
+
+
+def pumpkin_shape(cx, cy, size, fill, opacity=1):
+    s = size / 100.0
+    items = []
+    for dx in (-30, -10, 10, 30):
+        items.append(ellipse(cx + dx * s, cy + 10 * s, 22 * s, 45 * s, fill, opacity))
+    items.append(rect(cx - 6 * s, cy - 45 * s, 12 * s, 25 * s, "#6b8e23", rx=4 * s, opacity=opacity))
+    return group(items)
+
+
+cat("autumn-fall", "Autumn & Fall", titled_variants(
+    "autumn-fall",
+    moods=["Crisp", "Cozy", "Golden", "Falling", "Harvest", "Rustling", "Amber"],
+    palette_options=[("Red Leaf", ["#e63946"]), ("Orange Leaf", ["#f4a261"]),
+                      ("Golden Leaf", ["#ffb703"]), ("Brown Leaf", ["#8a5a2b"])],
+    sky_options=[("Autumn Sky", ["#ffe8b0", "#ffcf8a"]), ("Harvest Morning", ["#fff3e0", "#ffe4c2"]),
+                 ("Fall Dusk", ["#ff9f7b", "#ff6f91"])],
+    factory=lambda colors, sky: scene(lambda cx, cy, s, r, o: leaf_shape(cx, cy, s, colors[0], o, r), sky, 16, (70, 150), True),
+    name="Leaves",
+))
+
+# ---- Spring & Garden -----------------------------------------------------------
+
+def tulip_shape(cx, cy, size, fill, opacity=1):
+    s = size / 100.0
+    items = [
+        f'<path d="M {cx-20*s:.1f} {cy:.1f} C {cx-25*s:.1f} {cy-40*s:.1f}, {cx-10*s:.1f} {cy-55*s:.1f}, {cx:.1f} {cy-55*s:.1f} '
+        f'C {cx+10*s:.1f} {cy-55*s:.1f}, {cx+25*s:.1f} {cy-40*s:.1f}, {cx+20*s:.1f} {cy:.1f} '
+        f'C {cx+10*s:.1f} {cy-10*s:.1f}, {cx-10*s:.1f} {cy-10*s:.1f}, {cx-20*s:.1f} {cy:.1f} Z" fill="{fill}" opacity="{opacity:.2f}"/>',
+        line(cx, cy, cx, cy + 70 * s, "#2d6a4f", 5 * s, opacity),
+        ellipse(cx - 15 * s, cy + 40 * s, 14 * s, 6 * s, "#2d6a4f", opacity, transform=f"rotate(-30 {cx-15*s} {cy+40*s})"),
+    ]
+    return group(items)
+
+
+cat("spring-garden", "Spring & Garden", titled_variants(
+    "spring-garden",
+    moods=["Blooming", "Fresh", "Sunny", "Budding", "Cheerful", "Dewy", "New"],
+    palette_options=[("Tulip", ["#e63946"]), ("Daffodil", ["#ffd60a"]), ("Violet", ["#9b5de5"]),
+                      ("Pink Blossom", ["#ff8fa3"])],
+    sky_options=[("Garden", ["#eafff1", "#d0f4de"]), ("Morning", ["#fff8e0", "#ffefc2"]),
+                 ("Spring Sky", ["#dbe9ff", "#a8c6ff"])],
+    factory=lambda colors, sky: scene(lambda cx, cy, s, r, o: tulip_shape(cx, cy, s, colors[0], o), sky, 12, (100, 180)),
+    name="Garden",
+))
+
+# ---- Dragons & Mythical --------------------------------------------------------
+
+def dragon_shape(cx, cy, size, colors, opacity=1, rotation=0):
+    fill, wing = colors[0], (colors[1] if len(colors) > 1 else colors[0])
+    s = size / 100.0
+    items = [
+        ellipse(cx, cy + 20 * s, 55 * s, 35 * s, fill, opacity),
+        circle(cx - 60 * s, cy - 15 * s, 30 * s, fill, opacity),
+        polygon([(cx-75*s, cy-35*s), (cx-65*s, cy-35*s), (cx-70*s, cy-55*s)], fill, opacity),
+        polygon([(cx-55*s, cy-38*s), (cx-45*s, cy-38*s), (cx-50*s, cy-58*s)], fill, opacity),
+        circle(cx - 68 * s, cy - 18 * s, 4 * s, "#ffe066", opacity),
+        f'<path d="M {cx-10*s:.1f} {cy-5*s:.1f} Q {cx+50*s:.1f} {cy-70*s:.1f} {cx+90*s:.1f} {cy-20*s:.1f} '
+        f'Q {cx+40*s:.1f} {cy-30*s:.1f} {cx+10*s:.1f} {cy+10*s:.1f} Z" fill="{wing}" opacity="{opacity*0.9:.2f}"/>',
+        f'<path d="M {cx+40*s:.1f} {cy+40*s:.1f} Q {cx+90*s:.1f} {cy+60*s:.1f} {cx+100*s:.1f} {cy+100*s:.1f}" '
+        f'fill="none" stroke="{fill}" stroke-width="{16*s:.1f}" stroke-linecap="round" opacity="{opacity:.2f}"/>',
+    ]
+    t = f"rotate({rotation} {cx} {cy})" if rotation else None
+    return group(items, transform=t)
+
+
+cat("dragons-mythical", "Dragons & Mythical", titled_variants(
+    "dragons-mythical",
+    moods=["Fierce", "Friendly", "Soaring", "Legendary", "Sparkling", "Mighty", "Ancient"],
+    palette_options=[("Emerald", ["#2d6a4f", "#95d5b2"]), ("Ruby", ["#e63946", "#ff8fa3"]),
+                      ("Sapphire", ["#118ab2", "#4cc9f0"]), ("Amethyst", ["#7209b7", "#c8b6ff"])],
+    sky_options=[("Dragon Sky", ["#0d1b4c", "#1a1a40"]), ("Mountain Peak", ["#e0c3fc", "#8ec5fc"]),
+                 ("Sunset Flight", ["#ff9f7b", "#ff6f91"])],
+    factory=lambda colors, sky: scene(lambda cx, cy, s, r, o: dragon_shape(cx, cy, s, colors, o, r), sky, 4, (240, 340), True),
+    name="Dragon",
+))
+
+# ---- Wizards & Magic School -----------------------------------------------------
+
+def wizard_hat_shape(cx, cy, size, fill, opacity=1, rotation=0):
+    s = size / 100.0
+    items = [
+        polygon([(cx-45*s, cy+30*s), (cx+45*s, cy+30*s), (cx+8*s, cy-90*s)], fill, opacity),
+        ellipse(cx, cy + 30 * s, 55 * s, 14 * s, fill, opacity),
+        star_shape(cx + 8 * s, cy - 90 * s, 10 * s, "#ffd166", 5, 0, opacity),
+    ]
+    t = f"rotate({rotation} {cx} {cy})" if rotation else None
+    return group(items, transform=t)
+
+
+def wand_shape(cx, cy, size, fill, opacity=1, rotation=0):
+    s = size / 100.0
+    items = [
+        line(cx - 40 * s, cy + 40 * s, cx + 40 * s, cy - 40 * s, "#6b4423", 6 * s, opacity),
+        star_shape(cx + 45 * s, cy - 45 * s, 16 * s, fill, 5, 0, opacity),
+    ]
+    t = f"rotate({rotation} {cx} {cy})" if rotation else None
+    return group(items, transform=t)
+
+
+cat("wizards-magic", "Wizards & Magic School", titled_variants(
+    "wizards-magic",
+    moods=["Enchanted", "Mystical", "Starlit", "Spellbound", "Wise", "Glowing", "Secret"],
+    palette_options=[("Purple", ["#7209b7"]), ("Midnight Blue", ["#023e8a"]),
+                      ("Emerald", ["#2d6a4f"]), ("Golden", ["#ffd166"])],
+    sky_options=[("Magic School", ["#0f0c29", "#302b63"]), ("Spell Study", ["#3a0ca3", "#7209b7"]),
+                 ("Starry Tower", ["#1a1a40", "#0d1b4c"])],
+    factory=lambda colors, sky: scene(lambda cx, cy, s, r, o: wizard_hat_shape(cx, cy, s, colors[0], o, r), sky, 6, (150, 230), True),
+    name="Wizard Hat",
+))
+
+# ---- Treehouses & Forts -----------------------------------------------------------
+
+def treehouse_shape(cx, cy, size, colors, opacity=1):
+    wood, leaf = colors[0], (colors[1] if len(colors) > 1 else "#52b788")
+    s = size / 100.0
+    items = [
+        rect(cx - 10 * s, cy - 20 * s, 20 * s, 140 * s, "#6b4423", opacity=opacity),
+        circle(cx, cy - 60 * s, 70 * s, leaf, opacity * 0.9),
+        rect(cx - 55 * s, cy + 20 * s, 110 * s, 45 * s, wood, rx=6 * s, opacity=opacity),
+        polygon([(cx-60*s, cy+20*s), (cx+60*s, cy+20*s), (cx, cy-15*s)], "#8a5a2b", opacity),
+        rect(cx - 8 * s, cy + 65 * s, 6 * s, 12 * s, wood, opacity=opacity),
+        rect(cx + 2 * s, cy + 65 * s, 6 * s, 12 * s, wood, opacity=opacity),
+    ]
+    return group(items)
+
+
+cat("treehouses-forts", "Treehouses & Forts", titled_variants(
+    "treehouses-forts",
+    moods=["Cozy", "Secret", "Adventure", "Hidden", "Sunny", "Woodland", "Magical"],
+    palette_options=[("Oak", ["#8a5a2b", "#52b788"]), ("Autumn", ["#a0522d", "#e76f51"]),
+                      ("Birch", ["#d4a373", "#95d5b2"]), ("Cedar", ["#6b4423", "#2d6a4f"])],
+    sky_options=[("Treehouse", ["#d8f3dc", "#b7e4c7"]), ("Fort Sunset", ["#ff9f7b", "#ffcf8a"]),
+                 ("Forest Fort", ["#eaf6ff", "#cdeffd"])],
+    factory=lambda colors, sky: scene(lambda cx, cy, s, r, o: treehouse_shape(cx, cy, s, colors, o), sky, 4, (260, 360)),
+    name="Treehouse",
+))
+
+# ---- Roller Skating & Scooters -----------------------------------------------------
+
+def roller_skate_shape(cx, cy, size, colors, opacity=1, rotation=0):
+    fill = colors[0]
+    s = size / 100.0
+    items = [
+        f'<path d="M {cx-40*s:.1f} {cy:.1f} C {cx-45*s:.1f} {cy-25*s:.1f}, {cx-10*s:.1f} {cy-35*s:.1f}, {cx+20*s:.1f} {cy-20*s:.1f} '
+        f'C {cx+40*s:.1f} {cy-10*s:.1f}, {cx+45*s:.1f} {cy+10*s:.1f}, {cx+35*s:.1f} {cy+18*s:.1f} '
+        f'L {cx-38*s:.1f} {cy+18*s:.1f} Z" fill="{fill}" opacity="{opacity:.2f}"/>',
+        circle(cx - 25 * s, cy + 26 * s, 8 * s, "#2b2b2b", opacity),
+        circle(cx - 5 * s, cy + 26 * s, 8 * s, "#2b2b2b", opacity),
+        circle(cx + 15 * s, cy + 26 * s, 8 * s, "#2b2b2b", opacity),
+        circle(cx + 30 * s, cy + 26 * s, 8 * s, "#2b2b2b", opacity),
+    ]
+    t = f"rotate({rotation} {cx} {cy})" if rotation else None
+    return group(items, transform=t)
+
+
+cat("roller-skating", "Roller Skating & Scooters", titled_variants(
+    "roller-skating",
+    moods=["Speedy", "Retro", "Rolling", "Sunny Day", "Neon", "Sidewalk", "Weekend"],
+    palette_options=[("Hot Pink", ["#ff5c8a"]), ("Electric Blue", ["#4cc9f0"]),
+                      ("Sunshine Yellow", ["#ffd166"]), ("Lime", ["#a3e635"])],
+    sky_options=[("Skate Park", ["#eaf6ff", "#cdeffd"]), ("Boardwalk", ["#fff3e0", "#ffe4c2"]),
+                 ("Neon Rink", ["#3a0ca3", "#7209b7"])],
+    factory=lambda colors, sky: scene(lambda cx, cy, s, r, o: roller_skate_shape(cx, cy, s, colors, o, r), sky, 8, (130, 210), True),
+    name="Skates",
+))
+
+# ---- Baking & Kitchen -----------------------------------------------------------
+
+def cookie_shape(cx, cy, size, colors, opacity=1):
+    fill, chip = colors[0], (colors[1] if len(colors) > 1 else "#6b4423")
+    s = size / 100.0
+    items = [circle(cx, cy, 45 * s, fill, opacity)]
+    for i in range(6):
+        rad = math.radians(i * 60)
+        items.append(circle(cx + 28 * s * math.cos(rad), cy + 28 * s * math.sin(rad), 6 * s, chip, opacity))
+    return group(items)
+
+
+def mixing_bowl_shape(cx, cy, size, colors, opacity=1):
+    fill = colors[0]
+    s = size / 100.0
+    items = [
+        f'<path d="M {cx-55*s:.1f} {cy-10*s:.1f} A {55*s:.1f} {45*s:.1f} 0 0 0 {cx+55*s:.1f} {cy-10*s:.1f} Z" fill="{fill}" opacity="{opacity:.2f}"/>',
+        ellipse(cx, cy - 10 * s, 55 * s, 12 * s, fill, opacity),
+    ]
+    return group(items)
+
+
+cat("baking-kitchen", "Baking & Kitchen", titled_variants(
+    "baking-kitchen",
+    moods=["Fresh-Baked", "Sweet", "Homemade", "Warm", "Sugary", "Kitchen", "Delicious"],
+    palette_options=[("Chocolate Chip", ["#e8b84b", "#6b4423"]), ("Sugar Cookie", ["#fff3e0", "#ffd166"]),
+                      ("Gingerbread", ["#8a5a2b", "#e63946"]), ("Pink Frosted", ["#ffd6e8", "#ff8fa3"])],
+    sky_options=[("Bakery", ["#fff0f5", "#ffe6ee"]), ("Cozy Kitchen", ["#fff8e0", "#ffefc2"]),
+                 ("Sunday Baking", ["#eafff1", "#d0f4de"])],
+    factory=lambda colors, sky: scene(lambda cx, cy, s, r, o: cookie_shape(cx, cy, s, colors, o), sky, 8, (120, 200)),
+    name="Cookies",
+))
+
+# ---- Hiking & Nature Trails -----------------------------------------------------
+
+def binoculars_shape(cx, cy, size, colors, opacity=1):
+    fill = colors[0]
+    s = size / 100.0
+    items = [
+        circle(cx - 25 * s, cy, 22 * s, fill, opacity),
+        circle(cx + 25 * s, cy, 22 * s, fill, opacity),
+        rect(cx - 35 * s, cy - 15 * s, 70 * s, 22 * s, fill, rx=6 * s, opacity=opacity),
+        circle(cx - 25 * s, cy, 12 * s, "#87ceeb", opacity),
+        circle(cx + 25 * s, cy, 12 * s, "#87ceeb", opacity),
+    ]
+    return group(items)
+
+
+cat("hiking-nature-trails", "Hiking & Nature Trails", titled_variants(
+    "hiking-nature-trails",
+    moods=["Scenic", "Adventurous", "Mountain", "Trailblazing", "Fresh Air", "Explorer's", "Peaceful"],
+    palette_options=[("Forest Green", ["#2d6a4f"]), ("Trail Brown", ["#8a5a2b"]),
+                      ("Sky Blue", ["#4cc9f0"]), ("Sunset Orange", ["#f4a261"])],
+    sky_options=[("Mountain Trail", ["#e0c3fc", "#8ec5fc"]), ("Forest Path", ["#d8f3dc", "#b7e4c7"]),
+                 ("Summit View", ["#ffe8b0", "#ffcf8a"])],
+    factory=lambda colors, sky: scene(lambda cx, cy, s, r, o: binoculars_shape(cx, cy, s, colors, o), sky, 6, (150, 230)),
+    name="Trail",
+))
+
+# ---- Tea Party -----------------------------------------------------------------
+
+def teacup_shape(cx, cy, size, colors, opacity=1):
+    fill, accent = colors[0], (colors[1] if len(colors) > 1 else "#ffffff")
+    s = size / 100.0
+    items = [
+        f'<path d="M {cx-35*s:.1f} {cy-15*s:.1f} L {cx+35*s:.1f} {cy-15*s:.1f} L {cx+28*s:.1f} {cy+35*s:.1f} '
+        f'C {cx+28*s:.1f} {cy+45*s:.1f}, {cx-28*s:.1f} {cy+45*s:.1f}, {cx-28*s:.1f} {cy+35*s:.1f} Z" fill="{fill}" opacity="{opacity:.2f}"/>',
+        ellipse(cx, cy - 15 * s, 35 * s, 8 * s, accent, opacity),
+        f'<path d="M {cx+28*s:.1f} {cy-5*s:.1f} Q {cx+55*s:.1f} {cy:.1f} {cx+28*s:.1f} {cy+20*s:.1f}" '
+        f'fill="none" stroke="{fill}" stroke-width="{8*s:.1f}" opacity="{opacity:.2f}"/>',
+    ]
+    return group(items)
+
+
+cat("tea-party", "Tea Party", titled_variants(
+    "tea-party",
+    moods=["Fancy", "Whimsical", "Dainty", "Garden", "Afternoon", "Vintage", "Delightful"],
+    palette_options=[("Rose", ["#ff8fa3", "#ffe0eb"]), ("Lavender", ["#c8b6ff", "#f3e8ff"]),
+                      ("Mint", ["#95d5b2", "#eafff1"]), ("Gold Rim", ["#ffd166", "#fff8e0"])],
+    sky_options=[("Tea Garden", ["#fff0f5", "#ffe6ee"]), ("Sunny Porch", ["#fff8e0", "#ffefc2"]),
+                 ("Lace Tablecloth", ["#f3e8ff", "#eae4ff"])],
+    factory=lambda colors, sky: scene(lambda cx, cy, s, r, o: teacup_shape(cx, cy, s, colors, o), sky, 7, (140, 220)),
+    name="Teacups",
+))
+
+# ---- Race Cars & Speed -----------------------------------------------------------
+
+def race_car_shape(cx, cy, size, colors, opacity=1):
+    body, stripe = colors[0], (colors[1] if len(colors) > 1 else "#ffffff")
+    s = size / 100.0
+    items = [
+        polygon([(cx-90*s, cy+15*s), (cx-55*s, cy-30*s), (cx+50*s, cy-30*s), (cx+75*s, cy+15*s)], body, opacity),
+        rect(cx - 95 * s, cy + 10 * s, 195 * s, 30 * s, body, rx=10 * s, opacity=opacity),
+        rect(cx - 30 * s, cy - 45 * s, 60 * s, 15 * s, body, rx=4 * s, opacity=opacity),
+        rect(cx - 20 * s, cy + 5 * s, 60 * s, 10 * s, stripe, opacity=opacity),
+        circle(cx - 55 * s, cy + 50 * s, 20 * s, "#1a1a1a", opacity),
+        circle(cx + 45 * s, cy + 50 * s, 20 * s, "#1a1a1a", opacity),
+    ]
+    return group(items)
+
+
+cat("race-cars-speed", "Race Cars & Speed", titled_variants(
+    "race-cars-speed",
+    moods=["Turbo", "Fast", "Champion", "Roaring", "Track-Ready", "Victory Lap", "Nitro"],
+    palette_options=[("Fire Red", ["#e63946", "#ffffff"]), ("Racing Blue", ["#4361ee", "#ffe066"]),
+                      ("Neon Green", ["#39ff14", "#1a1a1a"]), ("Sunshine Yellow", ["#ffd166", "#1a1a1a"])],
+    sky_options=[("Speedway", ["#adb5bd", "#495057"]), ("Sunset Track", ["#ff9f7b", "#ff6f91"]),
+                 ("Finish Line", ["#eaf6ff", "#cdeffd"])],
+    factory=lambda colors, sky: scene(lambda cx, cy, s, r, o: race_car_shape(cx, cy, s, colors, o), sky, 6, (170, 250)),
+    name="Race Car",
+))
+
+# ---- Jungle & Rainforest -----------------------------------------------------------
+
+def monkey_shape(cx, cy, size, colors, opacity=1):
+    fur, face = colors[0], (colors[1] if len(colors) > 1 else "#f4c6a5")
+    s = size / 100.0
+    items = [
+        circle(cx - 45 * s, cy - 25 * s, 18 * s, fur, opacity),
+        circle(cx + 45 * s, cy - 25 * s, 18 * s, fur, opacity),
+        circle(cx, cy, 55 * s, fur, opacity),
+        circle(cx, cy + 5 * s, 38 * s, face, opacity),
+        circle(cx - 16 * s, cy - 8 * s, 6 * s, "#1a1a1a", opacity),
+        circle(cx + 16 * s, cy - 8 * s, 6 * s, "#1a1a1a", opacity),
+        ellipse(cx, cy + 20 * s, 8 * s, 6 * s, "#1a1a1a", opacity),
+    ]
+    return group(items)
+
+
+cat("jungle-rainforest", "Jungle & Rainforest", titled_variants(
+    "jungle-rainforest",
+    moods=["Wild", "Lush", "Tropical", "Swinging", "Misty", "Exotic", "Vibrant"],
+    palette_options=[("Brown Monkey", ["#8a5a2b", "#f4c6a5"]), ("Golden Monkey", ["#e8b84b", "#fff3e0"]),
+                      ("Grey Monkey", ["#6c757d", "#f4c6a5"]), ("Black Monkey", ["#2b2b2b", "#e8b88a"])],
+    sky_options=[("Rainforest Canopy", ["#1b4332", "#2d6a4f"]), ("Jungle Mist", ["#d8f3dc", "#b7e4c7"]),
+                 ("Tropical Dusk", ["#ff9f7b", "#ff6f91"])],
+    factory=lambda colors, sky: scene(lambda cx, cy, s, r, o: monkey_shape(cx, cy, s, colors, o), sky, 5, (190, 270)),
+    name="Monkey",
+))
+
+# ---- Koalas & Kangaroos -----------------------------------------------------------
+
+def koala_shape(cx, cy, size, colors, opacity=1):
+    fill = colors[0]
+    s = size / 100.0
+    items = [
+        circle(cx - 50 * s, cy - 35 * s, 26 * s, fill, opacity),
+        circle(cx + 50 * s, cy - 35 * s, 26 * s, fill, opacity),
+        circle(cx - 50 * s, cy - 35 * s, 14 * s, "#f4c6a5", opacity),
+        circle(cx + 50 * s, cy - 35 * s, 14 * s, "#f4c6a5", opacity),
+        circle(cx, cy + 5 * s, 55 * s, fill, opacity),
+        circle(cx - 18 * s, cy - 5 * s, 6 * s, "#1a1a1a", opacity),
+        circle(cx + 18 * s, cy - 5 * s, 6 * s, "#1a1a1a", opacity),
+        ellipse(cx, cy + 18 * s, 12 * s, 10 * s, "#1a1a1a", opacity),
+    ]
+    return group(items)
+
+
+def kangaroo_shape(cx, cy, size, colors, opacity=1):
+    fill = colors[0]
+    s = size / 100.0
+    items = [
+        ellipse(cx, cy + 10 * s, 45 * s, 60 * s, fill, opacity),
+        circle(cx + 10 * s, cy - 60 * s, 30 * s, fill, opacity),
+        polygon([(cx-5*s, cy-85*s), (cx+10*s, cy-85*s), (cx+2*s, cy-110*s)], fill, opacity),
+        polygon([(cx+20*s, cy-85*s), (cx+35*s, cy-85*s), (cx+28*s, cy-110*s)], fill, opacity),
+        circle(cx + 22 * s, cy - 62 * s, 4 * s, "#1a1a1a", opacity),
+        f'<path d="M {cx-30*s:.1f} {cy+50*s:.1f} Q {cx-70*s:.1f} {cy+80*s:.1f} {cx-80*s:.1f} {cy+120*s:.1f}" '
+        f'fill="none" stroke="{fill}" stroke-width="{16*s:.1f}" stroke-linecap="round" opacity="{opacity:.2f}"/>',
+    ]
+    return group(items)
+
+
+KOALA_KANGAROO_KINDS = ["koala", "kangaroo"]
+
+
+def koala_or_kangaroo(cx, cy, size, colors, kind, opacity=1):
+    return koala_shape(cx, cy, size, colors, opacity) if kind == "koala" else kangaroo_shape(cx, cy, size, colors, opacity)
+
+
+cat("koalas-kangaroos", "Koalas & Kangaroos", titled_variants(
+    "koalas-kangaroos",
+    moods=["Cuddly", "Bouncy", "Outback", "Sleepy", "Aussie", "Playful", "Sunny"],
+    palette_options=[("Grey", ["#adb5bd"]), ("Reddish Brown", ["#c07a4a"]),
+                      ("Soft Tan", ["#d4a373"]), ("Charcoal", ["#6c757d"])],
+    sky_options=[("Eucalyptus Grove", ["#d8f3dc", "#b7e4c7"]), ("Outback Sunset", ["#ff9f7b", "#ffcf8a"]),
+                 ("Australian Sky", ["#fff3e0", "#ffe4c2"])],
+    factory=lambda colors, sky: multi_kind_scene(koala_or_kangaroo, KOALA_KANGAROO_KINDS, colors, sky, 5, (190, 280)),
+    name="",
+))
+
+# ---- Glitter & Sparkle -----------------------------------------------------------
+
+cat("glitter-sparkle", "Glitter & Sparkle", titled_variants(
+    "glitter-sparkle",
+    moods=["Dazzling", "Shimmering", "Glittery", "Glam", "Shiny", "Twinkling", "Metallic"],
+    palette_options=[("Gold", ["#ffd700", "#fff3b0"]), ("Rose Gold", ["#ff9fd6", "#ffd6e8"]),
+                      ("Silver", ["#e0e0e0", "#ffffff"]), ("Holographic", ["#9b5de5", "#00f5d4", "#f15bb5"])],
+    sky_options=[("Sparkle", ["#2b2d42", "#3a0ca3"]), ("Glam", ["#fdf0ff", "#ffe6f7"]),
+                 ("Disco", ["#0d0221", "#190535"])],
+    factory=lambda colors, sky: scene(lambda cx, cy, s, r, o: sparkle_shape(cx, cy, s * 0.4, rng_choice_colors(r) if len(colors) < 2 else colors[int(abs(r)) % len(colors)], r, o), sky, 40, (30, 100), True),
+    name="Glitter",
+))
+
+
+# ============================================================================
+# REALISTIC STYLE PACK -- 150 more backgrounds (10 each) layering the
+# "realistic style" treatment (bokeh backdrop, contact shadow, texture
+# strokes, soft highlight, vignette -- see realistic_scene()) onto existing
+# shape functions with muted, natural color palettes, across the 15
+# categories where it reads best. These append into their categories'
+# existing tabs rather than creating new ones.
+# ============================================================================
+
+MUTED_SKIES = [
+    ("Soft Focus", ["#c9d6e0", "#eef3f6"]),
+    ("Golden Hour", ["#e8c48c", "#f4dfb8"]),
+    ("Overcast Light", ["#b8c4cc", "#dbe4ea"]),
+]
+PORTRAIT_MOODS = ["Golden Hour", "Soft Focus", "Studio Light", "Candid"]
+
+# ---- Huskies (realistic) -----------------------------------------------------
+HUSKY_REALISTIC_PALETTES = [
+    ("Charcoal & Cream Husky", ["#5b5f66", "#f2efe9", "#5b9bd5", "#5b9bd5"]),
+    ("Copper & Cream Husky", ["#9c5a34", "#f4e8d8", "#7a5230", "#7a5230"]),
+    ("Snow White Husky", ["#f0efe9", "#ffffff", "#5b9bd5", "#7a5230"]),
+    ("Silver Husky", ["#8b8f95", "#e6e3dd", "#5b9bd5", "#5b9bd5"]),
+    ("Sable Husky", ["#a9895e", "#f0e6d2", "#7a5230", "#7a5230"]),
+]
+cat("huskies", "Huskies", titled_variants(
+    "huskies-realistic", PORTRAIT_MOODS, HUSKY_REALISTIC_PALETTES, MUTED_SKIES,
+    factory=lambda colors, sky: realistic_scene(
+        lambda cx, cy, s, r, o: husky_face_shape(cx, cy, s, colors[0], colors[1], colors[2], colors[3], o, "face"),
+        sky, sky, 4, (260, 360), texture_color="#3a2a1a"),
+    count=10, name="Portrait",
+), style="realistic")
+
+# ---- Cute Animals (realistic) -------------------------------------------------
+CUTE_ANIMAL_REALISTIC = [
+    ("Golden Puppy", ["#e8b84b", "#8a5a2b", "puppy"]),
+    ("Tabby Kitten", ["#c9a066", "#c9a066", "kitten"]),
+    ("Snow Bunny", ["#f7f7f7", "#ffd6e8", "bunny"]),
+    ("Red Fox", ["#c1541c", "#ffffff", "fox"]),
+    ("Giant Panda", ["#ffffff", "#2b2b2b", "panda"]),
+]
+cat("cute-animals", "Cute Animals", titled_variants(
+    "cute-animals-realistic", PORTRAIT_MOODS, CUTE_ANIMAL_REALISTIC, MUTED_SKIES,
+    factory=lambda colors, sky: realistic_scene(
+        lambda cx, cy, s, r, o: animal_face_shape(cx, cy, s, colors[0], colors[1], colors[2], o),
+        sky, sky, 4, (250, 350), texture_color="#3a2a1a"),
+    count=10, name="Close-Up",
+), style="realistic")
+
+# ---- Cats & Kittens (realistic) -----------------------------------------------
+CAT_REALISTIC = [
+    ("Tabby Cat", ["#c9a066"]), ("Black Cat", ["#2b2b2b"]), ("White Cat", ["#f7f7f7"]),
+    ("Grey Cat", ["#8b8f95"]), ("Ginger Cat", ["#d97a3d"]),
+]
+cat("cats-kittens", "Cats & Kittens", titled_variants(
+    "cats-realistic", PORTRAIT_MOODS, CAT_REALISTIC, MUTED_SKIES,
+    factory=lambda colors, sky: realistic_scene(
+        lambda cx, cy, s, r, o: cat_face_shape(cx, cy, s, colors[0], o),
+        sky, sky, 4, (250, 350), texture_color="#3a2a1a"),
+    count=10, name="Portrait",
+), style="realistic")
+
+# ---- Farm & Barnyard (realistic) ----------------------------------------------
+COW_REALISTIC = [
+    ("Holstein Cow", ["#f4f1ea", "#1a1a1a"]), ("Jersey Cow", ["#a9895e", "#f0e6d2"]),
+    ("Highland Cow", ["#9c5a34", "#c9895e"]), ("Angus Cow", ["#2b2b2b", "#3a3a3a"]),
+    ("Hereford Cow", ["#9c3b22", "#f4f1ea"]),
+]
+cat("farm-barnyard", "Farm & Barnyard", titled_variants(
+    "farm-realistic", PORTRAIT_MOODS, COW_REALISTIC, MUTED_SKIES,
+    factory=lambda colors, sky: realistic_scene(
+        lambda cx, cy, s, r, o: cow_shape(cx, cy, s, colors[0], colors[1], o),
+        sky, sky, 4, (220, 320), texture_color="#5b4636"),
+    count=10, name="Pasture Portrait",
+), style="realistic")
+
+# ---- Arctic & Polar Animals (realistic) ---------------------------------------
+def arctic_realistic_motif(cx, cy, s, colors, o):
+    kind = colors[-1]
+    if kind == "penguin":
+        return penguin_shape(cx, cy, s, o)
+    if kind == "polarbear":
+        return polar_bear_shape(cx, cy, s, o)
+    if kind == "walrus":
+        return walrus_shape(cx, cy, s, o)
+    return seal_shape(cx, cy, s, colors[0], o)
+
+
+ARCTIC_REALISTIC = [
+    ("Emperor Penguin", ["#adb5bd", "penguin"]), ("Polar Bear", ["#ffffff", "polarbear"]),
+    ("Harbor Seal", ["#8d99ae", "seal"]), ("Walrus", ["#b98d6f", "walrus"]),
+    ("Snow Seal", ["#c9d6e0", "seal"]),
+]
+cat("arctic-polar", "Arctic & Polar Animals", titled_variants(
+    "arctic-realistic", PORTRAIT_MOODS, ARCTIC_REALISTIC, MUTED_SKIES,
+    factory=lambda colors, sky: realistic_scene(
+        lambda cx, cy, s, r, o: arctic_realistic_motif(cx, cy, s, colors, o),
+        sky, sky, 4, (220, 320)),
+    count=10, name="in the Wild",
+), style="realistic")
+
+# ---- Ocean & Sea Life (realistic) ---------------------------------------------
+def ocean_realistic_motif(cx, cy, s, colors, r, o):
+    kind = colors[-1]
+    if kind == "whale":
+        return whale_shape(cx, cy, s, colors[0], o, r)
+    if kind == "dolphin":
+        return dolphin_shape(cx, cy, s, colors[0], o, r)
+    if kind == "turtle":
+        return sea_turtle_shape(cx, cy, s, colors[0], colors[0], o, r)
+    return octopus_shape(cx, cy, s, colors[0], o)
+
+
+OCEAN_REALISTIC = [
+    ("Humpback Whale", ["#3d5a80", "whale"]), ("Bottlenose Dolphin", ["#5b7c99", "dolphin"]),
+    ("Green Sea Turtle", ["#2d6a4f", "turtle"]), ("Reef Octopus", ["#6a4c93", "octopus"]),
+    ("Orca", ["#1a1a1a", "whale"]),
+]
+cat("ocean-sea-life", "Ocean & Sea Life", titled_variants(
+    "ocean-realistic", PORTRAIT_MOODS, OCEAN_REALISTIC, [
+        ("Deep Blue", ["#03045e", "#0077b6"]), ("Sunlit Water", ["#48cae4", "#ade8f4"]),
+        ("Twilight Sea", ["#023e8a", "#0096c7"]),
+    ],
+    factory=lambda colors, sky: realistic_scene(
+        lambda cx, cy, s, r, o: ocean_realistic_motif(cx, cy, s, colors, r, o),
+        sky, sky, 3, (240, 340)),
+    count=10, name="in the Deep",
+), style="realistic")
+
+# ---- Birds & Feathers (realistic) ----------------------------------------------
+def birds_realistic_motif(cx, cy, s, colors, o):
+    kind = colors[-1]
+    if kind == "owl":
+        return owl_shape(cx, cy, s, colors[0], colors[1], "#ffd166", o)
+    if kind == "flamingo":
+        return flamingo_shape(cx, cy, s, colors[0], o)
+    return parrot_shape(cx, cy, s, colors[0], colors[1], o)
+
+
+BIRDS_REALISTIC = [
+    ("Barn Owl", ["#c9b18a", "#f0e6d2", "owl"]), ("Snowy Owl", ["#f0efe9", "#ffffff", "owl"]),
+    ("Scarlet Macaw", ["#c1272d", "#f4a261", "parrot"]), ("Flamingo", ["#e8879b", "#e8879b", "flamingo"]),
+    ("Great Horned Owl", ["#7a6a52", "#c9b18a", "owl"]),
+]
+cat("birds-feathers", "Birds & Feathers", titled_variants(
+    "birds-realistic", PORTRAIT_MOODS, BIRDS_REALISTIC, MUTED_SKIES,
+    factory=lambda colors, sky: realistic_scene(
+        lambda cx, cy, s, r, o: birds_realistic_motif(cx, cy, s, colors, o),
+        sky, sky, 4, (220, 320), texture_color="#5b4636", texture_count=18),
+    count=10, name="in Flight",
+), style="realistic")
+
+# ---- Safari & Desert (realistic) ------------------------------------------------
+def safari_realistic_motif(cx, cy, s, colors, o):
+    kind = colors[-1]
+    if kind == "giraffe":
+        return giraffe_shape(cx, cy, s, colors[0], colors[1], o)
+    if kind == "zebra":
+        return zebra_shape(cx, cy, s, o)
+    if kind == "camel":
+        return camel_shape(cx, cy, s, colors[0], o)
+    return elephant_shape(cx, cy, s, colors[0], o)
+
+
+SAFARI_REALISTIC = [
+    ("African Elephant", ["#8d99ae", "elephant"]), ("Reticulated Giraffe", ["#c9895e", "#6b4423", "giraffe"]),
+    ("Plains Zebra", ["#f4f1ea", "zebra"]), ("Dromedary Camel", ["#c9a066", "camel"]),
+    ("Savanna Elephant", ["#a9a9a9", "elephant"]),
+]
+cat("safari-desert", "Safari & Desert", titled_variants(
+    "safari-realistic", PORTRAIT_MOODS, SAFARI_REALISTIC, [
+        ("Savanna Dust", ["#e8c48c", "#f4dfb8"]), ("Desert Haze", ["#f4a261", "#ffe8b0"]),
+        ("Golden Plains", ["#e9c46a", "#fff3e0"]),
+    ],
+    factory=lambda colors, sky: realistic_scene(
+        lambda cx, cy, s, r, o: safari_realistic_motif(cx, cy, s, colors, o),
+        sky, sky, 3, (240, 340), texture_color="#5b4636", texture_count=16),
+    count=10, name="on Safari",
+), style="realistic")
+
+# ---- Nature Scenes (realistic) --------------------------------------------------
+def realistic_nature_scene(kind, sky, fog_colors):
+    def build(svg, rng):
+        grad_bg(svg, sky, 100)
+        blur_id = svg.blur_filter(24)
+        for item in bokeh_backdrop(rng, fog_colors, blur_id, n=8, r_range=(200, 420), opacity_range=(0.15, 0.28)):
+            svg.add(item)
+        if kind == "mountains":
+            for color, y, spread in [("#5c6b73", 0.6, 1.0), ("#7d8f96", 0.72, 0.85), ("#9fb1b8", 0.85, 0.7)]:
+                pts = [(0, H)]
+                x = 0
+                while x < W:
+                    pts.append((x, H * y - rng.uniform(0, 150) * spread))
+                    x += rng.uniform(200, 300)
+                pts.append((W, H))
+                svg.add(polygon(pts, color, 0.92))
+            svg.add(f'<circle cx="{W*0.78:.0f}" cy="{H*0.16:.0f}" r="90" fill="#fffaf0" opacity="0.85" filter="url(#{blur_id})"/>')
+        else:  # forest
+            for i, (color, y, s) in enumerate([("#3a5a45", 0.55, 1), ("#4d6e58", 0.68, 0.85), ("#5f8067", 0.82, 0.7)]):
+                for _ in range(7):
+                    x = rng.uniform(0, W)
+                    svg.add(triangle_shape(x, H * y, 170 * s, color, 0.9))
+                    svg.add(triangle_shape(x, H * y - 95 * s, 140 * s, color, 0.9))
+        svg.add(vignette(svg, 0.22))
+    return build
+
+
+cat("nature-scenes", "Nature Scenes", [
+    ("Misty Mountain Vista", realistic_nature_scene("mountains", ["#dbe4ea", "#b8c4cc"], ["#ffffff", "#c9d6e0"])),
+    ("Golden Hour Mountains", realistic_nature_scene("mountains", ["#e8c48c", "#f4dfb8"], ["#fff3d6", "#ffdca8"])),
+    ("Foggy Forest Morning", realistic_nature_scene("forest", ["#c9d6e0", "#dbe4ea"], ["#ffffff", "#e6ede8"])),
+    ("Deep Woods Twilight", realistic_nature_scene("forest", ["#2b3a3a", "#3d5a50"], ["#4d6e58", "#1b2e2a"])),
+    ("Alpine Sunrise", realistic_nature_scene("mountains", ["#f4a261", "#ffe8b0"], ["#ffd6a5", "#fff3d6"])),
+    ("Rainforest Haze", realistic_nature_scene("forest", ["#95d5b2", "#d8f3dc"], ["#eafff1", "#c9e8d0"])),
+    ("Overcast Peaks", realistic_nature_scene("mountains", ["#8d99ae", "#adb5bd"], ["#c9d6e0", "#e9ecef"])),
+    ("Autumn Forest Light", realistic_nature_scene("forest", ["#e9c46a", "#f4a261"], ["#ffe8b0", "#ffcf8a"])),
+    ("Snow-Capped Mountains", realistic_nature_scene("mountains", ["#eef3f6", "#c9d6e0"], ["#ffffff", "#dbe4ea"])),
+    ("Evergreen Forest Mist", realistic_nature_scene("forest", ["#4d6e58", "#95d5b2"], ["#d8f3dc", "#c9d6e0"])),
+], style="realistic")
+
+# ---- Space & Planets (realistic) ------------------------------------------------
+def realistic_space_scene(kind, sky, nebula_colors):
+    def build(svg, rng):
+        grad_bg(svg, sky, 100)
+        for _ in range(180):
+            r = rng.uniform(1.5, 4.5)
+            svg.add(circle(rng.uniform(0, W), rng.uniform(0, H), r, "#ffffff", rng.uniform(0.3, 0.95)))
+        blur_id = svg.blur_filter(30)
+        for item in bokeh_backdrop(rng, nebula_colors, blur_id, n=6, r_range=(220, 460), opacity_range=(0.16, 0.3)):
+            svg.add(item)
+        cx, cy = W * rng.uniform(0.35, 0.65), H * rng.uniform(0.3, 0.55)
+        if kind == "moon":
+            svg.add(shadow_ellipse(cx, cy + 260, 220, 60, blur_id, 0.2))
+            svg.add(moon_shape(cx, cy, 260, "#e6e3dd", 0.97))
+            svg.add(glow_highlight(svg, cx - 60, cy - 70, 220, 0.3))
+        else:  # planet
+            svg.add(planet_shape(cx, cy, 220, rng.choice(nebula_colors), "#ffffff", 0.95))
+            svg.add(glow_highlight(svg, cx - 60, cy - 70, 200, 0.28))
+        svg.add(vignette(svg, 0.28))
+    return build
+
+
+cat("space-planets", "Space & Planets", [
+    ("Lunar Surface Close-Up", realistic_space_scene("moon", ["#03071e", "#0a2540"], ["#3a0ca3", "#7209b7"])),
+    ("Deep Space Nebula", realistic_space_scene("planet", ["#0d0221", "#190535"], ["#f72585", "#7209b7", "#3a0ca3"])),
+    ("Saturn-Like Ringed World", realistic_space_scene("planet", ["#020024", "#090979"], ["#4361ee", "#4cc9f0"])),
+    ("Blood Moon Rising", realistic_space_scene("moon", ["#1a0000", "#3a0ca3"], ["#e63946", "#7209b7"])),
+    ("Crater-Marked Moon", realistic_space_scene("moon", ["#0f0c29", "#302b63"], ["#8b8f95", "#c9d6e0"])),
+    ("Distant Gas Giant", realistic_space_scene("planet", ["#03045e", "#023e8a"], ["#00f5d4", "#0077b6"])),
+    ("Starfield Observation", realistic_space_scene("moon", ["#000814", "#001d3d"], ["#4cc9f0", "#a6e3ff"])),
+    ("Amber Nebula Cloud", realistic_space_scene("planet", ["#1a1a40", "#0d1b4c"], ["#f4a261", "#e76f51"])),
+    ("Twin Moons Night", realistic_space_scene("moon", ["#10002b", "#240046"], ["#c8b6ff", "#9b5de5"])),
+    ("Emerald Nebula Field", realistic_space_scene("planet", ["#03071e", "#03045e"], ["#06d6a0", "#2ec4b6"])),
+], style="realistic")
+
+# ---- Dinosaurs & Prehistoric (realistic) -----------------------------------------
+DINO_REALISTIC = [
+    ("Olive Green Dino", ["#5f6b3a", "#3d4526"]), ("Slate Grey Dino", ["#6c757d", "#495057"]),
+    ("Earthy Brown Dino", ["#7a5c3e", "#5b4636"]), ("Moss Green Dino", ["#4a6b3a", "#2d3f22"]),
+    ("Sandstone Dino", ["#a68a64", "#7a5c3e"]),
+]
+cat("dinosaurs-prehistoric", "Dinosaurs & Prehistoric", titled_variants(
+    "dino-realistic", PORTRAIT_MOODS, DINO_REALISTIC, [
+        ("Prehistoric Jungle", ["#3a5a45", "#4d6e58"]), ("Volcanic Haze", ["#f4a261", "#e76f51"]),
+        ("Fossil Dig Site", ["#e8c48c", "#f4dfb8"]),
+    ],
+    factory=lambda colors, sky: realistic_scene(
+        lambda cx, cy, s, r, o: dino_shape(cx, cy, s, colors[0], colors[1], o),
+        sky, sky, 3, (240, 340), texture_color="#2b2b2b", texture_count=14),
+    count=10, name="",
+), style="realistic")
+
+# ---- Reptiles & Amphibians (realistic) --------------------------------------------
+def reptile_realistic_motif(cx, cy, s, colors, r, o):
+    kind = colors[-1]
+    if kind == "turtle":
+        return turtle_shape(cx, cy, s, colors[0], colors[0], o)
+    if kind == "chameleon":
+        return chameleon_shape(cx, cy, s, colors[0], o)
+    if kind == "snake":
+        return snake_shape(cx, cy, s, colors[0], o, r)
+    return frog_shape(cx, cy, s, colors[0], o)
+
+
+REPTILE_REALISTIC = [
+    ("Red-Eyed Tree Frog", ["#4a8f3c", "frog"]), ("Box Turtle", ["#5b4636", "turtle"]),
+    ("Veiled Chameleon", ["#4a8f6b", "chameleon"]), ("Corn Snake", ["#a9895e", "snake"]),
+    ("Poison Dart Frog", ["#f4d35e", "frog"]),
+]
+cat("reptiles-amphibians", "Reptiles & Amphibians", titled_variants(
+    "reptile-realistic", PORTRAIT_MOODS, REPTILE_REALISTIC, [
+        ("Rainforest Floor", ["#2b3a2a", "#3d5a45"]), ("Terrarium Light", ["#95d5b2", "#d8f3dc"]),
+        ("Wetland Morning", ["#c9d6e0", "#eef3f6"]),
+    ],
+    factory=lambda colors, sky: realistic_scene(
+        lambda cx, cy, s, r, o: reptile_realistic_motif(cx, cy, s, colors, r, o),
+        sky, sky, 4, (200, 300)),
+    count=10, name="Close-Up",
+), style="realistic")
+
+# ---- Winter & Holiday (realistic) --------------------------------------------------
+def realistic_winter_scene(sky, snow_colors):
+    def build(svg, rng):
+        grad_bg(svg, sky, 100)
+        blur_id = svg.blur_filter(20)
+        for item in bokeh_backdrop(rng, snow_colors, blur_id, n=7, r_range=(160, 340), opacity_range=(0.14, 0.26)):
+            svg.add(item)
+        for _ in range(4):
+            cx, cy = rng.uniform(200, W - 200), rng.uniform(H * 0.5, H * 0.85)
+            size = rng.uniform(220, 320)
+            svg.add(shadow_ellipse(cx, cy + size * 0.85, size * 0.5, size * 0.14, blur_id, 0.22))
+            svg.add(snowman_shape(cx, cy, size, 0.97))
+        for _ in range(40):
+            svg.add(circle(rng.uniform(0, W), rng.uniform(0, H), rng.uniform(2, 5), "#ffffff", rng.uniform(0.5, 0.9)))
+        svg.add(vignette(svg, 0.2))
+    return build
+
+
+cat("winter-holiday", "Winter & Holiday", [
+    ("Snowfall at Dusk", realistic_winter_scene(["#4a5a6b", "#2b3a4a"], ["#c9d6e0", "#8b8f95"])),
+    ("Frosty Morning Light", realistic_winter_scene(["#dbe4ea", "#eef3f6"], ["#ffffff", "#c9d6e0"])),
+    ("Blue Hour Snowfall", realistic_winter_scene(["#023e8a", "#0096c7"], ["#4cc9f0", "#a6e3ff"])),
+    ("Golden Winter Sunset", realistic_winter_scene(["#e8c48c", "#f4dfb8"], ["#ffd6a5", "#fff3d6"])),
+    ("Overcast Snow Day", realistic_winter_scene(["#8d99ae", "#adb5bd"], ["#c9d6e0", "#e9ecef"])),
+    ("Moonlit Snowfield", realistic_winter_scene(["#0d1b4c", "#1a1a40"], ["#8b8f95", "#c9d6e0"])),
+    ("Cabin Window Snow", realistic_winter_scene(["#5b4636", "#3a2a1a"], ["#ffe8b0", "#f4dfb8"])),
+    ("Pink Winter Dawn", realistic_winter_scene(["#ffb3c6", "#ffe0eb"], ["#ffffff", "#ffd6e8"])),
+    ("Deep Winter Night", realistic_winter_scene(["#03071e", "#0a2540"], ["#4cc9f0", "#8b8f95"])),
+    ("Soft Grey Snowscape", realistic_winter_scene(["#c9d6e0", "#dbe4ea"], ["#ffffff", "#eef3f6"])),
+], style="realistic")
+
+# ---- Summer & Beach (realistic) --------------------------------------------------
+def realistic_beach_scene(sky, haze_colors):
+    def build(svg, rng):
+        grad_bg(svg, sky, 100)
+        blur_id = svg.blur_filter(22)
+        for item in bokeh_backdrop(rng, haze_colors, blur_id, n=7, r_range=(180, 380), opacity_range=(0.14, 0.26)):
+            svg.add(item)
+        svg.add(f'<circle cx="{W*0.5:.0f}" cy="{H*0.22:.0f}" r="140" fill="#fff3d6" opacity="0.9" filter="url(#{blur_id})"/>')
+        svg.add(circle(W * 0.5, H * 0.22, 90, "#ffe8b0", 0.95))
+        svg.add(rect(0, H * 0.62, W, H * 0.1, "#4a8fa8", opacity=0.85))
+        svg.add(rect(0, H * 0.72, W, H * 0.28, "#e8c48c", opacity=0.9))
+        for _ in range(3):
+            cx, cy = rng.uniform(150, W - 150), H * rng.uniform(0.55, 0.68)
+            svg.add(shadow_ellipse(cx, cy + 210, 90, 22, blur_id, 0.2))
+            svg.add(palm_tree_shape(cx, cy, 220, "#5b4636", "#3d5a45", 0.95))
+        svg.add(vignette(svg, 0.2))
+    return build
+
+
+cat("summer-beach", "Summer & Beach", [
+    ("Golden Hour Shoreline", realistic_beach_scene(["#ffe8b0", "#ffcf8a"], ["#fff3d6", "#ffd6a5"])),
+    ("Turquoise Lagoon", realistic_beach_scene(["#a8e6ff", "#dff7ff"], ["#48cae4", "#ade8f4"])),
+    ("Sunset Beach Haze", realistic_beach_scene(["#ff9f7b", "#ff6f91"], ["#ffcf8a", "#ff9f7b"])),
+    ("Misty Morning Coast", realistic_beach_scene(["#c9d6e0", "#eef3f6"], ["#ffffff", "#dbe4ea"])),
+    ("Tropical Noon Light", realistic_beach_scene(["#4a8fa8", "#7fc8d8"], ["#a8e6ff", "#dff7ff"])),
+    ("Pastel Beach Dawn", realistic_beach_scene(["#ffd6e8", "#fff0f5"], ["#ffe0eb", "#ffffff"])),
+    ("Overcast Shoreline", realistic_beach_scene(["#8d99ae", "#adb5bd"], ["#c9d6e0", "#e9ecef"])),
+    ("Golden Sand Dunes", realistic_beach_scene(["#e9c46a", "#fff3e0"], ["#ffe8b0", "#fff3d6"])),
+    ("Twilight Palm Silhouette", realistic_beach_scene(["#3a0ca3", "#7209b7"], ["#c8b6ff", "#9b5de5"])),
+    ("Clear Blue Coastline", realistic_beach_scene(["#00b4d8", "#90e0ef"], ["#a8e6ff", "#caf0f8"])),
+], style="realistic")
+
+# ---- Dogs & Puppies (realistic) --------------------------------------------------
+DOG_REALISTIC = [
+    ("Golden Retriever", ["#e8b84b", "#f4d78a", "labrador"]), ("Chocolate Lab", ["#6b4423", "#8a5a2b", "labrador"]),
+    ("Corgi", ["#e8b84b", "#f4f1ea", "corgi"]), ("Fawn Pug", ["#d4a373", "#5b4636", "pug"]),
+    ("Tricolor Beagle", ["#8a5a2b", "#f4f1ea", "beagle"]),
+]
+cat("dogs-puppies", "Dogs & Puppies", titled_variants(
+    "dogs-realistic", PORTRAIT_MOODS, DOG_REALISTIC, MUTED_SKIES,
+    factory=lambda colors, sky: realistic_scene(
+        lambda cx, cy, s, r, o: dog_breed_shape(cx, cy, s, colors[:2], colors[2], o),
+        sky, sky, 4, (250, 350), texture_color="#3a2a1a"),
+    count=10, name="Portrait",
+), style="realistic")
+
+
 # --------------------------------------------------------------------------
 # Build everything
 # --------------------------------------------------------------------------
@@ -2777,15 +3785,100 @@ def slugify(title):
     return s.strip("-")
 
 
+# Extra search-recall tags per category, layered on top of the category name,
+# style, and title keywords for every background in that category. This is
+# what makes e.g. searching "dog" or "pet" surface Huskies, or "sea" surface
+# Ocean & Sea Life, without relying on the title alone.
+CATEGORY_TAGS = {
+    "rainbow-gradients": ["rainbow", "gradient", "colorful", "sky", "pastel"],
+    "geometric-patterns": ["pattern", "shapes", "geometric", "polka dot", "stripes"],
+    "cute-animals": ["animal", "animals", "pet", "cute", "baby animal"],
+    "nature-scenes": ["nature", "outdoors", "scenery", "landscape"],
+    "space-planets": ["space", "galaxy", "stars", "astronomy", "cosmic"],
+    "flowers-florals": ["flower", "floral", "garden", "bloom", "botanical"],
+    "butterflies-insects": ["butterfly", "insect", "bug", "garden", "wings"],
+    "mermaids-underwater": ["mermaid", "underwater", "ocean", "sea", "fantasy"],
+    "fairies-magic": ["fairy", "magic", "fantasy", "sparkle", "enchanted"],
+    "princesses-castles": ["princess", "castle", "royal", "fairytale", "crown"],
+    "hearts-romance": ["heart", "love", "romance", "valentine"],
+    "fashion-shopping": ["fashion", "style", "clothes", "shopping", "boutique"],
+    "unicorns-fantasy": ["unicorn", "fantasy", "magical", "rainbow", "mythical"],
+    "cats-kittens": ["cat", "kitten", "pet", "feline"],
+    "bows-ribbons": ["bow", "ribbon", "cute", "decorative", "lace"],
+    "sports-games": ["sports", "game", "athletic", "play", "ball"],
+    "dinosaurs-prehistoric": ["dinosaur", "prehistoric", "dino", "jurassic", "fossil"],
+    "vehicles": ["vehicle", "car", "truck", "transportation", "travel"],
+    "superheroes-action": ["superhero", "hero", "action", "comic", "cape"],
+    "food-treats": ["food", "treat", "snack", "sweet", "dessert"],
+    "music-dance": ["music", "dance", "song", "rhythm", "instrument"],
+    "winter-holiday": ["winter", "holiday", "christmas", "snow", "festive"],
+    "summer-beach": ["summer", "beach", "sun", "vacation", "tropical"],
+    "weather": ["weather", "sky", "clouds", "rain", "climate"],
+    "neon-bold": ["neon", "bright", "glow", "bold", "vibrant"],
+    "huskies": ["dog", "dogs", "puppy", "husky", "pet", "sled dog", "winter dog"],
+    "arctic-polar": ["arctic", "polar", "cold", "snow", "ice", "winter animal"],
+    "farm-barnyard": ["farm", "barnyard", "farm animal", "countryside", "rural"],
+    "ocean-sea-life": ["ocean", "sea", "marine", "underwater", "aquatic", "fish"],
+    "birds-feathers": ["bird", "feather", "wings", "tropical bird", "flying"],
+    "robots-gadgets": ["robot", "gadget", "tech", "mechanical", "futuristic"],
+    "pirates-treasure": ["pirate", "treasure", "ship", "ocean", "adventure"],
+    "camping-outdoors": ["camping", "outdoors", "tent", "adventure", "wilderness"],
+    "circus-carnival": ["circus", "carnival", "fair", "fun", "festival"],
+    "construction-diggers": ["construction", "truck", "digger", "builder", "machine"],
+    "school-learning": ["school", "learning", "education", "study", "classroom"],
+    "safari-desert": ["safari", "desert", "wild animal", "savanna", "jungle animal"],
+    "reptiles-amphibians": ["reptile", "amphibian", "frog", "turtle", "lizard"],
+    "emoji-faces": ["emoji", "smiley", "face", "happy", "mood"],
+    "board-games-puzzles": ["board game", "puzzle", "game night", "dice", "cards"],
+    "dogs-puppies": ["dog", "dogs", "puppy", "puppies", "pet", "breed"],
+    "horses-ponies": ["horse", "pony", "ponies", "equestrian", "stable", "riding"],
+    "ballet-dance": ["ballet", "dance", "dancer", "ballerina", "tutu"],
+    "autumn-fall": ["autumn", "fall", "leaves", "pumpkin", "harvest", "cozy"],
+    "spring-garden": ["spring", "garden", "gardening", "flowers", "bloom", "bees"],
+    "dragons-mythical": ["dragon", "mythical", "fantasy", "legend", "magic"],
+    "wizards-magic": ["wizard", "magic", "spell", "witch", "potion"],
+    "treehouses-forts": ["treehouse", "fort", "hideout", "forest", "adventure"],
+    "roller-skating": ["roller skate", "skating", "scooter", "wheels", "fun"],
+    "baking-kitchen": ["baking", "kitchen", "cookies", "cupcake", "chef", "cooking"],
+    "hiking-nature-trails": ["hiking", "trail", "nature", "mountain", "adventure", "outdoors"],
+    "tea-party": ["tea party", "teacup", "teapot", "cookies", "fancy", "whimsical"],
+    "race-cars-speed": ["race car", "racing", "speed", "fast", "checkered flag"],
+    "jungle-rainforest": ["jungle", "rainforest", "tropical", "monkey", "vine", "exotic"],
+    "koalas-kangaroos": ["koala", "kangaroo", "australia", "australian animal", "marsupial"],
+    "glitter-sparkle": ["glitter", "sparkle", "shiny", "glam", "shimmer"],
+}
+
+_STOPWORDS = {
+    "a", "an", "the", "of", "in", "on", "at", "for", "to", "and", "with",
+    "your", "my", "is", "day", "time",
+}
+
+
+def title_keywords(title):
+    """Meaningful, deduped keywords pulled from a background's title, for
+    search recall beyond the category name (e.g. "Aurora Husky Night" ->
+    aurora, husky, night)."""
+    words = re.findall(r"[a-z']+", title.lower())
+    seen, out = set(), []
+    for w in words:
+        if len(w) <= 2 or w in _STOPWORDS or w in seen:
+            continue
+        seen.add(w)
+        out.append(w)
+    return out
+
+
 def main():
     os.makedirs(OUT_DIR, exist_ok=True)
     entries = []
     total = 0
+    style_counts = {}
     for cat_def in CATS:
         slug = cat_def["slug"]
         cat_dir = os.path.join(OUT_DIR, slug)
         os.makedirs(cat_dir, exist_ok=True)
-        for i, (title, builder) in enumerate(cat_def["variants"], start=1):
+        bonus = CATEGORY_TAGS.get(slug, [])
+        for i, (title, builder, style) in enumerate(cat_def["variants"], start=1):
             rng = random.Random(f"{slug}-{i}-{title}")
             svg = Svg()
             builder(svg, rng)
@@ -2794,22 +3887,35 @@ def main():
             filepath = os.path.join(cat_dir, filename)
             with open(filepath, "w") as f:
                 f.write(svg.render())
+
+            tags = []
+            for t in ([slug.replace("-", " "), cat_def["name"].lower(), style]
+                      + bonus + title_keywords(title)):
+                if t not in tags:
+                    tags.append(t)
+
+            credit = ("Original artwork generated for this app "
+                      "(enhanced realistic-style illustration)" if style == "realistic"
+                      else "Original artwork generated for this app")
+
             entries.append({
                 "id": f"{slug}/{file_slug}",
                 "title": title,
                 "category": slug,
                 "categoryName": cat_def["name"],
                 "filename": f"images/backgrounds/{slug}/{filename}",
-                "credit": "Original artwork generated for this app",
-                "tags": [slug.replace("-", " "), cat_def["name"].lower()],
+                "style": style,
+                "credit": credit,
+                "tags": tags,
             })
+            style_counts[style] = style_counts.get(style, 0) + 1
             total += 1
     with open(JSON_PATH, "w") as f:
         json.dump({
             "categories": [{"slug": c["slug"], "name": c["name"]} for c in CATS],
             "backgrounds": entries,
         }, f, indent=2)
-    print(f"Generated {total} backgrounds across {len(CATS)} categories.")
+    print(f"Generated {total} backgrounds across {len(CATS)} categories. Styles: {style_counts}")
 
 
 if __name__ == "__main__":

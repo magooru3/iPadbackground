@@ -13,17 +13,26 @@
     categories: [],
     filtered: [],
     activeCategory: "all",
+    activeStyle: "all",
     searchTerm: "",
     favorites: new Set(loadFavorites()),
     soundOn: localStorage.getItem(SOUND_KEY) === "true",
     previewIndex: -1,
     audioCtx: null,
+    renderedCount: 0,
+  };
+
+  const STYLE_LABELS = {
+    all: "🎨 All Styles",
+    illustrated: "🖍️ Illustrated",
+    realistic: "📷 Realistic Style",
   };
 
   // ---- DOM refs -----------------------------------------------------
   const el = {
     loadingScreen: document.getElementById("loading-screen"),
     tabs: document.getElementById("tabs"),
+    styleTabs: document.getElementById("style-tabs"),
     grid: document.getElementById("grid"),
     resultsCount: document.getElementById("results-count"),
     emptyState: document.getElementById("empty-state"),
@@ -37,6 +46,7 @@
     previewBack: document.getElementById("preview-back"),
     previewTitle: document.getElementById("preview-title"),
     previewCategory: document.getElementById("preview-category"),
+    previewCredit: document.getElementById("preview-credit"),
     previewFav: document.getElementById("preview-fav"),
     previewFavIcon: document.getElementById("preview-fav-icon"),
     previewImg: document.getElementById("preview-img"),
@@ -55,6 +65,7 @@
     .then((data) => {
       state.all = data.backgrounds;
       state.categories = data.categories;
+      buildStyleTabs();
       buildTabs();
       applyFilters();
       finishLoading();
@@ -64,6 +75,17 @@
       el.resultsCount.textContent = "Oops! Couldn't load backgrounds.";
       finishLoading();
     });
+
+  // Load the kid-friendly display fonts in the background, well after the
+  // grid itself is up -- a slow or blocked font host should never be able
+  // to delay the app (see the comment in index.html for why this isn't a
+  // plain <link> tag).
+  (window.requestIdleCallback || ((fn) => setTimeout(fn, 1000)))(() => {
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = "https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700;800&display=swap";
+    document.head.appendChild(link);
+  });
 
   function finishLoading() {
     setTimeout(() => el.loadingScreen.classList.add("hide"), 350);
@@ -122,6 +144,34 @@
     updateTabCounts();
   }
 
+  // ---- Style tabs (second tab row: All Styles / Illustrated / Realistic) ---
+  function buildStyleTabs() {
+    const styles = ["all", ...new Set(state.all.map((b) => b.style))];
+    el.styleTabs.innerHTML = "";
+    styles.forEach((s) => {
+      const btn = document.createElement("button");
+      btn.className = "tab-btn style-tab-btn" + (s === "all" ? " active" : "");
+      btn.type = "button";
+      btn.dataset.style = s;
+      btn.innerHTML = `<span>${STYLE_LABELS[s] || s}</span><span class="tab-count"></span>`;
+      btn.addEventListener("click", () => {
+        state.activeStyle = s;
+        [...el.styleTabs.children].forEach((b) => b.classList.toggle("active", b === btn));
+        applyFilters();
+      });
+      el.styleTabs.appendChild(btn);
+    });
+    updateStyleTabCounts();
+  }
+
+  function updateStyleTabCounts() {
+    [...el.styleTabs.children].forEach((btn) => {
+      const s = btn.dataset.style;
+      const n = s === "all" ? state.all.length : state.all.filter((b) => b.style === s).length;
+      btn.querySelector(".tab-count").textContent = `(${n})`;
+    });
+  }
+
   function updateTabCounts() {
     [...el.tabs.children].forEach((btn) => {
       const slug = btn.dataset.slug;
@@ -147,6 +197,9 @@
     } else if (state.activeCategory !== "all") {
       list = list.filter((b) => b.category === state.activeCategory);
     }
+    if (state.activeStyle !== "all") {
+      list = list.filter((b) => b.style === state.activeStyle);
+    }
     if (state.searchTerm) {
       const t = state.searchTerm;
       list = list.filter((b) =>
@@ -159,10 +212,19 @@
     renderGrid();
   }
 
-  // ---- Grid rendering with lazy loading -----------------------------------
+  // ---- Grid rendering with lazy loading + incremental batches ---------------
+  // With up to 1000 backgrounds, mounting every card at once would force one
+  // giant, janky layout/paint pass. Instead we render a first batch, then
+  // grow the grid in batches as the user scrolls near the bottom (a second,
+  // separate IntersectionObserver watches a sentinel element for that).
+  const BATCH_SIZE = 60;
   let observer;
+  let loadMoreObserver;
+  let gridSentinel = null;
+
   function renderGrid() {
     el.grid.innerHTML = "";
+    state.renderedCount = 0;
     el.resultsCount.textContent = state.filtered.length
       ? `${state.filtered.length} background${state.filtered.length === 1 ? "" : "s"}`
       : "";
@@ -171,11 +233,41 @@
     if (observer) observer.disconnect();
     observer = new IntersectionObserver(onIntersect, { rootMargin: "300px 0px" });
 
+    if (loadMoreObserver) loadMoreObserver.disconnect();
+    loadMoreObserver = new IntersectionObserver(onLoadMoreIntersect, { rootMargin: "900px 0px" });
+
+    appendNextBatch();
+  }
+
+  function appendNextBatch() {
+    const start = state.renderedCount;
+    const end = Math.min(start + BATCH_SIZE, state.filtered.length);
+    if (start >= end) return;
+
     const frag = document.createDocumentFragment();
-    state.filtered.forEach((bg, i) => {
-      frag.appendChild(buildCard(bg, i));
-    });
+    for (let i = start; i < end; i++) {
+      frag.appendChild(buildCard(state.filtered[i], i - start));
+    }
     el.grid.appendChild(frag);
+    state.renderedCount = end;
+
+    if (gridSentinel) {
+      loadMoreObserver.unobserve(gridSentinel);
+      gridSentinel.remove();
+      gridSentinel = null;
+    }
+    if (state.renderedCount < state.filtered.length) {
+      gridSentinel = document.createElement("div");
+      gridSentinel.className = "grid-sentinel";
+      el.grid.appendChild(gridSentinel);
+      loadMoreObserver.observe(gridSentinel);
+    }
+  }
+
+  function onLoadMoreIntersect(entries) {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) appendNextBatch();
+    });
   }
 
   function buildCard(bg, index) {
@@ -195,6 +287,13 @@
     const overlay = document.createElement("div");
     overlay.className = "card-overlay";
     overlay.innerHTML = `<p class="card-title">${escapeHtml(bg.title)}</p><p class="card-cat">${escapeHtml(bg.categoryName)}</p>`;
+
+    if (bg.style === "realistic") {
+      const styleBadge = document.createElement("div");
+      styleBadge.className = "style-badge";
+      styleBadge.textContent = "📷 Realistic";
+      card.appendChild(styleBadge);
+    }
 
     const favBtn = document.createElement("button");
     favBtn.className = "fav-btn";
@@ -285,6 +384,7 @@
     if (!bg) return;
     el.previewTitle.textContent = bg.title;
     el.previewCategory.textContent = bg.categoryName;
+    el.previewCredit.textContent = bg.style === "realistic" ? (bg.credit || "") : "";
     el.previewImg.style.animation = "none";
     void el.previewImg.offsetWidth;
     el.previewImg.style.animation = "";

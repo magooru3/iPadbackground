@@ -1,8 +1,12 @@
 # Backdrop Buddies 🌈
 
-A fun, colorful web app that lets kids browse and pick from **450 original
-iPad backgrounds** across 40 categories — rainbows, unicorns, dinosaurs,
-mermaids, space, sports, huskies, arctic animals, robots, pirates, and more.
+A fun, colorful web app that lets kids browse and pick from **1000 original
+iPad backgrounds** across 56 categories — rainbows, unicorns, dinosaurs,
+mermaids, space, sports, huskies, dogs, horses, dragons, robots, pirates,
+and lots more. Every background comes in a flat **illustrated** style, and
+15 animal/nature-heavy categories also have a second, more detailed
+**realistic style** tier (soft lighting, texture, depth-of-field-style
+backdrops) — switchable via the style tabs.
 
 Open `index.html` in a browser (or serve the folder with any static file
 server) — no build step, no dependencies.
@@ -18,7 +22,9 @@ python3 -m http.server 8080   # then visit http://localhost:8080
 - "Set as Background" button with confetti + a celebratory chime (visual/audio
   feedback only — this is a picker, not a real device-background setter)
 - Swipe or use the arrow buttons to move between previews; pinch to zoom
-- Search box + horizontally-scrolling category tabs (including a Favorites tab)
+- Two rows of horizontally-scrolling tabs: art style (All / Illustrated /
+  Realistic) and category (56 categories + Favorites)
+- Search box matching titles, categories, and a rich per-image tag set
 - Heart a background to favorite it — favorites persist in `localStorage`
 - "Random" button jumps straight into a random background preview
 - Download button saves the current background's SVG file
@@ -32,7 +38,7 @@ styles.css               All styling (kid-friendly, rounded, animated)
 app.js                    App logic (grid, search, favorites, preview, confetti)
 images/
   backgrounds.json        Metadata for every background (id, title, category, tags…)
-  backgrounds/<category>/ 450 original SVG background artworks (6-20 per category)
+  backgrounds/<category>/ 1000 original SVG background artworks (6-45 per category)
   icons/                  UI icon set (heart, star, arrows, search, sound, …)
 scripts/
   generate_backgrounds.py Procedurally generates every background SVG + the

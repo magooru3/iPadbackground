@@ -131,10 +131,18 @@ input {
 /* ---------------------------------------------------------
    Top bar
 --------------------------------------------------------- */
-.topbar {
+/* One sticky block for the top bar + both tab rows. Sticking them
+   individually needs each row's offset to equal the exact height of
+   everything above it, and those heights are fluid (the top bar wraps on
+   narrow screens, --safe-top varies by device), so any fixed number is
+   wrong somewhere. */
+.sticky-header {
   position: sticky;
   top: 0;
   z-index: 40;
+}
+
+.topbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -249,17 +257,12 @@ input {
    Category tabs
 --------------------------------------------------------- */
 .tabs-wrap {
-  position: sticky;
-  top: calc(116px + var(--safe-top));
-  z-index: 34;
   background: rgba(255, 255, 255, 0.75);
   backdrop-filter: blur(8px);
   border-bottom: 2px solid #ffecf4;
   padding: 10px 0;
 }
 .style-tabs-wrap {
-  top: calc(72px + var(--safe-top));
-  z-index: 35;
   background: rgba(255, 255, 255, 0.92);
   border-bottom: 2px solid #eaf2ff;
   padding: 8px 0;

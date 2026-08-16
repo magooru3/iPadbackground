@@ -3878,11 +3878,22 @@ def main():
         cat_dir = os.path.join(OUT_DIR, slug)
         os.makedirs(cat_dir, exist_ok=True)
         bonus = CATEGORY_TAGS.get(slug, [])
+        seen_slugs = {}
         for i, (title, builder, style) in enumerate(cat_def["variants"], start=1):
             rng = random.Random(f"{slug}-{i}-{title}")
             svg = Svg()
             builder(svg, rng)
             file_slug = slugify(title)
+            # titled_variants() only guarantees unique *titles*; slugify()
+            # drops case and punctuation, so two distinct titles can still
+            # collide here ("Game On!" / "Game On") and silently overwrite
+            # each other's artwork, leaving a duplicate id in the manifest.
+            if file_slug in seen_slugs:
+                raise ValueError(
+                    f"{slug}: titles {seen_slugs[file_slug]!r} and {title!r} both "
+                    f"slugify to {file_slug!r} -- rename one of them"
+                )
+            seen_slugs[file_slug] = title
             filename = f"{file_slug}.svg"
             filepath = os.path.join(cat_dir, filename)
             with open(filepath, "w") as f:

@@ -64,10 +64,14 @@
 
   // ---- Bootstrap ------------------------------------------------------
   fetch("images/backgrounds.json")
-    .then((r) => r.json())
+    .then((r) => {
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      return r.json();
+    })
     .then((data) => {
       state.all = data.backgrounds;
       state.categories = data.categories;
+      pruneFavorites();
       buildStyleTabs();
       buildTabs();
       applyFilters();
@@ -95,15 +99,39 @@
   }
 
   // ---- Favorites --------------------------------------------------------
+  // Anything can end up in localStorage (a half-written value, an older
+  // version of the app, a curious kid in the Web Inspector). Whatever comes
+  // back has to survive `new Set(...)` at startup -- a non-iterable value
+  // there throws before the first card ever renders, leaving the app stuck
+  // on the loading screen with no way for the user to recover.
   function loadFavorites() {
     try {
-      return JSON.parse(localStorage.getItem(FAV_KEY)) || [];
+      const raw = JSON.parse(localStorage.getItem(FAV_KEY));
+      return Array.isArray(raw) ? raw.filter((id) => typeof id === "string") : [];
     } catch (e) {
       return [];
     }
   }
   function saveFavorites() {
-    localStorage.setItem(FAV_KEY, JSON.stringify([...state.favorites]));
+    try {
+      localStorage.setItem(FAV_KEY, JSON.stringify([...state.favorites]));
+    } catch (e) {
+      // Private browsing / quota exhausted -- favorites just won't persist.
+    }
+  }
+  // Drop favorited ids that no longer exist in the library (renamed or
+  // removed artwork), so the Favorites tab count can't claim more than the
+  // tab actually shows.
+  function pruneFavorites() {
+    const known = new Set(state.all.map((b) => b.id));
+    let changed = false;
+    state.favorites.forEach((id) => {
+      if (!known.has(id)) {
+        state.favorites.delete(id);
+        changed = true;
+      }
+    });
+    if (changed) saveFavorites();
   }
   function isFav(id) {
     return state.favorites.has(id);
@@ -176,16 +204,23 @@
   }
 
   function updateTabCounts() {
+    // Per-category totals never change once the library is loaded, so they're
+    // counted in a single pass and cached; only the Favorites count moves.
+    if (!categoryCounts) {
+      categoryCounts = new Map();
+      state.all.forEach((b) => categoryCounts.set(b.category, (categoryCounts.get(b.category) || 0) + 1));
+    }
     [...el.tabs.children].forEach((btn) => {
       const slug = btn.dataset.slug;
       const countEl = btn.querySelector(".tab-count");
       let n;
       if (slug === "all") n = state.all.length;
       else if (slug === "favorites") n = state.favorites.size;
-      else n = state.all.filter((b) => b.category === slug).length;
+      else n = categoryCounts.get(slug) || 0;
       countEl.textContent = `(${n})`;
     });
   }
+  let categoryCounts = null;
 
   // ---- Filtering ------------------------------------------------------------
   el.searchInput.addEventListener("input", debounce(() => {
@@ -362,6 +397,25 @@
 
   // ---- Preview --------------------------------------------------------------
   let previewList = [];
+  let lastFocusedBeforePreview = null;
+
+  // The preview is a modal dialog painted over the grid. Everything outside it
+  // has to stop being reachable while it's open -- otherwise Tab (and the
+  // VoiceOver rotor) keeps walking the grid cards hidden behind it.
+  const OUTSIDE_PREVIEW = () =>
+    [...document.body.children].filter((n) => n !== el.previewView && n.nodeType === 1);
+
+  function setBackgroundInert(inert) {
+    OUTSIDE_PREVIEW().forEach((n) => {
+      if ("inert" in HTMLElement.prototype) n.inert = inert;
+      else if (inert) n.setAttribute("aria-hidden", "true");
+      else n.removeAttribute("aria-hidden");
+    });
+  }
+
+  function currentBg() {
+    return previewList[state.previewIndex] || null;
+  }
 
   function openPreview(id, listOverride) {
     previewList = listOverride || (state.filtered.length ? state.filtered : state.all);
@@ -371,19 +425,46 @@
       previewList = state.all;
       idx = previewList.findIndex((b) => b.id === id);
     }
+    if (idx === -1) return;
     state.previewIndex = idx;
     renderPreview();
+    lastFocusedBeforePreview = document.activeElement;
     el.previewView.hidden = false;
+    setBackgroundInert(true);
     document.body.style.overflow = "hidden";
+    el.previewBack.focus();
   }
 
   function closePreview() {
     el.previewView.hidden = true;
+    setBackgroundInert(false);
     document.body.style.overflow = "";
+    if (lastFocusedBeforePreview && document.contains(lastFocusedBeforePreview)) {
+      lastFocusedBeforePreview.focus();
+    }
+    lastFocusedBeforePreview = null;
   }
 
+  // Fallback focus trap for engines without `inert` (which alone would let
+  // Tab escape the dialog even though the outside is aria-hidden).
+  el.previewView.addEventListener("keydown", (e) => {
+    if (e.key !== "Tab" || "inert" in HTMLElement.prototype) return;
+    const focusable = [...el.previewView.querySelectorAll("button, [href], input, [tabindex]:not([tabindex='-1'])")]
+      .filter((n) => !n.disabled && n.offsetParent !== null);
+    if (!focusable.length) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  });
+
   function renderPreview() {
-    const bg = previewList[state.previewIndex];
+    const bg = currentBg();
     if (!bg) return;
     el.previewTitle.textContent = bg.title;
     el.previewCategory.textContent = bg.categoryName;
@@ -396,19 +477,23 @@
     el.previewImg.alt = bg.title + " — full screen preview";
     resetZoom();
     updatePreviewFav();
+    clearTimeout(el.setToast._t);
     el.setToast.classList.remove("show");
+    confettiRun++; // stop any in-flight burst from the previous background
     el.confettiWrap.innerHTML = "";
   }
 
   function updatePreviewFav() {
-    const bg = previewList[state.previewIndex];
+    const bg = currentBg();
+    if (!bg) return;
     const fav = isFav(bg.id);
     el.previewFav.classList.toggle("is-fav", fav);
     el.previewFavIcon.src = `images/icons/${fav ? "heart-filled" : "heart"}.png`;
   }
 
   el.previewFav.addEventListener("click", () => {
-    const bg = previewList[state.previewIndex];
+    const bg = currentBg();
+    if (!bg) return;
     toggleFav(bg.id);
     updatePreviewFav();
     el.previewFav.classList.remove("is-fav");
@@ -497,7 +582,7 @@
   // is save the image (through the native share sheet on iOS, so it lands in
   // Photos) and tell the kid/parent exactly how to finish the job from there.
   el.setBgBtn.addEventListener("click", async () => {
-    const bg = previewList[state.previewIndex];
+    const bg = currentBg();
     if (!bg || el.setBgBtn.disabled) return;
 
     launchConfetti();
@@ -511,15 +596,29 @@
       const shareFilename = `${slugForFilename(bg.title)}.${ext}`;
       const file = new File([blob], shareFilename, { type: blob.type });
       if (navigator.canShare && navigator.canShare({ files: [file] })) {
-        await navigator.share({ files: [file], title: bg.title });
-        outcome = "shared";
+        try {
+          await navigator.share({ files: [file], title: bg.title });
+          outcome = "shared";
+        } catch (shareErr) {
+          // A share the user dismissed is a "no worries"; anything else
+          // (most often the transient-activation window expiring while the
+          // image downloaded) still has a perfectly good fallback -- don't
+          // leave the kid with an error and no picture.
+          if (shareErr && shareErr.name === "AbortError") {
+            outcome = "cancelled";
+          } else {
+            console.warn("Share sheet unavailable, falling back to download", shareErr);
+            triggerDownload(blob, shareFilename);
+            outcome = "downloaded";
+          }
+        }
       } else {
         triggerDownload(blob, shareFilename);
         outcome = "downloaded";
       }
     } catch (err) {
-      outcome = (err && err.name === "AbortError") ? "cancelled" : "error";
-      if (outcome === "error") console.error("Couldn't prepare image to save", err);
+      outcome = "error";
+      console.error("Couldn't prepare image to save", err);
     }
 
     setBtnBusy(false);
@@ -551,6 +650,9 @@
   // no SVG-to-canvas rasterization is needed at runtime.
   async function getShareableImageBlob(bg) {
     const res = await fetch(bg.filename);
+    // Without this a 404 would hand the share sheet (or the download) an
+    // HTML error page wearing a .jpg filename.
+    if (!res.ok) throw new Error(`${res.status} fetching ${bg.filename}`);
     return await res.blob();
   }
 
@@ -565,15 +667,22 @@
     setTimeout(() => URL.revokeObjectURL(url), 4000);
   }
 
+  // Titles carry punctuation ("Game On!", "Comic Book Pow!"), which has no
+  // business in a filename headed for Photos or the Downloads folder.
   function slugForFilename(title) {
-    return title.replace(/\s+/g, "-").toLowerCase();
+    const slug = String(title)
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+    return slug || "background";
   }
 
   // ---- Download ----------------------------------------------------------------
   el.downloadBtn.addEventListener("click", () => {
-    const bg = previewList[state.previewIndex];
+    const bg = currentBg();
     if (!bg) return;
-    const ext = bg.filename.slice(bg.filename.lastIndexOf(".") + 1);
+    const dot = bg.filename.lastIndexOf(".");
+    const ext = dot === -1 ? "jpg" : bg.filename.slice(dot + 1);
     const a = document.createElement("a");
     a.href = bg.filename;
     a.download = `${slugForFilename(bg.title)}.${ext}`;
@@ -600,6 +709,10 @@
     try {
       if (!state.audioCtx) state.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       const ctx = state.audioCtx;
+      // iOS suspends the context whenever the app is backgrounded (and starts
+      // it suspended if it was ever created outside a tap), which silently
+      // swallows every note until it's resumed.
+      if (ctx.state === "suspended") ctx.resume();
       const now = ctx.currentTime;
       const notes = [523.25, 659.25, 783.99, 1046.5]; // C5 E5 G5 C6
       notes.forEach((freq, i) => {
@@ -619,19 +732,29 @@
   }
 
   // ---- Confetti -------------------------------------------------------------------
+  // Only one burst runs at a time. Without the token, a burst that finishes
+  // (or a preview navigation that clears the wrap) tears down whatever burst
+  // happens to be on screen at that moment, not its own.
+  let confettiRun = 0;
+
   function launchConfetti() {
+    const run = ++confettiRun;
     const canvas = document.createElement("canvas");
     const wrap = el.confettiWrap;
     wrap.innerHTML = "";
     wrap.appendChild(canvas);
     const rect = wrap.getBoundingClientRect();
-    canvas.width = rect.width;
-    canvas.height = rect.height;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = Math.max(1, Math.round(rect.width * dpr));
+    canvas.height = Math.max(1, Math.round(rect.height * dpr));
+    canvas.style.width = rect.width + "px";
+    canvas.style.height = rect.height + "px";
     const ctx = canvas.getContext("2d");
+    ctx.scale(dpr, dpr);
     const colors = ["#ff6fa5", "#ffd166", "#06d6a0", "#4cc9f0", "#9b5de5", "#ff9f1c"];
     const pieces = Array.from({ length: 140 }, () => ({
-      x: Math.random() * canvas.width,
-      y: -20 - Math.random() * canvas.height * 0.3,
+      x: Math.random() * rect.width,
+      y: -20 - Math.random() * rect.height * 0.3,
       w: 6 + Math.random() * 6,
       h: 8 + Math.random() * 10,
       color: colors[Math.floor(Math.random() * colors.length)],
@@ -643,8 +766,9 @@
     let frame = 0;
     const maxFrames = 130;
     function tick() {
+      if (run !== confettiRun) return; // superseded by a newer burst
       frame++;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.clearRect(0, 0, rect.width, rect.height);
       pieces.forEach((p) => {
         p.x += p.speedX;
         p.y += p.speedY;
@@ -658,7 +782,7 @@
       });
       if (frame < maxFrames) {
         requestAnimationFrame(tick);
-      } else {
+      } else if (run === confettiRun) {
         wrap.innerHTML = "";
       }
     }

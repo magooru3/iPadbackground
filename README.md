@@ -1,13 +1,14 @@
 # McGraw Girls Backgrounds 🌈
 
-A fun, colorful web app that lets kids browse and pick from **1106
+A fun, colorful web app that lets kids browse and pick from **1354
 backgrounds** across 56 categories — rainbows, unicorns, dinosaurs,
 mermaids, space, sports, huskies, dogs, horses, dragons, robots, pirates,
 and lots more. Every background comes in a flat **illustrated** style, 15
 animal/nature-heavy categories also have a second, more detailed
 **realistic style** tier (soft lighting, texture, depth-of-field-style
-backdrops), and three categories also have genuine **real photos** — 40
-flowers, plus 59 puppies and 7 huskies — switchable via the style tabs.
+backdrops), and 22 categories also have genuine **real photos** — 354 of
+them, from puppies and kittens to rainbows, jellyfish and the Milky Way —
+switchable via the style tabs.
 
 Open `index.html` in a browser (or serve the folder with any static file
 server) — no build step, no dependencies.
@@ -43,8 +44,8 @@ app.js                    App logic (grid, search, favorites, preview, confetti)
 manifest.webmanifest      PWA manifest (Home Screen name/icon/theme color)
 images/
   backgrounds.json        Metadata for every background (id, title, category, style, tags, credit…)
-  backgrounds/<category>/ 1000 original JPG artworks (6-45 per category) + 106 real JPG photos
-                           (in the photos/ subfolder of flowers-florals, dogs-puppies and huskies)
+  backgrounds/<category>/ 1000 original JPG artworks (6-45 per category) + 354 real JPG photos
+                           (in the photos/ subfolder of 22 of the categories)
   icons/                  UI icon set (heart, star, arrows, search, sound, …) + Home Screen/favicon PNGs — all PNG, no SVG
 scripts/
   generate_backgrounds.py     Procedurally generates every illustrated/realistic-style background as SVG
@@ -55,9 +56,9 @@ scripts/
   import_real_photos.py       Downloads and processes the real flower photos (see below)
   real_photos_picks.json      Hand-reviewed list of which source flower photos to use
   real_photos_manifest.json   Generated metadata for the flower photos (feeds generate_backgrounds.py)
-  import_puppy_photos.py      Downloads and processes the real puppy/husky photos (see below)
-  puppy_photos_picks.json     Hand-reviewed list of which source puppy photos to use
-  puppy_photos_manifest.json  Generated metadata for the puppy photos (feeds generate_backgrounds.py)
+  import_openimages_photos.py     Downloads and processes the Open Images photos (see below)
+  openimages_photos_picks.json    Hand-reviewed list of which source photos to use, with titles
+  openimages_photos_manifest.json Generated metadata for those photos (feeds generate_backgrounds.py)
 ```
 
 The shipped image set (everything under `images/`) is **JPG/PNG only — no
@@ -100,7 +101,7 @@ python3 scripts/rasterize_icons.py
 
 ### Real photos
 
-106 of the backgrounds are `style: "photo"` — genuine photographs rather
+354 of the backgrounds are `style: "photo"` — genuine photographs rather
 than generated artwork, all of them Flickr originals under **Creative
 Commons Attribution 2.0 (CC BY 2.0)**, each carrying its photographer and
 source URL in the `credit` field that the preview view displays. They come
@@ -137,62 +138,94 @@ python3 scripts/import_real_photos.py
 python3 scripts/generate_backgrounds.py
 ```
 
-#### Dogs & Puppies + Huskies (66 photos)
+#### Open Images (314 photos, 22 categories)
 
-59 puppy photos in **Dogs & Puppies** and 7 husky photos in **Huskies**,
-imported by `scripts/import_puppy_photos.py` from Google's
+`scripts/import_openimages_photos.py` pulls the rest from Google's
 [Open Images Dataset](https://storage.googleapis.com/openimages/web/index.html)
 — ~9M Flickr photographs, every one of them **CC BY 2.0**, with the
 photographer and the original Flickr page recorded in the dataset's own
-image-metadata CSVs. Metadata comes from `storage.googleapis.com`; the
-images themselves come from the CVDF-hosted mirror on `s3.amazonaws.com`,
-resized to 1024px on the long edge.
+image-metadata CSVs. Metadata comes from `storage.googleapis.com`; the images
+themselves come from the CVDF-hosted mirror on `s3.amazonaws.com`, resized to
+1024px on the long edge.
 
-Open Images labels dogs but has no "puppy" class, so the candidate pool was
-built by taking every validation/test image with a `Dog` bounding box whose
-original Flickr *title* mentions a puppy (181 images), then reviewing all of
-them on contact sheets and keeping the 66 that work as a kid's wallpaper.
-The rest were dropped for the usual dataset reasons — watermarks and date
-stamps, photo collages, nursing/newborn litters, a ceramic dog figurine, a
-couple of genuinely grim titles, blurry or very dark frames, and shots where
-a person rather than the puppy is the subject.
-`scripts/puppy_photos_picks.json` pins that reviewed selection (and its
-per-photo titles), so re-running the import is reproducible.
+| Category | Photos | | Category | Photos |
+|---|--:|---|---|--:|
+| Dogs & Puppies | 59 | | Butterflies & Insects | 11 |
+| Flowers & Florals | 20 | | Winter & Holiday | 11 |
+| Cats & Kittens | 17 | | Food & Treats | 10 |
+| Horses & Ponies | 15 | | Arctic & Polar Animals | 10 |
+| Cute Animals | 15 | | Weather | 9 |
+| Birds & Feathers | 15 | | Space & Planets | 9 |
+| Ocean & Sea Life | 15 | | Circus & Carnival | 9 |
+| Summer & Beach | 15 | | Spring & Garden | 8 |
+| Nature Scenes | 15 | | Huskies | 7 |
+| Autumn & Fall | 13 | | Tea Party | 7 |
+| Safari & Desert | 12 | | | |
+| Koalas & Kangaroos | 12 | | | |
+
+Candidates were harvested from the validation + test subsets by
+cross-referencing Open Images' human-verified image labels (Kitten, Rose,
+Butterfly, Rainbow, Penguin, Jellyfish, …) with its bounding boxes, then
+filtered down to things that stand a chance as a wallpaper: the photo must be
+CC BY 2.0; it must carry no `Person` / `Human face` / `Text` / `Poster` /
+`Car` label, which removes both strangers' faces and most
+signage-and-clutter shots; and where the subject is one of the 600 boxable
+classes, its box must cover at least 10% of the frame so the subject is
+actually the subject. Dogs are the exception — Open Images has no "puppy"
+class, so that pool was every image with a `Dog` box whose original Flickr
+*title* mentions a puppy.
+
+Everything surviving those filters (~900 images) was downloaded, laid out on
+contact sheets and reviewed by eye; roughly a third was kept. The rest went
+for the usual dataset reasons — watermarks, date stamps and caption overlays,
+photo collages, product and museum shots, craft/plush/CGI stand-ins for the
+real animal, brand logos, nursing or newborn litters, blurry or very dark
+frames, and shots where a person rather than the subject dominates.
+`scripts/openimages_photos_picks.json` pins the reviewed selection (image id,
+subset, target category, subject and a hand-written title per photo), so
+re-running the import is reproducible — it never re-rolls the selection.
 
 Each photo is cover-cropped to whichever iPad orientation matches the source
 — landscape 2732×2048 or portrait 2048×2732 — so a landscape photo is never
 cropped down to a portrait sliver, and gets a light unsharp pass to offset
 the upscale from the 1024px source.
 
-To re-run the import (downloads ~60MB of metadata CSVs plus the 66 source
-JPGs into a gitignored `.cache/`, so a second run is nearly instant):
+To re-run the import (downloads ~60MB of metadata CSVs plus the source JPGs
+into a gitignored `.cache/`, so a second run is nearly instant):
 
 ```
 pip install Pillow
-python3 scripts/import_puppy_photos.py
+python3 scripts/import_openimages_photos.py
 python3 scripts/generate_backgrounds.py
 ```
 
-Widening the puppy set later is mostly a matter of pointing the same filter
-at Open Images' **train** subset — ~1.7M more images in the same CSV format
-under the same license — which was skipped here only because its metadata
-CSV is ~2GB.
+Adding another category is a two-step job: add its slug to `CATEGORIES` in
+the importer (display name + bonus search tags, mirroring
+`generate_backgrounds.py`), then add picks naming that slug. Widening the set
+further is mostly a matter of pointing the same filter at Open Images'
+**train** subset — ~1.7M more images in the same CSV format under the same
+license — which was skipped here only because its metadata CSV is ~2GB.
 
 #### Other sources
 
-Real photos for the remaining categories are limited by what this build
-environment can reach: the egress policy allows `storage.googleapis.com`,
+The categories still without real photos are the make-believe ones —
+unicorns, mermaids, fairies, princesses, dragons, superheroes, robots — plus
+a few (Ballet & Dance, Fashion & Shopping, School & Learning) where every
+usable Open Images photo has a stranger's face in it, which the person
+filter deliberately drops. Those stay illustrated-only on purpose.
+
+What's reachable is the real constraint on everything else: this build
+environment's egress policy allows `storage.googleapis.com`,
 `s3.amazonaws.com` and `github.com`/`raw.githubusercontent.com`, and every
 other real-photo host tested (Wikimedia Commons, Unsplash, Pexels, Pixabay,
-Openverse, Flickr, `thor.robots.ox.ac.uk`) is blocked. Open Images itself is
-the best remaining lead by far — it's reachable, permissively licensed, and
-its ~600 boxable classes cover a lot of this app's categories (cats, horses,
-butterflies, birds, dinosaur models, beaches, flowers), so the same
-importer pattern extends to them. Datasets that are reachable but *not*
-usable were also checked and rejected: Stanford Dogs and the Kaggle Cats &
-Dogs subset both carry research-only terms rather than a redistribution
-licence, and the Oxford-IIIT Pet dataset (CC BY-SA 4.0) is hosted on a
-blocked domain.
+Openverse, Flickr, `thor.robots.ox.ac.uk`) is blocked. Datasets that are
+reachable but *not* usable were also checked and rejected: Stanford Dogs and
+the Kaggle Cats & Dogs subset both carry research-only terms rather than a
+redistribution licence, and the Oxford-IIIT Pet dataset (CC BY-SA 4.0) is
+hosted on a blocked domain. That leaves Open Images as the practical source,
+and it is nowhere near exhausted — its label vocabulary covers plenty this
+app hasn't tapped yet (reptiles, farm animals, jungle, sports, musical
+instruments, castles).
 
 ## Setting the real wallpaper
 

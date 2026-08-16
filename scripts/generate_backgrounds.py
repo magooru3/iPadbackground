@@ -3916,7 +3916,7 @@ def main():
     # here -- only their metadata (already includes CC attribution) gets merged.
     for manifest_name, importer in (
         ("real_photos_manifest.json", "scripts/import_real_photos.py"),
-        ("puppy_photos_manifest.json", "scripts/import_puppy_photos.py"),
+        ("openimages_photos_manifest.json", "scripts/import_openimages_photos.py"),
     ):
         manifest_path = os.path.join(ROOT, "scripts", manifest_name)
         if not os.path.exists(manifest_path):

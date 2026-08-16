@@ -35,10 +35,11 @@ pip install Pillow
 python3 scripts/import_real_photos.py
 python3 scripts/generate_backgrounds.py
 
-# Re-import the real puppy/husky photos (rarely needed; downloads ~60MB of
-# Open Images metadata + the source JPGs into a gitignored .cache/)
+# Re-import the real Open Images photos (rarely needed; downloads ~60MB of
+# metadata CSVs + the source JPGs into a gitignored .cache/, so a second run
+# is nearly instant)
 pip install Pillow
-python3 scripts/import_puppy_photos.py
+python3 scripts/import_openimages_photos.py
 python3 scripts/generate_backgrounds.py
 ```
 
@@ -78,7 +79,7 @@ So after step 1 alone, the working tree will contain `.svg` files again —
 `find images -iname '*.svg'` returns nothing before finishing any task that
 touches the art pipeline.
 
-The 106 real photos are the exception to steps 1-2 — they're already JPG,
+The 354 real photos are the exception to steps 1-2 — they're already JPG,
 so the rasterize step leaves them alone. Each import writes its own
 manifest under `scripts/`, and `generate_backgrounds.py`'s `main()` merges
 every manifest in its list (in order, appended after the generated
@@ -86,20 +87,70 @@ entries):
 
 - 40 flowers (Flowers & Florals) from the TensorFlow `flower_photos`
   dataset (CC BY 2.0) — `import_real_photos.py` → `real_photos_manifest.json`.
-- 66 puppies/huskies (Dogs & Puppies, Huskies) from Google's Open Images
-  dataset (CC BY 2.0) — `import_puppy_photos.py` → `puppy_photos_manifest.json`.
+- 314 photos across 22 categories from Google's Open Images dataset (CC BY
+  2.0) — `import_openimages_photos.py` → `openimages_photos_manifest.json`.
 
 Both importers are pinned to a hand-reviewed `*_picks.json`, so re-running
 them is reproducible and never re-rolls the selection. **Adding a third
 photo source means adding its manifest to that list in `main()`** — nothing
 else in the generator needs to change.
 
-Because photo entries are appended after all generated entries, adding a
-photo import does not require re-rendering the 1000 procedural
-backgrounds: appending the new manifest's entries to `backgrounds.json`
-produces byte-identical output to a full `generate_backgrounds.py` +
-`rasterize_backgrounds.py` run (worth verifying with a temp-dir run of
-`main()` if you change anything in this area).
+Because photo entries are appended after all generated entries, adding or
+re-running a photo import does not require re-rendering the 1000 procedural
+backgrounds. Rebuild `backgrounds.json` as *generated entries (everything
+with `style != "photo"`, in order) + each photo manifest in the same order
+`main()` lists them* and the result is identical to a full
+`generate_backgrounds.py` + `rasterize_backgrounds.py` run. Verify it rather
+than trusting it: run `main()` with `OUT_DIR`/`JSON_PATH` pointed at a temp
+directory and diff the two, normalising the `.svg`/`.jpg` extension on
+generated entries.
+
+## Adding real photos (`import_openimages_photos.py`)
+
+Open Images is the only usable real-photo source reachable from this
+environment, and it is the one to reach for when asked for more real
+photos. Network reality, checked rather than assumed: the egress policy
+allows `storage.googleapis.com` (the metadata CSVs), `s3.amazonaws.com`
+(the CVDF image mirror, 1024px on the long edge) and
+`github.com`/`raw.githubusercontent.com`. Wikimedia Commons, Unsplash,
+Pexels, Pixabay, Openverse, Flickr and `thor.robots.ox.ac.uk` are all
+blocked — don't burn time re-probing them, and don't try to route around a
+403 from the proxy. Stanford Dogs and the Kaggle Cats & Dogs subset are
+reachable but research-only, so they must not be shipped.
+
+Adding a batch, end to end:
+
+1. **Harvest candidates** from the validation + test subsets by
+   cross-referencing `{subset}-annotations-human-imagelabels.csv` (the
+   ~20k-class image-level vocabulary — Kitten, Rose, Rainbow, Jellyfish, …;
+   `oidv6-class-descriptions.csv` maps names to `/m/...` ids) with
+   `{subset}-annotations-bbox.csv` (the 600 boxable classes, which give
+   subject area). Filters that carry their weight: license must be exactly
+   CC BY 2.0; reject any image labelled `Person` `/m/01g317`, `Human face`
+   `/m/0dzct`, `Man`, `Woman`, `Girl`, `Boy`, `Human body`, `Human head`,
+   `Human hand`, `Human arm`, `Text` `/m/07s6nbt`, `Poster` `/m/01n5jq` or
+   `Car` `/m/0k4j`; and for boxable subjects require a box covering ≥10% of
+   the frame.
+2. **Review every candidate by eye on contact sheets** — this is not
+   optional and cannot be automated away. Open Images is Flickr snapshots:
+   expect to throw away roughly two thirds for watermarks, date stamps and
+   caption overlays, collages, product/museum shots, craft/plush/CGI
+   stand-ins for the real animal, brand logos, nursing or newborn litters,
+   dark or blurry frames, and photos where a person dominates.
+3. **Append picks** to `scripts/openimages_photos_picks.json` — one object
+   per photo with `image_id`, `subset`, `category`, `subject` and a
+   hand-written `title`. Titles are what the app shows and what the output
+   filename is slugified from, so keep them stable: changing a title
+   renames its JPG.
+4. **Register any new category** in the importer's `CATEGORIES` map
+   (display name + bonus search tags, mirroring `CATS`/`CATEGORY_TAGS` in
+   `generate_backgrounds.py`). An unknown slug raises rather than silently
+   defaulting.
+5. Run the importer, then rebuild `backgrounds.json` (see above).
+
+Downloads are cached in a gitignored `.cache/open-images/`, so re-running
+is cheap. Output orientation follows the source's own aspect ratio — never
+force portrait on a landscape source, it crops the subject away.
 
 ## `generate_backgrounds.py` architecture
 

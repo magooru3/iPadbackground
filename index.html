@@ -9,14 +9,13 @@
 
 <!-- Home Screen icon (iOS "Add to Home Screen") + browser tab favicon -->
 <link rel="apple-touch-icon" href="images/icons/apple-touch-icon.png">
-<link rel="icon" type="image/svg+xml" href="images/icons/app-icon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="images/icons/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="images/icons/favicon-16.png">
 <link rel="manifest" href="manifest.webmanifest">
 <!-- Makes the bookmarked icon launch full-screen (no Safari address bar)
      with its own name/status bar, instead of just being a bookmark link. -->
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="McGraw Girls">
+<meta name="apple-mobile-web-app-title" content="Backgrounds">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
 <!-- Google Fonts are loaded dynamically from app.js, after the grid has
@@ -45,15 +44,15 @@
 
   <div class="topbar-actions">
     <div class="search-wrap">
-      <img class="search-icon" src="images/icons/search.svg" alt="">
+      <img class="search-icon" src="images/icons/search.png" alt="">
       <input id="search-input" type="search" placeholder="Search backgrounds…" aria-label="Search backgrounds" autocomplete="off">
     </div>
     <button id="random-btn" class="pill-btn random-btn" type="button">
-      <img src="images/icons/shuffle.svg" alt="">
+      <img src="images/icons/shuffle.png" alt="">
       <span>Random</span>
     </button>
     <button id="sound-toggle" class="icon-btn" type="button" aria-pressed="false" aria-label="Toggle sound effects">
-      <img id="sound-icon" src="images/icons/sound-off.svg" alt="">
+      <img id="sound-icon" src="images/icons/sound-off.png" alt="">
     </button>
   </div>
 </header>
@@ -81,7 +80,7 @@
 <section id="preview-view" class="preview-view" hidden aria-modal="true" role="dialog" aria-label="Background preview">
   <div class="preview-topbar">
     <button id="preview-back" class="icon-btn preview-back" type="button" aria-label="Back to grid">
-      <img src="images/icons/back.svg" alt="">
+      <img src="images/icons/back.png" alt="">
       <span>Back</span>
     </button>
     <div class="preview-title-wrap">
@@ -90,20 +89,20 @@
       <p id="preview-credit" class="preview-credit"></p>
     </div>
     <button id="preview-fav" class="icon-btn preview-fav" type="button" aria-label="Add to favorites">
-      <img id="preview-fav-icon" src="images/icons/heart.svg" alt="">
+      <img id="preview-fav-icon" src="images/icons/heart.png" alt="">
     </button>
   </div>
 
   <div class="preview-stage">
     <button id="prev-btn" class="nav-arrow nav-arrow-left" type="button" aria-label="Previous background">
-      <img src="images/icons/arrow-left.svg" alt="">
+      <img src="images/icons/arrow-left.png" alt="">
     </button>
 
     <div id="preview-frame" class="preview-frame">
       <img id="preview-img" class="preview-img" src="" alt="" draggable="false">
       <div id="confetti-canvas-wrap" class="confetti-canvas-wrap"></div>
       <div id="set-toast" class="set-toast" hidden>
-        <img src="images/icons/check.svg" alt="">
+        <img src="images/icons/check.png" alt="">
         <span class="set-toast-text">
           <span id="set-toast-title" class="set-toast-title">Saved!</span>
           <span id="set-toast-subtitle" class="set-toast-subtitle"></span>
@@ -112,17 +111,17 @@
     </div>
 
     <button id="next-btn" class="nav-arrow nav-arrow-right" type="button" aria-label="Next background">
-      <img src="images/icons/arrow-right.svg" alt="">
+      <img src="images/icons/arrow-right.png" alt="">
     </button>
   </div>
 
   <div class="preview-bottombar">
     <button id="set-bg-btn" class="pill-btn set-btn" type="button">
-      <img src="images/icons/check.svg" alt="">
+      <img src="images/icons/check.png" alt="">
       <span>Set as Background</span>
     </button>
     <button id="download-btn" class="pill-btn download-btn" type="button">
-      <img src="images/icons/download.svg" alt="">
+      <img src="images/icons/download.png" alt="">
       <span>Download</span>
     </button>
   </div>

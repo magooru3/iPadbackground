@@ -302,13 +302,13 @@
     favBtn.className = "fav-btn";
     favBtn.type = "button";
     favBtn.setAttribute("aria-label", "Toggle favorite");
-    favBtn.innerHTML = `<img src="images/icons/${isFav(bg.id) ? "heart-filled" : "heart"}.svg" alt="">`;
+    favBtn.innerHTML = `<img src="images/icons/${isFav(bg.id) ? "heart-filled" : "heart"}.png" alt="">`;
     favBtn.addEventListener("click", (e) => {
       e.stopPropagation();
       toggleFav(bg.id);
       const nowFav = isFav(bg.id);
       card.classList.toggle("is-favorited", nowFav);
-      favBtn.innerHTML = `<img src="images/icons/${nowFav ? "heart-filled" : "heart"}.svg" alt="">`;
+      favBtn.innerHTML = `<img src="images/icons/${nowFav ? "heart-filled" : "heart"}.png" alt="">`;
       favBtn.classList.remove("is-fav");
       void favBtn.offsetWidth;
       favBtn.classList.add("is-fav");
@@ -319,7 +319,7 @@
 
     const favBadge = document.createElement("div");
     favBadge.className = "fav-badge";
-    favBadge.innerHTML = `<img src="images/icons/heart-filled.svg" alt="">1`;
+    favBadge.innerHTML = `<img src="images/icons/heart-filled.png" alt="">1`;
 
     card.appendChild(img);
     card.appendChild(overlay);
@@ -404,7 +404,7 @@
     const bg = previewList[state.previewIndex];
     const fav = isFav(bg.id);
     el.previewFav.classList.toggle("is-fav", fav);
-    el.previewFavIcon.src = `images/icons/${fav ? "heart-filled" : "heart"}.svg`;
+    el.previewFavIcon.src = `images/icons/${fav ? "heart-filled" : "heart"}.png`;
   }
 
   el.previewFav.addEventListener("click", () => {
@@ -420,7 +420,7 @@
       const nowFav = isFav(bg.id);
       card.classList.toggle("is-favorited", nowFav);
       const cardFavBtn = card.querySelector(".fav-btn img");
-      if (cardFavBtn) cardFavBtn.src = `images/icons/${nowFav ? "heart-filled" : "heart"}.svg`;
+      if (cardFavBtn) cardFavBtn.src = `images/icons/${nowFav ? "heart-filled" : "heart"}.png`;
     }
   });
 
@@ -546,32 +546,12 @@
     el.setToast._t = setTimeout(() => el.setToast.classList.remove("show"), 4200);
   }
 
-  // Fetches the current background as a real, shareable raster image. SVGs
-  // get rasterized to PNG on a canvas first -- Photos can't store raw SVG,
-  // so sharing/downloading the XML file directly wouldn't be usable as a
-  // wallpaper. The 40 real photos are already JPGs and are fetched as-is.
+  // Fetches the current background as a real, shareable raster image.
+  // Every background ships as a JPG or PNG, so this is just a fetch --
+  // no SVG-to-canvas rasterization is needed at runtime.
   async function getShareableImageBlob(bg) {
     const res = await fetch(bg.filename);
-    if (!bg.filename.toLowerCase().endsWith(".svg")) {
-      return await res.blob();
-    }
-    const svgText = await res.text();
-    const url = URL.createObjectURL(new Blob([svgText], { type: "image/svg+xml" }));
-    try {
-      const img = new Image();
-      await new Promise((resolve, reject) => {
-        img.onload = resolve;
-        img.onerror = reject;
-        img.src = url;
-      });
-      const canvas = document.createElement("canvas");
-      canvas.width = img.naturalWidth || 2048;
-      canvas.height = img.naturalHeight || 2732;
-      canvas.getContext("2d").drawImage(img, 0, 0, canvas.width, canvas.height);
-      return await new Promise((resolve) => canvas.toBlob(resolve, "image/png"));
-    } finally {
-      URL.revokeObjectURL(url);
-    }
+    return await res.blob();
   }
 
   function triggerDownload(blob, filename) {
@@ -605,7 +585,7 @@
   // ---- Sound toggle ------------------------------------------------------------
   function updateSoundBtn() {
     el.soundToggle.setAttribute("aria-pressed", String(state.soundOn));
-    el.soundIcon.src = `images/icons/${state.soundOn ? "sound-on" : "sound-off"}.svg`;
+    el.soundIcon.src = `images/icons/${state.soundOn ? "sound-on" : "sound-off"}.png`;
   }
   updateSoundBtn();
   el.soundToggle.addEventListener("click", () => {

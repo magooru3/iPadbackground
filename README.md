@@ -20,16 +20,19 @@ python3 -m http.server 8080   # then visit http://localhost:8080
 
 - Scrollable, responsive thumbnail grid (2–6 columns depending on screen size)
 - Tap a thumbnail to preview it full screen, with a smooth zoom-in transition
-- "Set as Background" button with confetti + a celebratory chime (visual/audio
-  feedback only — this is a picker, not a real device-background setter)
+- "Set as Background" button with confetti + a celebratory chime, then shares
+  or downloads the image so it can be set as the actual iPad wallpaper from
+  Photos (see "Setting the real wallpaper" below)
 - Swipe or use the arrow buttons to move between previews; pinch to zoom
 - Two rows of horizontally-scrolling tabs: art style (All / Illustrated /
-  Realistic) and category (56 categories + Favorites)
+  Realistic / Real Photos) and category (56 categories + Favorites)
 - Search box matching titles, categories, and a rich per-image tag set
 - Heart a background to favorite it — favorites persist in `localStorage`
 - "Random" button jumps straight into a random background preview
-- Download button saves the current background's SVG file
+- Download button saves the current background's JPG/PNG file
 - Optional sound-effect toggle (also saved in `localStorage`)
+- Installable as a Home Screen app ("Backgrounds" icon) with its own launch
+  icon, splash color, and full-screen standalone display
 
 ## Project structure
 
@@ -37,36 +40,60 @@ python3 -m http.server 8080   # then visit http://localhost:8080
 index.html              Markup / app shell
 styles.css               All styling (kid-friendly, rounded, animated)
 app.js                    App logic (grid, search, favorites, preview, confetti)
+manifest.webmanifest      PWA manifest (Home Screen name/icon/theme color)
 images/
   backgrounds.json        Metadata for every background (id, title, category, style, tags, credit…)
-  backgrounds/<category>/ 1000 original SVG artworks (6-45 per category) + 40 real JPG photos
+  backgrounds/<category>/ 1000 original JPG artworks (6-45 per category) + 40 real JPG photos
                            (images/backgrounds/flowers-florals/photos/)
-  icons/                  UI icon set (heart, star, arrows, search, sound, …)
+  icons/                  UI icon set (heart, star, arrows, search, sound, …) + Home Screen/favicon PNGs — all PNG, no SVG
 scripts/
-  generate_backgrounds.py     Procedurally generates every illustrated/realistic-style SVG
-                               + merges in the real photos + writes backgrounds.json
+  generate_backgrounds.py     Procedurally generates every illustrated/realistic-style background as SVG
+                               (its internal drawing format), merges in the real photos, writes backgrounds.json
+  rasterize_backgrounds.py    Converts every generated SVG to JPG in place, deletes the source SVG,
+                               and rewrites backgrounds.json to point at the JPGs
+  rasterize_icons.py          Converts the UI icon SVGs to transparent PNGs in place, deletes the source SVGs
   import_real_photos.py       Downloads and processes the real photos (see below)
   real_photos_picks.json      Hand-reviewed list of which source photos to use
   real_photos_manifest.json   Generated metadata for the real photos (feeds generate_backgrounds.py)
 ```
 
+The shipped image set (everything under `images/`) is **JPG/PNG only — no
+SVG files are committed to the repo.**
+
 ## About the artwork
 
-Most backgrounds are **original, procedurally-generated SVGs** — built from
-simple vector shapes (gradients, circles, stars, hearts, flowers, animal
-faces, etc.) composed by `scripts/generate_backgrounds.py`. Nothing is
-sourced from outside the repo, so there are no licensing concerns, and since
-they're vector graphics they stay crisp at any iPad resolution.
+Most backgrounds are **original, procedurally-generated artwork** — built
+from simple vector shapes (gradients, circles, stars, hearts, flowers,
+animal faces, etc.) composed by `scripts/generate_backgrounds.py`. Nothing
+is sourced from outside the repo, so there are no licensing concerns.
+
+Internally, `generate_backgrounds.py` still draws each piece as SVG (it's a
+convenient vector format to compose shapes in), but that's strictly a build
+detail — a second step, `scripts/rasterize_backgrounds.py`, renders every
+SVG to a JPG via headless Chromium and deletes the SVG, so the files actually
+shipped in `images/backgrounds/` and referenced by the app are all JPG.
 
 To regenerate or extend the set (e.g. add more variants per category):
 
 ```
-python3 scripts/generate_backgrounds.py
+python3 scripts/generate_backgrounds.py     # (re)generates the art as SVG
+python3 scripts/rasterize_backgrounds.py    # converts SVG -> JPG, updates backgrounds.json
 ```
 
-Re-running is deterministic (each variant is seeded), and it overwrites
-`images/backgrounds/**/*.svg` and `images/backgrounds.json` in place. It also
-re-merges the real photo metadata (see below) if present.
+Re-running is deterministic (each variant is seeded). The first script
+overwrites `images/backgrounds/**/*.svg` and `images/backgrounds.json` in
+place (and re-merges the real photo metadata, see below, if present); the
+second script then converts those SVGs to JPG and removes them, leaving no
+SVG files behind.
+
+UI icons (heart, search, arrows, etc.) follow the same pattern: they're
+hand-authored as SVG for easy editing, then `scripts/rasterize_icons.py`
+renders them to transparent PNGs and deletes the SVG sources. If you edit an
+icon, re-run:
+
+```
+python3 scripts/rasterize_icons.py
+```
 
 ### Real photos (Flowers & Florals)
 
@@ -100,3 +127,13 @@ Real photos for other categories weren't added: this dataset only covers
 flowers, and every other legitimate real-photo/stock-photo host tested
 (Wikimedia Commons, NASA, Unsplash, Pexels, Pixabay) was unreachable from
 the environment this was built in.
+
+## Setting the real wallpaper
+
+No browser API can set a device's actual wallpaper directly, so "Set as
+Background" does the next best thing: it triggers iOS's native share sheet
+(via the Web Share API) with the full-resolution image attached, so a tap
+away is "Save Image" to Photos, then Photos' own Share → Use as Wallpaper
+flow sets it for real. On browsers/devices without file-sharing support it
+falls back to a plain download instead. Either way a toast under the button
+explains the next tap.

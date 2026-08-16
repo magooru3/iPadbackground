@@ -1,0 +1,398 @@
+[
+  {
+    "image_id": "17f81586ffe1128b",
+    "subset": "test",
+    "category": "huskies",
+    "title": "Armful of Husky Puppies"
+  },
+  {
+    "image_id": "4efb406c0a86906d",
+    "subset": "validation",
+    "category": "huskies",
+    "title": "Blue-Eyed Husky Puppy"
+  },
+  {
+    "image_id": "a29bb4de8f76f589",
+    "subset": "test",
+    "category": "huskies",
+    "title": "Husky Puppy Says Hello"
+  },
+  {
+    "image_id": "215836e253204db4",
+    "subset": "validation",
+    "category": "huskies",
+    "title": "Snowy White Husky Puppy"
+  },
+  {
+    "image_id": "7fbe2038d4bf8056",
+    "subset": "test",
+    "category": "huskies",
+    "title": "Husky Big Smile"
+  },
+  {
+    "image_id": "e9b4bd4fad373078",
+    "subset": "test",
+    "category": "huskies",
+    "title": "Row of Husky Puppies"
+  },
+  {
+    "image_id": "463ddcf1e24a6273",
+    "subset": "test",
+    "category": "huskies",
+    "title": "Two Husky Puppies on the Lawn"
+  },
+  {
+    "image_id": "ceb4bc450b1a7290",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "title": "Cavalier King Charles Puppy"
+  },
+  {
+    "image_id": "b158eac8fa185f9c",
+    "subset": "validation",
+    "category": "dogs-puppies",
+    "title": "Golden Retriever Puppy Cuddle"
+  },
+  {
+    "image_id": "65f0cdfee188aa8b",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "title": "Puppy in the Grass"
+  },
+  {
+    "image_id": "219d0bb4acecf73f",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "title": "Sleepy Mastiff Puppy"
+  },
+  {
+    "image_id": "bc0be3ed17a68aa9",
+    "subset": "validation",
+    "category": "dogs-puppies",
+    "title": "Boxer Puppy Eyes"
+  },
+  {
+    "image_id": "951f520cdc643da2",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "title": "Sheepdog Puppy Snuggle"
+  },
+  {
+    "image_id": "7a085339312ef288",
+    "subset": "validation",
+    "category": "dogs-puppies",
+    "title": "Ruby Cavalier Puppy Resting"
+  },
+  {
+    "image_id": "9c3aace5c2d1ae50",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "title": "Airedale Puppy Portrait"
+  },
+  {
+    "image_id": "010c94fc3baef214",
+    "subset": "validation",
+    "category": "dogs-puppies",
+    "title": "Black Labrador Puppy"
+  },
+  {
+    "image_id": "975ba4fc2c8793a8",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "title": "Fluffy White Puppy on Grass"
+  },
+  {
+    "image_id": "37dcad13dc189fd9",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "title": "Scruffy Little Puppy"
+  },
+  {
+    "image_id": "9a3d43afc8c95fef",
+    "subset": "validation",
+    "category": "dogs-puppies",
+    "title": "Blue Heeler Puppy Held Close"
+  },
+  {
+    "image_id": "5c3e5b8cb9ed6f21",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "title": "Shepherd Mix Puppy in the Yard"
+  },
+  {
+    "image_id": "a71021cbcb420dc2",
+    "subset": "validation",
+    "category": "dogs-puppies",
+    "title": "Cream Golden Retriever Puppy"
+  },
+  {
+    "image_id": "92a4ab794f725c2f",
+    "subset": "validation",
+    "category": "dogs-puppies",
+    "title": "Bulldog Puppy Sitting Pretty"
+  },
+  {
+    "image_id": "a02914d1c5daf26a",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "title": "Boston Terrier Puppy Snuggle"
+  },
+  {
+    "image_id": "21140731b6b43673",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "title": "Springer Spaniel Puppy"
+  },
+  {
+    "image_id": "306de7b31c908f79",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "title": "Bernese Puppy Smile"
+  },
+  {
+    "image_id": "f256ea24edaaa8c2",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "title": "Golden Puppy on the Couch"
+  },
+  {
+    "image_id": "a21093132630d7a2",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "title": "Shiba Inu Puppy"
+  },
+  {
+    "image_id": "8c12e7b164c78a1b",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "title": "Yellow Lab Puppy Hug"
+  },
+  {
+    "image_id": "83a7d4c02f0902db",
+    "subset": "validation",
+    "category": "dogs-puppies",
+    "title": "Three Golden Puppies in a Wagon"
+  },
+  {
+    "image_id": "718c6f7425f985ee",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "title": "Happy Black Spaniel"
+  },
+  {
+    "image_id": "55ad6ca47fc3a508",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "title": "Shih Tzu Puppy on a Blanket"
+  },
+  {
+    "image_id": "997f34fcb062ace1",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "title": "Puppy Playing in the Grass"
+  },
+  {
+    "image_id": "87dc77dd092e451b",
+    "subset": "validation",
+    "category": "dogs-puppies",
+    "title": "Aussie Puppy and Chew Toy"
+  },
+  {
+    "image_id": "c553e577d1d65e41",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "title": "German Shepherd Puppy"
+  },
+  {
+    "image_id": "9c096a7e394d6b51",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "title": "Snowy Cocker Spaniel Puppy"
+  },
+  {
+    "image_id": "22b0a304afcb7282",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "title": "Yellow Labrador Puppy Resting"
+  },
+  {
+    "image_id": "00493fdf106b5fdf",
+    "subset": "validation",
+    "category": "dogs-puppies",
+    "title": "Curious Shepherd Puppy"
+  },
+  {
+    "image_id": "a6666720a5cfb0e7",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "title": "Miniature Pinscher Puppy"
+  },
+  {
+    "image_id": "be0b5c33e093c8bd",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "title": "Beagle Puppy Sitting"
+  },
+  {
+    "image_id": "37b1475fbce50f9f",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "title": "Blue Heeler Puppy and Stick"
+  },
+  {
+    "image_id": "b4a0decd3449f2b4",
+    "subset": "validation",
+    "category": "dogs-puppies",
+    "title": "Black German Shepherd Puppy"
+  },
+  {
+    "image_id": "b3c5b243f2f1d1e9",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "title": "Dachshund Puppies Napping"
+  },
+  {
+    "image_id": "6fa5c3084836a842",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "title": "Jack Russell Puppy Look"
+  },
+  {
+    "image_id": "67cd4d80037d571c",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "title": "Cattle Dog Puppy on Straw"
+  },
+  {
+    "image_id": "abfa679752507b1c",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "title": "Beagle Puppy on Red"
+  },
+  {
+    "image_id": "3966ed4c091d1a2c",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "title": "Golden Puppy in the Meadow"
+  },
+  {
+    "image_id": "bdb2aafcf51789b9",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "title": "Smiling Shiba Inu"
+  },
+  {
+    "image_id": "88e8cca17c74dfdc",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "title": "Border Collie Puppy"
+  },
+  {
+    "image_id": "7d9476609283f3dc",
+    "subset": "validation",
+    "category": "dogs-puppies",
+    "title": "Corgi Puppy and Ball"
+  },
+  {
+    "image_id": "3169e1d8e88a2b91",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "title": "Golden Puppy Napping on Grass"
+  },
+  {
+    "image_id": "5c356a07d8901162",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "title": "Whippet Puppies Running"
+  },
+  {
+    "image_id": "50d2f673c6889632",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "title": "Two Terrier Puppies"
+  },
+  {
+    "image_id": "5c8c5b2867c9c49f",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "title": "Griffon Puppy in the Garden"
+  },
+  {
+    "image_id": "35dc1191f902bd74",
+    "subset": "validation",
+    "category": "dogs-puppies",
+    "title": "Boston Terrier Puppy"
+  },
+  {
+    "image_id": "95a2d4a7bd32e683",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "title": "Dachshund Puppies in Bed"
+  },
+  {
+    "image_id": "0f09d152aa5cc085",
+    "subset": "validation",
+    "category": "dogs-puppies",
+    "title": "Dapple Dachshund Puppy"
+  },
+  {
+    "image_id": "8e13268f37dbd17b",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "title": "Dachshund Puppy Pair"
+  },
+  {
+    "image_id": "cfc0bb821cddc7fb",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "title": "Bulldog Puppy Stretch"
+  },
+  {
+    "image_id": "00c6e88291c33874",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "title": "Chihuahua Puppy Curled Up"
+  },
+  {
+    "image_id": "ea7968fc38b4f6a9",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "title": "Saint Bernard Puppy in Leaves"
+  },
+  {
+    "image_id": "ece0ae012f4f1f25",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "title": "Schnauzer Puppy on the Lawn"
+  },
+  {
+    "image_id": "3973152f44d8163d",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "title": "Cattle Dog Puppy in the Grass"
+  },
+  {
+    "image_id": "b178362abca95392",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "title": "Cavalier Puppy on the Sofa"
+  },
+  {
+    "image_id": "7142b3d3f5945f37",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "title": "Three Cattle Dog Puppies"
+  },
+  {
+    "image_id": "a076f6bedb5d131c",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "title": "Shepherd Puppy on the Patio"
+  },
+  {
+    "image_id": "41415a979d227ce0",
+    "subset": "validation",
+    "category": "dogs-puppies",
+    "title": "German Shepherd Puppies Running"
+  }
+]

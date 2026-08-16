@@ -34,6 +34,12 @@ python3 scripts/rasterize_icons.py
 pip install Pillow
 python3 scripts/import_real_photos.py
 python3 scripts/generate_backgrounds.py
+
+# Re-import the real puppy/husky photos (rarely needed; downloads ~60MB of
+# Open Images metadata + the source JPGs into a gitignored .cache/)
+pip install Pillow
+python3 scripts/import_puppy_photos.py
+python3 scripts/generate_backgrounds.py
 ```
 
 `rasterize_backgrounds.py` and `rasterize_icons.py` both require
@@ -72,12 +78,28 @@ So after step 1 alone, the working tree will contain `.svg` files again —
 `find images -iname '*.svg'` returns nothing before finishing any task that
 touches the art pipeline.
 
-The 40 real photos (Flowers & Florals) are the exception to steps 1-2:
-they're genuine JPGs from the TensorFlow `flower_photos` dataset (CC BY
-2.0), imported once by `scripts/import_real_photos.py` into
-`scripts/real_photos_manifest.json`, and merged into `backgrounds.json`
-by `generate_backgrounds.py`'s `main()` (untouched by the rasterize step,
-since they're already JPG).
+The 106 real photos are the exception to steps 1-2 — they're already JPG,
+so the rasterize step leaves them alone. Each import writes its own
+manifest under `scripts/`, and `generate_backgrounds.py`'s `main()` merges
+every manifest in its list (in order, appended after the generated
+entries):
+
+- 40 flowers (Flowers & Florals) from the TensorFlow `flower_photos`
+  dataset (CC BY 2.0) — `import_real_photos.py` → `real_photos_manifest.json`.
+- 66 puppies/huskies (Dogs & Puppies, Huskies) from Google's Open Images
+  dataset (CC BY 2.0) — `import_puppy_photos.py` → `puppy_photos_manifest.json`.
+
+Both importers are pinned to a hand-reviewed `*_picks.json`, so re-running
+them is reproducible and never re-rolls the selection. **Adding a third
+photo source means adding its manifest to that list in `main()`** — nothing
+else in the generator needs to change.
+
+Because photo entries are appended after all generated entries, adding a
+photo import does not require re-rendering the 1000 procedural
+backgrounds: appending the new manifest's entries to `backgrounds.json`
+produces byte-identical output to a full `generate_backgrounds.py` +
+`rasterize_backgrounds.py` run (worth verifying with a temp-dir run of
+`main()` if you change anything in this area).
 
 ## `generate_backgrounds.py` architecture
 

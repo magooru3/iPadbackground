@@ -1,13 +1,13 @@
 # McGraw Girls Backgrounds 🌈
 
-A fun, colorful web app that lets kids browse and pick from **1040
+A fun, colorful web app that lets kids browse and pick from **1106
 backgrounds** across 56 categories — rainbows, unicorns, dinosaurs,
 mermaids, space, sports, huskies, dogs, horses, dragons, robots, pirates,
 and lots more. Every background comes in a flat **illustrated** style, 15
 animal/nature-heavy categories also have a second, more detailed
 **realistic style** tier (soft lighting, texture, depth-of-field-style
-backdrops), and the Flowers & Florals category also has 40 genuine
-**real photos** — switchable via the style tabs.
+backdrops), and three categories also have genuine **real photos** — 40
+flowers, plus 59 puppies and 7 huskies — switchable via the style tabs.
 
 Open `index.html` in a browser (or serve the folder with any static file
 server) — no build step, no dependencies.
@@ -43,8 +43,8 @@ app.js                    App logic (grid, search, favorites, preview, confetti)
 manifest.webmanifest      PWA manifest (Home Screen name/icon/theme color)
 images/
   backgrounds.json        Metadata for every background (id, title, category, style, tags, credit…)
-  backgrounds/<category>/ 1000 original JPG artworks (6-45 per category) + 40 real JPG photos
-                           (images/backgrounds/flowers-florals/photos/)
+  backgrounds/<category>/ 1000 original JPG artworks (6-45 per category) + 106 real JPG photos
+                           (in the photos/ subfolder of flowers-florals, dogs-puppies and huskies)
   icons/                  UI icon set (heart, star, arrows, search, sound, …) + Home Screen/favicon PNGs — all PNG, no SVG
 scripts/
   generate_backgrounds.py     Procedurally generates every illustrated/realistic-style background as SVG
@@ -52,9 +52,12 @@ scripts/
   rasterize_backgrounds.py    Converts every generated SVG to JPG in place, deletes the source SVG,
                                and rewrites backgrounds.json to point at the JPGs
   rasterize_icons.py          Converts the UI icon SVGs to transparent PNGs in place, deletes the source SVGs
-  import_real_photos.py       Downloads and processes the real photos (see below)
-  real_photos_picks.json      Hand-reviewed list of which source photos to use
-  real_photos_manifest.json   Generated metadata for the real photos (feeds generate_backgrounds.py)
+  import_real_photos.py       Downloads and processes the real flower photos (see below)
+  real_photos_picks.json      Hand-reviewed list of which source flower photos to use
+  real_photos_manifest.json   Generated metadata for the flower photos (feeds generate_backgrounds.py)
+  import_puppy_photos.py      Downloads and processes the real puppy/husky photos (see below)
+  puppy_photos_picks.json     Hand-reviewed list of which source puppy photos to use
+  puppy_photos_manifest.json  Generated metadata for the puppy photos (feeds generate_backgrounds.py)
 ```
 
 The shipped image set (everything under `images/`) is **JPG/PNG only — no
@@ -95,9 +98,20 @@ icon, re-run:
 python3 scripts/rasterize_icons.py
 ```
 
-### Real photos (Flowers & Florals)
+### Real photos
 
-The 40 `style: "photo"` backgrounds are genuine photographs — both landscape
+106 of the backgrounds are `style: "photo"` — genuine photographs rather
+than generated artwork, all of them Flickr originals under **Creative
+Commons Attribution 2.0 (CC BY 2.0)**, each carrying its photographer and
+source URL in the `credit` field that the preview view displays. They come
+from two separate imports, described below, and share the same shape: a
+hand-reviewed picks file pins the exact source images, an importer writes
+the cropped JPGs plus a metadata manifest, and `generate_backgrounds.py`
+merges every manifest it finds into `backgrounds.json`.
+
+#### Flowers & Florals (40 photos)
+
+These 40 photographs — both landscape
 (2732×2048) and portrait (2048×2732) JPGs — from the TensorFlow
 ["flower_photos"](https://www.tensorflow.org/datasets/catalog/tf_flowers)
 dataset: ~3,670 flower photos scraped from Flickr and released under
@@ -123,10 +137,62 @@ python3 scripts/import_real_photos.py
 python3 scripts/generate_backgrounds.py
 ```
 
-Real photos for other categories weren't added: this dataset only covers
-flowers, and every other legitimate real-photo/stock-photo host tested
-(Wikimedia Commons, NASA, Unsplash, Pexels, Pixabay) was unreachable from
-the environment this was built in.
+#### Dogs & Puppies + Huskies (66 photos)
+
+59 puppy photos in **Dogs & Puppies** and 7 husky photos in **Huskies**,
+imported by `scripts/import_puppy_photos.py` from Google's
+[Open Images Dataset](https://storage.googleapis.com/openimages/web/index.html)
+— ~9M Flickr photographs, every one of them **CC BY 2.0**, with the
+photographer and the original Flickr page recorded in the dataset's own
+image-metadata CSVs. Metadata comes from `storage.googleapis.com`; the
+images themselves come from the CVDF-hosted mirror on `s3.amazonaws.com`,
+resized to 1024px on the long edge.
+
+Open Images labels dogs but has no "puppy" class, so the candidate pool was
+built by taking every validation/test image with a `Dog` bounding box whose
+original Flickr *title* mentions a puppy (181 images), then reviewing all of
+them on contact sheets and keeping the 66 that work as a kid's wallpaper.
+The rest were dropped for the usual dataset reasons — watermarks and date
+stamps, photo collages, nursing/newborn litters, a ceramic dog figurine, a
+couple of genuinely grim titles, blurry or very dark frames, and shots where
+a person rather than the puppy is the subject.
+`scripts/puppy_photos_picks.json` pins that reviewed selection (and its
+per-photo titles), so re-running the import is reproducible.
+
+Each photo is cover-cropped to whichever iPad orientation matches the source
+— landscape 2732×2048 or portrait 2048×2732 — so a landscape photo is never
+cropped down to a portrait sliver, and gets a light unsharp pass to offset
+the upscale from the 1024px source.
+
+To re-run the import (downloads ~60MB of metadata CSVs plus the 66 source
+JPGs into a gitignored `.cache/`, so a second run is nearly instant):
+
+```
+pip install Pillow
+python3 scripts/import_puppy_photos.py
+python3 scripts/generate_backgrounds.py
+```
+
+Widening the puppy set later is mostly a matter of pointing the same filter
+at Open Images' **train** subset — ~1.7M more images in the same CSV format
+under the same license — which was skipped here only because its metadata
+CSV is ~2GB.
+
+#### Other sources
+
+Real photos for the remaining categories are limited by what this build
+environment can reach: the egress policy allows `storage.googleapis.com`,
+`s3.amazonaws.com` and `github.com`/`raw.githubusercontent.com`, and every
+other real-photo host tested (Wikimedia Commons, Unsplash, Pexels, Pixabay,
+Openverse, Flickr, `thor.robots.ox.ac.uk`) is blocked. Open Images itself is
+the best remaining lead by far — it's reachable, permissively licensed, and
+its ~600 boxable classes cover a lot of this app's categories (cats, horses,
+butterflies, birds, dinosaur models, beaches, flowers), so the same
+importer pattern extends to them. Datasets that are reachable but *not*
+usable were also checked and rejected: Stanford Dogs and the Kaggle Cats &
+Dogs subset both carry research-only terms rather than a redistribution
+licence, and the Oxford-IIIT Pet dataset (CC BY-SA 4.0) is hosted on a
+blocked domain.
 
 ## Setting the real wallpaper
 

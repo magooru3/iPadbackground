@@ -1,2 +1,5 @@
 __pycache__/
 *.pyc
+
+# Source-dataset download cache used by scripts/import_puppy_photos.py
+.cache/

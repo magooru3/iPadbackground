@@ -1,0 +1,2200 @@
+[
+  {
+    "image_id": "17f81586ffe1128b",
+    "subset": "test",
+    "category": "huskies",
+    "subject": "Husky",
+    "title": "Armful of Husky Puppies"
+  },
+  {
+    "image_id": "4efb406c0a86906d",
+    "subset": "validation",
+    "category": "huskies",
+    "subject": "Husky",
+    "title": "Blue-Eyed Husky Puppy"
+  },
+  {
+    "image_id": "a29bb4de8f76f589",
+    "subset": "test",
+    "category": "huskies",
+    "subject": "Husky",
+    "title": "Husky Puppy Says Hello"
+  },
+  {
+    "image_id": "215836e253204db4",
+    "subset": "validation",
+    "category": "huskies",
+    "subject": "Husky",
+    "title": "Snowy White Husky Puppy"
+  },
+  {
+    "image_id": "7fbe2038d4bf8056",
+    "subset": "test",
+    "category": "huskies",
+    "subject": "Husky",
+    "title": "Husky Big Smile"
+  },
+  {
+    "image_id": "e9b4bd4fad373078",
+    "subset": "test",
+    "category": "huskies",
+    "subject": "Husky",
+    "title": "Row of Husky Puppies"
+  },
+  {
+    "image_id": "463ddcf1e24a6273",
+    "subset": "test",
+    "category": "huskies",
+    "subject": "Husky",
+    "title": "Two Husky Puppies on the Lawn"
+  },
+  {
+    "image_id": "ceb4bc450b1a7290",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "subject": "Puppy",
+    "title": "Cavalier King Charles Puppy"
+  },
+  {
+    "image_id": "b158eac8fa185f9c",
+    "subset": "validation",
+    "category": "dogs-puppies",
+    "subject": "Puppy",
+    "title": "Golden Retriever Puppy Cuddle"
+  },
+  {
+    "image_id": "65f0cdfee188aa8b",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "subject": "Puppy",
+    "title": "Puppy in the Grass"
+  },
+  {
+    "image_id": "219d0bb4acecf73f",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "subject": "Puppy",
+    "title": "Sleepy Mastiff Puppy"
+  },
+  {
+    "image_id": "bc0be3ed17a68aa9",
+    "subset": "validation",
+    "category": "dogs-puppies",
+    "subject": "Puppy",
+    "title": "Boxer Puppy Eyes"
+  },
+  {
+    "image_id": "951f520cdc643da2",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "subject": "Puppy",
+    "title": "Sheepdog Puppy Snuggle"
+  },
+  {
+    "image_id": "7a085339312ef288",
+    "subset": "validation",
+    "category": "dogs-puppies",
+    "subject": "Puppy",
+    "title": "Ruby Cavalier Puppy Resting"
+  },
+  {
+    "image_id": "9c3aace5c2d1ae50",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "subject": "Puppy",
+    "title": "Airedale Puppy Portrait"
+  },
+  {
+    "image_id": "010c94fc3baef214",
+    "subset": "validation",
+    "category": "dogs-puppies",
+    "subject": "Puppy",
+    "title": "Black Labrador Puppy"
+  },
+  {
+    "image_id": "975ba4fc2c8793a8",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "subject": "Puppy",
+    "title": "Fluffy White Puppy on Grass"
+  },
+  {
+    "image_id": "37dcad13dc189fd9",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "subject": "Puppy",
+    "title": "Scruffy Little Puppy"
+  },
+  {
+    "image_id": "9a3d43afc8c95fef",
+    "subset": "validation",
+    "category": "dogs-puppies",
+    "subject": "Puppy",
+    "title": "Blue Heeler Puppy Held Close"
+  },
+  {
+    "image_id": "5c3e5b8cb9ed6f21",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "subject": "Puppy",
+    "title": "Shepherd Mix Puppy in the Yard"
+  },
+  {
+    "image_id": "a71021cbcb420dc2",
+    "subset": "validation",
+    "category": "dogs-puppies",
+    "subject": "Puppy",
+    "title": "Cream Golden Retriever Puppy"
+  },
+  {
+    "image_id": "92a4ab794f725c2f",
+    "subset": "validation",
+    "category": "dogs-puppies",
+    "subject": "Puppy",
+    "title": "Bulldog Puppy Sitting Pretty"
+  },
+  {
+    "image_id": "a02914d1c5daf26a",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "subject": "Puppy",
+    "title": "Boston Terrier Puppy Snuggle"
+  },
+  {
+    "image_id": "21140731b6b43673",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "subject": "Puppy",
+    "title": "Springer Spaniel Puppy"
+  },
+  {
+    "image_id": "306de7b31c908f79",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "subject": "Puppy",
+    "title": "Bernese Puppy Smile"
+  },
+  {
+    "image_id": "f256ea24edaaa8c2",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "subject": "Puppy",
+    "title": "Golden Puppy on the Couch"
+  },
+  {
+    "image_id": "a21093132630d7a2",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "subject": "Puppy",
+    "title": "Shiba Inu Puppy"
+  },
+  {
+    "image_id": "8c12e7b164c78a1b",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "subject": "Puppy",
+    "title": "Yellow Lab Puppy Hug"
+  },
+  {
+    "image_id": "83a7d4c02f0902db",
+    "subset": "validation",
+    "category": "dogs-puppies",
+    "subject": "Puppy",
+    "title": "Three Golden Puppies in a Wagon"
+  },
+  {
+    "image_id": "718c6f7425f985ee",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "subject": "Puppy",
+    "title": "Happy Black Spaniel"
+  },
+  {
+    "image_id": "55ad6ca47fc3a508",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "subject": "Puppy",
+    "title": "Shih Tzu Puppy on a Blanket"
+  },
+  {
+    "image_id": "997f34fcb062ace1",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "subject": "Puppy",
+    "title": "Puppy Playing in the Grass"
+  },
+  {
+    "image_id": "87dc77dd092e451b",
+    "subset": "validation",
+    "category": "dogs-puppies",
+    "subject": "Puppy",
+    "title": "Aussie Puppy and Chew Toy"
+  },
+  {
+    "image_id": "c553e577d1d65e41",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "subject": "Puppy",
+    "title": "German Shepherd Puppy"
+  },
+  {
+    "image_id": "9c096a7e394d6b51",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "subject": "Puppy",
+    "title": "Snowy Cocker Spaniel Puppy"
+  },
+  {
+    "image_id": "22b0a304afcb7282",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "subject": "Puppy",
+    "title": "Yellow Labrador Puppy Resting"
+  },
+  {
+    "image_id": "00493fdf106b5fdf",
+    "subset": "validation",
+    "category": "dogs-puppies",
+    "subject": "Puppy",
+    "title": "Curious Shepherd Puppy"
+  },
+  {
+    "image_id": "a6666720a5cfb0e7",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "subject": "Puppy",
+    "title": "Miniature Pinscher Puppy"
+  },
+  {
+    "image_id": "be0b5c33e093c8bd",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "subject": "Puppy",
+    "title": "Beagle Puppy Sitting"
+  },
+  {
+    "image_id": "37b1475fbce50f9f",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "subject": "Puppy",
+    "title": "Blue Heeler Puppy and Stick"
+  },
+  {
+    "image_id": "b4a0decd3449f2b4",
+    "subset": "validation",
+    "category": "dogs-puppies",
+    "subject": "Puppy",
+    "title": "Black German Shepherd Puppy"
+  },
+  {
+    "image_id": "b3c5b243f2f1d1e9",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "subject": "Puppy",
+    "title": "Dachshund Puppies Napping"
+  },
+  {
+    "image_id": "6fa5c3084836a842",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "subject": "Puppy",
+    "title": "Jack Russell Puppy Look"
+  },
+  {
+    "image_id": "67cd4d80037d571c",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "subject": "Puppy",
+    "title": "Cattle Dog Puppy on Straw"
+  },
+  {
+    "image_id": "abfa679752507b1c",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "subject": "Puppy",
+    "title": "Beagle Puppy on Red"
+  },
+  {
+    "image_id": "3966ed4c091d1a2c",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "subject": "Puppy",
+    "title": "Golden Puppy in the Meadow"
+  },
+  {
+    "image_id": "bdb2aafcf51789b9",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "subject": "Puppy",
+    "title": "Smiling Shiba Inu"
+  },
+  {
+    "image_id": "88e8cca17c74dfdc",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "subject": "Puppy",
+    "title": "Border Collie Puppy"
+  },
+  {
+    "image_id": "7d9476609283f3dc",
+    "subset": "validation",
+    "category": "dogs-puppies",
+    "subject": "Puppy",
+    "title": "Corgi Puppy and Ball"
+  },
+  {
+    "image_id": "3169e1d8e88a2b91",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "subject": "Puppy",
+    "title": "Golden Puppy Napping on Grass"
+  },
+  {
+    "image_id": "5c356a07d8901162",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "subject": "Puppy",
+    "title": "Whippet Puppies Running"
+  },
+  {
+    "image_id": "50d2f673c6889632",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "subject": "Puppy",
+    "title": "Two Terrier Puppies"
+  },
+  {
+    "image_id": "5c8c5b2867c9c49f",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "subject": "Puppy",
+    "title": "Griffon Puppy in the Garden"
+  },
+  {
+    "image_id": "35dc1191f902bd74",
+    "subset": "validation",
+    "category": "dogs-puppies",
+    "subject": "Puppy",
+    "title": "Boston Terrier Puppy"
+  },
+  {
+    "image_id": "95a2d4a7bd32e683",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "subject": "Puppy",
+    "title": "Dachshund Puppies in Bed"
+  },
+  {
+    "image_id": "0f09d152aa5cc085",
+    "subset": "validation",
+    "category": "dogs-puppies",
+    "subject": "Puppy",
+    "title": "Dapple Dachshund Puppy"
+  },
+  {
+    "image_id": "8e13268f37dbd17b",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "subject": "Puppy",
+    "title": "Dachshund Puppy Pair"
+  },
+  {
+    "image_id": "cfc0bb821cddc7fb",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "subject": "Puppy",
+    "title": "Bulldog Puppy Stretch"
+  },
+  {
+    "image_id": "00c6e88291c33874",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "subject": "Puppy",
+    "title": "Chihuahua Puppy Curled Up"
+  },
+  {
+    "image_id": "ea7968fc38b4f6a9",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "subject": "Puppy",
+    "title": "Saint Bernard Puppy in Leaves"
+  },
+  {
+    "image_id": "ece0ae012f4f1f25",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "subject": "Puppy",
+    "title": "Schnauzer Puppy on the Lawn"
+  },
+  {
+    "image_id": "3973152f44d8163d",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "subject": "Puppy",
+    "title": "Cattle Dog Puppy in the Grass"
+  },
+  {
+    "image_id": "b178362abca95392",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "subject": "Puppy",
+    "title": "Cavalier Puppy on the Sofa"
+  },
+  {
+    "image_id": "7142b3d3f5945f37",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "subject": "Puppy",
+    "title": "Three Cattle Dog Puppies"
+  },
+  {
+    "image_id": "a076f6bedb5d131c",
+    "subset": "test",
+    "category": "dogs-puppies",
+    "subject": "Puppy",
+    "title": "Shepherd Puppy on the Patio"
+  },
+  {
+    "image_id": "41415a979d227ce0",
+    "subset": "validation",
+    "category": "dogs-puppies",
+    "subject": "Puppy",
+    "title": "German Shepherd Puppies Running"
+  },
+  {
+    "image_id": "0ed2ce28c4d654bd",
+    "subset": "test",
+    "category": "cats-kittens",
+    "subject": "Kitten",
+    "title": "Fluffy Cream Kitten"
+  },
+  {
+    "image_id": "2b757019dc70148e",
+    "subset": "test",
+    "category": "cats-kittens",
+    "subject": "Kitten",
+    "title": "Siamese Kitten on Blue"
+  },
+  {
+    "image_id": "5ae35b582cbe045a",
+    "subset": "test",
+    "category": "cats-kittens",
+    "subject": "Cat",
+    "title": "Green-Eyed Black Cat"
+  },
+  {
+    "image_id": "f5d487608dd6e7e2",
+    "subset": "test",
+    "category": "cats-kittens",
+    "subject": "Kitten",
+    "title": "Little Fluffy Kitten"
+  },
+  {
+    "image_id": "f334858135c2b91a",
+    "subset": "test",
+    "category": "cats-kittens",
+    "subject": "Kitten",
+    "title": "Grey Kitten Chatting"
+  },
+  {
+    "image_id": "16f7344738dda9b8",
+    "subset": "test",
+    "category": "cats-kittens",
+    "subject": "Kitten",
+    "title": "Kitten Reaching Up"
+  },
+  {
+    "image_id": "0ea4852b0c090058",
+    "subset": "test",
+    "category": "cats-kittens",
+    "subject": "Kitten",
+    "title": "Tiny Cream Kitten"
+  },
+  {
+    "image_id": "ad1557e9bbb2d227",
+    "subset": "test",
+    "category": "cats-kittens",
+    "subject": "Cat",
+    "title": "Ginger Maine Coon"
+  },
+  {
+    "image_id": "80b95a8935913250",
+    "subset": "test",
+    "category": "cats-kittens",
+    "subject": "Kitten",
+    "title": "Calico Kitten Portrait"
+  },
+  {
+    "image_id": "a2428d014d415157",
+    "subset": "test",
+    "category": "cats-kittens",
+    "subject": "Kitten",
+    "title": "Grey Kitten Big Eyes"
+  },
+  {
+    "image_id": "f5b432a274bc716c",
+    "subset": "test",
+    "category": "cats-kittens",
+    "subject": "Cat",
+    "title": "Tabby Cat Eyes"
+  },
+  {
+    "image_id": "0ad3f3375816f9ed",
+    "subset": "validation",
+    "category": "cats-kittens",
+    "subject": "Kitten",
+    "title": "Sleepy Tabby Kitten"
+  },
+  {
+    "image_id": "21199a79300d61ff",
+    "subset": "test",
+    "category": "cats-kittens",
+    "subject": "Kitten",
+    "title": "Curious Tabby Kitten"
+  },
+  {
+    "image_id": "db8033a46d2afd83",
+    "subset": "test",
+    "category": "cats-kittens",
+    "subject": "Kitten",
+    "title": "Blue-Eyed Siamese Kitten"
+  },
+  {
+    "image_id": "376eb0646b2eb373",
+    "subset": "test",
+    "category": "cats-kittens",
+    "subject": "Cat",
+    "title": "White Cat Blue Eyes"
+  },
+  {
+    "image_id": "19ed10f087eb9b06",
+    "subset": "test",
+    "category": "cats-kittens",
+    "subject": "Kitten",
+    "title": "Kitten in the Sunshine"
+  },
+  {
+    "image_id": "43293d56f1e626e2",
+    "subset": "validation",
+    "category": "cats-kittens",
+    "subject": "Kitten",
+    "title": "Snowy White Kitten"
+  },
+  {
+    "image_id": "b97cd9ae23586733",
+    "subset": "test",
+    "category": "flowers-florals",
+    "subject": "Lily",
+    "title": "Orange Alstroemeria"
+  },
+  {
+    "image_id": "f58c55579a481c50",
+    "subset": "test",
+    "category": "flowers-florals",
+    "subject": "Rose",
+    "title": "Pink Rose Bush"
+  },
+  {
+    "image_id": "84f2a7a0d78ddad4",
+    "subset": "test",
+    "category": "flowers-florals",
+    "subject": "Orchid",
+    "title": "Yellow Orchid Spray"
+  },
+  {
+    "image_id": "efae7aed1fbd00d2",
+    "subset": "test",
+    "category": "flowers-florals",
+    "subject": "Hydrangea",
+    "title": "White Hydrangea"
+  },
+  {
+    "image_id": "d244ce5c10cbfd5a",
+    "subset": "validation",
+    "category": "flowers-florals",
+    "subject": "Tulip",
+    "title": "Purple Tulips"
+  },
+  {
+    "image_id": "084493adfe1247f4",
+    "subset": "test",
+    "category": "flowers-florals",
+    "subject": "Rose",
+    "title": "Red Roses in Bloom"
+  },
+  {
+    "image_id": "82b450561caa564f",
+    "subset": "test",
+    "category": "flowers-florals",
+    "subject": "Cherry blossom",
+    "title": "Cherry Blossom Branch"
+  },
+  {
+    "image_id": "a485b7f7b82a1015",
+    "subset": "test",
+    "category": "flowers-florals",
+    "subject": "Orchid",
+    "title": "Purple Orchid Bloom"
+  },
+  {
+    "image_id": "6c847d37178e6167",
+    "subset": "test",
+    "category": "flowers-florals",
+    "subject": "Hydrangea",
+    "title": "Blue Hydrangea"
+  },
+  {
+    "image_id": "42fe7414ae2e84a1",
+    "subset": "validation",
+    "category": "flowers-florals",
+    "subject": "Tulip",
+    "title": "Pink Tulip Close-Up"
+  },
+  {
+    "image_id": "24afb10a5187cf5b",
+    "subset": "test",
+    "category": "flowers-florals",
+    "subject": "Cherry blossom",
+    "title": "Blossom Against Blue Sky"
+  },
+  {
+    "image_id": "e6b4862616884a38",
+    "subset": "validation",
+    "category": "flowers-florals",
+    "subject": "Orchid",
+    "title": "White Orchids"
+  },
+  {
+    "image_id": "9a4a2be0474bc68b",
+    "subset": "test",
+    "category": "flowers-florals",
+    "subject": "Tulip",
+    "title": "Yellow Tulip"
+  },
+  {
+    "image_id": "a9007d223851217c",
+    "subset": "validation",
+    "category": "flowers-florals",
+    "subject": "Lily",
+    "title": "White Lily Petals"
+  },
+  {
+    "image_id": "3b345a205a452c36",
+    "subset": "test",
+    "category": "flowers-florals",
+    "subject": "Rose",
+    "title": "Orange Roses"
+  },
+  {
+    "image_id": "74fd49e4f4397913",
+    "subset": "test",
+    "category": "flowers-florals",
+    "subject": "Cherry blossom",
+    "title": "White Spring Blossom"
+  },
+  {
+    "image_id": "fe7d5bb7da302278",
+    "subset": "test",
+    "category": "flowers-florals",
+    "subject": "Orchid",
+    "title": "Pink Orchids on Black"
+  },
+  {
+    "image_id": "d0f1aadcdc552083",
+    "subset": "test",
+    "category": "flowers-florals",
+    "subject": "Rose",
+    "title": "Cream Rose"
+  },
+  {
+    "image_id": "77b1467431c21b78",
+    "subset": "test",
+    "category": "flowers-florals",
+    "subject": "Cherry blossom",
+    "title": "Pink Blossom Cluster"
+  },
+  {
+    "image_id": "1b7076f650620e3e",
+    "subset": "test",
+    "category": "flowers-florals",
+    "subject": "Orchid",
+    "title": "White Orchid Bloom"
+  },
+  {
+    "image_id": "5b87655d801cb8a4",
+    "subset": "test",
+    "category": "butterflies-insects",
+    "subject": "Butterfly",
+    "title": "Butterfly Wing Close-Up"
+  },
+  {
+    "image_id": "61179e58948a32d2",
+    "subset": "test",
+    "category": "butterflies-insects",
+    "subject": "Ladybug",
+    "title": "Ladybug on Wood"
+  },
+  {
+    "image_id": "f9dad278302c057a",
+    "subset": "test",
+    "category": "butterflies-insects",
+    "subject": "Butterfly",
+    "title": "Monarch Butterflies"
+  },
+  {
+    "image_id": "09eb3a64ff84690a",
+    "subset": "test",
+    "category": "butterflies-insects",
+    "subject": "Dragonfly",
+    "title": "Dragonfly on White"
+  },
+  {
+    "image_id": "01d4fc65683b0798",
+    "subset": "test",
+    "category": "butterflies-insects",
+    "subject": "Ladybug",
+    "title": "Ladybug on a Leaf"
+  },
+  {
+    "image_id": "50b16878e779e34c",
+    "subset": "test",
+    "category": "butterflies-insects",
+    "subject": "Butterfly",
+    "title": "Yellow Butterflies"
+  },
+  {
+    "image_id": "eb55e93566caac65",
+    "subset": "validation",
+    "category": "butterflies-insects",
+    "subject": "Ladybug",
+    "title": "Ladybug in the Garden"
+  },
+  {
+    "image_id": "8ae1ace92ba01a52",
+    "subset": "validation",
+    "category": "butterflies-insects",
+    "subject": "Butterfly",
+    "title": "Butterfly Wings Open"
+  },
+  {
+    "image_id": "afe2a094ef2387bd",
+    "subset": "validation",
+    "category": "butterflies-insects",
+    "subject": "Ladybug",
+    "title": "Ladybug on Green"
+  },
+  {
+    "image_id": "0716f55d7debe300",
+    "subset": "test",
+    "category": "butterflies-insects",
+    "subject": "Butterfly",
+    "title": "Green and Gold Butterfly"
+  },
+  {
+    "image_id": "4ad75e493f8436e4",
+    "subset": "validation",
+    "category": "butterflies-insects",
+    "subject": "Butterfly",
+    "title": "Spotted Butterfly"
+  },
+  {
+    "image_id": "9ba79738bda48cd2",
+    "subset": "test",
+    "category": "horses-ponies",
+    "subject": "Foal",
+    "title": "Bay Horse Grazing"
+  },
+  {
+    "image_id": "1ff1d5ea396d9cbe",
+    "subset": "test",
+    "category": "horses-ponies",
+    "subject": "Pony",
+    "title": "Shetland Pony"
+  },
+  {
+    "image_id": "308757e00a344818",
+    "subset": "test",
+    "category": "horses-ponies",
+    "subject": "Pony",
+    "title": "Pony Mane in the Wind"
+  },
+  {
+    "image_id": "78098ed9d6246d5a",
+    "subset": "test",
+    "category": "horses-ponies",
+    "subject": "Foal",
+    "title": "Horse on the Hillside"
+  },
+  {
+    "image_id": "adf7c8a6104d1d7c",
+    "subset": "test",
+    "category": "horses-ponies",
+    "subject": "Horse",
+    "title": "Chestnut Horse Portrait"
+  },
+  {
+    "image_id": "f569a87550ee2c45",
+    "subset": "test",
+    "category": "horses-ponies",
+    "subject": "Pony",
+    "title": "Fluffy Shetland Pony"
+  },
+  {
+    "image_id": "33738f93e7c2e547",
+    "subset": "test",
+    "category": "horses-ponies",
+    "subject": "Horse",
+    "title": "Two Young Foals"
+  },
+  {
+    "image_id": "c2b5d7b6fda74803",
+    "subset": "test",
+    "category": "horses-ponies",
+    "subject": "Foal",
+    "title": "Palomino Foals"
+  },
+  {
+    "image_id": "919de9c62bdda92a",
+    "subset": "test",
+    "category": "horses-ponies",
+    "subject": "Pony",
+    "title": "Piebald Pony"
+  },
+  {
+    "image_id": "f9923046d1febf2f",
+    "subset": "test",
+    "category": "horses-ponies",
+    "subject": "Pony",
+    "title": "Ponies in a Green Field"
+  },
+  {
+    "image_id": "db435eb6d22291ce",
+    "subset": "test",
+    "category": "horses-ponies",
+    "subject": "Horse",
+    "title": "White Pony Portrait"
+  },
+  {
+    "image_id": "e49c69d69460a47b",
+    "subset": "test",
+    "category": "horses-ponies",
+    "subject": "Foal",
+    "title": "Pony and Her Foal"
+  },
+  {
+    "image_id": "557d8b5dcd0d96a4",
+    "subset": "test",
+    "category": "horses-ponies",
+    "subject": "Foal",
+    "title": "Pony in the Morning Mist"
+  },
+  {
+    "image_id": "d8766f5ce909e95c",
+    "subset": "test",
+    "category": "horses-ponies",
+    "subject": "Horse",
+    "title": "Chestnut Horse Mane"
+  },
+  {
+    "image_id": "167af8f2bde5db07",
+    "subset": "test",
+    "category": "horses-ponies",
+    "subject": "Pony",
+    "title": "Two Fjord Horses"
+  },
+  {
+    "image_id": "7fb49fd6901ec135",
+    "subset": "test",
+    "category": "cute-animals",
+    "subject": "Fox",
+    "title": "Arctic Fox Face"
+  },
+  {
+    "image_id": "0f949420862cb302",
+    "subset": "test",
+    "category": "cute-animals",
+    "subject": "Panda",
+    "title": "Panda Eating Bamboo"
+  },
+  {
+    "image_id": "de9b8a28d013da76",
+    "subset": "test",
+    "category": "cute-animals",
+    "subject": "Deer",
+    "title": "Deer with Antlers"
+  },
+  {
+    "image_id": "70bd59e227910c24",
+    "subset": "test",
+    "category": "cute-animals",
+    "subject": "Rabbit",
+    "title": "Fluffy White Bunny"
+  },
+  {
+    "image_id": "b508f2291be98ec0",
+    "subset": "validation",
+    "category": "cute-animals",
+    "subject": "Squirrel",
+    "title": "Squirrel with a Snack"
+  },
+  {
+    "image_id": "dcf65fffe4125877",
+    "subset": "test",
+    "category": "cute-animals",
+    "subject": "Fox",
+    "title": "Red Fox Portrait"
+  },
+  {
+    "image_id": "a283f31201afbb6c",
+    "subset": "test",
+    "category": "cute-animals",
+    "subject": "Panda",
+    "title": "Giant Panda Close-Up"
+  },
+  {
+    "image_id": "c5c8e6851abd5c55",
+    "subset": "validation",
+    "category": "cute-animals",
+    "subject": "Deer",
+    "title": "Spotted Deer in the Grass"
+  },
+  {
+    "image_id": "2ad2e9e79d2f1be3",
+    "subset": "test",
+    "category": "cute-animals",
+    "subject": "Fox",
+    "title": "White Arctic Fox"
+  },
+  {
+    "image_id": "b48f8235b23de64d",
+    "subset": "validation",
+    "category": "cute-animals",
+    "subject": "Panda",
+    "title": "Panda Resting"
+  },
+  {
+    "image_id": "91cbd5359a81e30b",
+    "subset": "validation",
+    "category": "cute-animals",
+    "subject": "Deer",
+    "title": "Young Deer Portrait"
+  },
+  {
+    "image_id": "897c809b02010f67",
+    "subset": "validation",
+    "category": "cute-animals",
+    "subject": "Squirrel",
+    "title": "Little Chipmunk"
+  },
+  {
+    "image_id": "881142e056b6892f",
+    "subset": "test",
+    "category": "cute-animals",
+    "subject": "Fox",
+    "title": "Sleepy Fox"
+  },
+  {
+    "image_id": "ed568fa187db449f",
+    "subset": "test",
+    "category": "cute-animals",
+    "subject": "Hedgehog",
+    "title": "Hedgehog in the Grass"
+  },
+  {
+    "image_id": "1dc9a4d983024705",
+    "subset": "validation",
+    "category": "cute-animals",
+    "subject": "Fox",
+    "title": "Red Fox on the Path"
+  },
+  {
+    "image_id": "ad6afbab7d7dff21",
+    "subset": "test",
+    "category": "birds-feathers",
+    "subject": "Parrot",
+    "title": "Parrot Feathers Close-Up"
+  },
+  {
+    "image_id": "57205d4435df3689",
+    "subset": "validation",
+    "category": "birds-feathers",
+    "subject": "Swan",
+    "title": "Swan on Blue Water"
+  },
+  {
+    "image_id": "e75c523db74eab2a",
+    "subset": "validation",
+    "category": "birds-feathers",
+    "subject": "Owl",
+    "title": "Owl with Golden Eyes"
+  },
+  {
+    "image_id": "26537ed72cbbfe3f",
+    "subset": "test",
+    "category": "birds-feathers",
+    "subject": "Feather",
+    "title": "Peacock Feathers"
+  },
+  {
+    "image_id": "5442a2e57242aa85",
+    "subset": "test",
+    "category": "birds-feathers",
+    "subject": "Owl",
+    "title": "Owl Portrait"
+  },
+  {
+    "image_id": "a4facf3c75587a5c",
+    "subset": "test",
+    "category": "birds-feathers",
+    "subject": "Feather",
+    "title": "Green Peacock Feather"
+  },
+  {
+    "image_id": "7d00af2927a57eeb",
+    "subset": "validation",
+    "category": "birds-feathers",
+    "subject": "Hummingbird",
+    "title": "Hummingbird in Flight"
+  },
+  {
+    "image_id": "76bc82be7ce1525c",
+    "subset": "test",
+    "category": "birds-feathers",
+    "subject": "Owl",
+    "title": "Owl with Amber Eyes"
+  },
+  {
+    "image_id": "d3bcd21af5934634",
+    "subset": "test",
+    "category": "birds-feathers",
+    "subject": "Feather",
+    "title": "Peacock Feather Pattern"
+  },
+  {
+    "image_id": "22d6ddd02dc9295f",
+    "subset": "test",
+    "category": "birds-feathers",
+    "subject": "Flamingo",
+    "title": "Pink Flamingo"
+  },
+  {
+    "image_id": "e33c707d217e3778",
+    "subset": "validation",
+    "category": "birds-feathers",
+    "subject": "Parrot",
+    "title": "Toucan Eye Close-Up"
+  },
+  {
+    "image_id": "ac244a0e2332ab55",
+    "subset": "test",
+    "category": "birds-feathers",
+    "subject": "Swan",
+    "title": "Swan Portrait"
+  },
+  {
+    "image_id": "5a29b83d4d4273ae",
+    "subset": "validation",
+    "category": "birds-feathers",
+    "subject": "Hummingbird",
+    "title": "Kingfisher on a Branch"
+  },
+  {
+    "image_id": "d08bbb32144db9dc",
+    "subset": "test",
+    "category": "birds-feathers",
+    "subject": "Owl",
+    "title": "Barred Owl"
+  },
+  {
+    "image_id": "450dc62c63f2d5e6",
+    "subset": "test",
+    "category": "birds-feathers",
+    "subject": "Flamingo",
+    "title": "Flamingo in the Water"
+  },
+  {
+    "image_id": "6c0117535ba52967",
+    "subset": "validation",
+    "category": "ocean-sea-life",
+    "subject": "Jellyfish",
+    "title": "Blue Jellyfish"
+  },
+  {
+    "image_id": "738118280d0b0c7c",
+    "subset": "test",
+    "category": "ocean-sea-life",
+    "subject": "Dolphin",
+    "title": "Smiling Dolphin"
+  },
+  {
+    "image_id": "d2cb5405453dbc78",
+    "subset": "test",
+    "category": "ocean-sea-life",
+    "subject": "Jellyfish",
+    "title": "Moon Jellyfish"
+  },
+  {
+    "image_id": "61ff1ad964b25171",
+    "subset": "test",
+    "category": "ocean-sea-life",
+    "subject": "Starfish",
+    "title": "Purple Sea Stars"
+  },
+  {
+    "image_id": "f4655d9153752b1e",
+    "subset": "test",
+    "category": "ocean-sea-life",
+    "subject": "Dolphin",
+    "title": "Orca Leaping"
+  },
+  {
+    "image_id": "de8971941794e52a",
+    "subset": "test",
+    "category": "ocean-sea-life",
+    "subject": "Jellyfish",
+    "title": "Red Jellyfish"
+  },
+  {
+    "image_id": "5152f0d507aa5cdf",
+    "subset": "test",
+    "category": "ocean-sea-life",
+    "subject": "Starfish",
+    "title": "Starfish Everywhere"
+  },
+  {
+    "image_id": "4ba44d4387e4f46b",
+    "subset": "test",
+    "category": "ocean-sea-life",
+    "subject": "Dolphin",
+    "title": "Dolphin at the Surface"
+  },
+  {
+    "image_id": "93bc4aca8b0dfe02",
+    "subset": "validation",
+    "category": "ocean-sea-life",
+    "subject": "Jellyfish",
+    "title": "Violet Jellyfish"
+  },
+  {
+    "image_id": "082fced57a8f6fb9",
+    "subset": "validation",
+    "category": "ocean-sea-life",
+    "subject": "Starfish",
+    "title": "Blue Starfish"
+  },
+  {
+    "image_id": "c97d7fce00d324c3",
+    "subset": "test",
+    "category": "ocean-sea-life",
+    "subject": "Dolphin",
+    "title": "Dolphin Underwater"
+  },
+  {
+    "image_id": "b8d948b05698b1eb",
+    "subset": "test",
+    "category": "ocean-sea-life",
+    "subject": "Jellyfish",
+    "title": "Glowing Jellyfish"
+  },
+  {
+    "image_id": "e717d02f59ac3f52",
+    "subset": "test",
+    "category": "ocean-sea-life",
+    "subject": "Seahorse",
+    "title": "Yellow Seahorses"
+  },
+  {
+    "image_id": "15997951d8ae0dec",
+    "subset": "test",
+    "category": "ocean-sea-life",
+    "subject": "Starfish",
+    "title": "Sunflower Sea Star"
+  },
+  {
+    "image_id": "86f932badbf1aef0",
+    "subset": "validation",
+    "category": "ocean-sea-life",
+    "subject": "Seahorse",
+    "title": "Leafy Sea Dragon"
+  },
+  {
+    "image_id": "7e4384888b77e075",
+    "subset": "validation",
+    "category": "summer-beach",
+    "subject": "Beach",
+    "title": "Turquoise Lagoon"
+  },
+  {
+    "image_id": "886fd8148928e946",
+    "subset": "test",
+    "category": "summer-beach",
+    "subject": "Beach",
+    "title": "White Sand Beach"
+  },
+  {
+    "image_id": "8ccf632d57311190",
+    "subset": "test",
+    "category": "summer-beach",
+    "subject": "Sunset",
+    "title": "Golden Sunset Clouds"
+  },
+  {
+    "image_id": "39746337f5a4d140",
+    "subset": "test",
+    "category": "summer-beach",
+    "subject": "Palm tree",
+    "title": "Looking Up a Palm Tree"
+  },
+  {
+    "image_id": "3b09d1cc21d66785",
+    "subset": "test",
+    "category": "summer-beach",
+    "subject": "Beach",
+    "title": "Island Water Bungalows"
+  },
+  {
+    "image_id": "4f469bb1537c5255",
+    "subset": "validation",
+    "category": "summer-beach",
+    "subject": "Palm tree",
+    "title": "Palm Crown Overhead"
+  },
+  {
+    "image_id": "9fdd9b8775bbdd9b",
+    "subset": "test",
+    "category": "summer-beach",
+    "subject": "Beach",
+    "title": "Palms Along the Shore"
+  },
+  {
+    "image_id": "6b1287edcd1b0a7e",
+    "subset": "validation",
+    "category": "summer-beach",
+    "subject": "Palm tree",
+    "title": "Palm Fronds"
+  },
+  {
+    "image_id": "32994c88291c4384",
+    "subset": "test",
+    "category": "summer-beach",
+    "subject": "Palm tree",
+    "title": "Green Palm Burst"
+  },
+  {
+    "image_id": "1b1d2e69aff36d0c",
+    "subset": "test",
+    "category": "summer-beach",
+    "subject": "Beach",
+    "title": "Beach from Above"
+  },
+  {
+    "image_id": "1cfe1682da80fc45",
+    "subset": "validation",
+    "category": "summer-beach",
+    "subject": "Sunset",
+    "title": "Sunset over the Hills"
+  },
+  {
+    "image_id": "b7f5aa1cd5d46396",
+    "subset": "test",
+    "category": "summer-beach",
+    "subject": "Sunset",
+    "title": "Orange Sunset"
+  },
+  {
+    "image_id": "8ca8020c689ab850",
+    "subset": "test",
+    "category": "summer-beach",
+    "subject": "Beach",
+    "title": "Rocky Turquoise Coast"
+  },
+  {
+    "image_id": "8e4eabf3f13745f2",
+    "subset": "validation",
+    "category": "summer-beach",
+    "subject": "Beach",
+    "title": "Island in Blue Water"
+  },
+  {
+    "image_id": "928a78b13c25d287",
+    "subset": "validation",
+    "category": "summer-beach",
+    "subject": "Sunset",
+    "title": "Sunset over the Dunes"
+  },
+  {
+    "image_id": "5a99c380afcaf4de",
+    "subset": "test",
+    "category": "food-treats",
+    "subject": "Strawberry",
+    "title": "Field of Strawberries"
+  },
+  {
+    "image_id": "ead7794e672a60ac",
+    "subset": "test",
+    "category": "food-treats",
+    "subject": "Strawberry",
+    "title": "Ripe Strawberries"
+  },
+  {
+    "image_id": "ab7ebd97843c83ae",
+    "subset": "validation",
+    "category": "food-treats",
+    "subject": "Doughnut",
+    "title": "Sprinkle Doughnut"
+  },
+  {
+    "image_id": "7a7f633e9cdbb5a8",
+    "subset": "validation",
+    "category": "food-treats",
+    "subject": "Lollipop",
+    "title": "Swirl Lollipops"
+  },
+  {
+    "image_id": "3827da6c70b11b8d",
+    "subset": "test",
+    "category": "food-treats",
+    "subject": "Doughnut",
+    "title": "Glazed Doughnuts"
+  },
+  {
+    "image_id": "fa7e2d93d3f014ff",
+    "subset": "test",
+    "category": "food-treats",
+    "subject": "Lollipop",
+    "title": "Rainbow Lollipops"
+  },
+  {
+    "image_id": "309230952616a45f",
+    "subset": "test",
+    "category": "food-treats",
+    "subject": "Doughnut",
+    "title": "Doughnuts on a Tray"
+  },
+  {
+    "image_id": "0c97ce20e62e4106",
+    "subset": "validation",
+    "category": "food-treats",
+    "subject": "Lollipop",
+    "title": "Lollipop Rack"
+  },
+  {
+    "image_id": "e9e05989620d30b4",
+    "subset": "validation",
+    "category": "food-treats",
+    "subject": "Strawberry",
+    "title": "Strawberries and Blossom"
+  },
+  {
+    "image_id": "cd15c5a5c8029714",
+    "subset": "test",
+    "category": "food-treats",
+    "subject": "Lollipop",
+    "title": "Rainbow Lollipop Sparkle"
+  },
+  {
+    "image_id": "844c3f3cc4096bc0",
+    "subset": "test",
+    "category": "nature-scenes",
+    "subject": "Lake",
+    "title": "Blue Mountain Lake"
+  },
+  {
+    "image_id": "1ecb5e0c6fd6d98d",
+    "subset": "test",
+    "category": "nature-scenes",
+    "subject": "Mountain",
+    "title": "Coastal Bay"
+  },
+  {
+    "image_id": "7ce079c253262927",
+    "subset": "test",
+    "category": "nature-scenes",
+    "subject": "Forest",
+    "title": "Silky Waterfall"
+  },
+  {
+    "image_id": "0634e3d0a7ea3cc6",
+    "subset": "test",
+    "category": "nature-scenes",
+    "subject": "Forest",
+    "title": "Green Forest Canopy"
+  },
+  {
+    "image_id": "c45d47836ee9044f",
+    "subset": "test",
+    "category": "nature-scenes",
+    "subject": "Forest",
+    "title": "Mossy Forest Stream"
+  },
+  {
+    "image_id": "35eb2f3abd170694",
+    "subset": "test",
+    "category": "nature-scenes",
+    "subject": "Mountain",
+    "title": "Snowy Peaks"
+  },
+  {
+    "image_id": "dfcd54d1f1828b09",
+    "subset": "test",
+    "category": "nature-scenes",
+    "subject": "Forest",
+    "title": "Green Terraced Valley"
+  },
+  {
+    "image_id": "3d66b9e626d7d9c1",
+    "subset": "test",
+    "category": "nature-scenes",
+    "subject": "Lake",
+    "title": "Deep Blue Crater Lake"
+  },
+  {
+    "image_id": "5feddeea887bcc6e",
+    "subset": "validation",
+    "category": "nature-scenes",
+    "subject": "Mountain",
+    "title": "Red Mountain at Sunset"
+  },
+  {
+    "image_id": "e55449f852955950",
+    "subset": "test",
+    "category": "nature-scenes",
+    "subject": "Forest",
+    "title": "River Through the Trees"
+  },
+  {
+    "image_id": "582728b952e3bee6",
+    "subset": "validation",
+    "category": "nature-scenes",
+    "subject": "Waterfall",
+    "title": "Blue Ice Waterfall"
+  },
+  {
+    "image_id": "b01c2b017c0be632",
+    "subset": "test",
+    "category": "nature-scenes",
+    "subject": "Mountain",
+    "title": "Mountain Under the Clouds"
+  },
+  {
+    "image_id": "5e6ef9ae5d8ad045",
+    "subset": "test",
+    "category": "nature-scenes",
+    "subject": "Forest",
+    "title": "Misty Winter Trees"
+  },
+  {
+    "image_id": "841284c353b6e356",
+    "subset": "test",
+    "category": "nature-scenes",
+    "subject": "Mountain",
+    "title": "Snowy Mountain Range"
+  },
+  {
+    "image_id": "0a833d0c929a5257",
+    "subset": "validation",
+    "category": "nature-scenes",
+    "subject": "Lake",
+    "title": "Emerald Crater Lakes"
+  },
+  {
+    "image_id": "266b0039f5a453be",
+    "subset": "test",
+    "category": "winter-holiday",
+    "subject": "Christmas tree",
+    "title": "Christmas Tree Lights"
+  },
+  {
+    "image_id": "2f454e51efcdd489",
+    "subset": "test",
+    "category": "winter-holiday",
+    "subject": "Snow",
+    "title": "Winter Sun over the Snow"
+  },
+  {
+    "image_id": "af939228945d5cd2",
+    "subset": "validation",
+    "category": "winter-holiday",
+    "subject": "Snow",
+    "title": "Blue Iceberg"
+  },
+  {
+    "image_id": "a81ae22d25c4428f",
+    "subset": "test",
+    "category": "winter-holiday",
+    "subject": "Christmas tree",
+    "title": "Pink Glass Bauble"
+  },
+  {
+    "image_id": "b27237b20b264b7b",
+    "subset": "test",
+    "category": "winter-holiday",
+    "subject": "Snow",
+    "title": "Iceberg Reflection"
+  },
+  {
+    "image_id": "e5731f33812ffae5",
+    "subset": "test",
+    "category": "winter-holiday",
+    "subject": "Snow",
+    "title": "Snow-Covered Mountain"
+  },
+  {
+    "image_id": "87b73488492d57ab",
+    "subset": "test",
+    "category": "winter-holiday",
+    "subject": "Christmas tree",
+    "title": "Silver and Blue Baubles"
+  },
+  {
+    "image_id": "244341868bbfe84d",
+    "subset": "test",
+    "category": "winter-holiday",
+    "subject": "Snowman",
+    "title": "Snowman with a Scarf"
+  },
+  {
+    "image_id": "27261c9d7a8ae35c",
+    "subset": "validation",
+    "category": "winter-holiday",
+    "subject": "Snow",
+    "title": "Wall of Ice"
+  },
+  {
+    "image_id": "9c0d4247614445fb",
+    "subset": "validation",
+    "category": "winter-holiday",
+    "subject": "Christmas tree",
+    "title": "Snowy Pine Tree"
+  },
+  {
+    "image_id": "bcfd0eede83c5d5f",
+    "subset": "test",
+    "category": "winter-holiday",
+    "subject": "Snow",
+    "title": "Snowy Mountain Peak"
+  },
+  {
+    "image_id": "91a3d29cd11ef891",
+    "subset": "validation",
+    "category": "autumn-fall",
+    "subject": "Pumpkin",
+    "title": "Green Pumpkins"
+  },
+  {
+    "image_id": "296b84193ba78ff4",
+    "subset": "validation",
+    "category": "autumn-fall",
+    "subject": "Pumpkin",
+    "title": "White Pumpkins"
+  },
+  {
+    "image_id": "a3b885c3e20c3868",
+    "subset": "test",
+    "category": "autumn-fall",
+    "subject": "Maple leaf",
+    "title": "Backlit Maple Leaves"
+  },
+  {
+    "image_id": "da8a2631e24440fc",
+    "subset": "test",
+    "category": "autumn-fall",
+    "subject": "Maple leaf",
+    "title": "Green Maple Leaves"
+  },
+  {
+    "image_id": "d90cddb1cc9d37e5",
+    "subset": "test",
+    "category": "autumn-fall",
+    "subject": "Pumpkin",
+    "title": "Jack-o'-Lantern Smile"
+  },
+  {
+    "image_id": "2855f03220bbe240",
+    "subset": "test",
+    "category": "autumn-fall",
+    "subject": "Maple leaf",
+    "title": "Red Maple Against Blue"
+  },
+  {
+    "image_id": "a9f88bfd9ed555f4",
+    "subset": "test",
+    "category": "autumn-fall",
+    "subject": "Maple leaf",
+    "title": "Yellow Maple Leaves"
+  },
+  {
+    "image_id": "c8bf2add1a7b2088",
+    "subset": "test",
+    "category": "autumn-fall",
+    "subject": "Maple leaf",
+    "title": "Red Japanese Maple"
+  },
+  {
+    "image_id": "81c547d845b7cf72",
+    "subset": "test",
+    "category": "autumn-fall",
+    "subject": "Maple leaf",
+    "title": "Scarlet Maple Leaves"
+  },
+  {
+    "image_id": "faffe34ada7c4a44",
+    "subset": "test",
+    "category": "autumn-fall",
+    "subject": "Pumpkin",
+    "title": "Orange Pumpkins"
+  },
+  {
+    "image_id": "eb9deee68d32b60c",
+    "subset": "test",
+    "category": "autumn-fall",
+    "subject": "Maple leaf",
+    "title": "Fallen Leaves on Grass"
+  },
+  {
+    "image_id": "8a7897a47631cfe9",
+    "subset": "test",
+    "category": "autumn-fall",
+    "subject": "Maple leaf",
+    "title": "One Red Leaf"
+  },
+  {
+    "image_id": "154e6083804b4ffc",
+    "subset": "test",
+    "category": "autumn-fall",
+    "subject": "Pumpkin",
+    "title": "Cat Jack-o'-Lantern"
+  },
+  {
+    "image_id": "1851e76f3b9a8d30",
+    "subset": "test",
+    "category": "spring-garden",
+    "subject": "Petal",
+    "title": "Pink and Green Coleus"
+  },
+  {
+    "image_id": "c141055293803199",
+    "subset": "test",
+    "category": "spring-garden",
+    "subject": "Meadow",
+    "title": "Green Meadow and Water"
+  },
+  {
+    "image_id": "94704233149c936b",
+    "subset": "validation",
+    "category": "spring-garden",
+    "subject": "Petal",
+    "title": "White Petals"
+  },
+  {
+    "image_id": "81367518d2d55ebb",
+    "subset": "test",
+    "category": "spring-garden",
+    "subject": "Meadow",
+    "title": "Green Mountain Valley"
+  },
+  {
+    "image_id": "24f323ca8f1c447b",
+    "subset": "test",
+    "category": "spring-garden",
+    "subject": "Petal",
+    "title": "Rosebuds in the Garden"
+  },
+  {
+    "image_id": "33421437927f7fed",
+    "subset": "test",
+    "category": "spring-garden",
+    "subject": "Petal",
+    "title": "Pink Cyclamen"
+  },
+  {
+    "image_id": "97269be5622f6356",
+    "subset": "validation",
+    "category": "spring-garden",
+    "subject": "Petal",
+    "title": "White Garden Flower"
+  },
+  {
+    "image_id": "aeb7ee5628819bf8",
+    "subset": "test",
+    "category": "spring-garden",
+    "subject": "Meadow",
+    "title": "Meadow Lake in Spring"
+  },
+  {
+    "image_id": "743b9d6b59213729",
+    "subset": "test",
+    "category": "weather",
+    "subject": "Rainbow",
+    "title": "Rainbow over the Hills"
+  },
+  {
+    "image_id": "c5860e0cdb610be2",
+    "subset": "test",
+    "category": "weather",
+    "subject": "Rainbow",
+    "title": "Rainbow in a Blue Sky"
+  },
+  {
+    "image_id": "540337be04603684",
+    "subset": "validation",
+    "category": "weather",
+    "subject": "Rainbow",
+    "title": "Rainbow above the Clouds"
+  },
+  {
+    "image_id": "2f0e07d4c89252ba",
+    "subset": "test",
+    "category": "weather",
+    "subject": "Rainbow",
+    "title": "Rainbow and Cloud"
+  },
+  {
+    "image_id": "7f2253a7b7312224",
+    "subset": "test",
+    "category": "weather",
+    "subject": "Rainbow",
+    "title": "Rainbow Colors Close-Up"
+  },
+  {
+    "image_id": "5f5331aa5a8ea368",
+    "subset": "test",
+    "category": "weather",
+    "subject": "Rainbow",
+    "title": "Rainbow over the Sea"
+  },
+  {
+    "image_id": "ed84186fdd7ca48c",
+    "subset": "test",
+    "category": "weather",
+    "subject": "Rainbow",
+    "title": "Rainbow over Green Fields"
+  },
+  {
+    "image_id": "b64487147b12a542",
+    "subset": "test",
+    "category": "weather",
+    "subject": "Rainbow",
+    "title": "Double Rainbow"
+  },
+  {
+    "image_id": "77fd3b03291596cd",
+    "subset": "test",
+    "category": "weather",
+    "subject": "Rainbow",
+    "title": "Rainbow over the Valley"
+  },
+  {
+    "image_id": "8429b8f408b7b0c6",
+    "subset": "validation",
+    "category": "safari-desert",
+    "subject": "Zebra",
+    "title": "Zebra Stripes"
+  },
+  {
+    "image_id": "aeb2fbeea8cff51b",
+    "subset": "test",
+    "category": "safari-desert",
+    "subject": "Giraffe",
+    "title": "Giraffe Eye Close-Up"
+  },
+  {
+    "image_id": "fdae04691118eecb",
+    "subset": "test",
+    "category": "safari-desert",
+    "subject": "Lion",
+    "title": "Lion's Golden Mane"
+  },
+  {
+    "image_id": "02fbdccb15dfbec8",
+    "subset": "test",
+    "category": "safari-desert",
+    "subject": "Giraffe",
+    "title": "Young Giraffe Portrait"
+  },
+  {
+    "image_id": "84b473491eee4048",
+    "subset": "test",
+    "category": "safari-desert",
+    "subject": "Lion",
+    "title": "Lion Resting"
+  },
+  {
+    "image_id": "1c542b393bbcbdfc",
+    "subset": "validation",
+    "category": "safari-desert",
+    "subject": "Lion",
+    "title": "Lion in Profile"
+  },
+  {
+    "image_id": "f314840e1483c91d",
+    "subset": "test",
+    "category": "safari-desert",
+    "subject": "Zebra",
+    "title": "Zebra in the Grass"
+  },
+  {
+    "image_id": "8df00d388c565531",
+    "subset": "test",
+    "category": "safari-desert",
+    "subject": "Giraffe",
+    "title": "Giraffe on the Savanna"
+  },
+  {
+    "image_id": "8a8cacbda86f1d75",
+    "subset": "test",
+    "category": "safari-desert",
+    "subject": "Zebra",
+    "title": "Zebra Portrait"
+  },
+  {
+    "image_id": "209a730031941da7",
+    "subset": "test",
+    "category": "safari-desert",
+    "subject": "Lion",
+    "title": "Lion Face to Face"
+  },
+  {
+    "image_id": "e4bbba6a606610c1",
+    "subset": "test",
+    "category": "safari-desert",
+    "subject": "Lion",
+    "title": "Lioness Portrait"
+  },
+  {
+    "image_id": "5bdee5bdf1b2b1eb",
+    "subset": "test",
+    "category": "safari-desert",
+    "subject": "Zebra",
+    "title": "Two Zebras"
+  },
+  {
+    "image_id": "3ed4241054b89db2",
+    "subset": "test",
+    "category": "arctic-polar",
+    "subject": "Penguin",
+    "title": "Emperor Penguin"
+  },
+  {
+    "image_id": "7d8e998a98b804d0",
+    "subset": "test",
+    "category": "arctic-polar",
+    "subject": "Penguin",
+    "title": "King Penguin Standing"
+  },
+  {
+    "image_id": "028d762d6716abdf",
+    "subset": "validation",
+    "category": "arctic-polar",
+    "subject": "Penguin",
+    "title": "Penguin Looking Down"
+  },
+  {
+    "image_id": "7a05ae226d8e7842",
+    "subset": "test",
+    "category": "arctic-polar",
+    "subject": "Penguin",
+    "title": "King Penguin Profile"
+  },
+  {
+    "image_id": "0d2d4e6cefec6f87",
+    "subset": "validation",
+    "category": "arctic-polar",
+    "subject": "Penguin",
+    "title": "Little Blue Penguin"
+  },
+  {
+    "image_id": "eb35fff837eca755",
+    "subset": "test",
+    "category": "arctic-polar",
+    "subject": "Penguin",
+    "title": "Gentoo Penguin"
+  },
+  {
+    "image_id": "38c6668e60cfe264",
+    "subset": "test",
+    "category": "arctic-polar",
+    "subject": "Penguin",
+    "title": "King Penguin Portrait"
+  },
+  {
+    "image_id": "83bf8172abed42d7",
+    "subset": "validation",
+    "category": "arctic-polar",
+    "subject": "Penguin",
+    "title": "Rockhopper Penguin"
+  },
+  {
+    "image_id": "b6374a0f86da6bb9",
+    "subset": "test",
+    "category": "arctic-polar",
+    "subject": "Penguin",
+    "title": "Macaroni Penguin"
+  },
+  {
+    "image_id": "1654d220ef8dfb40",
+    "subset": "validation",
+    "category": "arctic-polar",
+    "subject": "Penguin",
+    "title": "African Penguin"
+  },
+  {
+    "image_id": "633b1c5a124195e7",
+    "subset": "validation",
+    "category": "koalas-kangaroos",
+    "subject": "Kangaroo",
+    "title": "Kangaroo Portrait"
+  },
+  {
+    "image_id": "eb454f14e993de89",
+    "subset": "validation",
+    "category": "koalas-kangaroos",
+    "subject": "Koala",
+    "title": "Koala in a Gum Tree"
+  },
+  {
+    "image_id": "85f55cb2318a4230",
+    "subset": "test",
+    "category": "koalas-kangaroos",
+    "subject": "Koala",
+    "title": "Koala Face"
+  },
+  {
+    "image_id": "c580685c8b58c93b",
+    "subset": "test",
+    "category": "koalas-kangaroos",
+    "subject": "Koala",
+    "title": "Koala and Eucalyptus"
+  },
+  {
+    "image_id": "d8f2323aa6b81b5a",
+    "subset": "test",
+    "category": "koalas-kangaroos",
+    "subject": "Koala",
+    "title": "Sleepy Koala"
+  },
+  {
+    "image_id": "37ddd822d2562a1a",
+    "subset": "validation",
+    "category": "koalas-kangaroos",
+    "subject": "Kangaroo",
+    "title": "Wallaby Grazing"
+  },
+  {
+    "image_id": "7bae092e3f14c0f8",
+    "subset": "test",
+    "category": "koalas-kangaroos",
+    "subject": "Koala",
+    "title": "Koala Mother and Joey"
+  },
+  {
+    "image_id": "f9a4dc0b70132fcc",
+    "subset": "test",
+    "category": "koalas-kangaroos",
+    "subject": "Kangaroo",
+    "title": "Kangaroo on the Lawn"
+  },
+  {
+    "image_id": "2962a58fa88ce181",
+    "subset": "test",
+    "category": "koalas-kangaroos",
+    "subject": "Kangaroo",
+    "title": "Kangaroo in the Sunshine"
+  },
+  {
+    "image_id": "7137a76c4ea4c1f4",
+    "subset": "validation",
+    "category": "koalas-kangaroos",
+    "subject": "Koala",
+    "title": "Joey on Mum's Back"
+  },
+  {
+    "image_id": "798e105a88db5ab0",
+    "subset": "test",
+    "category": "koalas-kangaroos",
+    "subject": "Koala",
+    "title": "Koala Up High"
+  },
+  {
+    "image_id": "d0306c6d3a41df97",
+    "subset": "test",
+    "category": "koalas-kangaroos",
+    "subject": "Kangaroo",
+    "title": "Wallaby Portrait"
+  },
+  {
+    "image_id": "5b4570380c6e4ae3",
+    "subset": "test",
+    "category": "space-planets",
+    "subject": "Milky Way",
+    "title": "Milky Way over the Lake"
+  },
+  {
+    "image_id": "fc7836973f654a91",
+    "subset": "test",
+    "category": "space-planets",
+    "subject": "Milky Way",
+    "title": "Milky Way Rising"
+  },
+  {
+    "image_id": "e50e440f565684a7",
+    "subset": "test",
+    "category": "space-planets",
+    "subject": "Milky Way",
+    "title": "Milky Way Overhead"
+  },
+  {
+    "image_id": "7f33dd007a436040",
+    "subset": "validation",
+    "category": "space-planets",
+    "subject": "Moon",
+    "title": "Crescent Moon"
+  },
+  {
+    "image_id": "81c10c6f52ca0240",
+    "subset": "validation",
+    "category": "space-planets",
+    "subject": "Milky Way",
+    "title": "Starry Sky over the Hill"
+  },
+  {
+    "image_id": "6ac9c40b9624e40b",
+    "subset": "test",
+    "category": "space-planets",
+    "subject": "Moon",
+    "title": "Moon in the Dark"
+  },
+  {
+    "image_id": "a2560b4e405bde7e",
+    "subset": "test",
+    "category": "space-planets",
+    "subject": "Aurora",
+    "title": "Pink Aurora"
+  },
+  {
+    "image_id": "aa3c4db34c3083b8",
+    "subset": "test",
+    "category": "space-planets",
+    "subject": "Milky Way",
+    "title": "Pinwheel Galaxy"
+  },
+  {
+    "image_id": "e12e773aebe387c8",
+    "subset": "test",
+    "category": "space-planets",
+    "subject": "Aurora",
+    "title": "Green Aurora"
+  },
+  {
+    "image_id": "a9daaa85ca3dbcd0",
+    "subset": "test",
+    "category": "tea-party",
+    "subject": "Teapot",
+    "title": "Blue Willow Teapot"
+  },
+  {
+    "image_id": "745e2c7ee3eb929b",
+    "subset": "test",
+    "category": "tea-party",
+    "subject": "Teapot",
+    "title": "Sage Green Teapot"
+  },
+  {
+    "image_id": "35cecd60100c5552",
+    "subset": "test",
+    "category": "tea-party",
+    "subject": "Teapot",
+    "title": "Lime Green Teapot"
+  },
+  {
+    "image_id": "bf64103539066082",
+    "subset": "test",
+    "category": "tea-party",
+    "subject": "Teapot",
+    "title": "Blue Duck Teapot"
+  },
+  {
+    "image_id": "1b8b495f818a78f2",
+    "subset": "validation",
+    "category": "tea-party",
+    "subject": "Teapot",
+    "title": "Pink Floral Teapot"
+  },
+  {
+    "image_id": "8951f95c01d0dd90",
+    "subset": "test",
+    "category": "tea-party",
+    "subject": "Teapot",
+    "title": "Striped Stacking Teapot"
+  },
+  {
+    "image_id": "22721ab2ef93ea5e",
+    "subset": "test",
+    "category": "tea-party",
+    "subject": "Teapot",
+    "title": "Painted China Teapot"
+  },
+  {
+    "image_id": "f774928efbb7fd2c",
+    "subset": "test",
+    "category": "circus-carnival",
+    "subject": "Ferris wheel",
+    "title": "Ferris Wheel in Blue Sky"
+  },
+  {
+    "image_id": "06d0ce18e134e342",
+    "subset": "test",
+    "category": "circus-carnival",
+    "subject": "Hot air balloon",
+    "title": "Rainbow Hot Air Balloon"
+  },
+  {
+    "image_id": "ce6ccf5b0173792b",
+    "subset": "test",
+    "category": "circus-carnival",
+    "subject": "Hot air balloon",
+    "title": "Pink and Purple Balloon"
+  },
+  {
+    "image_id": "c709d475bb26f270",
+    "subset": "test",
+    "category": "circus-carnival",
+    "subject": "Ferris wheel",
+    "title": "Carnival Light Trails"
+  },
+  {
+    "image_id": "a34cfd29b18fdeb2",
+    "subset": "test",
+    "category": "circus-carnival",
+    "subject": "Ferris wheel",
+    "title": "Ferris Wheel Curve"
+  },
+  {
+    "image_id": "b1cace6d0814da40",
+    "subset": "test",
+    "category": "circus-carnival",
+    "subject": "Hot air balloon",
+    "title": "Balloon Overhead"
+  },
+  {
+    "image_id": "25cfaa80c04a81fe",
+    "subset": "test",
+    "category": "circus-carnival",
+    "subject": "Hot air balloon",
+    "title": "Inside a Hot Air Balloon"
+  },
+  {
+    "image_id": "6b98420d3819c9c2",
+    "subset": "validation",
+    "category": "circus-carnival",
+    "subject": "Ferris wheel",
+    "title": "Ferris Wheel Spokes"
+  },
+  {
+    "image_id": "48dedce3f202f396",
+    "subset": "test",
+    "category": "circus-carnival",
+    "subject": "Ferris wheel",
+    "title": "Ferris Wheel from Below"
+  }
+]

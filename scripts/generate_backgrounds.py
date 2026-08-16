@@ -1559,6 +1559,1207 @@ cat("neon-bold", "Neon & Bold", [
 ])
 
 
+# ============================================================================
+# EXPANSION PACK -- 15 more categories, 20 variants each (300 backgrounds).
+# Includes a dedicated Huskies category (kids love huskies!) alongside 14
+# other fresh themes, so the new set isn't "all huskies."
+# ============================================================================
+
+def scene(motif_fn, sky, count=7, size_range=(150, 260), rotate=False, angle=100):
+    """Generic gradient-background + scatter-of-one-motif scene factory,
+    used throughout the expansion pack to keep each category's code small."""
+    def build(svg, rng):
+        grad_bg(svg, sky, angle)
+        scatter(svg, rng, motif_fn, count, size_range=size_range, rotate=rotate)
+    return build
+
+
+# ---- Husky shape -----------------------------------------------------------
+
+def husky_face_shape(cx, cy, size, coat, coat_light, eye1, eye2, opacity=1, style="face"):
+    s = size / 100.0
+    items = []
+    # pointed ears
+    items.append(polygon([(cx-62*s, cy-38*s), (cx-30*s, cy-38*s), (cx-48*s, cy-100*s)], coat, opacity))
+    items.append(polygon([(cx+62*s, cy-38*s), (cx+30*s, cy-38*s), (cx+48*s, cy-100*s)], coat, opacity))
+    items.append(polygon([(cx-54*s, cy-42*s), (cx-38*s, cy-42*s), (cx-46*s, cy-80*s)], "#2b2b2b", opacity * 0.5))
+    items.append(polygon([(cx+54*s, cy-42*s), (cx+38*s, cy-42*s), (cx+46*s, cy-80*s)], "#2b2b2b", opacity * 0.5))
+    # head + light face mask
+    items.append(circle(cx, cy, 65 * s, coat, opacity))
+    items.append(path(
+        f"M {cx-40*s} {cy+10*s} C {cx-40*s} {cy-30*s}, {cx-18*s} {cy-45*s}, {cx} {cy-45*s} "
+        f"C {cx+18*s} {cy-45*s}, {cx+40*s} {cy-30*s}, {cx+40*s} {cy+10*s} "
+        f"C {cx+40*s} {cy+45*s}, {cx+20*s} {cy+60*s}, {cx} {cy+60*s} "
+        f"C {cx-20*s} {cy+60*s}, {cx-40*s} {cy+45*s}, {cx-40*s} {cy+10*s} Z",
+        coat_light, opacity))
+    # eyes (support heterochromia via eye1 != eye2)
+    items.append(ellipse(cx - 22 * s, cy - 8 * s, 11 * s, 13 * s, eye1, opacity))
+    items.append(ellipse(cx + 22 * s, cy - 8 * s, 11 * s, 13 * s, eye2, opacity))
+    items.append(circle(cx - 22 * s, cy - 8 * s, 4 * s, "#111", opacity))
+    items.append(circle(cx + 22 * s, cy - 8 * s, 4 * s, "#111", opacity))
+    # nose + mouth
+    items.append(ellipse(cx, cy + 18 * s, 11 * s, 8 * s, "#1a1a1a", opacity))
+    if style == "howl":
+        items.append(ellipse(cx, cy + 42 * s, 14 * s, 20 * s, "#5c2a2a", opacity))
+        items.append(ellipse(cx, cy + 48 * s, 8 * s, 10 * s, "#ff8fa3", opacity))
+    else:
+        items.append(f'<path d="M {cx-14*s} {cy+26*s} Q {cx} {cy+36*s} {cx+14*s} {cy+26*s}" '
+                     f'fill="none" stroke="#1a1a1a" stroke-width="{3*s:.1f}" stroke-linecap="round" '
+                     f'opacity="{opacity:.2f}"/>')
+    if style == "puppy":
+        items.append(circle(cx - 34 * s, cy + 40 * s, 8 * s, coat_light, opacity * 0.9))
+        items.append(circle(cx + 34 * s, cy + 40 * s, 8 * s, coat_light, opacity * 0.9))
+    return group(items)
+
+
+def husky_sled_shape(cx, cy, size, coat, coat_light, opacity=1):
+    s = size / 100.0
+    items = [
+        rect(cx - 70 * s, cy + 30 * s, 140 * s, 22 * s, "#8a5a2b", rx=6 * s, opacity=opacity),
+        rect(cx - 70 * s, cy + 52 * s, 140 * s, 10 * s, "#5b3a1f", rx=4 * s, opacity=opacity),
+    ]
+    for i, dx in enumerate([-140, -60, 20]):
+        fs = size * 0.42
+        items.append(husky_face_shape(cx + dx * s, cy - 20 * s, fs, coat, coat_light, "#7ec8e3", "#7ec8e3",
+                                       opacity, "face"))
+    return group(items)
+
+
+HUSKY_COATS = [
+    ("#8a8f99", "#f4f4f4", "Classic Grey & White"),
+    ("#2b2b2b", "#ffffff", "Black & White"),
+    ("#b5651d", "#fbe8d3", "Copper & Cream"),
+    ("#f4f4f4", "#ffffff", "Pure Snow White"),
+    ("#c9b18a", "#f7efe0", "Agouti Sable"),
+    ("#7a7f87", "#e8e8ea", "Silver Storm"),
+]
+HUSKY_EYES = [("#7ec8e3", "#7ec8e3"), ("#6b4423", "#6b4423"), ("#7ec8e3", "#6b4423")]
+
+
+def husky_scene(coat, coat_light, eyes, sky, style="face", team=False, angle=100):
+    def build(svg, rng):
+        grad_bg(svg, sky, angle)
+        if team:
+            scatter(svg, rng, lambda cx, cy, s, r, o: husky_sled_shape(cx, cy, s, coat, coat_light, o), 2,
+                    size_range=(260, 340))
+        else:
+            scatter(svg, rng, lambda cx, cy, s, r, o: husky_face_shape(cx, cy, s, coat, coat_light,
+                    eyes[0], eyes[1], o, style), 5, size_range=(230, 340))
+    return build
+
+
+cat("huskies", "Huskies", [
+    ("Classic Grey Husky", husky_scene("#8a8f99", "#f4f4f4", ("#7ec8e3", "#7ec8e3"), ["#dbe9ff", "#a8c6ff"])),
+    ("Black & White Husky", husky_scene("#2b2b2b", "#ffffff", ("#6b4423", "#6b4423"), ["#eef2f7", "#d6e0ea"])),
+    ("Copper Husky Charm", husky_scene("#b5651d", "#fbe8d3", ("#7ec8e3", "#7ec8e3"), ["#fff3e0", "#ffe0c2"])),
+    ("Snow White Husky", husky_scene("#f4f4f4", "#ffffff", ("#7ec8e3", "#6b4423"), ["#eaf6ff", "#d6efff"])),
+    ("Agouti Sable Husky", husky_scene("#c9b18a", "#f7efe0", ("#6b4423", "#6b4423"), ["#f0ead2", "#e4d9b8"])),
+    ("Silver Storm Husky", husky_scene("#7a7f87", "#e8e8ea", ("#7ec8e3", "#7ec8e3"), ["#c9d6e8", "#9fb4cc"])),
+    ("Heterochromia Husky", husky_scene("#8a8f99", "#f4f4f4", ("#7ec8e3", "#6b4423"), ["#fdf0ff", "#eae0ff"])),
+    ("Husky Howling at the Moon", husky_scene("#2b2b2b", "#ffffff", ("#7ec8e3", "#7ec8e3"),
+                                               ["#0d1b4c", "#1a1a40"], style="howl")),
+    ("Playful Husky Puppy", husky_scene("#8a8f99", "#fdf6ec", ("#6b4423", "#6b4423"),
+                                         ["#fff3e0", "#ffe4c2"], style="puppy")),
+    ("Husky in the Snowstorm", husky_scene("#f4f4f4", "#e8e8ea", ("#7ec8e3", "#7ec8e3"), ["#cfe8ff", "#eaf6ff"])),
+    ("Aurora Husky Night", husky_scene("#7a7f87", "#e8e8ea", ("#7ec8e3", "#6b4423"), ["#0f2027", "#2c5364"])),
+    ("Husky Sunset Silhouette", husky_scene("#b5651d", "#fbe8d3", ("#6b4423", "#6b4423"),
+                                             ["#ff9f7b", "#ff6f91"])),
+    ("Rainbow Husky Squad", husky_scene("#2b2b2b", "#ffffff", ("#7ec8e3", "#7ec8e3"),
+                                         ["#ff9fbf", "#9fd8ff", "#c2f0c2"])),
+    ("Cozy Cabin Husky", husky_scene("#8a8f99", "#f4f4f4", ("#6b4423", "#6b4423"), ["#fff0e0", "#ffdca8"])),
+    ("Husky Pack in the Pines", husky_scene("#c9b18a", "#f7efe0", ("#7ec8e3", "#7ec8e3"), ["#d8f3dc", "#b7e4c7"])),
+    ("Husky Sled Team Adventure", husky_scene("#8a8f99", "#f4f4f4", ("#7ec8e3", "#7ec8e3"),
+                                               ["#cfe8ff", "#eaf6ff"], team=True)),
+    ("Midnight Husky Pack", husky_scene("#2b2b2b", "#ffffff", ("#7ec8e3", "#7ec8e3"), ["#03071e", "#0a2540"])),
+    ("Golden Hour Husky", husky_scene("#b5651d", "#fbe8d3", ("#7ec8e3", "#6b4423"), ["#ffe8b0", "#ffcf8a"])),
+    ("Husky in a Bandana", husky_scene("#7a7f87", "#e8e8ea", ("#6b4423", "#6b4423"), ["#ffe0ec", "#ffc2d9"])),
+    ("Frosty Husky Meadow", husky_scene("#f4f4f4", "#e8e8ea", ("#7ec8e3", "#7ec8e3"), ["#eafff1", "#d0f4de"])),
+])
+
+
+# ---- Arctic & Polar Animals --------------------------------------------------
+
+def penguin_shape(cx, cy, size, opacity=1):
+    s = size / 100.0
+    items = [
+        ellipse(cx, cy, 45 * s, 65 * s, "#1a1a1a", opacity),
+        ellipse(cx, cy + 8 * s, 30 * s, 50 * s, "#ffffff", opacity),
+        polygon([(cx-10*s, cy-45*s), (cx+10*s, cy-45*s), (cx, cy-60*s)], "#f4a261", opacity),
+        circle(cx - 12 * s, cy - 40 * s, 5 * s, "#1a1a1a", opacity),
+        circle(cx + 12 * s, cy - 40 * s, 5 * s, "#1a1a1a", opacity),
+        ellipse(cx - 40 * s, cy + 10 * s, 12 * s, 30 * s, "#1a1a1a", opacity, transform=f"rotate(-20 {cx-40*s} {cy+10*s})"),
+        ellipse(cx + 40 * s, cy + 10 * s, 12 * s, 30 * s, "#1a1a1a", opacity, transform=f"rotate(20 {cx+40*s} {cy+10*s})"),
+        polygon([(cx-14*s, cy+58*s), (cx+14*s, cy+58*s), (cx, cy+72*s)], "#f4a261", opacity),
+    ]
+    return group(items)
+
+
+def polar_bear_shape(cx, cy, size, opacity=1):
+    s = size / 100.0
+    items = [
+        circle(cx - 48 * s, cy - 48 * s, 18 * s, "#fdfdfd", opacity),
+        circle(cx + 48 * s, cy - 48 * s, 18 * s, "#fdfdfd", opacity),
+        circle(cx, cy, 65 * s, "#fdfdfd", opacity),
+        ellipse(cx, cy + 22 * s, 28 * s, 20 * s, "#f4f1ea", opacity),
+        circle(cx - 22 * s, cy - 8 * s, 7 * s, "#1a1a1a", opacity),
+        circle(cx + 22 * s, cy - 8 * s, 7 * s, "#1a1a1a", opacity),
+        ellipse(cx, cy + 20 * s, 9 * s, 6 * s, "#1a1a1a", opacity),
+    ]
+    return group(items)
+
+
+def seal_shape(cx, cy, size, fill, opacity=1, rotation=0):
+    s = size / 100.0
+    items = [
+        ellipse(cx, cy, 60 * s, 38 * s, fill, opacity),
+        ellipse(cx - 66 * s, cy + 14 * s, 16 * s, 8 * s, fill, opacity, transform=f"rotate(-30 {cx-66*s} {cy+14*s})"),
+        circle(cx + 40 * s, cy - 6 * s, 5 * s, "#1a1a1a", opacity),
+        ellipse(cx + 55 * s, cy + 4 * s, 6 * s, 4 * s, "#1a1a1a", opacity),
+    ]
+    t = f"rotate({rotation} {cx} {cy})" if rotation else None
+    return group(items, transform=t)
+
+
+def walrus_shape(cx, cy, size, opacity=1):
+    s = size / 100.0
+    items = [
+        ellipse(cx, cy, 60 * s, 45 * s, "#b98d6f", opacity),
+        circle(cx - 20 * s, cy - 10 * s, 6 * s, "#1a1a1a", opacity),
+        circle(cx + 20 * s, cy - 10 * s, 6 * s, "#1a1a1a", opacity),
+        polygon([(cx-16*s, cy+15*s), (cx-10*s, cy+55*s), (cx-2*s, cy+15*s)], "#f4f1ea", opacity),
+        polygon([(cx+16*s, cy+15*s), (cx+10*s, cy+55*s), (cx+2*s, cy+15*s)], "#f4f1ea", opacity),
+    ]
+    return group(items)
+
+
+def owl_shape(cx, cy, size, body_color, belly_color, eye_color, opacity=1):
+    s = size / 100.0
+    items = [
+        polygon([(cx-55*s, cy-70*s), (cx-30*s, cy-70*s), (cx-42*s, cy-100*s)], body_color, opacity),
+        polygon([(cx+55*s, cy-70*s), (cx+30*s, cy-70*s), (cx+42*s, cy-100*s)], body_color, opacity),
+        ellipse(cx, cy, 60 * s, 70 * s, body_color, opacity),
+        ellipse(cx, cy + 15 * s, 34 * s, 45 * s, belly_color, opacity),
+        circle(cx - 22 * s, cy - 15 * s, 18 * s, "#ffffff", opacity),
+        circle(cx + 22 * s, cy - 15 * s, 18 * s, "#ffffff", opacity),
+        circle(cx - 22 * s, cy - 15 * s, 9 * s, eye_color, opacity),
+        circle(cx + 22 * s, cy - 15 * s, 9 * s, eye_color, opacity),
+        circle(cx - 22 * s, cy - 15 * s, 4 * s, "#1a1a1a", opacity),
+        circle(cx + 22 * s, cy - 15 * s, 4 * s, "#1a1a1a", opacity),
+        polygon([(cx-6*s, cy+2*s), (cx+6*s, cy+2*s), (cx, cy+16*s)], "#f4a261", opacity),
+    ]
+    return group(items)
+
+
+cat("arctic-polar", "Arctic & Polar Animals", [
+    ("Waddling Penguins", scene(lambda cx, cy, s, r, o: penguin_shape(cx, cy, s, o), ["#a8dadc", "#457b9d"], 7)),
+    ("Polar Bear Playground", scene(lambda cx, cy, s, r, o: polar_bear_shape(cx, cy, s, o), ["#eaf6ff", "#cdeffd"], 5, (220, 320))),
+    ("Seal Pup Splash", scene(lambda cx, cy, s, r, o: seal_shape(cx, cy, s, "#8d99ae", o, r), ["#0077b6", "#00b4d8"], 6, (140, 220), True)),
+    ("Walrus Waters", scene(lambda cx, cy, s, r, o: walrus_shape(cx, cy, s, o), ["#8ecae6", "#219ebc"], 5, (200, 280))),
+    ("Snowy Owl Night", scene(lambda cx, cy, s, r, o: owl_shape(cx, cy, s, "#f4f4f4", "#e8e8ea", "#f4a261", o), ["#0d1b4c", "#1a1a40"], 5, (180, 260))),
+    ("Arctic Fox Frost", scene(lambda cx, cy, s, r, o: animal_face_shape(cx, cy, s, "#ffffff", "#e8e8ea", "fox", o), ["#eaf6ff", "#d6efff"], 5, (200, 300))),
+    ("Iceberg Penguin Party", scene(lambda cx, cy, s, r, o: penguin_shape(cx, cy, s, o), ["#caf0f8", "#90e0ef"], 8, (110, 190))),
+    ("Aurora Polar Bears", scene(lambda cx, cy, s, r, o: polar_bear_shape(cx, cy, s, o), ["#0f2027", "#2c5364"], 4, (220, 320))),
+    ("Snowflakes & Seals", scene(lambda cx, cy, s, r, o: seal_shape(cx, cy, s, "#adb5bd", o, r), ["#dbe9ff", "#a8c6ff"], 6, (130, 210), True)),
+    ("Frozen Tundra Walrus", scene(lambda cx, cy, s, r, o: walrus_shape(cx, cy, s, o), ["#e0f7fa", "#b2ebf2"], 5, (190, 270))),
+    ("Snowy Owl Daytime", scene(lambda cx, cy, s, r, o: owl_shape(cx, cy, s, "#e8e8ea", "#ffffff", "#f4a261", o), ["#eaf6ff", "#cdeffd"], 5, (180, 260))),
+    ("Penguin Ice Slide", scene(lambda cx, cy, s, r, o: penguin_shape(cx, cy, s, o), ["#ade8f4", "#48cae4"], 6, (150, 230))),
+    ("Polar Night Sky", scene(lambda cx, cy, s, r, o: polar_bear_shape(cx, cy, s, o), ["#020024", "#090979"], 4, (220, 320))),
+    ("Baby Seal Snuggles", scene(lambda cx, cy, s, r, o: seal_shape(cx, cy, s, "#f4f1ea", o, r), ["#fff8e0", "#ffefc2"], 5, (150, 230), True)),
+    ("Glacier Blue Walrus", scene(lambda cx, cy, s, r, o: walrus_shape(cx, cy, s, o), ["#03045e", "#0077b6"], 5, (190, 270))),
+    ("Frosty Fox & Friends", scene(lambda cx, cy, s, r, o: animal_face_shape(cx, cy, s, "#f4f4f4", "#ffd6ec", "fox", o), ["#f3e8ff", "#e0d4ff"], 5, (200, 300))),
+    ("Icy Owl Eyes", scene(lambda cx, cy, s, r, o: owl_shape(cx, cy, s, "#8ecae6", "#eaf6ff", "#ffd166", o), ["#023e8a", "#0096c7"], 5, (180, 260))),
+    ("Penguin Family Portrait", scene(lambda cx, cy, s, r, o: penguin_shape(cx, cy, s, o), ["#fff8e0", "#ffefc2"], 6, (160, 240))),
+    ("Snowdrift Polar Bears", scene(lambda cx, cy, s, r, o: polar_bear_shape(cx, cy, s, o), ["#f8f9fa", "#dee2e6"], 5, (220, 320))),
+    ("Twilight Arctic Waters", scene(lambda cx, cy, s, r, o: seal_shape(cx, cy, s, "#6c757d", o, r), ["#3a0ca3", "#7209b7"], 6, (140, 220), True)),
+])
+
+
+# ---- Farm & Barnyard ---------------------------------------------------------
+
+def cow_shape(cx, cy, size, base_color, spot_color, opacity=1):
+    s = size / 100.0
+    items = [
+        circle(cx, cy, 62 * s, base_color, opacity),
+        circle(cx - 25 * s, cy - 20 * s, 16 * s, spot_color, opacity),
+        circle(cx + 28 * s, cy + 15 * s, 14 * s, spot_color, opacity),
+        ellipse(cx - 50 * s, cy - 45 * s, 14 * s, 20 * s, base_color, opacity),
+        ellipse(cx + 50 * s, cy - 45 * s, 14 * s, 20 * s, base_color, opacity),
+        ellipse(cx, cy + 20 * s, 30 * s, 22 * s, "#ffe8f0", opacity),
+        circle(cx - 22 * s, cy - 8 * s, 8 * s, "#1a1a1a", opacity),
+        circle(cx + 22 * s, cy - 8 * s, 8 * s, "#1a1a1a", opacity),
+        circle(cx - 12 * s, cy + 18 * s, 4 * s, "#c96a80", opacity),
+        circle(cx + 12 * s, cy + 18 * s, 4 * s, "#c96a80", opacity),
+    ]
+    return group(items)
+
+
+def pig_shape(cx, cy, size, opacity=1):
+    s = size / 100.0
+    items = [
+        circle(cx, cy, 60 * s, "#ffafc5", opacity),
+        ellipse(cx - 45 * s, cy - 45 * s, 14 * s, 16 * s, "#ffafc5", opacity),
+        ellipse(cx + 45 * s, cy - 45 * s, 14 * s, 16 * s, "#ffafc5", opacity),
+        ellipse(cx, cy + 15 * s, 22 * s, 16 * s, "#ff8fa3", opacity),
+        circle(cx - 8 * s, cy + 15 * s, 4 * s, "#c96a80", opacity),
+        circle(cx + 8 * s, cy + 15 * s, 4 * s, "#c96a80", opacity),
+        circle(cx - 20 * s, cy - 8 * s, 6 * s, "#1a1a1a", opacity),
+        circle(cx + 20 * s, cy - 8 * s, 6 * s, "#1a1a1a", opacity),
+    ]
+    return group(items)
+
+
+def chicken_shape(cx, cy, size, body_color, opacity=1):
+    s = size / 100.0
+    items = [
+        circle(cx, cy + 5 * s, 48 * s, body_color, opacity),
+        circle(cx + 30 * s, cy - 35 * s, 26 * s, body_color, opacity),
+        polygon([(cx+50*s, cy-38*s), (cx+50*s, cy-24*s), (cx+66*s, cy-31*s)], "#f4a261", opacity),
+        polygon([(cx+14*s, cy-58*s), (cx+22*s, cy-58*s), (cx+18*s, cy-70*s)], "#e63946", opacity),
+        polygon([(cx+24*s, cy-56*s), (cx+32*s, cy-56*s), (cx+28*s, cy-70*s)], "#e63946", opacity),
+        circle(cx + 34 * s, cy - 38 * s, 4 * s, "#1a1a1a", opacity),
+    ]
+    return group(items)
+
+
+def barn_shape(cx, cy, size, opacity=1):
+    s = size / 100.0
+    items = [
+        rect(cx - 80 * s, cy - 10 * s, 160 * s, 100 * s, "#e63946", opacity=opacity),
+        polygon([(cx-95*s, cy-10*s), (cx+95*s, cy-10*s), (cx, cy-80*s)], "#6b4423", opacity),
+        rect(cx - 20 * s, cy + 30 * s, 40 * s, 60 * s, "#f4f1ea", rx=6 * s, opacity=opacity),
+        polygon([(cx-15*s, cy-70*s), (cx+15*s, cy-70*s), (cx, cy-95*s)], "#f4f1ea", opacity),
+    ]
+    return group(items)
+
+
+def sheep_shape(cx, cy, size, opacity=1):
+    s = size / 100.0
+    items = [cloud_shape(cx, cy, size * 0.9, "#f8f9fa", opacity)]
+    items.append(circle(cx - size * 0.75, cy + size * 0.02, size * 0.22, "#4a4a4a", opacity))
+    items.append(circle(cx - size * 0.82, cy - size * 0.05, 4 * (size / 100), "#1a1a1a", opacity))
+    for dx in (-0.4, 0, 0.5):
+        items.append(rect(cx + dx * size, cy + size * 0.28, size * 0.08, size * 0.22, "#4a4a4a", rx=3, opacity=opacity))
+    return group(items)
+
+
+cat("farm-barnyard", "Farm & Barnyard", [
+    ("Spotted Cow Meadow", scene(lambda cx, cy, s, r, o: cow_shape(cx, cy, s, "#f8f9fa", "#2b2b2b", o), ["#cdeac0", "#eaf7d0"], 6, (180, 260))),
+    ("Pink Piggy Patch", scene(lambda cx, cy, s, r, o: pig_shape(cx, cy, s, o), ["#fff0f5", "#ffe6ee"], 7, (160, 240))),
+    ("Rooster Morning Call", scene(lambda cx, cy, s, r, o: chicken_shape(cx, cy, s, "#fff3e0", o), ["#ffe066", "#ffd166"], 8, (140, 220))),
+    ("Red Barn Sunrise", scene(lambda cx, cy, s, r, o: barn_shape(cx, cy, s, o), ["#ffe8b0", "#ffcf8a"], 4, (260, 380))),
+    ("Fluffy Sheep Field", scene(lambda cx, cy, s, r, o: sheep_shape(cx, cy, s, o), ["#eaf7ff", "#dff3ff"], 8, (140, 220))),
+    ("Brown & White Cows", scene(lambda cx, cy, s, r, o: cow_shape(cx, cy, s, "#fdf6ec", "#b5651d", o), ["#d8f3dc", "#b7e4c7"], 6, (180, 260))),
+    ("Barnyard Chicken Coop", scene(lambda cx, cy, s, r, o: chicken_shape(cx, cy, s, "#f4a261", o), ["#fff8e0", "#ffe9c2"], 7, (140, 220))),
+    ("Golden Hay Barn", scene(lambda cx, cy, s, r, o: barn_shape(cx, cy, s, o), ["#fff3e0", "#ffe4c2"], 4, (260, 380))),
+    ("Piglet Playtime", scene(lambda cx, cy, s, r, o: pig_shape(cx, cy, s, o), ["#ffe0ec", "#ffc2d9"], 7, (150, 230))),
+    ("Woolly Sheep Sunset", scene(lambda cx, cy, s, r, o: sheep_shape(cx, cy, s, o), ["#ff9f7b", "#ff6f91"], 6, (150, 230))),
+    ("Farmyard Friends Mix", scene(lambda cx, cy, s, r, o: pig_shape(cx, cy, s, o), ["#f1faee", "#dff7e0"], 5, (160, 240))),
+    ("Black & White Dairy Cows", scene(lambda cx, cy, s, r, o: cow_shape(cx, cy, s, "#ffffff", "#1a1a1a", o), ["#eaf6ff", "#cdeffd"], 6, (180, 260))),
+    ("Chicken & Sunflowers", scene(lambda cx, cy, s, r, o: chicken_shape(cx, cy, s, "#ffd166", o), ["#eafff1", "#d0f4de"], 7, (140, 220))),
+    ("Countryside Red Barn", scene(lambda cx, cy, s, r, o: barn_shape(cx, cy, s, o), ["#a8dadc", "#457b9d"], 4, (260, 380))),
+    ("Spring Lamb Meadow", scene(lambda cx, cy, s, r, o: sheep_shape(cx, cy, s, o), ["#f0ead2", "#e4d9b8"], 8, (130, 210))),
+    ("Sunny Piglet Pasture", scene(lambda cx, cy, s, r, o: pig_shape(cx, cy, s, o), ["#fff3b0", "#ffe066"], 7, (150, 230))),
+    ("Grazing Cow Hillside", scene(lambda cx, cy, s, r, o: cow_shape(cx, cy, s, "#f8f9fa", "#6b4423", o), ["#e0f7fa", "#b2ebf2"], 5, (190, 270))),
+    ("Rise & Shine Rooster", scene(lambda cx, cy, s, r, o: chicken_shape(cx, cy, s, "#e76f51", o), ["#ffcf8a", "#ff9f7b"], 7, (150, 230))),
+    ("Wooly Sheep Cloud Field", scene(lambda cx, cy, s, r, o: sheep_shape(cx, cy, s, o), ["#dbe9ff", "#a8c6ff"], 8, (130, 210))),
+    ("Barnyard Blue Sky", scene(lambda cx, cy, s, r, o: barn_shape(cx, cy, s, o), ["#8ecae6", "#219ebc"], 4, (260, 380))),
+])
+
+
+# ---- Ocean & Sea Life ---------------------------------------------------------
+
+def whale_shape(cx, cy, size, fill, opacity=1, rotation=0):
+    s = size / 100.0
+    items = [
+        path(f"M {cx-70*s} {cy} C {cx-70*s} {cy-40*s}, {cx-20*s} {cy-55*s}, {cx+30*s} {cy-45*s} "
+             f"C {cx+65*s} {cy-38*s}, {cx+80*s} {cy-10*s}, {cx+70*s} {cy+15*s} "
+             f"C {cx+40*s} {cy+35*s}, {cx-40*s} {cy+35*s}, {cx-70*s} {cy} Z", fill, opacity),
+        polygon([(cx-70*s, cy), (cx-100*s, cy-20*s), (cx-100*s, cy+10*s)], fill, opacity),
+        circle(cx + 40 * s, cy - 25 * s, 4 * s, "#1a1a1a", opacity),
+        f'<path d="M {cx-10*s:.1f} {cy-55*s:.1f} Q {cx:.1f} {cy-78*s:.1f} {cx+10*s:.1f} {cy-55*s:.1f}" '
+        f'fill="none" stroke="#a6e3ff" stroke-width="{6*s:.1f}" opacity="{opacity*0.7:.2f}"/>',
+    ]
+    t = f"rotate({rotation} {cx} {cy})" if rotation else None
+    return group(items, transform=t)
+
+
+def octopus_shape(cx, cy, size, fill, opacity=1):
+    s = size / 100.0
+    items = [circle(cx, cy - 10 * s, 50 * s, fill, opacity)]
+    for i in range(6):
+        x0 = cx - 45 * s + i * 18 * s
+        items.append(f'<path d="M {x0:.1f} {cy+20*s:.1f} Q {x0-10*s:.1f} {cy+60*s:.1f} {x0+8*s:.1f} {cy+80*s:.1f}" '
+                     f'fill="none" stroke="{fill}" stroke-width="{14*s:.1f}" stroke-linecap="round" '
+                     f'opacity="{opacity:.2f}"/>')
+    items.append(circle(cx - 18 * s, cy - 15 * s, 8 * s, "#ffffff", opacity))
+    items.append(circle(cx + 18 * s, cy - 15 * s, 8 * s, "#ffffff", opacity))
+    items.append(circle(cx - 18 * s, cy - 15 * s, 4 * s, "#1a1a1a", opacity))
+    items.append(circle(cx + 18 * s, cy - 15 * s, 4 * s, "#1a1a1a", opacity))
+    return group(items)
+
+
+def sea_turtle_shape(cx, cy, size, shell_color, body_color, opacity=1, rotation=0):
+    s = size / 100.0
+    items = [
+        ellipse(cx, cy, 55 * s, 42 * s, shell_color, opacity),
+        circle(cx - 15 * s, cy - 12 * s, 8 * s, shell_color, opacity * 0.6),
+        circle(cx + 15 * s, cy - 5 * s, 8 * s, shell_color, opacity * 0.6),
+        circle(cx, cy + 15 * s, 8 * s, shell_color, opacity * 0.6),
+        ellipse(cx - 68 * s, cy, 20 * s, 12 * s, body_color, opacity),
+        ellipse(cx - 30 * s, cy + 40 * s, 16 * s, 10 * s, body_color, opacity, transform=f"rotate(30 {cx-30*s} {cy+40*s})"),
+        ellipse(cx + 30 * s, cy + 40 * s, 16 * s, 10 * s, body_color, opacity, transform=f"rotate(-30 {cx+30*s} {cy+40*s})"),
+        ellipse(cx - 30 * s, cy - 38 * s, 16 * s, 10 * s, body_color, opacity, transform=f"rotate(-30 {cx-30*s} {cy-38*s})"),
+        ellipse(cx + 30 * s, cy - 38 * s, 16 * s, 10 * s, body_color, opacity, transform=f"rotate(30 {cx+30*s} {cy-38*s})"),
+    ]
+    t = f"rotate({rotation} {cx} {cy})" if rotation else None
+    return group(items, transform=t)
+
+
+def jellyfish_shape(cx, cy, size, fill, opacity=1):
+    s = size / 100.0
+    items = [f'<path d="M {cx-45*s:.1f} {cy:.1f} A {45*s:.1f} {40*s:.1f} 0 0 1 {cx+45*s:.1f} {cy:.1f} '
+              f'Q {cx+45*s:.1f} {cy+18*s:.1f} {cx+30*s:.1f} {cy+12*s:.1f} '
+              f'Q {cx+15*s:.1f} {cy+22*s:.1f} {cx:.1f} {cy+12*s:.1f} '
+              f'Q {cx-15*s:.1f} {cy+22*s:.1f} {cx-30*s:.1f} {cy+12*s:.1f} '
+              f'Q {cx-45*s:.1f} {cy+18*s:.1f} {cx-45*s:.1f} {cy:.1f} Z" fill="{fill}" opacity="{opacity:.2f}"/>']
+    for dx in (-25, -8, 8, 25):
+        items.append(line(cx + dx * s, cy + 15 * s, cx + dx * s * 1.3, cy + 55 * s, fill, 5 * s, opacity * 0.8))
+    return group(items)
+
+
+def dolphin_shape(cx, cy, size, fill, opacity=1, rotation=0):
+    s = size / 100.0
+    items = [
+        path(f"M {cx-60*s} {cy+10*s} C {cx-40*s} {cy-40*s}, {cx+20*s} {cy-40*s}, {cx+65*s} {cy-5*s} "
+             f"C {cx+40*s} {cy+15*s}, {cx-20*s} {cy+30*s}, {cx-60*s} {cy+10*s} Z", fill, opacity),
+        polygon([(cx-20*s, cy-35*s), (cx-5*s, cy-60*s), (cx+5*s, cy-32*s)], fill, opacity),
+        polygon([(cx+55*s, cy-8*s), (cx+80*s, cy-25*s), (cx+80*s, cy+2*s)], fill, opacity),
+        circle(cx - 45 * s, cy - 5 * s, 4 * s, "#1a1a1a", opacity),
+    ]
+    t = f"rotate({rotation} {cx} {cy})" if rotation else None
+    return group(items, transform=t)
+
+
+cat("ocean-sea-life", "Ocean & Sea Life", [
+    ("Gentle Giant Whale", scene(lambda cx, cy, s, r, o: whale_shape(cx, cy, s, "#4361ee", o, r), ["#03045e", "#0077b6"], 5, (200, 300), True)),
+    ("Curious Octopus", scene(lambda cx, cy, s, r, o: octopus_shape(cx, cy, s, "#f15bb5", o), ["#023e8a", "#0096c7"], 6, (150, 230))),
+    ("Sea Turtle Voyage", scene(lambda cx, cy, s, r, o: sea_turtle_shape(cx, cy, s, "#2d6a4f", "#52b788", o, r), ["#00b4d8", "#90e0ef"], 6, (160, 240), True)),
+    ("Jellyfish Glow", scene(lambda cx, cy, s, r, o: jellyfish_shape(cx, cy, s, "#c8b6ff", o), ["#03045e", "#0a4d68"], 7, (140, 220))),
+    ("Playful Dolphins", scene(lambda cx, cy, s, r, o: dolphin_shape(cx, cy, s, "#4cc9f0", o, r), ["#ade8f4", "#48cae4"], 6, (170, 250), True)),
+    ("Deep Blue Whale Song", scene(lambda cx, cy, s, r, o: whale_shape(cx, cy, s, "#5390d9", o, r), ["#001d3d", "#003566"], 4, (220, 320), True)),
+    ("Orange Octopus Garden", scene(lambda cx, cy, s, r, o: octopus_shape(cx, cy, s, "#ff9f1c", o), ["#0077b6", "#00b4d8"], 6, (150, 230))),
+    ("Coral Reef Turtles", scene(lambda cx, cy, s, r, o: sea_turtle_shape(cx, cy, s, "#e76f51", "#f4a261", o, r), ["#0096c7", "#48cae4"], 6, (160, 240), True)),
+    ("Pink Jellyfish Drift", scene(lambda cx, cy, s, r, o: jellyfish_shape(cx, cy, s, "#ff9fd6", o), ["#0a4d68", "#088395"], 7, (140, 220))),
+    ("Sunny Dolphin Splash", scene(lambda cx, cy, s, r, o: dolphin_shape(cx, cy, s, "#00b4d8", o, r), ["#a8e6ff", "#dff7ff"], 6, (170, 250), True)),
+    ("Purple Whale Dreams", scene(lambda cx, cy, s, r, o: whale_shape(cx, cy, s, "#9b5de5", o, r), ["#240046", "#3c096c"], 4, (220, 320), True)),
+    ("Teal Octopus Depths", scene(lambda cx, cy, s, r, o: octopus_shape(cx, cy, s, "#2ec4b6", o), ["#03045e", "#023e8a"], 6, (150, 230))),
+    ("Golden Sea Turtle", scene(lambda cx, cy, s, r, o: sea_turtle_shape(cx, cy, s, "#ffb703", "#ffd166", o, r), ["#023047", "#219ebc"], 6, (160, 240), True)),
+    ("Yellow Jellyfish Bloom", scene(lambda cx, cy, s, r, o: jellyfish_shape(cx, cy, s, "#ffe066", o), ["#001d3d", "#003566"], 7, (140, 220))),
+    ("Dolphin Sunset Leap", scene(lambda cx, cy, s, r, o: dolphin_shape(cx, cy, s, "#f4a261", o, r), ["#ff9f7b", "#ff6f91"], 6, (170, 250), True)),
+    ("Whale & Bubbles", scene(lambda cx, cy, s, r, o: whale_shape(cx, cy, s, "#48cae4", o, r), ["#caf0f8", "#ade8f4"], 5, (200, 300), True)),
+    ("Rainbow Reef Octopus", scene(lambda cx, cy, s, r, o: octopus_shape(cx, cy, s, "#06d6a0", o), ["#ff9fbf", "#9fd8ff"], 6, (150, 230))),
+    ("Emerald Sea Turtle", scene(lambda cx, cy, s, r, o: sea_turtle_shape(cx, cy, s, "#118ab2", "#06d6a0", o, r), ["#d8f3dc", "#b7e4c7"], 6, (160, 240), True)),
+    ("Moonlit Jellyfish", scene(lambda cx, cy, s, r, o: jellyfish_shape(cx, cy, s, "#a6e3ff", o), ["#0d1b4c", "#1a1a40"], 7, (140, 220))),
+    ("Dolphin Pod Parade", scene(lambda cx, cy, s, r, o: dolphin_shape(cx, cy, s, "#4361ee", o, r), ["#0077b6", "#00b4d8"], 7, (150, 230), True)),
+])
+
+
+# ---- Birds & Feathers -----------------------------------------------------------
+
+def parrot_shape(cx, cy, size, body_color, wing_color, opacity=1, rotation=0):
+    s = size / 100.0
+    items = [
+        ellipse(cx, cy, 40 * s, 55 * s, body_color, opacity),
+        ellipse(cx + 10 * s, cy + 5 * s, 20 * s, 32 * s, wing_color, opacity),
+        circle(cx, cy - 48 * s, 26 * s, body_color, opacity),
+        polygon([(cx-10*s, cy-40*s), (cx-30*s, cy-35*s), (cx-8*s, cy-28*s)], "#f4a261", opacity),
+        circle(cx + 6 * s, cy - 52 * s, 5 * s, "#1a1a1a", opacity),
+        polygon([(cx-10*s, cy+55*s), (cx-16*s, cy+80*s), (cx-4*s, cy+80*s)], "#f4a261", opacity),
+        polygon([(cx+10*s, cy+55*s), (cx+4*s, cy+80*s), (cx+16*s, cy+80*s)], "#f4a261", opacity),
+    ]
+    t = f"rotate({rotation} {cx} {cy})" if rotation else None
+    return group(items, transform=t)
+
+
+def flamingo_shape(cx, cy, size, fill, opacity=1):
+    s = size / 100.0
+    items = [
+        ellipse(cx, cy - 10 * s, 32 * s, 40 * s, fill, opacity),
+        f'<path d="M {cx-25*s:.1f} {cy-30*s:.1f} Q {cx-55*s:.1f} {cy-10*s:.1f} {cx-40*s:.1f} {cy+40*s:.1f}" '
+        f'fill="none" stroke="{fill}" stroke-width="{14*s:.1f}" stroke-linecap="round" opacity="{opacity:.2f}"/>',
+        circle(cx - 40 * s, cy + 42 * s, 16 * s, fill, opacity),
+        polygon([(cx-56*s, cy+38*s), (cx-78*s, cy+46*s), (cx-56*s, cy+50*s)], "#1a1a1a", opacity),
+        circle(cx - 44 * s, cy + 38 * s, 3 * s, "#1a1a1a", opacity),
+        line(cx, cy + 30 * s, cx - 6 * s, cy + 110 * s, fill, 6 * s, opacity),
+        line(cx - 6 * s, cy + 110 * s, cx - 16 * s, cy + 130 * s, fill, 6 * s, opacity),
+    ]
+    return group(items)
+
+
+def peacock_shape(cx, cy, size, body_color, tail_colors, opacity=1):
+    s = size / 100.0
+    items = []
+    for i, a in enumerate(range(-70, 71, 20)):
+        rad = math.radians(a - 90)
+        ex = cx + 90 * s * math.cos(rad)
+        ey = cy - 20 * s + 90 * s * math.sin(rad)
+        items.append(ellipse(ex, ey, 16 * s, 26 * s, tail_colors[i % len(tail_colors)], opacity * 0.9,
+                              transform=f"rotate({a} {ex} {ey})"))
+        items.append(circle(ex, ey - 18 * s, 6 * s, tail_colors[(i + 1) % len(tail_colors)], opacity))
+    items.append(circle(cx, cy + 20 * s, 26 * s, body_color, opacity))
+    items.append(circle(cx, cy - 20 * s, 16 * s, body_color, opacity))
+    items.append(circle(cx, cy - 38 * s, 3 * s, tail_colors[0], opacity))
+    return group(items)
+
+
+cat("birds-feathers", "Birds & Feathers", [
+    ("Colorful Parrot Perch", scene(lambda cx, cy, s, r, o: parrot_shape(cx, cy, s, "#06d6a0", "#118ab2", o, r), ["#d8f3dc", "#b7e4c7"], 6, (170, 250), True)),
+    ("Pretty Pink Flamingos", scene(lambda cx, cy, s, r, o: flamingo_shape(cx, cy, s, "#ff8fa3", o), ["#fff0f5", "#ffe0eb"], 6, (160, 240))),
+    ("Majestic Peacock Fan", scene(lambda cx, cy, s, r, o: peacock_shape(cx, cy, s, "#118ab2", ["#06d6a0", "#4cc9f0", "#9b5de5"], o), ["#f3e8ff", "#e0f7ff"], 3, (260, 360))),
+    ("Snowy Owl Watch", scene(lambda cx, cy, s, r, o: owl_shape(cx, cy, s, "#f4f4f4", "#e8e8ea", "#ffd166", o), ["#dbe9ff", "#a8c6ff"], 5, (180, 260))),
+    ("Rainbow Parrot Jungle", scene(lambda cx, cy, s, r, o: parrot_shape(cx, cy, s, "#ef476f", "#ffd166", o, r), ["#eafff1", "#d0f4de"], 6, (170, 250), True)),
+    ("Flamingo Sunset Pond", scene(lambda cx, cy, s, r, o: flamingo_shape(cx, cy, s, "#ff6f91", o), ["#ff9f7b", "#ff6f91"], 6, (160, 240))),
+    ("Emerald Peacock Garden", scene(lambda cx, cy, s, r, o: peacock_shape(cx, cy, s, "#2ec4b6", ["#118ab2", "#06d6a0", "#ffd166"], o), ["#eaf6ff", "#cdeffd"], 3, (260, 360))),
+    ("Barn Owl Twilight", scene(lambda cx, cy, s, r, o: owl_shape(cx, cy, s, "#c9b18a", "#f7efe0", "#1a1a1a", o), ["#ff9f7b", "#ffcf8a"], 5, (180, 260))),
+    ("Blue Parrot Paradise", scene(lambda cx, cy, s, r, o: parrot_shape(cx, cy, s, "#4361ee", "#4cc9f0", o, r), ["#a8e6ff", "#dff7ff"], 6, (170, 250), True)),
+    ("Flamingo Flock", scene(lambda cx, cy, s, r, o: flamingo_shape(cx, cy, s, "#f15bb5", o), ["#eaf7ff", "#dff3ff"], 7, (140, 220))),
+    ("Purple Peacock Dream", scene(lambda cx, cy, s, r, o: peacock_shape(cx, cy, s, "#7209b7", ["#9b5de5", "#f15bb5", "#4cc9f0"], o), ["#240046", "#3c096c"], 3, (260, 360))),
+    ("Golden Owl Eyes", scene(lambda cx, cy, s, r, o: owl_shape(cx, cy, s, "#f4a261", "#ffe8b0", "#1a1a1a", o), ["#fff3e0", "#ffe4c2"], 5, (180, 260))),
+    ("Tropical Parrot Duo", scene(lambda cx, cy, s, r, o: parrot_shape(cx, cy, s, "#ffd166", "#ef476f", o, r), ["#caf0f8", "#90e0ef"], 5, (190, 270), True)),
+    ("Coral Pink Flamingos", scene(lambda cx, cy, s, r, o: flamingo_shape(cx, cy, s, "#ff9f9f", o), ["#ffe0ec", "#ffc2d9"], 6, (160, 240))),
+    ("Sapphire Peacock Feathers", scene(lambda cx, cy, s, r, o: peacock_shape(cx, cy, s, "#023e8a", ["#0096c7", "#48cae4", "#90e0ef"], o), ["#eaf6ff", "#d6efff"], 3, (260, 360))),
+    ("Night Owl Stargazing", scene(lambda cx, cy, s, r, o: owl_shape(cx, cy, s, "#3a0ca3", "#c8b6ff", "#ffd166", o), ["#03071e", "#0a2540"], 5, (180, 260))),
+    ("Macaw Rainbow Wings", scene(lambda cx, cy, s, r, o: parrot_shape(cx, cy, s, "#e63946", "#ffd166", o, r), ["#fff8e0", "#ffe9c2"], 6, (170, 250), True)),
+    ("Flamingo Yoga Pose", scene(lambda cx, cy, s, r, o: flamingo_shape(cx, cy, s, "#ff8fa3", o), ["#f0ead2", "#e4d9b8"], 5, (180, 260))),
+    ("Peacock Garden Party", scene(lambda cx, cy, s, r, o: peacock_shape(cx, cy, s, "#06d6a0", ["#4cc9f0", "#ffd166", "#f15bb5"], o), ["#fdf0ff", "#ffe6f7"], 3, (260, 360))),
+    ("Forest Owl Hideaway", scene(lambda cx, cy, s, r, o: owl_shape(cx, cy, s, "#52b788", "#d8f3dc", "#ffd166", o), ["#1b4332", "#2d6a4f"], 5, (180, 260))),
+])
+
+
+# ---- Robots & Gadgets -----------------------------------------------------------
+
+def robot_shape(cx, cy, size, body_color, accent_color, opacity=1):
+    s = size / 100.0
+    items = [
+        rect(cx - 45 * s, cy - 60 * s, 90 * s, 70 * s, body_color, rx=14 * s, opacity=opacity),
+        rect(cx - 55 * s, cy + 10 * s, 110 * s, 70 * s, body_color, rx=16 * s, opacity=opacity),
+        line(cx, cy - 60 * s, cx, cy - 85 * s, accent_color, 6 * s, opacity),
+        circle(cx, cy - 90 * s, 8 * s, accent_color, opacity),
+        circle(cx - 20 * s, cy - 28 * s, 10 * s, accent_color, opacity),
+        circle(cx + 20 * s, cy - 28 * s, 10 * s, accent_color, opacity),
+        rect(cx - 25 * s, cy + 35 * s, 50 * s, 24 * s, accent_color, rx=8 * s, opacity=opacity),
+        circle(cx - 70 * s, cy + 30 * s, 12 * s, body_color, opacity),
+        circle(cx + 70 * s, cy + 30 * s, 12 * s, body_color, opacity),
+    ]
+    return group(items)
+
+
+def gear_shape(cx, cy, r, fill, opacity=1, rotation=0):
+    items = [circle(cx, cy, r * 0.6, fill, opacity)]
+    for i in range(8):
+        a = math.radians(i * 45)
+        x = cx + r * math.cos(a)
+        y = cy + r * math.sin(a)
+        items.append(f'<rect x="{x-r*0.16:.1f}" y="{y-r*0.16:.1f}" width="{r*0.32:.1f}" height="{r*0.32:.1f}" '
+                     f'fill="{fill}" opacity="{opacity:.2f}" transform="rotate({math.degrees(a):.0f} {x:.1f} {y:.1f})"/>')
+    items.append(circle(cx, cy, r * 0.24, "#ffffff", opacity * 0.8))
+    t = f"rotate({rotation} {cx} {cy})" if rotation else None
+    return group(items, transform=t)
+
+
+cat("robots-gadgets", "Robots & Gadgets", [
+    ("Friendly Blue Robot", scene(lambda cx, cy, s, r, o: robot_shape(cx, cy, s, "#4cc9f0", "#ffd166", o), ["#eaf6ff", "#cdeffd"], 5, (200, 300))),
+    ("Gear & Cog Machine", scene(lambda cx, cy, s, r, o: gear_shape(cx, cy, s * 0.5, "#adb5bd", o, r), ["#f8f9fa", "#dee2e6"], 8, (110, 190), True)),
+    ("Pink Robo Pal", scene(lambda cx, cy, s, r, o: robot_shape(cx, cy, s, "#ff8fa3", "#ffffff", o), ["#fff0f5", "#ffe6ee"], 5, (200, 300))),
+    ("Neon Circuit Bot", scene(lambda cx, cy, s, r, o: robot_shape(cx, cy, s, "#3a0ca3", "#00f5d4", o), ["#0d0221", "#190535"], 5, (200, 300))),
+    ("Golden Gears at Work", scene(lambda cx, cy, s, r, o: gear_shape(cx, cy, s * 0.5, "#ffd166", o, r), ["#fff8e0", "#ffe9c2"], 8, (110, 190), True)),
+    ("Green Guardian Robot", scene(lambda cx, cy, s, r, o: robot_shape(cx, cy, s, "#52b788", "#fff3b0", o), ["#d8f3dc", "#b7e4c7"], 5, (200, 300))),
+    ("Purple Space Robot", scene(lambda cx, cy, s, r, o: robot_shape(cx, cy, s, "#9b5de5", "#f4a261", o), ["#3a0ca3", "#7209b7"], 5, (200, 300))),
+    ("Silver Gear Grid", scene(lambda cx, cy, s, r, o: gear_shape(cx, cy, s * 0.5, "#6c757d", o, r), ["#e9ecef", "#ced4da"], 8, (110, 190), True)),
+    ("Orange Helper Bot", scene(lambda cx, cy, s, r, o: robot_shape(cx, cy, s, "#f4a261", "#264653", o), ["#fff3e0", "#ffe4c2"], 5, (200, 300))),
+    ("Rainbow Robot Party", scene(lambda cx, cy, s, r, o: robot_shape(cx, cy, s, rng_choice_colors(r), "#ffffff", o), ["#ff9fbf", "#9fd8ff"], 4, (200, 300))),
+    ("Tiny Gadget Bots", scene(lambda cx, cy, s, r, o: robot_shape(cx, cy, s, "#4361ee", "#ffe66d", o), ["#caf0f8", "#90e0ef"], 6, (140, 220))),
+    ("Copper Cog Adventure", scene(lambda cx, cy, s, r, o: gear_shape(cx, cy, s * 0.5, "#b5651d", o, r), ["#fff0e0", "#ffdbb0"], 8, (110, 190), True)),
+    ("Midnight Robot Watch", scene(lambda cx, cy, s, r, o: robot_shape(cx, cy, s, "#212529", "#4cc9f0", o), ["#03071e", "#0a2540"], 5, (200, 300))),
+    ("Bubblegum Bot Squad", scene(lambda cx, cy, s, r, o: robot_shape(cx, cy, s, "#f15bb5", "#c8b6ff", o), ["#fdf0ff", "#ffe6f7"], 5, (200, 300))),
+    ("Sunny Yellow Robot", scene(lambda cx, cy, s, r, o: robot_shape(cx, cy, s, "#ffd166", "#118ab2", o), ["#fff8e0", "#ffefc2"], 5, (200, 300))),
+    ("Turquoise Tech Gears", scene(lambda cx, cy, s, r, o: gear_shape(cx, cy, s * 0.5, "#2ec4b6", o, r), ["#e0f7fa", "#b2ebf2"], 8, (110, 190), True)),
+    ("Robot Repair Shop", scene(lambda cx, cy, s, r, o: robot_shape(cx, cy, s, "#adb5bd", "#e63946", o), ["#f1faee", "#dff7e0"], 5, (200, 300))),
+    ("Cosmic Cyber Bot", scene(lambda cx, cy, s, r, o: robot_shape(cx, cy, s, "#7209b7", "#00f5d4", o), ["#020024", "#090979"], 5, (200, 300))),
+    ("Cherry Red Robot", scene(lambda cx, cy, s, r, o: robot_shape(cx, cy, s, "#e63946", "#ffe066", o), ["#ffe0ec", "#ffc2d9"], 5, (200, 300))),
+    ("Gearbox Wonderland", scene(lambda cx, cy, s, r, o: gear_shape(cx, cy, s * 0.5, "#4a4e69", o, r), ["#e0d4ff", "#c8b6ff"], 8, (110, 190), True)),
+])
+
+def rng_choice_colors(seedval):
+    palette = ["#ff6fa5", "#4cc9f0", "#ffd166", "#06d6a0", "#9b5de5"]
+    return palette[int(abs(seedval)) % len(palette)]
+
+
+# ---- Pirates & Treasure -----------------------------------------------------------
+
+def ship_shape(cx, cy, size, hull_color, sail_color, opacity=1):
+    s = size / 100.0
+    items = [
+        polygon([(cx-80*s, cy+20*s), (cx+80*s, cy+20*s), (cx+55*s, cy+55*s), (cx-55*s, cy+55*s)], hull_color, opacity),
+        rect(cx - 4 * s, cy - 90 * s, 8 * s, 110 * s, "#6b4423", opacity=opacity),
+        polygon([(cx+4*s, cy-88*s), (cx+65*s, cy-60*s), (cx+4*s, cy-25*s)], sail_color, opacity),
+        polygon([(cx-4*s, cy-70*s), (cx-55*s, cy-45*s), (cx-4*s, cy-20*s)], sail_color, opacity),
+    ]
+    return group(items)
+
+
+def chest_shape(cx, cy, size, wood_color, gold_color, opacity=1):
+    s = size / 100.0
+    items = [
+        rect(cx - 55 * s, cy - 10 * s, 110 * s, 55 * s, wood_color, rx=6 * s, opacity=opacity),
+        f'<path d="M {cx-55*s:.1f} {cy-10*s:.1f} A {55*s:.1f} {35*s:.1f} 0 0 1 {cx+55*s:.1f} {cy-10*s:.1f} Z" '
+        f'fill="{wood_color}" opacity="{opacity:.2f}"/>',
+        rect(cx - 55 * s, cy - 15 * s, 110 * s, 8 * s, gold_color, opacity=opacity),
+        rect(cx - 10 * s, cy - 15 * s, 20 * s, 30 * s, gold_color, rx=4 * s, opacity=opacity),
+        circle(cx, cy - 2 * s, 6 * s, "#5b3a1f", opacity),
+    ]
+    return group(items)
+
+
+def skull_shape(cx, cy, size, opacity=1, rotation=0):
+    s = size / 100.0
+    items = [
+        circle(cx, cy, 45 * s, "#f4f1ea", opacity),
+        rect(cx - 22 * s, cy + 30 * s, 44 * s, 22 * s, "#f4f1ea", rx=6 * s, opacity=opacity),
+        ellipse(cx - 18 * s, cy - 5 * s, 12 * s, 15 * s, "#1a1a1a", opacity),
+        ellipse(cx + 18 * s, cy - 5 * s, 12 * s, 15 * s, "#1a1a1a", opacity),
+        polygon([(cx-6*s, cy+15*s), (cx+6*s, cy+15*s), (cx, cy+28*s)], "#1a1a1a", opacity),
+        line(cx - 70 * s, cy + 10 * s, cx + 70 * s, cy - 30 * s, "#f4f1ea", 10 * s, opacity),
+        line(cx - 70 * s, cy - 30 * s, cx + 70 * s, cy + 10 * s, "#f4f1ea", 10 * s, opacity),
+    ]
+    t = f"rotate({rotation} {cx} {cy})" if rotation else None
+    return group(items, transform=t)
+
+
+def anchor_shape(cx, cy, size, fill, opacity=1, rotation=0):
+    s = size / 100.0
+    items = [
+        circle(cx, cy - 55 * s, 14 * s, fill, opacity),
+        f'<circle cx="{cx:.1f}" cy="{cy-55*s:.1f}" r="{8*s:.1f}" fill="none" stroke="none"/>',
+        line(cx, cy - 45 * s, cx, cy + 55 * s, fill, 10 * s, opacity),
+        line(cx - 40 * s, cy - 20 * s, cx + 40 * s, cy - 20 * s, fill, 8 * s, opacity),
+        f'<path d="M {cx-45*s:.1f} {cy+30*s:.1f} Q {cx:.1f} {cy+80*s:.1f} {cx+45*s:.1f} {cy+30*s:.1f}" '
+        f'fill="none" stroke="{fill}" stroke-width="{10*s:.1f}" stroke-linecap="round" opacity="{opacity:.2f}"/>',
+    ]
+    t = f"rotate({rotation} {cx} {cy})" if rotation else None
+    return group(items, transform=t)
+
+
+cat("pirates-treasure", "Pirates & Treasure", [
+    ("Pirate Ship Voyage", scene(lambda cx, cy, s, r, o: ship_shape(cx, cy, s, "#6b4423", "#f4f1ea", o), ["#00b4d8", "#90e0ef"], 4, (240, 340))),
+    ("Buried Treasure Chest", scene(lambda cx, cy, s, r, o: chest_shape(cx, cy, s, "#8a5a2b", "#ffd166", o), ["#ffe8b0", "#ffcf8a"], 5, (200, 300))),
+    ("Skull & Crossbones Flag", scene(lambda cx, cy, s, r, o: skull_shape(cx, cy, s, o, r), ["#212529", "#495057"], 6, (140, 220), True)),
+    ("Anchors Away", scene(lambda cx, cy, s, r, o: anchor_shape(cx, cy, s, "#023e8a", o, r), ["#caf0f8", "#90e0ef"], 6, (150, 230), True)),
+    ("High Seas Adventure", scene(lambda cx, cy, s, r, o: ship_shape(cx, cy, s, "#e76f51", "#fff3e0", o), ["#0077b6", "#00b4d8"], 4, (240, 340))),
+    ("Golden Doubloon Chest", scene(lambda cx, cy, s, r, o: chest_shape(cx, cy, s, "#6b4423", "#f4a261", o), ["#fff8e0", "#ffe9c2"], 5, (200, 300))),
+    ("Jolly Roger Sunset", scene(lambda cx, cy, s, r, o: skull_shape(cx, cy, s, o, r), ["#ff9f7b", "#ff6f91"], 6, (140, 220), True)),
+    ("Sailor's Anchor Bay", scene(lambda cx, cy, s, r, o: anchor_shape(cx, cy, s, "#118ab2", o, r), ["#eaf6ff", "#cdeffd"], 6, (150, 230), True)),
+    ("Storm-Tossed Ship", scene(lambda cx, cy, s, r, o: ship_shape(cx, cy, s, "#495057", "#e9ecef", o), ["#2b2d42", "#495057"], 4, (240, 340))),
+    ("Emerald Isle Treasure", scene(lambda cx, cy, s, r, o: chest_shape(cx, cy, s, "#2d6a4f", "#ffd166", o), ["#d8f3dc", "#b7e4c7"], 5, (200, 300))),
+    ("Ghost Ship Skulls", scene(lambda cx, cy, s, r, o: skull_shape(cx, cy, s, o, r), ["#0d1b4c", "#1a1a40"], 6, (140, 220), True)),
+    ("Purple Pirate Anchor", scene(lambda cx, cy, s, r, o: anchor_shape(cx, cy, s, "#7209b7", o, r), ["#f3e8ff", "#e0d4ff"], 6, (150, 230), True)),
+    ("Tropical Pirate Cove", scene(lambda cx, cy, s, r, o: ship_shape(cx, cy, s, "#f4a261", "#fff3e0", o), ["#06d6a0", "#4cc9f0"], 4, (240, 340))),
+    ("Ruby Jeweled Chest", scene(lambda cx, cy, s, r, o: chest_shape(cx, cy, s, "#5b3a1f", "#e63946", o), ["#ffe0ec", "#ffc2d9"], 5, (200, 300))),
+    ("Pink Pirate Party", scene(lambda cx, cy, s, r, o: skull_shape(cx, cy, s, o, r), ["#ff9fd6", "#c8b6ff"], 6, (140, 220), True)),
+    ("Deep Sea Anchor Drop", scene(lambda cx, cy, s, r, o: anchor_shape(cx, cy, s, "#00b4d8", o, r), ["#03045e", "#0077b6"], 6, (150, 230), True)),
+    ("Moonlit Pirate Sails", scene(lambda cx, cy, s, r, o: ship_shape(cx, cy, s, "#212529", "#adb5bd", o), ["#03071e", "#0a2540"], 4, (240, 340))),
+    ("Silver Treasure Hoard", scene(lambda cx, cy, s, r, o: chest_shape(cx, cy, s, "#6c757d", "#e9ecef", o), ["#e0f7fa", "#b2ebf2"], 5, (200, 300))),
+    ("Rainbow Pirate Flag", scene(lambda cx, cy, s, r, o: skull_shape(cx, cy, s, o, r), ["#ff9fbf", "#ffd39f"], 6, (140, 220), True)),
+    ("Captain's Golden Anchor", scene(lambda cx, cy, s, r, o: anchor_shape(cx, cy, s, "#ffd166", o, r), ["#fff3e0", "#ffe4c2"], 6, (150, 230), True)),
+])
+
+
+# ---- Camping & Outdoors -----------------------------------------------------------
+
+def tent_shape(cx, cy, size, fabric_color, opacity=1):
+    s = size / 100.0
+    items = [
+        polygon([(cx-70*s, cy+40*s), (cx, cy-70*s), (cx+70*s, cy+40*s)], fabric_color, opacity),
+        polygon([(cx-20*s, cy+40*s), (cx, cy-10*s), (cx+20*s, cy+40*s)], "#5b3a1f", opacity),
+        line(cx, cy - 70 * s, cx, cy - 90 * s, "#5b3a1f", 5 * s, opacity),
+    ]
+    return group(items)
+
+
+def campfire_shape(cx, cy, size, opacity=1):
+    s = size / 100.0
+    items = [
+        polygon([(cx-40*s, cy+30*s), (cx+10*s, cy+15*s), (cx+40*s, cy+30*s)], "#8a5a2b", opacity),
+        polygon([(cx-40*s, cy+15*s), (cx+10*s, cy+30*s), (cx+40*s, cy+15*s)], "#6b4423", opacity),
+        path(f"M {cx-18*s} {cy+15*s} C {cx-25*s} {cy-15*s}, {cx-5*s} {cy-20*s}, {cx} {cy-45*s} "
+             f"C {cx+5*s} {cy-20*s}, {cx+25*s} {cy-15*s}, {cx+18*s} {cy+15*s} "
+             f"C {cx+10*s} {cy+5*s}, {cx-10*s} {cy+5*s}, {cx-18*s} {cy+15*s} Z", "#f4a261", opacity),
+        path(f"M {cx-8*s} {cy+10*s} C {cx-10*s} {cy-8*s}, {cx-2*s} {cy-10*s}, {cx} {cy-25*s} "
+             f"C {cx+2*s} {cy-10*s}, {cx+10*s} {cy-8*s}, {cx+8*s} {cy+10*s} Z", "#ffd166", opacity),
+    ]
+    return group(items)
+
+
+def lantern_shape(cx, cy, size, opacity=1):
+    s = size / 100.0
+    items = [
+        rect(cx - 6 * s, cy - 60 * s, 12 * s, 15 * s, "#495057", opacity=opacity),
+        rect(cx - 35 * s, cy - 45 * s, 70 * s, 80 * s, "#495057", rx=8 * s, opacity=opacity),
+        rect(cx - 26 * s, cy - 36 * s, 52 * s, 62 * s, "#fff3b0", rx=4 * s, opacity=opacity),
+        circle(cx, cy - 5 * s, 16 * s, "#ffd166", opacity),
+    ]
+    return group(items)
+
+
+cat("camping-outdoors", "Camping & Outdoors", [
+    ("Starlit Tent Camp", scene(lambda cx, cy, s, r, o: tent_shape(cx, cy, s, "#e76f51", o), ["#0d1b4c", "#1a1a40"], 5, (200, 300))),
+    ("Cozy Campfire Glow", scene(lambda cx, cy, s, r, o: campfire_shape(cx, cy, s, o), ["#2b2d42", "#495057"], 6, (150, 230))),
+    ("Camping Lantern Light", scene(lambda cx, cy, s, r, o: lantern_shape(cx, cy, s, o), ["#0f2027", "#2c5364"], 5, (180, 260))),
+    ("Green Forest Tents", scene(lambda cx, cy, s, r, o: tent_shape(cx, cy, s, "#52b788", o), ["#d8f3dc", "#b7e4c7"], 5, (200, 300))),
+    ("Marshmallow Roast Fire", scene(lambda cx, cy, s, r, o: campfire_shape(cx, cy, s, o), ["#ffe8b0", "#ffcf8a"], 6, (150, 230))),
+    ("Blue Mountain Camp", scene(lambda cx, cy, s, r, o: tent_shape(cx, cy, s, "#4cc9f0", o), ["#eaf6ff", "#cdeffd"], 5, (200, 300))),
+    ("Firefly Lantern Night", scene(lambda cx, cy, s, r, o: lantern_shape(cx, cy, s, o), ["#03071e", "#0a2540"], 5, (180, 260))),
+    ("Sunset Campsite", scene(lambda cx, cy, s, r, o: tent_shape(cx, cy, s, "#ffd166", o), ["#ff9f7b", "#ff6f91"], 5, (200, 300))),
+    ("Woodland Campfire Circle", scene(lambda cx, cy, s, r, o: campfire_shape(cx, cy, s, o), ["#1b4332", "#2d6a4f"], 6, (150, 230))),
+    ("Purple Twilight Tent", scene(lambda cx, cy, s, r, o: tent_shape(cx, cy, s, "#9b5de5", o), ["#3a0ca3", "#7209b7"], 5, (200, 300))),
+    ("Glowing Trail Lanterns", scene(lambda cx, cy, s, r, o: lantern_shape(cx, cy, s, o), ["#eaf7ff", "#dff3ff"], 5, (180, 260))),
+    ("Pink Adventure Tent", scene(lambda cx, cy, s, r, o: tent_shape(cx, cy, s, "#ff8fa3", o), ["#fff0f5", "#ffe6ee"], 5, (200, 300))),
+    ("Late Night Fire Stories", scene(lambda cx, cy, s, r, o: campfire_shape(cx, cy, s, o), ["#000814", "#001d3d"], 6, (150, 230))),
+    ("Rustic Lantern Glow", scene(lambda cx, cy, s, r, o: lantern_shape(cx, cy, s, o), ["#fff3e0", "#ffe4c2"], 5, (180, 260))),
+    ("Alpine Camp Retreat", scene(lambda cx, cy, s, r, o: tent_shape(cx, cy, s, "#118ab2", o), ["#caf0f8", "#90e0ef"], 5, (200, 300))),
+    ("Golden Ember Campfire", scene(lambda cx, cy, s, r, o: campfire_shape(cx, cy, s, o), ["#6b4423", "#5b3a1f"], 6, (150, 230))),
+    ("Misty Morning Lantern", scene(lambda cx, cy, s, r, o: lantern_shape(cx, cy, s, o), ["#a8dadc", "#457b9d"], 5, (180, 260))),
+    ("Desert Star Camp", scene(lambda cx, cy, s, r, o: tent_shape(cx, cy, s, "#f4a261", o), ["#020024", "#090979"], 5, (200, 300))),
+    ("Summer Campfire Fun", scene(lambda cx, cy, s, r, o: campfire_shape(cx, cy, s, o), ["#eafff1", "#d0f4de"], 6, (150, 230))),
+    ("Trailhead Lantern Path", scene(lambda cx, cy, s, r, o: lantern_shape(cx, cy, s, o), ["#f0ead2", "#e4d9b8"], 5, (180, 260))),
+])
+
+
+# ---- Circus & Carnival -----------------------------------------------------------
+
+def big_top_shape(cx, cy, size, stripe1, stripe2, opacity=1):
+    s = size / 100.0
+    items = [polygon([(cx-90*s, cy+40*s), (cx, cy-100*s), (cx+90*s, cy+40*s)], stripe1, opacity)]
+    for i in range(-3, 4):
+        items.append(polygon([(cx+i*24*s, cy-100*s+abs(i)*8*s), (cx+i*24*s+12*s, cy-100*s+abs(i)*8*s),
+                               (cx+i*24*s+6*s, cy+40*s)], stripe2, opacity * 0.8))
+    items.append(circle(cx, cy - 100 * s, 10 * s, stripe2, opacity))
+    for dx in (-45, 0, 45):
+        items.append(polygon([(cx+dx*s-14*s, cy+40*s), (cx+dx*s+14*s, cy+40*s), (cx+dx*s, cy+65*s)], stripe1, opacity))
+    return group(items)
+
+
+def ferris_wheel_shape(cx, cy, r, fill, gondola_color, opacity=1, rotation=0):
+    items = [f'<circle cx="{cx:.1f}" cy="{cy:.1f}" r="{r:.1f}" fill="none" stroke="{fill}" '
+             f'stroke-width="{r*0.1:.1f}" opacity="{opacity:.2f}"/>']
+    for i in range(8):
+        a = math.radians(i * 45 + rotation)
+        x = cx + r * math.cos(a)
+        y = cy + r * math.sin(a)
+        items.append(line(cx, cy, x, y, fill, r * 0.04, opacity))
+        items.append(circle(x, y, r * 0.14, gondola_color, opacity))
+    items.append(circle(cx, cy, r * 0.1, fill, opacity))
+    return group(items)
+
+
+def popcorn_shape(cx, cy, size, opacity=1):
+    s = size / 100.0
+    items = [polygon([(cx-30*s, cy), (cx+30*s, cy), (cx+22*s, cy+60*s), (cx-22*s, cy+60*s)], "#e63946", opacity)]
+    for i in range(4):
+        items.append(line(cx - 24 * s + i * 16 * s, cy, cx - 20 * s + i * 16 * s, cy + 58 * s, "#ffffff", 6 * s, opacity))
+    for _ in range(10):
+        items.append(circle(cx + random_jitter(s), cy - 20 * s + random_jitter(s) * 2, 12 * s, "#fff3b0", opacity))
+    return group(items)
+
+
+def random_jitter(scale):
+    import random as _r
+    return _r.uniform(-40, 40) * scale
+
+
+cat("circus-carnival", "Circus & Carnival", [
+    ("Big Top Circus Tent", scene(lambda cx, cy, s, r, o: big_top_shape(cx, cy, s, "#e63946", "#f4f1ea", o), ["#ffe066", "#ffd166"], 4, (240, 340))),
+    ("Colorful Balloon Bunch", scene(lambda cx, cy, s, r, o: balloon_shape(cx, cy, s, rng_choice_colors(r), o), ["#a8e6ff", "#d6f0ff"], 8, (140, 220))),
+    ("Spinning Ferris Wheel", scene(lambda cx, cy, s, r, o: ferris_wheel_shape(cx, cy, s * 0.5, "#4361ee", "#ffd166", o, r), ["#eaf6ff", "#cdeffd"], 3, (300, 420), True)),
+    ("Buttery Popcorn Fun", scene(lambda cx, cy, s, r, o: popcorn_shape(cx, cy, s, o), ["#fff3e0", "#ffe4c2"], 7, (150, 230))),
+    ("Purple Carnival Tent", scene(lambda cx, cy, s, r, o: big_top_shape(cx, cy, s, "#7209b7", "#f4f1ea", o), ["#fdf0ff", "#ffe6f7"], 4, (240, 340))),
+    ("Rainbow Balloon Sky", scene(lambda cx, cy, s, r, o: balloon_shape(cx, cy, s, rng_choice_colors(r), o), ["#ff9fbf", "#9fd8ff"], 8, (140, 220))),
+    ("Night Carnival Lights", scene(lambda cx, cy, s, r, o: ferris_wheel_shape(cx, cy, s * 0.5, "#f15bb5", "#4cc9f0", o, r), ["#0d1b4c", "#1a1a40"], 3, (300, 420), True)),
+    ("Circus Popcorn Stand", scene(lambda cx, cy, s, r, o: popcorn_shape(cx, cy, s, o), ["#eafff1", "#d0f4de"], 7, (150, 230))),
+    ("Blue Striped Big Top", scene(lambda cx, cy, s, r, o: big_top_shape(cx, cy, s, "#118ab2", "#f4f1ea", o), ["#caf0f8", "#90e0ef"], 4, (240, 340))),
+    ("Golden Ferris Wheel", scene(lambda cx, cy, s, r, o: ferris_wheel_shape(cx, cy, s * 0.5, "#ffd166", "#e63946", o, r), ["#fff8e0", "#ffe9c2"], 3, (300, 420), True)),
+    ("Party Balloon Cluster", scene(lambda cx, cy, s, r, o: balloon_shape(cx, cy, s, rng_choice_colors(r), o), ["#fff0f5", "#ffe6ee"], 8, (140, 220))),
+    ("Sunset Carnival Fair", scene(lambda cx, cy, s, r, o: ferris_wheel_shape(cx, cy, s * 0.5, "#ff6f91", "#ffd166", o, r), ["#ff9f7b", "#ff6f91"], 3, (300, 420), True)),
+    ("Green Big Top Show", scene(lambda cx, cy, s, r, o: big_top_shape(cx, cy, s, "#2d6a4f", "#f4f1ea", o), ["#d8f3dc", "#b7e4c7"], 4, (240, 340))),
+    ("Caramel Popcorn Party", scene(lambda cx, cy, s, r, o: popcorn_shape(cx, cy, s, o), ["#f0ead2", "#e4d9b8"], 7, (150, 230))),
+    ("Teal Carnival Delight", scene(lambda cx, cy, s, r, o: big_top_shape(cx, cy, s, "#2ec4b6", "#f4f1ea", o), ["#e0f7fa", "#b2ebf2"], 4, (240, 340))),
+    ("Pastel Balloon Drift", scene(lambda cx, cy, s, r, o: balloon_shape(cx, cy, s, rng_choice_colors(r), o), ["#f3e8ff", "#e0f7ff"], 8, (140, 220))),
+    ("Twilight Ferris Wheel", scene(lambda cx, cy, s, r, o: ferris_wheel_shape(cx, cy, s * 0.5, "#9b5de5", "#00f5d4", o, r), ["#03071e", "#0a2540"], 3, (300, 420), True)),
+    ("Salty Sweet Popcorn", scene(lambda cx, cy, s, r, o: popcorn_shape(cx, cy, s, o), ["#ffe0ec", "#ffc2d9"], 7, (150, 230))),
+    ("Red & White Big Top", scene(lambda cx, cy, s, r, o: big_top_shape(cx, cy, s, "#ef476f", "#f4f1ea", o), ["#fff3b0", "#ffe066"], 4, (240, 340))),
+    ("Carnival Balloon Release", scene(lambda cx, cy, s, r, o: balloon_shape(cx, cy, s, rng_choice_colors(r), o), ["#eaf7ff", "#dff3ff"], 8, (140, 220))),
+])
+
+
+# ---- Construction & Diggers -----------------------------------------------------------
+
+def dump_truck_shape(cx, cy, size, body_color, opacity=1):
+    s = size / 100.0
+    items = [
+        rect(cx - 90 * s, cy - 10 * s, 70 * s, 55 * s, body_color, rx=6 * s, opacity=opacity),
+        rect(cx - 20 * s, cy - 40 * s, 90 * s, 85 * s, body_color, rx=8 * s, opacity=opacity),
+        rect(cx - 82 * s, cy - 2 * s, 40 * s, 30 * s, "#a6e3ff", rx=4 * s, opacity=opacity),
+        circle(cx - 55 * s, cy + 55 * s, 20 * s, "#1a1a1a", opacity),
+        circle(cx + 40 * s, cy + 55 * s, 20 * s, "#1a1a1a", opacity),
+    ]
+    return group(items)
+
+
+def crane_shape(cx, cy, size, fill, opacity=1):
+    s = size / 100.0
+    items = [
+        rect(cx - 8 * s, cy - 20 * s, 16 * s, 130 * s, fill, opacity=opacity),
+        line(cx, cy - 20 * s, cx + 90 * s, cy - 20 * s, fill, 8 * s, opacity),
+        line(cx, cy - 20 * s, cx - 30 * s, cy - 20 * s, fill, 8 * s, opacity),
+        line(cx + 80 * s, cy - 20 * s, cx + 80 * s, cy + 30 * s, "#495057", 3 * s, opacity),
+        rect(cx + 72 * s, cy + 30 * s, 16 * s, 14 * s, "#495057", opacity=opacity),
+        rect(cx - 30 * s, cy + 108 * s, 60 * s, 22 * s, fill, rx=4 * s, opacity=opacity),
+    ]
+    return group(items)
+
+
+def cone_shape(cx, cy, size, opacity=1):
+    s = size / 100.0
+    items = [
+        polygon([(cx-35*s, cy+50*s), (cx+35*s, cy+50*s), (cx+12*s, cy-50*s), (cx-12*s, cy-50*s)], "#f4a261", opacity),
+        rect(cx - 40 * s, cy + 42 * s, 80 * s, 16 * s, "#e76f51", rx=4 * s, opacity=opacity),
+        polygon([(cx-18*s, cy+5*s), (cx+18*s, cy+5*s), (cx+8*s, cy-25*s), (cx-8*s, cy-25*s)], "#ffffff", opacity * 0.8),
+    ]
+    return group(items)
+
+
+def hardhat_shape(cx, cy, size, fill, opacity=1):
+    s = size / 100.0
+    items = [
+        f'<path d="M {cx-55*s:.1f} {cy+10*s:.1f} A {55*s:.1f} {50*s:.1f} 0 0 1 {cx+55*s:.1f} {cy+10*s:.1f} Z" '
+        f'fill="{fill}" opacity="{opacity:.2f}"/>',
+        rect(cx - 62 * s, cy + 5 * s, 124 * s, 16 * s, fill, rx=8 * s, opacity=opacity),
+        rect(cx - 6 * s, cy - 45 * s, 12 * s, 20 * s, fill, rx=4 * s, opacity=opacity * 0.8),
+    ]
+    return group(items)
+
+
+cat("construction-diggers", "Construction & Diggers", [
+    ("Big Dump Truck", scene(lambda cx, cy, s, r, o: dump_truck_shape(cx, cy, s, "#ffd166", o), ["#a8dadc", "#457b9d"], 5, (180, 260))),
+    ("Tower Crane at Work", scene(lambda cx, cy, s, r, o: crane_shape(cx, cy, s, "#e76f51", o), ["#eaf6ff", "#cdeffd"], 3, (280, 380))),
+    ("Traffic Cone Row", scene(lambda cx, cy, s, r, o: cone_shape(cx, cy, s, o), ["#fff3e0", "#ffe4c2"], 8, (140, 220))),
+    ("Hard Hat Zone", scene(lambda cx, cy, s, r, o: hardhat_shape(cx, cy, s, "#ffd166", o), ["#fff8e0", "#ffe9c2"], 7, (140, 220))),
+    ("Yellow Dump Trucks", scene(lambda cx, cy, s, r, o: dump_truck_shape(cx, cy, s, "#f4a261", o), ["#fff3e0", "#ffe4c2"], 5, (180, 260))),
+    ("Red Crane Skyline", scene(lambda cx, cy, s, r, o: crane_shape(cx, cy, s, "#e63946", o), ["#caf0f8", "#90e0ef"], 3, (280, 380))),
+    ("Orange Cone Path", scene(lambda cx, cy, s, r, o: cone_shape(cx, cy, s, o), ["#eafff1", "#d0f4de"], 8, (140, 220))),
+    ("Blue Hard Hat Crew", scene(lambda cx, cy, s, r, o: hardhat_shape(cx, cy, s, "#4361ee", o), ["#dbe9ff", "#a8c6ff"], 7, (140, 220))),
+    ("Green Machine Truck", scene(lambda cx, cy, s, r, o: dump_truck_shape(cx, cy, s, "#52b788", o), ["#d8f3dc", "#b7e4c7"], 5, (180, 260))),
+    ("Golden Hour Crane", scene(lambda cx, cy, s, r, o: crane_shape(cx, cy, s, "#ffd166", o), ["#ffe8b0", "#ffcf8a"], 3, (280, 380))),
+    ("Cone Construction Zone", scene(lambda cx, cy, s, r, o: cone_shape(cx, cy, s, o), ["#fff0f5", "#ffe6ee"], 8, (140, 220))),
+    ("Pink Hard Hat Fun", scene(lambda cx, cy, s, r, o: hardhat_shape(cx, cy, s, "#ff8fa3", o), ["#ffe0ec", "#ffc2d9"], 7, (140, 220))),
+    ("Purple Dump Truck Fleet", scene(lambda cx, cy, s, r, o: dump_truck_shape(cx, cy, s, "#9b5de5", o), ["#f3e8ff", "#e0d4ff"], 5, (180, 260))),
+    ("Night Shift Crane", scene(lambda cx, cy, s, r, o: crane_shape(cx, cy, s, "#adb5bd", o), ["#03071e", "#0a2540"], 3, (280, 380))),
+    ("Rainbow Traffic Cones", scene(lambda cx, cy, s, r, o: cone_shape(cx, cy, s, o), ["#ff9fbf", "#9fd8ff"], 8, (140, 220))),
+    ("Teal Hard Hat Team", scene(lambda cx, cy, s, r, o: hardhat_shape(cx, cy, s, "#2ec4b6", o), ["#e0f7fa", "#b2ebf2"], 7, (140, 220))),
+    ("Sunny Site Truck", scene(lambda cx, cy, s, r, o: dump_truck_shape(cx, cy, s, "#ffe066", o), ["#fff8e0", "#ffefc2"], 5, (180, 260))),
+    ("Sky High Crane Lift", scene(lambda cx, cy, s, r, o: crane_shape(cx, cy, s, "#118ab2", o), ["#a8e6ff", "#dff7ff"], 3, (280, 380))),
+    ("Cone Zone Party", scene(lambda cx, cy, s, r, o: cone_shape(cx, cy, s, o), ["#f0ead2", "#e4d9b8"], 8, (140, 220))),
+    ("Builder's Hard Hat Day", scene(lambda cx, cy, s, r, o: hardhat_shape(cx, cy, s, "#e76f51", o), ["#fff3e0", "#ffe4c2"], 7, (140, 220))),
+])
+
+
+# ---- School & Learning -----------------------------------------------------------
+
+def book_shape(cx, cy, size, cover_color, opacity=1, rotation=0):
+    s = size / 100.0
+    items = [
+        rect(cx - 50 * s, cy - 40 * s, 100 * s, 80 * s, cover_color, rx=6 * s, opacity=opacity),
+        rect(cx - 42 * s, cy - 34 * s, 84 * s, 68 * s, "#fdfdfd", rx=4 * s, opacity=opacity),
+        line(cx, cy - 34 * s, cx, cy + 34 * s, cover_color, 3 * s, opacity * 0.6),
+        line(cx - 30 * s, cy - 15 * s, cx - 8 * s, cy - 15 * s, "#adb5bd", 3 * s, opacity),
+        line(cx - 30 * s, cy, cx - 8 * s, cy, "#adb5bd", 3 * s, opacity),
+        line(cx + 8 * s, cy - 15 * s, cx + 30 * s, cy - 15 * s, "#adb5bd", 3 * s, opacity),
+        line(cx + 8 * s, cy, cx + 30 * s, cy, "#adb5bd", 3 * s, opacity),
+    ]
+    t = f"rotate({rotation} {cx} {cy})" if rotation else None
+    return group(items, transform=t)
+
+
+def pencil_shape(cx, cy, size, body_color, opacity=1, rotation=0):
+    s = size / 100.0
+    items = [
+        rect(cx - 15 * s, cy - 90 * s, 30 * s, 140 * s, body_color, opacity=opacity),
+        polygon([(cx-15*s, cy+50*s), (cx+15*s, cy+50*s), (cx, cy+85*s)], "#f4a261", opacity),
+        rect(cx - 15 * s, cy - 105 * s, 30 * s, 18 * s, "#adb5bd", rx=4 * s, opacity=opacity),
+        rect(cx - 15 * s, cy - 90 * s, 30 * s, 8 * s, "#ffe066", opacity=opacity),
+    ]
+    t = f"rotate({rotation} {cx} {cy})" if rotation else None
+    return group(items, transform=t)
+
+
+def apple_shape(cx, cy, size, fill, opacity=1):
+    s = size / 100.0
+    items = [
+        circle(cx - 20 * s, cy + 5 * s, 32 * s, fill, opacity),
+        circle(cx + 20 * s, cy + 5 * s, 32 * s, fill, opacity),
+        circle(cx, cy + 15 * s, 34 * s, fill, opacity),
+        line(cx, cy - 30 * s, cx, cy - 50 * s, "#6b4423", 5 * s, opacity),
+        ellipse(cx + 14 * s, cy - 42 * s, 14 * s, 8 * s, "#52b788", opacity, transform=f"rotate(-20 {cx+14*s} {cy-42*s})"),
+    ]
+    return group(items)
+
+
+def backpack_shape(cx, cy, size, fill, opacity=1):
+    s = size / 100.0
+    items = [
+        rect(cx - 45 * s, cy - 30 * s, 90 * s, 100 * s, fill, rx=20 * s, opacity=opacity),
+        rect(cx - 30 * s, cy - 50 * s, 60 * s, 30 * s, fill, rx=14 * s, opacity=opacity),
+        rect(cx - 25 * s, cy + 10 * s, 50 * s, 40 * s, "#ffffff", rx=10 * s, opacity=opacity * 0.85),
+        circle(cx, cy + 30 * s, 6 * s, "#495057", opacity),
+    ]
+    return group(items)
+
+
+cat("school-learning", "School & Learning", [
+    ("Storybook Stack", scene(lambda cx, cy, s, r, o: book_shape(cx, cy, s, "#ef476f", o, r), ["#fff0f5", "#ffe6ee"], 6, (170, 250), True)),
+    ("Pencil Case Colors", scene(lambda cx, cy, s, r, o: pencil_shape(cx, cy, s, rng_choice_colors(r), o, r * 0.1), ["#fff8e0", "#ffefc2"], 8, (130, 210), True)),
+    ("Apple for the Teacher", scene(lambda cx, cy, s, r, o: apple_shape(cx, cy, s, "#e63946", o), ["#eafff1", "#d0f4de"], 6, (160, 240))),
+    ("Ready for School Backpack", scene(lambda cx, cy, s, r, o: backpack_shape(cx, cy, s, "#4361ee", o), ["#eaf6ff", "#cdeffd"], 5, (180, 260))),
+    ("Blue Book Collection", scene(lambda cx, cy, s, r, o: book_shape(cx, cy, s, "#118ab2", o, r), ["#caf0f8", "#90e0ef"], 6, (170, 250), True)),
+    ("Rainbow Pencil Party", scene(lambda cx, cy, s, r, o: pencil_shape(cx, cy, s, rng_choice_colors(r), o, r * 0.1), ["#ff9fbf", "#9fd8ff"], 8, (130, 210), True)),
+    ("Green Apple Orchard", scene(lambda cx, cy, s, r, o: apple_shape(cx, cy, s, "#52b788", o), ["#d8f3dc", "#b7e4c7"], 6, (160, 240))),
+    ("Pink Backpack Ready", scene(lambda cx, cy, s, r, o: backpack_shape(cx, cy, s, "#ff8fa3", o), ["#fff0f5", "#ffe6ee"], 5, (180, 260))),
+    ("Purple Reading Corner", scene(lambda cx, cy, s, r, o: book_shape(cx, cy, s, "#9b5de5", o, r), ["#f3e8ff", "#e0d4ff"], 6, (170, 250), True)),
+    ("Classic Yellow Pencils", scene(lambda cx, cy, s, r, o: pencil_shape(cx, cy, s, "#ffd166", o, r * 0.1), ["#fff3b0", "#ffe066"], 8, (130, 210), True)),
+    ("Golden Apple Day", scene(lambda cx, cy, s, r, o: apple_shape(cx, cy, s, "#ffd166", o), ["#fff8e0", "#ffe9c2"], 6, (160, 240))),
+    ("Orange Backpack Adventure", scene(lambda cx, cy, s, r, o: backpack_shape(cx, cy, s, "#f4a261", o), ["#fff3e0", "#ffe4c2"], 5, (180, 260))),
+    ("Teal Textbook Tower", scene(lambda cx, cy, s, r, o: book_shape(cx, cy, s, "#2ec4b6", o, r), ["#e0f7fa", "#b2ebf2"], 6, (170, 250), True)),
+    ("Back to School Pencils", scene(lambda cx, cy, s, r, o: pencil_shape(cx, cy, s, rng_choice_colors(r), o, r * 0.1), ["#eafff1", "#d0f4de"], 8, (130, 210), True)),
+    ("Red Apple Classroom", scene(lambda cx, cy, s, r, o: apple_shape(cx, cy, s, "#ef476f", o), ["#ffe0ec", "#ffc2d9"], 6, (160, 240))),
+    ("Sky Blue Backpack Set", scene(lambda cx, cy, s, r, o: backpack_shape(cx, cy, s, "#4cc9f0", o), ["#a8e6ff", "#dff7ff"], 5, (180, 260))),
+    ("Sunshine Storybooks", scene(lambda cx, cy, s, r, o: book_shape(cx, cy, s, "#ffd166", o, r), ["#fff8e0", "#ffefc2"], 6, (170, 250), True)),
+    ("Lavender Pencil Cup", scene(lambda cx, cy, s, r, o: pencil_shape(cx, cy, s, "#c8b6ff", o, r * 0.1), ["#f3e8ff", "#e0d4ff"], 8, (130, 210), True)),
+    ("Autumn Apple Harvest", scene(lambda cx, cy, s, r, o: apple_shape(cx, cy, s, "#e76f51", o), ["#ffe8b0", "#ffcf8a"], 6, (160, 240))),
+    ("First Day Backpack", scene(lambda cx, cy, s, r, o: backpack_shape(cx, cy, s, "#06d6a0", o), ["#eafff1", "#d0f4de"], 5, (180, 260))),
+])
+
+
+# ---- Safari & Desert -----------------------------------------------------------
+
+def cactus_shape(cx, cy, size, fill, opacity=1):
+    s = size / 100.0
+    items = [
+        rect(cx - 18 * s, cy - 60 * s, 36 * s, 130 * s, fill, rx=18 * s, opacity=opacity),
+        rect(cx - 55 * s, cy - 20 * s, 32 * s, 70 * s, fill, rx=16 * s, opacity=opacity),
+        rect(cx + 23 * s, cy - 40 * s, 32 * s, 70 * s, fill, rx=16 * s, opacity=opacity),
+        circle(cx, cy - 65 * s, 5 * s, "#ffb703", opacity),
+        circle(cx - 12 * s, cy - 30 * s, 5 * s, "#ffb703", opacity),
+    ]
+    return group(items)
+
+
+def camel_shape(cx, cy, size, fill, opacity=1):
+    s = size / 100.0
+    items = [
+        ellipse(cx, cy + 10 * s, 55 * s, 32 * s, fill, opacity),
+        ellipse(cx - 10 * s, cy - 20 * s, 26 * s, 24 * s, fill, opacity),
+        f'<path d="M {cx-45*s:.1f} {cy-10*s:.1f} C {cx-30*s:.1f} {cy-70*s:.1f}, {cx+5*s:.1f} {cy-70*s:.1f}, '
+        f'{cx+10*s:.1f} {cy-25*s:.1f}" fill="{fill}" opacity="{opacity:.2f}"/>',
+        rect(cx + 30 * s, cy - 45 * s, 16 * s, 60 * s, fill, rx=8 * s, opacity=opacity),
+        circle(cx + 40 * s, cy - 50 * s, 4 * s, "#1a1a1a", opacity),
+        rect(cx - 40 * s, cy + 35 * s, 8 * s, 30 * s, fill, opacity=opacity),
+        rect(cx + 30 * s, cy + 35 * s, 8 * s, 30 * s, fill, opacity=opacity),
+    ]
+    return group(items)
+
+
+def elephant_shape(cx, cy, size, fill, opacity=1):
+    s = size / 100.0
+    items = [
+        circle(cx, cy, 55 * s, fill, opacity),
+        ellipse(cx - 60 * s, cy - 20 * s, 30 * s, 38 * s, fill, opacity),
+        f'<path d="M {cx+30*s:.1f} {cy+30*s:.1f} C {cx+45*s:.1f} {cy+50*s:.1f}, {cx+40*s:.1f} {cy+85*s:.1f}, '
+        f'{cx+20*s:.1f} {cy+85*s:.1f}" fill="none" stroke="{fill}" stroke-width="{16*s:.1f}" '
+        f'stroke-linecap="round" opacity="{opacity:.2f}"/>',
+        circle(cx + 12 * s, cy - 10 * s, 6 * s, "#1a1a1a", opacity),
+        ellipse(cx - 10 * s, cy - 60 * s, 14 * s, 10 * s, fill, opacity),
+        ellipse(cx + 22 * s, cy - 60 * s, 14 * s, 10 * s, fill, opacity),
+    ]
+    return group(items)
+
+
+def giraffe_shape(cx, cy, size, fill, spot_color, opacity=1):
+    s = size / 100.0
+    items = [
+        rect(cx - 12 * s, cy - 20 * s, 24 * s, 100 * s, fill, rx=10 * s, opacity=opacity),
+        circle(cx, cy - 40 * s, 32 * s, fill, opacity),
+        ellipse(cx - 8 * s, cy - 72 * s, 5 * s, 14 * s, fill, opacity),
+        ellipse(cx + 8 * s, cy - 72 * s, 5 * s, 14 * s, fill, opacity),
+        circle(cx + 10 * s, cy - 44 * s, 4 * s, "#1a1a1a", opacity),
+        ellipse(cx, cy + 40 * s, 30 * s, 22 * s, fill, opacity),
+    ]
+    for _ in range(6):
+        items.append(circle(cx + rng_jitter(s * 0.6), cy + 20 * s + rng_jitter(s * 0.6), 8 * s, spot_color, opacity))
+    return group(items)
+
+
+def rng_jitter(scale):
+    import random as _r
+    return _r.uniform(-30, 30) * scale
+
+
+def zebra_shape(cx, cy, size, opacity=1):
+    s = size / 100.0
+    items = [
+        circle(cx, cy, 55 * s, "#fdfdfd", opacity),
+        ellipse(cx - 48 * s, cy - 42 * s, 12 * s, 20 * s, "#fdfdfd", opacity),
+        ellipse(cx + 48 * s, cy - 42 * s, 12 * s, 20 * s, "#fdfdfd", opacity),
+        circle(cx - 20 * s, cy - 8 * s, 6 * s, "#1a1a1a", opacity),
+        circle(cx + 20 * s, cy - 8 * s, 6 * s, "#1a1a1a", opacity),
+    ]
+    for i in range(6):
+        y = cy - 45 * s + i * 16 * s
+        items.append(f'<path d="M {cx-50*s:.1f} {y:.1f} Q {cx:.1f} {y+10*s:.1f} {cx+50*s:.1f} {y:.1f}" '
+                     f'fill="none" stroke="#1a1a1a" stroke-width="{6*s:.1f}" opacity="{opacity*0.7:.2f}"/>')
+    return group(items)
+
+
+cat("safari-desert", "Safari & Desert", [
+    ("Desert Cactus Bloom", scene(lambda cx, cy, s, r, o: cactus_shape(cx, cy, s, "#2d6a4f", o), ["#ffe8b0", "#ffcf8a"], 6, (180, 260))),
+    ("Camel Caravan", scene(lambda cx, cy, s, r, o: camel_shape(cx, cy, s, "#e9c46a", o), ["#f4a261", "#e76f51"], 5, (190, 270))),
+    ("Gentle Elephant Herd", scene(lambda cx, cy, s, r, o: elephant_shape(cx, cy, s, "#8d99ae", o), ["#eafff1", "#d0f4de"], 5, (200, 280))),
+    ("Tall Giraffe Savanna", scene(lambda cx, cy, s, r, o: giraffe_shape(cx, cy, s, "#f4a261", "#e76f51", o), ["#fff3e0", "#ffe4c2"], 5, (200, 300))),
+    ("Striped Zebra Crossing", scene(lambda cx, cy, s, r, o: zebra_shape(cx, cy, s, o), ["#fdf6ec", "#f0ead2"], 6, (180, 260))),
+    ("Green Oasis Cactus", scene(lambda cx, cy, s, r, o: cactus_shape(cx, cy, s, "#52b788", o), ["#d8f3dc", "#b7e4c7"], 6, (180, 260))),
+    ("Sandy Dune Camels", scene(lambda cx, cy, s, r, o: camel_shape(cx, cy, s, "#c9a066", o), ["#ffe8b0", "#ffcf8a"], 5, (190, 270))),
+    ("Baby Elephant Splash", scene(lambda cx, cy, s, r, o: elephant_shape(cx, cy, s, "#adb5bd", o), ["#a8e6ff", "#dff7ff"], 5, (200, 280))),
+    ("Sunset Giraffe Silhouette", scene(lambda cx, cy, s, r, o: giraffe_shape(cx, cy, s, "#e76f51", "#6b4423", o), ["#ff9f7b", "#ff6f91"], 5, (200, 300))),
+    ("Zebra Herd at Dusk", scene(lambda cx, cy, s, r, o: zebra_shape(cx, cy, s, o), ["#ff9f7b", "#ff6f91"], 6, (180, 260))),
+    ("Blue Cactus Garden", scene(lambda cx, cy, s, r, o: cactus_shape(cx, cy, s, "#2a9d8f", o), ["#caf0f8", "#90e0ef"], 6, (180, 260))),
+    ("Golden Hour Camel Trek", scene(lambda cx, cy, s, r, o: camel_shape(cx, cy, s, "#f4a261", o), ["#fff3e0", "#ffe4c2"], 5, (190, 270))),
+    ("Pink Elephant Parade", scene(lambda cx, cy, s, r, o: elephant_shape(cx, cy, s, "#ffb3c6", o), ["#fff0f5", "#ffe6ee"], 5, (200, 280))),
+    ("Spotted Giraffe Friends", scene(lambda cx, cy, s, r, o: giraffe_shape(cx, cy, s, "#ffd166", "#e76f51", o), ["#fff8e0", "#ffe9c2"], 5, (200, 300))),
+    ("Purple Savanna Zebras", scene(lambda cx, cy, s, r, o: zebra_shape(cx, cy, s, o), ["#f3e8ff", "#e0d4ff"], 6, (180, 260))),
+    ("Desert Night Cactus", scene(lambda cx, cy, s, r, o: cactus_shape(cx, cy, s, "#264653", o), ["#03071e", "#0a2540"], 6, (180, 260))),
+    ("Two-Hump Camel Fun", scene(lambda cx, cy, s, r, o: camel_shape(cx, cy, s, "#d4a373", o), ["#eaf6ff", "#cdeffd"], 5, (190, 270))),
+    ("Elephant & Friends Watering Hole", scene(lambda cx, cy, s, r, o: elephant_shape(cx, cy, s, "#6c757d", o), ["#d8f3dc", "#b7e4c7"], 5, (200, 280))),
+    ("Rainbow Giraffe Spots", scene(lambda cx, cy, s, r, o: giraffe_shape(cx, cy, s, "#ffe066", "#9b5de5", o), ["#ff9fbf", "#9fd8ff"], 5, (200, 300))),
+    ("Zebra Stripe Party", scene(lambda cx, cy, s, r, o: zebra_shape(cx, cy, s, o), ["#eafff1", "#d0f4de"], 6, (180, 260))),
+])
+
+
+# ---- Reptiles & Amphibians -----------------------------------------------------------
+
+def frog_shape(cx, cy, size, fill, opacity=1):
+    s = size / 100.0
+    items = [
+        ellipse(cx, cy + 10 * s, 50 * s, 38 * s, fill, opacity),
+        circle(cx - 25 * s, cy - 30 * s, 18 * s, fill, opacity),
+        circle(cx + 25 * s, cy - 30 * s, 18 * s, fill, opacity),
+        circle(cx - 25 * s, cy - 32 * s, 8 * s, "#1a1a1a", opacity),
+        circle(cx + 25 * s, cy - 32 * s, 8 * s, "#1a1a1a", opacity),
+        f'<path d="M {cx-20*s:.1f} {cy+15*s:.1f} Q {cx:.1f} {cy+28*s:.1f} {cx+20*s:.1f} {cy+15*s:.1f}" '
+        f'fill="none" stroke="#1a1a1a" stroke-width="{3*s:.1f}" stroke-linecap="round" opacity="{opacity:.2f}"/>',
+        ellipse(cx - 45 * s, cy + 35 * s, 16 * s, 10 * s, fill, opacity),
+        ellipse(cx + 45 * s, cy + 35 * s, 16 * s, 10 * s, fill, opacity),
+    ]
+    return group(items)
+
+
+def turtle_shape(cx, cy, size, shell_color, body_color, opacity=1):
+    s = size / 100.0
+    items = [
+        ellipse(cx, cy, 55 * s, 45 * s, body_color, opacity),
+        circle(cx, cy - 2 * s, 42 * s, shell_color, opacity),
+        circle(cx - 16 * s, cy - 14 * s, 10 * s, shell_color, opacity * 0.6),
+        circle(cx + 16 * s, cy - 14 * s, 10 * s, shell_color, opacity * 0.6),
+        circle(cx, cy + 14 * s, 10 * s, shell_color, opacity * 0.6),
+        circle(cx - 65 * s, cy - 5 * s, 16 * s, body_color, opacity),
+        circle(cx - 70 * s, cy - 8 * s, 3 * s, "#1a1a1a", opacity),
+    ]
+    return group(items)
+
+
+def chameleon_shape(cx, cy, size, fill, opacity=1):
+    s = size / 100.0
+    items = [
+        f'<path d="M {cx-50*s:.1f} {cy+10*s:.1f} Q {cx-20*s:.1f} {cy-40*s:.1f} {cx+30*s:.1f} {cy-10*s:.1f} '
+        f'Q {cx+60*s:.1f} {cy+5*s:.1f} {cx+40*s:.1f} {cy+30*s:.1f} '
+        f'Q {cx:.1f} {cy+45*s:.1f} {cx-50*s:.1f} {cy+10*s:.1f} Z" fill="{fill}" opacity="{opacity:.2f}"/>',
+        circle(cx + 30 * s, cy - 15 * s, 14 * s, fill, opacity),
+        circle(cx + 34 * s, cy - 18 * s, 6 * s, "#1a1a1a", opacity),
+        f'<path d="M {cx-50*s:.1f} {cy+10*s:.1f} Q {cx-80*s:.1f} {cy-10*s:.1f} {cx-95*s:.1f} {cy+20*s:.1f}" '
+        f'fill="none" stroke="{fill}" stroke-width="{10*s:.1f}" stroke-linecap="round" opacity="{opacity:.2f}"/>',
+    ]
+    return group(items)
+
+
+def snake_shape(cx, cy, size, fill, opacity=1, rotation=0):
+    s = size / 100.0
+    d = f"M {cx-90*s} {cy} Q {cx-50*s} {cy-40*s} {cx-10*s} {cy} Q {cx+30*s} {cy+40*s} {cx+60*s} {cy}"
+    items = [f'<path d="{d}" fill="none" stroke="{fill}" stroke-width="{22*s:.1f}" stroke-linecap="round" '
+             f'opacity="{opacity:.2f}"/>',
+             circle(cx + 70 * s, cy - 5 * s, 16 * s, fill, opacity),
+             circle(cx + 75 * s, cy - 10 * s, 4 * s, "#1a1a1a", opacity)]
+    t = f"rotate({rotation} {cx} {cy})" if rotation else None
+    return group(items, transform=t)
+
+
+cat("reptiles-amphibians", "Reptiles & Amphibians", [
+    ("Leaping Green Frogs", scene(lambda cx, cy, s, r, o: frog_shape(cx, cy, s, "#52b788", o), ["#d8f3dc", "#b7e4c7"], 7, (150, 230))),
+    ("Basking Turtle Friends", scene(lambda cx, cy, s, r, o: turtle_shape(cx, cy, s, "#2d6a4f", "#95d5b2", o), ["#eafff1", "#d0f4de"], 6, (170, 250))),
+    ("Color-Changing Chameleon", scene(lambda cx, cy, s, r, o: chameleon_shape(cx, cy, s, "#06d6a0", o), ["#caf0f8", "#90e0ef"], 6, (160, 240))),
+    ("Friendly Garden Snake", scene(lambda cx, cy, s, r, o: snake_shape(cx, cy, s, "#2a9d8f", o, r), ["#fff3e0", "#ffe4c2"], 6, (160, 240), True)),
+    ("Blue Poison Frog", scene(lambda cx, cy, s, r, o: frog_shape(cx, cy, s, "#4361ee", o), ["#eaf6ff", "#cdeffd"], 7, (150, 230))),
+    ("Sea Turtle Cove", scene(lambda cx, cy, s, r, o: turtle_shape(cx, cy, s, "#118ab2", "#4cc9f0", o), ["#00b4d8", "#90e0ef"], 6, (170, 250))),
+    ("Rainbow Chameleon Mood", scene(lambda cx, cy, s, r, o: chameleon_shape(cx, cy, s, "#f15bb5", o), ["#ff9fbf", "#9fd8ff"], 6, (160, 240))),
+    ("Striped Corn Snake", scene(lambda cx, cy, s, r, o: snake_shape(cx, cy, s, "#e76f51", o, r), ["#fff8e0", "#ffe9c2"], 6, (160, 240), True)),
+    ("Tree Frog Hideaway", scene(lambda cx, cy, s, r, o: frog_shape(cx, cy, s, "#a3e635", o), ["#1b4332", "#2d6a4f"], 7, (150, 230))),
+    ("Desert Tortoise Trail", scene(lambda cx, cy, s, r, o: turtle_shape(cx, cy, s, "#e9c46a", "#f4a261", o), ["#ffe8b0", "#ffcf8a"], 6, (170, 250))),
+    ("Purple Chameleon Chill", scene(lambda cx, cy, s, r, o: chameleon_shape(cx, cy, s, "#9b5de5", o), ["#f3e8ff", "#e0d4ff"], 6, (160, 240))),
+    ("Emerald Garden Snake", scene(lambda cx, cy, s, r, o: snake_shape(cx, cy, s, "#2d6a4f", o, r), ["#d8f3dc", "#b7e4c7"], 6, (160, 240), True)),
+    ("Yellow Spotted Frog", scene(lambda cx, cy, s, r, o: frog_shape(cx, cy, s, "#ffd166", o), ["#fff3b0", "#ffe066"], 7, (150, 230))),
+    ("Painted Turtle Pond", scene(lambda cx, cy, s, r, o: turtle_shape(cx, cy, s, "#e63946", "#f4a261", o), ["#eafff1", "#d0f4de"], 6, (170, 250))),
+    ("Sunset Chameleon Branch", scene(lambda cx, cy, s, r, o: chameleon_shape(cx, cy, s, "#ff9f1c", o), ["#ff9f7b", "#ff6f91"], 6, (160, 240))),
+    ("Night Garden Snake", scene(lambda cx, cy, s, r, o: snake_shape(cx, cy, s, "#3a0ca3", o, r), ["#03071e", "#0a2540"], 6, (160, 240), True)),
+    ("Pink Poison Dart Frog", scene(lambda cx, cy, s, r, o: frog_shape(cx, cy, s, "#f15bb5", o), ["#fff0f5", "#ffe6ee"], 7, (150, 230))),
+    ("Galapagos Giant Turtle", scene(lambda cx, cy, s, r, o: turtle_shape(cx, cy, s, "#6b4423", "#8a5a2b", o), ["#f0ead2", "#e4d9b8"], 6, (170, 250))),
+    ("Teal Chameleon Calm", scene(lambda cx, cy, s, r, o: chameleon_shape(cx, cy, s, "#2ec4b6", o), ["#e0f7fa", "#b2ebf2"], 6, (160, 240))),
+    ("Golden Garden Snake", scene(lambda cx, cy, s, r, o: snake_shape(cx, cy, s, "#ffd166", o, r), ["#fff8e0", "#ffefc2"], 6, (160, 240), True)),
+])
+
+
+# ---- Emojis & Smiley Faces -----------------------------------------------------------
+
+def smiley_shape(cx, cy, size, face_color, mood, opacity=1):
+    s = size / 100.0
+    items = [circle(cx, cy, 55 * s, face_color, opacity)]
+    if mood == "sunglasses":
+        items.append(rect(cx - 40 * s, cy - 12 * s, 34 * s, 20 * s, "#1a1a1a", rx=6 * s, opacity=opacity))
+        items.append(rect(cx + 6 * s, cy - 12 * s, 34 * s, 20 * s, "#1a1a1a", rx=6 * s, opacity=opacity))
+        items.append(line(cx - 6 * s, cy - 4 * s, cx + 6 * s, cy - 4 * s, "#1a1a1a", 4 * s, opacity))
+    elif mood == "heart":
+        items.append(heart_shape(cx - 20 * s, cy - 10 * s, 26, "#e63946", opacity))
+        items.append(heart_shape(cx + 20 * s, cy - 10 * s, 26, "#e63946", opacity))
+    elif mood == "wink":
+        items.append(circle(cx - 20 * s, cy - 8 * s, 8 * s, "#1a1a1a", opacity))
+        items.append(line(cx + 12 * s, cy - 8 * s, cx + 28 * s, cy - 8 * s, "#1a1a1a", 4 * s, opacity))
+    elif mood == "star":
+        items.append(star_shape(cx - 20 * s, cy - 8 * s, 12 * s, "#ffd166", 5, 0, opacity))
+        items.append(star_shape(cx + 20 * s, cy - 8 * s, 12 * s, "#ffd166", 5, 0, opacity))
+    else:  # happy / laugh
+        items.append(circle(cx - 20 * s, cy - 8 * s, 8 * s, "#1a1a1a", opacity))
+        items.append(circle(cx + 20 * s, cy - 8 * s, 8 * s, "#1a1a1a", opacity))
+    if mood != "sunglasses":
+        items.append(f'<path d="M {cx-26*s:.1f} {cy+15*s:.1f} Q {cx:.1f} {cy+42*s:.1f} {cx+26*s:.1f} {cy+15*s:.1f}" '
+                     f'fill="none" stroke="#1a1a1a" stroke-width="{5*s:.1f}" stroke-linecap="round" '
+                     f'opacity="{opacity:.2f}"/>')
+    else:
+        items.append(f'<path d="M {cx-20*s:.1f} {cy+20*s:.1f} Q {cx:.1f} {cy+34*s:.1f} {cx+20*s:.1f} {cy+20*s:.1f}" '
+                     f'fill="none" stroke="#1a1a1a" stroke-width="{5*s:.1f}" stroke-linecap="round" '
+                     f'opacity="{opacity:.2f}"/>')
+    return group(items)
+
+
+MOODS = ["happy", "wink", "sunglasses", "heart", "star"]
+
+
+cat("emoji-faces", "Emojis & Smiley Faces", [
+    ("Happy Face Party", scene(lambda cx, cy, s, r, o: smiley_shape(cx, cy, s, "#ffd166", "happy", o), ["#fff8e0", "#ffefc2"], 8, (140, 220))),
+    ("Cool Sunglasses Squad", scene(lambda cx, cy, s, r, o: smiley_shape(cx, cy, s, "#ffd166", "sunglasses", o), ["#00b4d8", "#90e0ef"], 8, (140, 220))),
+    ("Heart Eyes Everywhere", scene(lambda cx, cy, s, r, o: smiley_shape(cx, cy, s, "#ff8fa3", "heart", o), ["#fff0f5", "#ffe6ee"], 8, (140, 220))),
+    ("Winking Smiley Fun", scene(lambda cx, cy, s, r, o: smiley_shape(cx, cy, s, "#ffd166", "wink", o), ["#eafff1", "#d0f4de"], 8, (140, 220))),
+    ("Star Struck Smiles", scene(lambda cx, cy, s, r, o: smiley_shape(cx, cy, s, "#ffd166", "star", o), ["#3a0ca3", "#7209b7"], 8, (140, 220))),
+    ("Pink Happy Faces", scene(lambda cx, cy, s, r, o: smiley_shape(cx, cy, s, "#ff9fd6", "happy", o), ["#fdf0ff", "#ffe6f7"], 8, (140, 220))),
+    ("Blue Sunglasses Vibes", scene(lambda cx, cy, s, r, o: smiley_shape(cx, cy, s, "#4cc9f0", "sunglasses", o), ["#eaf6ff", "#cdeffd"], 8, (140, 220))),
+    ("Rainbow Heart Eyes", scene(lambda cx, cy, s, r, o: smiley_shape(cx, cy, s, rng_choice_colors(r), "heart", o), ["#ff9fbf", "#9fd8ff"], 8, (140, 220))),
+    ("Green Winking Crew", scene(lambda cx, cy, s, r, o: smiley_shape(cx, cy, s, "#95d5b2", "wink", o), ["#d8f3dc", "#b7e4c7"], 8, (140, 220))),
+    ("Golden Star Smiles", scene(lambda cx, cy, s, r, o: smiley_shape(cx, cy, s, "#ffe066", "star", o), ["#fff3b0", "#ffe066"], 8, (140, 220))),
+    ("Purple Happy Vibes", scene(lambda cx, cy, s, r, o: smiley_shape(cx, cy, s, "#c8b6ff", "happy", o), ["#f3e8ff", "#e0d4ff"], 8, (140, 220))),
+    ("Orange Sunglasses Cool", scene(lambda cx, cy, s, r, o: smiley_shape(cx, cy, s, "#f4a261", "sunglasses", o), ["#fff3e0", "#ffe4c2"], 8, (140, 220))),
+    ("Sweetheart Smiley Mix", scene(lambda cx, cy, s, r, o: smiley_shape(cx, cy, s, "#ff6f91", "heart", o), ["#ffe0ec", "#ffc2d9"], 8, (140, 220))),
+    ("Playful Wink Party", scene(lambda cx, cy, s, r, o: smiley_shape(cx, cy, s, "#ffd166", "wink", o), ["#caf0f8", "#90e0ef"], 8, (140, 220))),
+    ("Night Sky Star Smiles", scene(lambda cx, cy, s, r, o: smiley_shape(cx, cy, s, "#c8b6ff", "star", o), ["#03071e", "#0a2540"], 8, (140, 220))),
+    ("Sunny Yellow Grins", scene(lambda cx, cy, s, r, o: smiley_shape(cx, cy, s, "#ffe066", "happy", o), ["#fff8e0", "#ffefc2"], 8, (140, 220))),
+    ("Teal Sunglasses Chill", scene(lambda cx, cy, s, r, o: smiley_shape(cx, cy, s, "#2ec4b6", "sunglasses", o), ["#e0f7fa", "#b2ebf2"], 8, (140, 220))),
+    ("Confetti Heart Eyes", scene(lambda cx, cy, s, r, o: smiley_shape(cx, cy, s, "#ff9f1c", "heart", o), ["#ffe8b0", "#ffcf8a"], 8, (140, 220))),
+    ("Silly Wink Squad", scene(lambda cx, cy, s, r, o: smiley_shape(cx, cy, s, "#adb5bd", "wink", o), ["#e9ecef", "#ced4da"], 8, (140, 220))),
+    ("All-Star Smiley Mix", scene(lambda cx, cy, s, r, o: smiley_shape(cx, cy, s, rng_choice_colors(r), "star", o), ["#eafff1", "#d0f4de"], 8, (140, 220))),
+])
+
+
+# ---- Board Games & Puzzles -----------------------------------------------------------
+
+def die_shape(cx, cy, size, fill, dot_color, pips, opacity=1, rotation=0):
+    s = size / 100.0
+    items = [rect(cx - 45 * s, cy - 45 * s, 90 * s, 90 * s, fill, rx=16 * s, opacity=opacity)]
+    layouts = {
+        1: [(0, 0)],
+        2: [(-20, -20), (20, 20)],
+        3: [(-20, -20), (0, 0), (20, 20)],
+        4: [(-20, -20), (20, -20), (-20, 20), (20, 20)],
+        5: [(-20, -20), (20, -20), (0, 0), (-20, 20), (20, 20)],
+        6: [(-20, -22), (20, -22), (-20, 0), (20, 0), (-20, 22), (20, 22)],
+    }
+    for dx, dy in layouts.get(pips, [(0, 0)]):
+        items.append(circle(cx + dx * s, cy + dy * s, 7 * s, dot_color, opacity))
+    t = f"rotate({rotation} {cx} {cy})" if rotation else None
+    return group(items, transform=t)
+
+
+def card_shape(cx, cy, size, fill, suit_color, suit, opacity=1, rotation=0):
+    s = size / 100.0
+    items = [rect(cx - 40 * s, cy - 55 * s, 80 * s, 110 * s, fill, rx=10 * s, opacity=opacity)]
+    if suit == "heart":
+        items.append(heart_shape(cx, cy, 45, suit_color, opacity))
+    elif suit == "star":
+        items.append(star_shape(cx, cy, 32 * s, suit_color, 5, 0, opacity))
+    else:  # circle / token suit
+        items.append(circle(cx, cy, 26 * s, suit_color, opacity))
+    t = f"rotate({rotation} {cx} {cy})" if rotation else None
+    return group(items, transform=t)
+
+
+def puzzle_piece_shape(cx, cy, size, fill, opacity=1, rotation=0):
+    s = size / 100.0
+    items = [
+        rect(cx - 45 * s, cy - 45 * s, 90 * s, 90 * s, fill, rx=10 * s, opacity=opacity),
+        circle(cx + 45 * s, cy, 18 * s, fill, opacity),
+        circle(cx, cy - 45 * s, 18 * s, fill, opacity),
+    ]
+    t = f"rotate({rotation} {cx} {cy})" if rotation else None
+    return group(items, transform=t)
+
+
+cat("board-games-puzzles", "Board Games & Puzzles", [
+    ("Rolling Dice Fun", scene(lambda cx, cy, s, r, o: die_shape(cx, cy, s, "#ffffff", "#e63946", (int(abs(r))%6)+1, o, r), ["#ff9fbf", "#9fd8ff"], 8, (130, 210), True)),
+    ("Puzzle Piece Puzzle", scene(lambda cx, cy, s, r, o: puzzle_piece_shape(cx, cy, s, rng_choice_colors(r), o, r), ["#eaf6ff", "#cdeffd"], 8, (120, 200), True)),
+    ("Playing Card Hearts", scene(lambda cx, cy, s, r, o: card_shape(cx, cy, s, "#ffffff", "#e63946", "heart", o, r), ["#fff0f5", "#ffe6ee"], 6, (170, 250), True)),
+    ("Star Token Game Night", scene(lambda cx, cy, s, r, o: card_shape(cx, cy, s, "#ffffff", "#ffd166", "star", o, r), ["#fff8e0", "#ffe9c2"], 6, (170, 250), True)),
+    ("Colorful Dice Roll", scene(lambda cx, cy, s, r, o: die_shape(cx, cy, s, rng_choice_colors(r), "#ffffff", (int(abs(r))%6)+1, o, r), ["#eafff1", "#d0f4de"], 8, (130, 210), True)),
+    ("Rainbow Puzzle Pieces", scene(lambda cx, cy, s, r, o: puzzle_piece_shape(cx, cy, s, rng_choice_colors(r), o, r), ["#fdf0ff", "#ffe6f7"], 8, (120, 200), True)),
+    ("Blue Card Deck", scene(lambda cx, cy, s, r, o: card_shape(cx, cy, s, "#ffffff", "#4361ee", "circle", o, r), ["#caf0f8", "#90e0ef"], 6, (170, 250), True)),
+    ("Golden Dice Party", scene(lambda cx, cy, s, r, o: die_shape(cx, cy, s, "#fff3b0", "#e63946", (int(abs(r))%6)+1, o, r), ["#ffe8b0", "#ffcf8a"], 8, (130, 210), True)),
+    ("Jigsaw Adventure", scene(lambda cx, cy, s, r, o: puzzle_piece_shape(cx, cy, s, rng_choice_colors(r), o, r), ["#f3e8ff", "#e0d4ff"], 8, (120, 200), True)),
+    ("Heart Card Game", scene(lambda cx, cy, s, r, o: card_shape(cx, cy, s, "#ffffff", "#ff8fa3", "heart", o, r), ["#ffe0ec", "#ffc2d9"], 6, (170, 250), True)),
+    ("Purple Dice Tumble", scene(lambda cx, cy, s, r, o: die_shape(cx, cy, s, "#e0d4ff", "#7209b7", (int(abs(r))%6)+1, o, r), ["#3a0ca3", "#7209b7"], 8, (130, 210), True)),
+    ("Puzzle Time Together", scene(lambda cx, cy, s, r, o: puzzle_piece_shape(cx, cy, s, rng_choice_colors(r), o, r), ["#d8f3dc", "#b7e4c7"], 8, (120, 200), True)),
+    ("Star Card Shuffle", scene(lambda cx, cy, s, r, o: card_shape(cx, cy, s, "#ffffff", "#118ab2", "star", o, r), ["#a8e6ff", "#dff7ff"], 6, (170, 250), True)),
+    ("Neon Dice Night", scene(lambda cx, cy, s, r, o: die_shape(cx, cy, s, "#212529", "#00f5d4", (int(abs(r))%6)+1, o, r), ["#0d0221", "#190535"], 8, (130, 210), True)),
+    ("Sunny Puzzle Pieces", scene(lambda cx, cy, s, r, o: puzzle_piece_shape(cx, cy, s, rng_choice_colors(r), o, r), ["#fff8e0", "#ffefc2"], 8, (120, 200), True)),
+    ("Circle Token Card Game", scene(lambda cx, cy, s, r, o: card_shape(cx, cy, s, "#ffffff", "#06d6a0", "circle", o, r), ["#eafff1", "#d0f4de"], 6, (170, 250), True)),
+    ("Cotton Candy Dice", scene(lambda cx, cy, s, r, o: die_shape(cx, cy, s, "#ffe0ec", "#f15bb5", (int(abs(r))%6)+1, o, r), ["#ffb3c6", "#c8b6ff"], 8, (130, 210), True)),
+    ("Family Puzzle Night", scene(lambda cx, cy, s, r, o: puzzle_piece_shape(cx, cy, s, rng_choice_colors(r), o, r), ["#e0f7fa", "#b2ebf2"], 8, (120, 200), True)),
+    ("Heart & Star Card Mix", scene(lambda cx, cy, s, r, o: card_shape(cx, cy, s, "#ffffff", "#9b5de5", "star", o, r), ["#f0ead2", "#e4d9b8"], 6, (170, 250), True)),
+    ("Game Night Dice Duo", scene(lambda cx, cy, s, r, o: die_shape(cx, cy, s, "#ffffff", "#2b2b2b", (int(abs(r))%6)+1, o, r), ["#f8f9fa", "#dee2e6"], 8, (130, 210), True)),
+])
+
+
 # --------------------------------------------------------------------------
 # Build everything
 # --------------------------------------------------------------------------

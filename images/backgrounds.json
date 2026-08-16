@@ -99,6 +99,66 @@
     {
       "slug": "neon-bold",
       "name": "Neon & Bold"
+    },
+    {
+      "slug": "huskies",
+      "name": "Huskies"
+    },
+    {
+      "slug": "arctic-polar",
+      "name": "Arctic & Polar Animals"
+    },
+    {
+      "slug": "farm-barnyard",
+      "name": "Farm & Barnyard"
+    },
+    {
+      "slug": "ocean-sea-life",
+      "name": "Ocean & Sea Life"
+    },
+    {
+      "slug": "birds-feathers",
+      "name": "Birds & Feathers"
+    },
+    {
+      "slug": "robots-gadgets",
+      "name": "Robots & Gadgets"
+    },
+    {
+      "slug": "pirates-treasure",
+      "name": "Pirates & Treasure"
+    },
+    {
+      "slug": "camping-outdoors",
+      "name": "Camping & Outdoors"
+    },
+    {
+      "slug": "circus-carnival",
+      "name": "Circus & Carnival"
+    },
+    {
+      "slug": "construction-diggers",
+      "name": "Construction & Diggers"
+    },
+    {
+      "slug": "school-learning",
+      "name": "School & Learning"
+    },
+    {
+      "slug": "safari-desert",
+      "name": "Safari & Desert"
+    },
+    {
+      "slug": "reptiles-amphibians",
+      "name": "Reptiles & Amphibians"
+    },
+    {
+      "slug": "emoji-faces",
+      "name": "Emojis & Smiley Faces"
+    },
+    {
+      "slug": "board-games-puzzles",
+      "name": "Board Games & Puzzles"
     }
   ],
   "backgrounds": [
@@ -1900,6 +1960,3606 @@
       "tags": [
         "neon bold",
         "neon & bold"
+      ]
+    },
+    {
+      "id": "huskies/classic-grey-husky",
+      "title": "Classic Grey Husky",
+      "category": "huskies",
+      "categoryName": "Huskies",
+      "filename": "images/backgrounds/huskies/classic-grey-husky.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "huskies",
+        "huskies"
+      ]
+    },
+    {
+      "id": "huskies/black-white-husky",
+      "title": "Black & White Husky",
+      "category": "huskies",
+      "categoryName": "Huskies",
+      "filename": "images/backgrounds/huskies/black-white-husky.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "huskies",
+        "huskies"
+      ]
+    },
+    {
+      "id": "huskies/copper-husky-charm",
+      "title": "Copper Husky Charm",
+      "category": "huskies",
+      "categoryName": "Huskies",
+      "filename": "images/backgrounds/huskies/copper-husky-charm.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "huskies",
+        "huskies"
+      ]
+    },
+    {
+      "id": "huskies/snow-white-husky",
+      "title": "Snow White Husky",
+      "category": "huskies",
+      "categoryName": "Huskies",
+      "filename": "images/backgrounds/huskies/snow-white-husky.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "huskies",
+        "huskies"
+      ]
+    },
+    {
+      "id": "huskies/agouti-sable-husky",
+      "title": "Agouti Sable Husky",
+      "category": "huskies",
+      "categoryName": "Huskies",
+      "filename": "images/backgrounds/huskies/agouti-sable-husky.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "huskies",
+        "huskies"
+      ]
+    },
+    {
+      "id": "huskies/silver-storm-husky",
+      "title": "Silver Storm Husky",
+      "category": "huskies",
+      "categoryName": "Huskies",
+      "filename": "images/backgrounds/huskies/silver-storm-husky.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "huskies",
+        "huskies"
+      ]
+    },
+    {
+      "id": "huskies/heterochromia-husky",
+      "title": "Heterochromia Husky",
+      "category": "huskies",
+      "categoryName": "Huskies",
+      "filename": "images/backgrounds/huskies/heterochromia-husky.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "huskies",
+        "huskies"
+      ]
+    },
+    {
+      "id": "huskies/husky-howling-at-the-moon",
+      "title": "Husky Howling at the Moon",
+      "category": "huskies",
+      "categoryName": "Huskies",
+      "filename": "images/backgrounds/huskies/husky-howling-at-the-moon.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "huskies",
+        "huskies"
+      ]
+    },
+    {
+      "id": "huskies/playful-husky-puppy",
+      "title": "Playful Husky Puppy",
+      "category": "huskies",
+      "categoryName": "Huskies",
+      "filename": "images/backgrounds/huskies/playful-husky-puppy.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "huskies",
+        "huskies"
+      ]
+    },
+    {
+      "id": "huskies/husky-in-the-snowstorm",
+      "title": "Husky in the Snowstorm",
+      "category": "huskies",
+      "categoryName": "Huskies",
+      "filename": "images/backgrounds/huskies/husky-in-the-snowstorm.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "huskies",
+        "huskies"
+      ]
+    },
+    {
+      "id": "huskies/aurora-husky-night",
+      "title": "Aurora Husky Night",
+      "category": "huskies",
+      "categoryName": "Huskies",
+      "filename": "images/backgrounds/huskies/aurora-husky-night.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "huskies",
+        "huskies"
+      ]
+    },
+    {
+      "id": "huskies/husky-sunset-silhouette",
+      "title": "Husky Sunset Silhouette",
+      "category": "huskies",
+      "categoryName": "Huskies",
+      "filename": "images/backgrounds/huskies/husky-sunset-silhouette.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "huskies",
+        "huskies"
+      ]
+    },
+    {
+      "id": "huskies/rainbow-husky-squad",
+      "title": "Rainbow Husky Squad",
+      "category": "huskies",
+      "categoryName": "Huskies",
+      "filename": "images/backgrounds/huskies/rainbow-husky-squad.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "huskies",
+        "huskies"
+      ]
+    },
+    {
+      "id": "huskies/cozy-cabin-husky",
+      "title": "Cozy Cabin Husky",
+      "category": "huskies",
+      "categoryName": "Huskies",
+      "filename": "images/backgrounds/huskies/cozy-cabin-husky.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "huskies",
+        "huskies"
+      ]
+    },
+    {
+      "id": "huskies/husky-pack-in-the-pines",
+      "title": "Husky Pack in the Pines",
+      "category": "huskies",
+      "categoryName": "Huskies",
+      "filename": "images/backgrounds/huskies/husky-pack-in-the-pines.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "huskies",
+        "huskies"
+      ]
+    },
+    {
+      "id": "huskies/husky-sled-team-adventure",
+      "title": "Husky Sled Team Adventure",
+      "category": "huskies",
+      "categoryName": "Huskies",
+      "filename": "images/backgrounds/huskies/husky-sled-team-adventure.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "huskies",
+        "huskies"
+      ]
+    },
+    {
+      "id": "huskies/midnight-husky-pack",
+      "title": "Midnight Husky Pack",
+      "category": "huskies",
+      "categoryName": "Huskies",
+      "filename": "images/backgrounds/huskies/midnight-husky-pack.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "huskies",
+        "huskies"
+      ]
+    },
+    {
+      "id": "huskies/golden-hour-husky",
+      "title": "Golden Hour Husky",
+      "category": "huskies",
+      "categoryName": "Huskies",
+      "filename": "images/backgrounds/huskies/golden-hour-husky.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "huskies",
+        "huskies"
+      ]
+    },
+    {
+      "id": "huskies/husky-in-a-bandana",
+      "title": "Husky in a Bandana",
+      "category": "huskies",
+      "categoryName": "Huskies",
+      "filename": "images/backgrounds/huskies/husky-in-a-bandana.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "huskies",
+        "huskies"
+      ]
+    },
+    {
+      "id": "huskies/frosty-husky-meadow",
+      "title": "Frosty Husky Meadow",
+      "category": "huskies",
+      "categoryName": "Huskies",
+      "filename": "images/backgrounds/huskies/frosty-husky-meadow.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "huskies",
+        "huskies"
+      ]
+    },
+    {
+      "id": "arctic-polar/waddling-penguins",
+      "title": "Waddling Penguins",
+      "category": "arctic-polar",
+      "categoryName": "Arctic & Polar Animals",
+      "filename": "images/backgrounds/arctic-polar/waddling-penguins.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "arctic polar",
+        "arctic & polar animals"
+      ]
+    },
+    {
+      "id": "arctic-polar/polar-bear-playground",
+      "title": "Polar Bear Playground",
+      "category": "arctic-polar",
+      "categoryName": "Arctic & Polar Animals",
+      "filename": "images/backgrounds/arctic-polar/polar-bear-playground.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "arctic polar",
+        "arctic & polar animals"
+      ]
+    },
+    {
+      "id": "arctic-polar/seal-pup-splash",
+      "title": "Seal Pup Splash",
+      "category": "arctic-polar",
+      "categoryName": "Arctic & Polar Animals",
+      "filename": "images/backgrounds/arctic-polar/seal-pup-splash.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "arctic polar",
+        "arctic & polar animals"
+      ]
+    },
+    {
+      "id": "arctic-polar/walrus-waters",
+      "title": "Walrus Waters",
+      "category": "arctic-polar",
+      "categoryName": "Arctic & Polar Animals",
+      "filename": "images/backgrounds/arctic-polar/walrus-waters.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "arctic polar",
+        "arctic & polar animals"
+      ]
+    },
+    {
+      "id": "arctic-polar/snowy-owl-night",
+      "title": "Snowy Owl Night",
+      "category": "arctic-polar",
+      "categoryName": "Arctic & Polar Animals",
+      "filename": "images/backgrounds/arctic-polar/snowy-owl-night.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "arctic polar",
+        "arctic & polar animals"
+      ]
+    },
+    {
+      "id": "arctic-polar/arctic-fox-frost",
+      "title": "Arctic Fox Frost",
+      "category": "arctic-polar",
+      "categoryName": "Arctic & Polar Animals",
+      "filename": "images/backgrounds/arctic-polar/arctic-fox-frost.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "arctic polar",
+        "arctic & polar animals"
+      ]
+    },
+    {
+      "id": "arctic-polar/iceberg-penguin-party",
+      "title": "Iceberg Penguin Party",
+      "category": "arctic-polar",
+      "categoryName": "Arctic & Polar Animals",
+      "filename": "images/backgrounds/arctic-polar/iceberg-penguin-party.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "arctic polar",
+        "arctic & polar animals"
+      ]
+    },
+    {
+      "id": "arctic-polar/aurora-polar-bears",
+      "title": "Aurora Polar Bears",
+      "category": "arctic-polar",
+      "categoryName": "Arctic & Polar Animals",
+      "filename": "images/backgrounds/arctic-polar/aurora-polar-bears.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "arctic polar",
+        "arctic & polar animals"
+      ]
+    },
+    {
+      "id": "arctic-polar/snowflakes-seals",
+      "title": "Snowflakes & Seals",
+      "category": "arctic-polar",
+      "categoryName": "Arctic & Polar Animals",
+      "filename": "images/backgrounds/arctic-polar/snowflakes-seals.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "arctic polar",
+        "arctic & polar animals"
+      ]
+    },
+    {
+      "id": "arctic-polar/frozen-tundra-walrus",
+      "title": "Frozen Tundra Walrus",
+      "category": "arctic-polar",
+      "categoryName": "Arctic & Polar Animals",
+      "filename": "images/backgrounds/arctic-polar/frozen-tundra-walrus.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "arctic polar",
+        "arctic & polar animals"
+      ]
+    },
+    {
+      "id": "arctic-polar/snowy-owl-daytime",
+      "title": "Snowy Owl Daytime",
+      "category": "arctic-polar",
+      "categoryName": "Arctic & Polar Animals",
+      "filename": "images/backgrounds/arctic-polar/snowy-owl-daytime.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "arctic polar",
+        "arctic & polar animals"
+      ]
+    },
+    {
+      "id": "arctic-polar/penguin-ice-slide",
+      "title": "Penguin Ice Slide",
+      "category": "arctic-polar",
+      "categoryName": "Arctic & Polar Animals",
+      "filename": "images/backgrounds/arctic-polar/penguin-ice-slide.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "arctic polar",
+        "arctic & polar animals"
+      ]
+    },
+    {
+      "id": "arctic-polar/polar-night-sky",
+      "title": "Polar Night Sky",
+      "category": "arctic-polar",
+      "categoryName": "Arctic & Polar Animals",
+      "filename": "images/backgrounds/arctic-polar/polar-night-sky.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "arctic polar",
+        "arctic & polar animals"
+      ]
+    },
+    {
+      "id": "arctic-polar/baby-seal-snuggles",
+      "title": "Baby Seal Snuggles",
+      "category": "arctic-polar",
+      "categoryName": "Arctic & Polar Animals",
+      "filename": "images/backgrounds/arctic-polar/baby-seal-snuggles.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "arctic polar",
+        "arctic & polar animals"
+      ]
+    },
+    {
+      "id": "arctic-polar/glacier-blue-walrus",
+      "title": "Glacier Blue Walrus",
+      "category": "arctic-polar",
+      "categoryName": "Arctic & Polar Animals",
+      "filename": "images/backgrounds/arctic-polar/glacier-blue-walrus.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "arctic polar",
+        "arctic & polar animals"
+      ]
+    },
+    {
+      "id": "arctic-polar/frosty-fox-friends",
+      "title": "Frosty Fox & Friends",
+      "category": "arctic-polar",
+      "categoryName": "Arctic & Polar Animals",
+      "filename": "images/backgrounds/arctic-polar/frosty-fox-friends.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "arctic polar",
+        "arctic & polar animals"
+      ]
+    },
+    {
+      "id": "arctic-polar/icy-owl-eyes",
+      "title": "Icy Owl Eyes",
+      "category": "arctic-polar",
+      "categoryName": "Arctic & Polar Animals",
+      "filename": "images/backgrounds/arctic-polar/icy-owl-eyes.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "arctic polar",
+        "arctic & polar animals"
+      ]
+    },
+    {
+      "id": "arctic-polar/penguin-family-portrait",
+      "title": "Penguin Family Portrait",
+      "category": "arctic-polar",
+      "categoryName": "Arctic & Polar Animals",
+      "filename": "images/backgrounds/arctic-polar/penguin-family-portrait.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "arctic polar",
+        "arctic & polar animals"
+      ]
+    },
+    {
+      "id": "arctic-polar/snowdrift-polar-bears",
+      "title": "Snowdrift Polar Bears",
+      "category": "arctic-polar",
+      "categoryName": "Arctic & Polar Animals",
+      "filename": "images/backgrounds/arctic-polar/snowdrift-polar-bears.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "arctic polar",
+        "arctic & polar animals"
+      ]
+    },
+    {
+      "id": "arctic-polar/twilight-arctic-waters",
+      "title": "Twilight Arctic Waters",
+      "category": "arctic-polar",
+      "categoryName": "Arctic & Polar Animals",
+      "filename": "images/backgrounds/arctic-polar/twilight-arctic-waters.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "arctic polar",
+        "arctic & polar animals"
+      ]
+    },
+    {
+      "id": "farm-barnyard/spotted-cow-meadow",
+      "title": "Spotted Cow Meadow",
+      "category": "farm-barnyard",
+      "categoryName": "Farm & Barnyard",
+      "filename": "images/backgrounds/farm-barnyard/spotted-cow-meadow.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "farm barnyard",
+        "farm & barnyard"
+      ]
+    },
+    {
+      "id": "farm-barnyard/pink-piggy-patch",
+      "title": "Pink Piggy Patch",
+      "category": "farm-barnyard",
+      "categoryName": "Farm & Barnyard",
+      "filename": "images/backgrounds/farm-barnyard/pink-piggy-patch.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "farm barnyard",
+        "farm & barnyard"
+      ]
+    },
+    {
+      "id": "farm-barnyard/rooster-morning-call",
+      "title": "Rooster Morning Call",
+      "category": "farm-barnyard",
+      "categoryName": "Farm & Barnyard",
+      "filename": "images/backgrounds/farm-barnyard/rooster-morning-call.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "farm barnyard",
+        "farm & barnyard"
+      ]
+    },
+    {
+      "id": "farm-barnyard/red-barn-sunrise",
+      "title": "Red Barn Sunrise",
+      "category": "farm-barnyard",
+      "categoryName": "Farm & Barnyard",
+      "filename": "images/backgrounds/farm-barnyard/red-barn-sunrise.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "farm barnyard",
+        "farm & barnyard"
+      ]
+    },
+    {
+      "id": "farm-barnyard/fluffy-sheep-field",
+      "title": "Fluffy Sheep Field",
+      "category": "farm-barnyard",
+      "categoryName": "Farm & Barnyard",
+      "filename": "images/backgrounds/farm-barnyard/fluffy-sheep-field.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "farm barnyard",
+        "farm & barnyard"
+      ]
+    },
+    {
+      "id": "farm-barnyard/brown-white-cows",
+      "title": "Brown & White Cows",
+      "category": "farm-barnyard",
+      "categoryName": "Farm & Barnyard",
+      "filename": "images/backgrounds/farm-barnyard/brown-white-cows.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "farm barnyard",
+        "farm & barnyard"
+      ]
+    },
+    {
+      "id": "farm-barnyard/barnyard-chicken-coop",
+      "title": "Barnyard Chicken Coop",
+      "category": "farm-barnyard",
+      "categoryName": "Farm & Barnyard",
+      "filename": "images/backgrounds/farm-barnyard/barnyard-chicken-coop.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "farm barnyard",
+        "farm & barnyard"
+      ]
+    },
+    {
+      "id": "farm-barnyard/golden-hay-barn",
+      "title": "Golden Hay Barn",
+      "category": "farm-barnyard",
+      "categoryName": "Farm & Barnyard",
+      "filename": "images/backgrounds/farm-barnyard/golden-hay-barn.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "farm barnyard",
+        "farm & barnyard"
+      ]
+    },
+    {
+      "id": "farm-barnyard/piglet-playtime",
+      "title": "Piglet Playtime",
+      "category": "farm-barnyard",
+      "categoryName": "Farm & Barnyard",
+      "filename": "images/backgrounds/farm-barnyard/piglet-playtime.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "farm barnyard",
+        "farm & barnyard"
+      ]
+    },
+    {
+      "id": "farm-barnyard/woolly-sheep-sunset",
+      "title": "Woolly Sheep Sunset",
+      "category": "farm-barnyard",
+      "categoryName": "Farm & Barnyard",
+      "filename": "images/backgrounds/farm-barnyard/woolly-sheep-sunset.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "farm barnyard",
+        "farm & barnyard"
+      ]
+    },
+    {
+      "id": "farm-barnyard/farmyard-friends-mix",
+      "title": "Farmyard Friends Mix",
+      "category": "farm-barnyard",
+      "categoryName": "Farm & Barnyard",
+      "filename": "images/backgrounds/farm-barnyard/farmyard-friends-mix.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "farm barnyard",
+        "farm & barnyard"
+      ]
+    },
+    {
+      "id": "farm-barnyard/black-white-dairy-cows",
+      "title": "Black & White Dairy Cows",
+      "category": "farm-barnyard",
+      "categoryName": "Farm & Barnyard",
+      "filename": "images/backgrounds/farm-barnyard/black-white-dairy-cows.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "farm barnyard",
+        "farm & barnyard"
+      ]
+    },
+    {
+      "id": "farm-barnyard/chicken-sunflowers",
+      "title": "Chicken & Sunflowers",
+      "category": "farm-barnyard",
+      "categoryName": "Farm & Barnyard",
+      "filename": "images/backgrounds/farm-barnyard/chicken-sunflowers.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "farm barnyard",
+        "farm & barnyard"
+      ]
+    },
+    {
+      "id": "farm-barnyard/countryside-red-barn",
+      "title": "Countryside Red Barn",
+      "category": "farm-barnyard",
+      "categoryName": "Farm & Barnyard",
+      "filename": "images/backgrounds/farm-barnyard/countryside-red-barn.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "farm barnyard",
+        "farm & barnyard"
+      ]
+    },
+    {
+      "id": "farm-barnyard/spring-lamb-meadow",
+      "title": "Spring Lamb Meadow",
+      "category": "farm-barnyard",
+      "categoryName": "Farm & Barnyard",
+      "filename": "images/backgrounds/farm-barnyard/spring-lamb-meadow.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "farm barnyard",
+        "farm & barnyard"
+      ]
+    },
+    {
+      "id": "farm-barnyard/sunny-piglet-pasture",
+      "title": "Sunny Piglet Pasture",
+      "category": "farm-barnyard",
+      "categoryName": "Farm & Barnyard",
+      "filename": "images/backgrounds/farm-barnyard/sunny-piglet-pasture.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "farm barnyard",
+        "farm & barnyard"
+      ]
+    },
+    {
+      "id": "farm-barnyard/grazing-cow-hillside",
+      "title": "Grazing Cow Hillside",
+      "category": "farm-barnyard",
+      "categoryName": "Farm & Barnyard",
+      "filename": "images/backgrounds/farm-barnyard/grazing-cow-hillside.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "farm barnyard",
+        "farm & barnyard"
+      ]
+    },
+    {
+      "id": "farm-barnyard/rise-shine-rooster",
+      "title": "Rise & Shine Rooster",
+      "category": "farm-barnyard",
+      "categoryName": "Farm & Barnyard",
+      "filename": "images/backgrounds/farm-barnyard/rise-shine-rooster.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "farm barnyard",
+        "farm & barnyard"
+      ]
+    },
+    {
+      "id": "farm-barnyard/wooly-sheep-cloud-field",
+      "title": "Wooly Sheep Cloud Field",
+      "category": "farm-barnyard",
+      "categoryName": "Farm & Barnyard",
+      "filename": "images/backgrounds/farm-barnyard/wooly-sheep-cloud-field.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "farm barnyard",
+        "farm & barnyard"
+      ]
+    },
+    {
+      "id": "farm-barnyard/barnyard-blue-sky",
+      "title": "Barnyard Blue Sky",
+      "category": "farm-barnyard",
+      "categoryName": "Farm & Barnyard",
+      "filename": "images/backgrounds/farm-barnyard/barnyard-blue-sky.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "farm barnyard",
+        "farm & barnyard"
+      ]
+    },
+    {
+      "id": "ocean-sea-life/gentle-giant-whale",
+      "title": "Gentle Giant Whale",
+      "category": "ocean-sea-life",
+      "categoryName": "Ocean & Sea Life",
+      "filename": "images/backgrounds/ocean-sea-life/gentle-giant-whale.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "ocean sea life",
+        "ocean & sea life"
+      ]
+    },
+    {
+      "id": "ocean-sea-life/curious-octopus",
+      "title": "Curious Octopus",
+      "category": "ocean-sea-life",
+      "categoryName": "Ocean & Sea Life",
+      "filename": "images/backgrounds/ocean-sea-life/curious-octopus.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "ocean sea life",
+        "ocean & sea life"
+      ]
+    },
+    {
+      "id": "ocean-sea-life/sea-turtle-voyage",
+      "title": "Sea Turtle Voyage",
+      "category": "ocean-sea-life",
+      "categoryName": "Ocean & Sea Life",
+      "filename": "images/backgrounds/ocean-sea-life/sea-turtle-voyage.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "ocean sea life",
+        "ocean & sea life"
+      ]
+    },
+    {
+      "id": "ocean-sea-life/jellyfish-glow",
+      "title": "Jellyfish Glow",
+      "category": "ocean-sea-life",
+      "categoryName": "Ocean & Sea Life",
+      "filename": "images/backgrounds/ocean-sea-life/jellyfish-glow.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "ocean sea life",
+        "ocean & sea life"
+      ]
+    },
+    {
+      "id": "ocean-sea-life/playful-dolphins",
+      "title": "Playful Dolphins",
+      "category": "ocean-sea-life",
+      "categoryName": "Ocean & Sea Life",
+      "filename": "images/backgrounds/ocean-sea-life/playful-dolphins.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "ocean sea life",
+        "ocean & sea life"
+      ]
+    },
+    {
+      "id": "ocean-sea-life/deep-blue-whale-song",
+      "title": "Deep Blue Whale Song",
+      "category": "ocean-sea-life",
+      "categoryName": "Ocean & Sea Life",
+      "filename": "images/backgrounds/ocean-sea-life/deep-blue-whale-song.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "ocean sea life",
+        "ocean & sea life"
+      ]
+    },
+    {
+      "id": "ocean-sea-life/orange-octopus-garden",
+      "title": "Orange Octopus Garden",
+      "category": "ocean-sea-life",
+      "categoryName": "Ocean & Sea Life",
+      "filename": "images/backgrounds/ocean-sea-life/orange-octopus-garden.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "ocean sea life",
+        "ocean & sea life"
+      ]
+    },
+    {
+      "id": "ocean-sea-life/coral-reef-turtles",
+      "title": "Coral Reef Turtles",
+      "category": "ocean-sea-life",
+      "categoryName": "Ocean & Sea Life",
+      "filename": "images/backgrounds/ocean-sea-life/coral-reef-turtles.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "ocean sea life",
+        "ocean & sea life"
+      ]
+    },
+    {
+      "id": "ocean-sea-life/pink-jellyfish-drift",
+      "title": "Pink Jellyfish Drift",
+      "category": "ocean-sea-life",
+      "categoryName": "Ocean & Sea Life",
+      "filename": "images/backgrounds/ocean-sea-life/pink-jellyfish-drift.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "ocean sea life",
+        "ocean & sea life"
+      ]
+    },
+    {
+      "id": "ocean-sea-life/sunny-dolphin-splash",
+      "title": "Sunny Dolphin Splash",
+      "category": "ocean-sea-life",
+      "categoryName": "Ocean & Sea Life",
+      "filename": "images/backgrounds/ocean-sea-life/sunny-dolphin-splash.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "ocean sea life",
+        "ocean & sea life"
+      ]
+    },
+    {
+      "id": "ocean-sea-life/purple-whale-dreams",
+      "title": "Purple Whale Dreams",
+      "category": "ocean-sea-life",
+      "categoryName": "Ocean & Sea Life",
+      "filename": "images/backgrounds/ocean-sea-life/purple-whale-dreams.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "ocean sea life",
+        "ocean & sea life"
+      ]
+    },
+    {
+      "id": "ocean-sea-life/teal-octopus-depths",
+      "title": "Teal Octopus Depths",
+      "category": "ocean-sea-life",
+      "categoryName": "Ocean & Sea Life",
+      "filename": "images/backgrounds/ocean-sea-life/teal-octopus-depths.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "ocean sea life",
+        "ocean & sea life"
+      ]
+    },
+    {
+      "id": "ocean-sea-life/golden-sea-turtle",
+      "title": "Golden Sea Turtle",
+      "category": "ocean-sea-life",
+      "categoryName": "Ocean & Sea Life",
+      "filename": "images/backgrounds/ocean-sea-life/golden-sea-turtle.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "ocean sea life",
+        "ocean & sea life"
+      ]
+    },
+    {
+      "id": "ocean-sea-life/yellow-jellyfish-bloom",
+      "title": "Yellow Jellyfish Bloom",
+      "category": "ocean-sea-life",
+      "categoryName": "Ocean & Sea Life",
+      "filename": "images/backgrounds/ocean-sea-life/yellow-jellyfish-bloom.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "ocean sea life",
+        "ocean & sea life"
+      ]
+    },
+    {
+      "id": "ocean-sea-life/dolphin-sunset-leap",
+      "title": "Dolphin Sunset Leap",
+      "category": "ocean-sea-life",
+      "categoryName": "Ocean & Sea Life",
+      "filename": "images/backgrounds/ocean-sea-life/dolphin-sunset-leap.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "ocean sea life",
+        "ocean & sea life"
+      ]
+    },
+    {
+      "id": "ocean-sea-life/whale-bubbles",
+      "title": "Whale & Bubbles",
+      "category": "ocean-sea-life",
+      "categoryName": "Ocean & Sea Life",
+      "filename": "images/backgrounds/ocean-sea-life/whale-bubbles.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "ocean sea life",
+        "ocean & sea life"
+      ]
+    },
+    {
+      "id": "ocean-sea-life/rainbow-reef-octopus",
+      "title": "Rainbow Reef Octopus",
+      "category": "ocean-sea-life",
+      "categoryName": "Ocean & Sea Life",
+      "filename": "images/backgrounds/ocean-sea-life/rainbow-reef-octopus.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "ocean sea life",
+        "ocean & sea life"
+      ]
+    },
+    {
+      "id": "ocean-sea-life/emerald-sea-turtle",
+      "title": "Emerald Sea Turtle",
+      "category": "ocean-sea-life",
+      "categoryName": "Ocean & Sea Life",
+      "filename": "images/backgrounds/ocean-sea-life/emerald-sea-turtle.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "ocean sea life",
+        "ocean & sea life"
+      ]
+    },
+    {
+      "id": "ocean-sea-life/moonlit-jellyfish",
+      "title": "Moonlit Jellyfish",
+      "category": "ocean-sea-life",
+      "categoryName": "Ocean & Sea Life",
+      "filename": "images/backgrounds/ocean-sea-life/moonlit-jellyfish.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "ocean sea life",
+        "ocean & sea life"
+      ]
+    },
+    {
+      "id": "ocean-sea-life/dolphin-pod-parade",
+      "title": "Dolphin Pod Parade",
+      "category": "ocean-sea-life",
+      "categoryName": "Ocean & Sea Life",
+      "filename": "images/backgrounds/ocean-sea-life/dolphin-pod-parade.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "ocean sea life",
+        "ocean & sea life"
+      ]
+    },
+    {
+      "id": "birds-feathers/colorful-parrot-perch",
+      "title": "Colorful Parrot Perch",
+      "category": "birds-feathers",
+      "categoryName": "Birds & Feathers",
+      "filename": "images/backgrounds/birds-feathers/colorful-parrot-perch.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "birds feathers",
+        "birds & feathers"
+      ]
+    },
+    {
+      "id": "birds-feathers/pretty-pink-flamingos",
+      "title": "Pretty Pink Flamingos",
+      "category": "birds-feathers",
+      "categoryName": "Birds & Feathers",
+      "filename": "images/backgrounds/birds-feathers/pretty-pink-flamingos.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "birds feathers",
+        "birds & feathers"
+      ]
+    },
+    {
+      "id": "birds-feathers/majestic-peacock-fan",
+      "title": "Majestic Peacock Fan",
+      "category": "birds-feathers",
+      "categoryName": "Birds & Feathers",
+      "filename": "images/backgrounds/birds-feathers/majestic-peacock-fan.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "birds feathers",
+        "birds & feathers"
+      ]
+    },
+    {
+      "id": "birds-feathers/snowy-owl-watch",
+      "title": "Snowy Owl Watch",
+      "category": "birds-feathers",
+      "categoryName": "Birds & Feathers",
+      "filename": "images/backgrounds/birds-feathers/snowy-owl-watch.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "birds feathers",
+        "birds & feathers"
+      ]
+    },
+    {
+      "id": "birds-feathers/rainbow-parrot-jungle",
+      "title": "Rainbow Parrot Jungle",
+      "category": "birds-feathers",
+      "categoryName": "Birds & Feathers",
+      "filename": "images/backgrounds/birds-feathers/rainbow-parrot-jungle.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "birds feathers",
+        "birds & feathers"
+      ]
+    },
+    {
+      "id": "birds-feathers/flamingo-sunset-pond",
+      "title": "Flamingo Sunset Pond",
+      "category": "birds-feathers",
+      "categoryName": "Birds & Feathers",
+      "filename": "images/backgrounds/birds-feathers/flamingo-sunset-pond.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "birds feathers",
+        "birds & feathers"
+      ]
+    },
+    {
+      "id": "birds-feathers/emerald-peacock-garden",
+      "title": "Emerald Peacock Garden",
+      "category": "birds-feathers",
+      "categoryName": "Birds & Feathers",
+      "filename": "images/backgrounds/birds-feathers/emerald-peacock-garden.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "birds feathers",
+        "birds & feathers"
+      ]
+    },
+    {
+      "id": "birds-feathers/barn-owl-twilight",
+      "title": "Barn Owl Twilight",
+      "category": "birds-feathers",
+      "categoryName": "Birds & Feathers",
+      "filename": "images/backgrounds/birds-feathers/barn-owl-twilight.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "birds feathers",
+        "birds & feathers"
+      ]
+    },
+    {
+      "id": "birds-feathers/blue-parrot-paradise",
+      "title": "Blue Parrot Paradise",
+      "category": "birds-feathers",
+      "categoryName": "Birds & Feathers",
+      "filename": "images/backgrounds/birds-feathers/blue-parrot-paradise.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "birds feathers",
+        "birds & feathers"
+      ]
+    },
+    {
+      "id": "birds-feathers/flamingo-flock",
+      "title": "Flamingo Flock",
+      "category": "birds-feathers",
+      "categoryName": "Birds & Feathers",
+      "filename": "images/backgrounds/birds-feathers/flamingo-flock.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "birds feathers",
+        "birds & feathers"
+      ]
+    },
+    {
+      "id": "birds-feathers/purple-peacock-dream",
+      "title": "Purple Peacock Dream",
+      "category": "birds-feathers",
+      "categoryName": "Birds & Feathers",
+      "filename": "images/backgrounds/birds-feathers/purple-peacock-dream.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "birds feathers",
+        "birds & feathers"
+      ]
+    },
+    {
+      "id": "birds-feathers/golden-owl-eyes",
+      "title": "Golden Owl Eyes",
+      "category": "birds-feathers",
+      "categoryName": "Birds & Feathers",
+      "filename": "images/backgrounds/birds-feathers/golden-owl-eyes.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "birds feathers",
+        "birds & feathers"
+      ]
+    },
+    {
+      "id": "birds-feathers/tropical-parrot-duo",
+      "title": "Tropical Parrot Duo",
+      "category": "birds-feathers",
+      "categoryName": "Birds & Feathers",
+      "filename": "images/backgrounds/birds-feathers/tropical-parrot-duo.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "birds feathers",
+        "birds & feathers"
+      ]
+    },
+    {
+      "id": "birds-feathers/coral-pink-flamingos",
+      "title": "Coral Pink Flamingos",
+      "category": "birds-feathers",
+      "categoryName": "Birds & Feathers",
+      "filename": "images/backgrounds/birds-feathers/coral-pink-flamingos.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "birds feathers",
+        "birds & feathers"
+      ]
+    },
+    {
+      "id": "birds-feathers/sapphire-peacock-feathers",
+      "title": "Sapphire Peacock Feathers",
+      "category": "birds-feathers",
+      "categoryName": "Birds & Feathers",
+      "filename": "images/backgrounds/birds-feathers/sapphire-peacock-feathers.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "birds feathers",
+        "birds & feathers"
+      ]
+    },
+    {
+      "id": "birds-feathers/night-owl-stargazing",
+      "title": "Night Owl Stargazing",
+      "category": "birds-feathers",
+      "categoryName": "Birds & Feathers",
+      "filename": "images/backgrounds/birds-feathers/night-owl-stargazing.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "birds feathers",
+        "birds & feathers"
+      ]
+    },
+    {
+      "id": "birds-feathers/macaw-rainbow-wings",
+      "title": "Macaw Rainbow Wings",
+      "category": "birds-feathers",
+      "categoryName": "Birds & Feathers",
+      "filename": "images/backgrounds/birds-feathers/macaw-rainbow-wings.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "birds feathers",
+        "birds & feathers"
+      ]
+    },
+    {
+      "id": "birds-feathers/flamingo-yoga-pose",
+      "title": "Flamingo Yoga Pose",
+      "category": "birds-feathers",
+      "categoryName": "Birds & Feathers",
+      "filename": "images/backgrounds/birds-feathers/flamingo-yoga-pose.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "birds feathers",
+        "birds & feathers"
+      ]
+    },
+    {
+      "id": "birds-feathers/peacock-garden-party",
+      "title": "Peacock Garden Party",
+      "category": "birds-feathers",
+      "categoryName": "Birds & Feathers",
+      "filename": "images/backgrounds/birds-feathers/peacock-garden-party.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "birds feathers",
+        "birds & feathers"
+      ]
+    },
+    {
+      "id": "birds-feathers/forest-owl-hideaway",
+      "title": "Forest Owl Hideaway",
+      "category": "birds-feathers",
+      "categoryName": "Birds & Feathers",
+      "filename": "images/backgrounds/birds-feathers/forest-owl-hideaway.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "birds feathers",
+        "birds & feathers"
+      ]
+    },
+    {
+      "id": "robots-gadgets/friendly-blue-robot",
+      "title": "Friendly Blue Robot",
+      "category": "robots-gadgets",
+      "categoryName": "Robots & Gadgets",
+      "filename": "images/backgrounds/robots-gadgets/friendly-blue-robot.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "robots gadgets",
+        "robots & gadgets"
+      ]
+    },
+    {
+      "id": "robots-gadgets/gear-cog-machine",
+      "title": "Gear & Cog Machine",
+      "category": "robots-gadgets",
+      "categoryName": "Robots & Gadgets",
+      "filename": "images/backgrounds/robots-gadgets/gear-cog-machine.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "robots gadgets",
+        "robots & gadgets"
+      ]
+    },
+    {
+      "id": "robots-gadgets/pink-robo-pal",
+      "title": "Pink Robo Pal",
+      "category": "robots-gadgets",
+      "categoryName": "Robots & Gadgets",
+      "filename": "images/backgrounds/robots-gadgets/pink-robo-pal.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "robots gadgets",
+        "robots & gadgets"
+      ]
+    },
+    {
+      "id": "robots-gadgets/neon-circuit-bot",
+      "title": "Neon Circuit Bot",
+      "category": "robots-gadgets",
+      "categoryName": "Robots & Gadgets",
+      "filename": "images/backgrounds/robots-gadgets/neon-circuit-bot.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "robots gadgets",
+        "robots & gadgets"
+      ]
+    },
+    {
+      "id": "robots-gadgets/golden-gears-at-work",
+      "title": "Golden Gears at Work",
+      "category": "robots-gadgets",
+      "categoryName": "Robots & Gadgets",
+      "filename": "images/backgrounds/robots-gadgets/golden-gears-at-work.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "robots gadgets",
+        "robots & gadgets"
+      ]
+    },
+    {
+      "id": "robots-gadgets/green-guardian-robot",
+      "title": "Green Guardian Robot",
+      "category": "robots-gadgets",
+      "categoryName": "Robots & Gadgets",
+      "filename": "images/backgrounds/robots-gadgets/green-guardian-robot.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "robots gadgets",
+        "robots & gadgets"
+      ]
+    },
+    {
+      "id": "robots-gadgets/purple-space-robot",
+      "title": "Purple Space Robot",
+      "category": "robots-gadgets",
+      "categoryName": "Robots & Gadgets",
+      "filename": "images/backgrounds/robots-gadgets/purple-space-robot.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "robots gadgets",
+        "robots & gadgets"
+      ]
+    },
+    {
+      "id": "robots-gadgets/silver-gear-grid",
+      "title": "Silver Gear Grid",
+      "category": "robots-gadgets",
+      "categoryName": "Robots & Gadgets",
+      "filename": "images/backgrounds/robots-gadgets/silver-gear-grid.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "robots gadgets",
+        "robots & gadgets"
+      ]
+    },
+    {
+      "id": "robots-gadgets/orange-helper-bot",
+      "title": "Orange Helper Bot",
+      "category": "robots-gadgets",
+      "categoryName": "Robots & Gadgets",
+      "filename": "images/backgrounds/robots-gadgets/orange-helper-bot.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "robots gadgets",
+        "robots & gadgets"
+      ]
+    },
+    {
+      "id": "robots-gadgets/rainbow-robot-party",
+      "title": "Rainbow Robot Party",
+      "category": "robots-gadgets",
+      "categoryName": "Robots & Gadgets",
+      "filename": "images/backgrounds/robots-gadgets/rainbow-robot-party.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "robots gadgets",
+        "robots & gadgets"
+      ]
+    },
+    {
+      "id": "robots-gadgets/tiny-gadget-bots",
+      "title": "Tiny Gadget Bots",
+      "category": "robots-gadgets",
+      "categoryName": "Robots & Gadgets",
+      "filename": "images/backgrounds/robots-gadgets/tiny-gadget-bots.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "robots gadgets",
+        "robots & gadgets"
+      ]
+    },
+    {
+      "id": "robots-gadgets/copper-cog-adventure",
+      "title": "Copper Cog Adventure",
+      "category": "robots-gadgets",
+      "categoryName": "Robots & Gadgets",
+      "filename": "images/backgrounds/robots-gadgets/copper-cog-adventure.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "robots gadgets",
+        "robots & gadgets"
+      ]
+    },
+    {
+      "id": "robots-gadgets/midnight-robot-watch",
+      "title": "Midnight Robot Watch",
+      "category": "robots-gadgets",
+      "categoryName": "Robots & Gadgets",
+      "filename": "images/backgrounds/robots-gadgets/midnight-robot-watch.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "robots gadgets",
+        "robots & gadgets"
+      ]
+    },
+    {
+      "id": "robots-gadgets/bubblegum-bot-squad",
+      "title": "Bubblegum Bot Squad",
+      "category": "robots-gadgets",
+      "categoryName": "Robots & Gadgets",
+      "filename": "images/backgrounds/robots-gadgets/bubblegum-bot-squad.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "robots gadgets",
+        "robots & gadgets"
+      ]
+    },
+    {
+      "id": "robots-gadgets/sunny-yellow-robot",
+      "title": "Sunny Yellow Robot",
+      "category": "robots-gadgets",
+      "categoryName": "Robots & Gadgets",
+      "filename": "images/backgrounds/robots-gadgets/sunny-yellow-robot.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "robots gadgets",
+        "robots & gadgets"
+      ]
+    },
+    {
+      "id": "robots-gadgets/turquoise-tech-gears",
+      "title": "Turquoise Tech Gears",
+      "category": "robots-gadgets",
+      "categoryName": "Robots & Gadgets",
+      "filename": "images/backgrounds/robots-gadgets/turquoise-tech-gears.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "robots gadgets",
+        "robots & gadgets"
+      ]
+    },
+    {
+      "id": "robots-gadgets/robot-repair-shop",
+      "title": "Robot Repair Shop",
+      "category": "robots-gadgets",
+      "categoryName": "Robots & Gadgets",
+      "filename": "images/backgrounds/robots-gadgets/robot-repair-shop.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "robots gadgets",
+        "robots & gadgets"
+      ]
+    },
+    {
+      "id": "robots-gadgets/cosmic-cyber-bot",
+      "title": "Cosmic Cyber Bot",
+      "category": "robots-gadgets",
+      "categoryName": "Robots & Gadgets",
+      "filename": "images/backgrounds/robots-gadgets/cosmic-cyber-bot.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "robots gadgets",
+        "robots & gadgets"
+      ]
+    },
+    {
+      "id": "robots-gadgets/cherry-red-robot",
+      "title": "Cherry Red Robot",
+      "category": "robots-gadgets",
+      "categoryName": "Robots & Gadgets",
+      "filename": "images/backgrounds/robots-gadgets/cherry-red-robot.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "robots gadgets",
+        "robots & gadgets"
+      ]
+    },
+    {
+      "id": "robots-gadgets/gearbox-wonderland",
+      "title": "Gearbox Wonderland",
+      "category": "robots-gadgets",
+      "categoryName": "Robots & Gadgets",
+      "filename": "images/backgrounds/robots-gadgets/gearbox-wonderland.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "robots gadgets",
+        "robots & gadgets"
+      ]
+    },
+    {
+      "id": "pirates-treasure/pirate-ship-voyage",
+      "title": "Pirate Ship Voyage",
+      "category": "pirates-treasure",
+      "categoryName": "Pirates & Treasure",
+      "filename": "images/backgrounds/pirates-treasure/pirate-ship-voyage.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "pirates treasure",
+        "pirates & treasure"
+      ]
+    },
+    {
+      "id": "pirates-treasure/buried-treasure-chest",
+      "title": "Buried Treasure Chest",
+      "category": "pirates-treasure",
+      "categoryName": "Pirates & Treasure",
+      "filename": "images/backgrounds/pirates-treasure/buried-treasure-chest.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "pirates treasure",
+        "pirates & treasure"
+      ]
+    },
+    {
+      "id": "pirates-treasure/skull-crossbones-flag",
+      "title": "Skull & Crossbones Flag",
+      "category": "pirates-treasure",
+      "categoryName": "Pirates & Treasure",
+      "filename": "images/backgrounds/pirates-treasure/skull-crossbones-flag.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "pirates treasure",
+        "pirates & treasure"
+      ]
+    },
+    {
+      "id": "pirates-treasure/anchors-away",
+      "title": "Anchors Away",
+      "category": "pirates-treasure",
+      "categoryName": "Pirates & Treasure",
+      "filename": "images/backgrounds/pirates-treasure/anchors-away.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "pirates treasure",
+        "pirates & treasure"
+      ]
+    },
+    {
+      "id": "pirates-treasure/high-seas-adventure",
+      "title": "High Seas Adventure",
+      "category": "pirates-treasure",
+      "categoryName": "Pirates & Treasure",
+      "filename": "images/backgrounds/pirates-treasure/high-seas-adventure.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "pirates treasure",
+        "pirates & treasure"
+      ]
+    },
+    {
+      "id": "pirates-treasure/golden-doubloon-chest",
+      "title": "Golden Doubloon Chest",
+      "category": "pirates-treasure",
+      "categoryName": "Pirates & Treasure",
+      "filename": "images/backgrounds/pirates-treasure/golden-doubloon-chest.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "pirates treasure",
+        "pirates & treasure"
+      ]
+    },
+    {
+      "id": "pirates-treasure/jolly-roger-sunset",
+      "title": "Jolly Roger Sunset",
+      "category": "pirates-treasure",
+      "categoryName": "Pirates & Treasure",
+      "filename": "images/backgrounds/pirates-treasure/jolly-roger-sunset.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "pirates treasure",
+        "pirates & treasure"
+      ]
+    },
+    {
+      "id": "pirates-treasure/sailors-anchor-bay",
+      "title": "Sailor's Anchor Bay",
+      "category": "pirates-treasure",
+      "categoryName": "Pirates & Treasure",
+      "filename": "images/backgrounds/pirates-treasure/sailors-anchor-bay.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "pirates treasure",
+        "pirates & treasure"
+      ]
+    },
+    {
+      "id": "pirates-treasure/storm-tossed-ship",
+      "title": "Storm-Tossed Ship",
+      "category": "pirates-treasure",
+      "categoryName": "Pirates & Treasure",
+      "filename": "images/backgrounds/pirates-treasure/storm-tossed-ship.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "pirates treasure",
+        "pirates & treasure"
+      ]
+    },
+    {
+      "id": "pirates-treasure/emerald-isle-treasure",
+      "title": "Emerald Isle Treasure",
+      "category": "pirates-treasure",
+      "categoryName": "Pirates & Treasure",
+      "filename": "images/backgrounds/pirates-treasure/emerald-isle-treasure.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "pirates treasure",
+        "pirates & treasure"
+      ]
+    },
+    {
+      "id": "pirates-treasure/ghost-ship-skulls",
+      "title": "Ghost Ship Skulls",
+      "category": "pirates-treasure",
+      "categoryName": "Pirates & Treasure",
+      "filename": "images/backgrounds/pirates-treasure/ghost-ship-skulls.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "pirates treasure",
+        "pirates & treasure"
+      ]
+    },
+    {
+      "id": "pirates-treasure/purple-pirate-anchor",
+      "title": "Purple Pirate Anchor",
+      "category": "pirates-treasure",
+      "categoryName": "Pirates & Treasure",
+      "filename": "images/backgrounds/pirates-treasure/purple-pirate-anchor.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "pirates treasure",
+        "pirates & treasure"
+      ]
+    },
+    {
+      "id": "pirates-treasure/tropical-pirate-cove",
+      "title": "Tropical Pirate Cove",
+      "category": "pirates-treasure",
+      "categoryName": "Pirates & Treasure",
+      "filename": "images/backgrounds/pirates-treasure/tropical-pirate-cove.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "pirates treasure",
+        "pirates & treasure"
+      ]
+    },
+    {
+      "id": "pirates-treasure/ruby-jeweled-chest",
+      "title": "Ruby Jeweled Chest",
+      "category": "pirates-treasure",
+      "categoryName": "Pirates & Treasure",
+      "filename": "images/backgrounds/pirates-treasure/ruby-jeweled-chest.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "pirates treasure",
+        "pirates & treasure"
+      ]
+    },
+    {
+      "id": "pirates-treasure/pink-pirate-party",
+      "title": "Pink Pirate Party",
+      "category": "pirates-treasure",
+      "categoryName": "Pirates & Treasure",
+      "filename": "images/backgrounds/pirates-treasure/pink-pirate-party.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "pirates treasure",
+        "pirates & treasure"
+      ]
+    },
+    {
+      "id": "pirates-treasure/deep-sea-anchor-drop",
+      "title": "Deep Sea Anchor Drop",
+      "category": "pirates-treasure",
+      "categoryName": "Pirates & Treasure",
+      "filename": "images/backgrounds/pirates-treasure/deep-sea-anchor-drop.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "pirates treasure",
+        "pirates & treasure"
+      ]
+    },
+    {
+      "id": "pirates-treasure/moonlit-pirate-sails",
+      "title": "Moonlit Pirate Sails",
+      "category": "pirates-treasure",
+      "categoryName": "Pirates & Treasure",
+      "filename": "images/backgrounds/pirates-treasure/moonlit-pirate-sails.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "pirates treasure",
+        "pirates & treasure"
+      ]
+    },
+    {
+      "id": "pirates-treasure/silver-treasure-hoard",
+      "title": "Silver Treasure Hoard",
+      "category": "pirates-treasure",
+      "categoryName": "Pirates & Treasure",
+      "filename": "images/backgrounds/pirates-treasure/silver-treasure-hoard.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "pirates treasure",
+        "pirates & treasure"
+      ]
+    },
+    {
+      "id": "pirates-treasure/rainbow-pirate-flag",
+      "title": "Rainbow Pirate Flag",
+      "category": "pirates-treasure",
+      "categoryName": "Pirates & Treasure",
+      "filename": "images/backgrounds/pirates-treasure/rainbow-pirate-flag.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "pirates treasure",
+        "pirates & treasure"
+      ]
+    },
+    {
+      "id": "pirates-treasure/captains-golden-anchor",
+      "title": "Captain's Golden Anchor",
+      "category": "pirates-treasure",
+      "categoryName": "Pirates & Treasure",
+      "filename": "images/backgrounds/pirates-treasure/captains-golden-anchor.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "pirates treasure",
+        "pirates & treasure"
+      ]
+    },
+    {
+      "id": "camping-outdoors/starlit-tent-camp",
+      "title": "Starlit Tent Camp",
+      "category": "camping-outdoors",
+      "categoryName": "Camping & Outdoors",
+      "filename": "images/backgrounds/camping-outdoors/starlit-tent-camp.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "camping outdoors",
+        "camping & outdoors"
+      ]
+    },
+    {
+      "id": "camping-outdoors/cozy-campfire-glow",
+      "title": "Cozy Campfire Glow",
+      "category": "camping-outdoors",
+      "categoryName": "Camping & Outdoors",
+      "filename": "images/backgrounds/camping-outdoors/cozy-campfire-glow.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "camping outdoors",
+        "camping & outdoors"
+      ]
+    },
+    {
+      "id": "camping-outdoors/camping-lantern-light",
+      "title": "Camping Lantern Light",
+      "category": "camping-outdoors",
+      "categoryName": "Camping & Outdoors",
+      "filename": "images/backgrounds/camping-outdoors/camping-lantern-light.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "camping outdoors",
+        "camping & outdoors"
+      ]
+    },
+    {
+      "id": "camping-outdoors/green-forest-tents",
+      "title": "Green Forest Tents",
+      "category": "camping-outdoors",
+      "categoryName": "Camping & Outdoors",
+      "filename": "images/backgrounds/camping-outdoors/green-forest-tents.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "camping outdoors",
+        "camping & outdoors"
+      ]
+    },
+    {
+      "id": "camping-outdoors/marshmallow-roast-fire",
+      "title": "Marshmallow Roast Fire",
+      "category": "camping-outdoors",
+      "categoryName": "Camping & Outdoors",
+      "filename": "images/backgrounds/camping-outdoors/marshmallow-roast-fire.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "camping outdoors",
+        "camping & outdoors"
+      ]
+    },
+    {
+      "id": "camping-outdoors/blue-mountain-camp",
+      "title": "Blue Mountain Camp",
+      "category": "camping-outdoors",
+      "categoryName": "Camping & Outdoors",
+      "filename": "images/backgrounds/camping-outdoors/blue-mountain-camp.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "camping outdoors",
+        "camping & outdoors"
+      ]
+    },
+    {
+      "id": "camping-outdoors/firefly-lantern-night",
+      "title": "Firefly Lantern Night",
+      "category": "camping-outdoors",
+      "categoryName": "Camping & Outdoors",
+      "filename": "images/backgrounds/camping-outdoors/firefly-lantern-night.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "camping outdoors",
+        "camping & outdoors"
+      ]
+    },
+    {
+      "id": "camping-outdoors/sunset-campsite",
+      "title": "Sunset Campsite",
+      "category": "camping-outdoors",
+      "categoryName": "Camping & Outdoors",
+      "filename": "images/backgrounds/camping-outdoors/sunset-campsite.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "camping outdoors",
+        "camping & outdoors"
+      ]
+    },
+    {
+      "id": "camping-outdoors/woodland-campfire-circle",
+      "title": "Woodland Campfire Circle",
+      "category": "camping-outdoors",
+      "categoryName": "Camping & Outdoors",
+      "filename": "images/backgrounds/camping-outdoors/woodland-campfire-circle.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "camping outdoors",
+        "camping & outdoors"
+      ]
+    },
+    {
+      "id": "camping-outdoors/purple-twilight-tent",
+      "title": "Purple Twilight Tent",
+      "category": "camping-outdoors",
+      "categoryName": "Camping & Outdoors",
+      "filename": "images/backgrounds/camping-outdoors/purple-twilight-tent.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "camping outdoors",
+        "camping & outdoors"
+      ]
+    },
+    {
+      "id": "camping-outdoors/glowing-trail-lanterns",
+      "title": "Glowing Trail Lanterns",
+      "category": "camping-outdoors",
+      "categoryName": "Camping & Outdoors",
+      "filename": "images/backgrounds/camping-outdoors/glowing-trail-lanterns.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "camping outdoors",
+        "camping & outdoors"
+      ]
+    },
+    {
+      "id": "camping-outdoors/pink-adventure-tent",
+      "title": "Pink Adventure Tent",
+      "category": "camping-outdoors",
+      "categoryName": "Camping & Outdoors",
+      "filename": "images/backgrounds/camping-outdoors/pink-adventure-tent.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "camping outdoors",
+        "camping & outdoors"
+      ]
+    },
+    {
+      "id": "camping-outdoors/late-night-fire-stories",
+      "title": "Late Night Fire Stories",
+      "category": "camping-outdoors",
+      "categoryName": "Camping & Outdoors",
+      "filename": "images/backgrounds/camping-outdoors/late-night-fire-stories.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "camping outdoors",
+        "camping & outdoors"
+      ]
+    },
+    {
+      "id": "camping-outdoors/rustic-lantern-glow",
+      "title": "Rustic Lantern Glow",
+      "category": "camping-outdoors",
+      "categoryName": "Camping & Outdoors",
+      "filename": "images/backgrounds/camping-outdoors/rustic-lantern-glow.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "camping outdoors",
+        "camping & outdoors"
+      ]
+    },
+    {
+      "id": "camping-outdoors/alpine-camp-retreat",
+      "title": "Alpine Camp Retreat",
+      "category": "camping-outdoors",
+      "categoryName": "Camping & Outdoors",
+      "filename": "images/backgrounds/camping-outdoors/alpine-camp-retreat.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "camping outdoors",
+        "camping & outdoors"
+      ]
+    },
+    {
+      "id": "camping-outdoors/golden-ember-campfire",
+      "title": "Golden Ember Campfire",
+      "category": "camping-outdoors",
+      "categoryName": "Camping & Outdoors",
+      "filename": "images/backgrounds/camping-outdoors/golden-ember-campfire.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "camping outdoors",
+        "camping & outdoors"
+      ]
+    },
+    {
+      "id": "camping-outdoors/misty-morning-lantern",
+      "title": "Misty Morning Lantern",
+      "category": "camping-outdoors",
+      "categoryName": "Camping & Outdoors",
+      "filename": "images/backgrounds/camping-outdoors/misty-morning-lantern.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "camping outdoors",
+        "camping & outdoors"
+      ]
+    },
+    {
+      "id": "camping-outdoors/desert-star-camp",
+      "title": "Desert Star Camp",
+      "category": "camping-outdoors",
+      "categoryName": "Camping & Outdoors",
+      "filename": "images/backgrounds/camping-outdoors/desert-star-camp.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "camping outdoors",
+        "camping & outdoors"
+      ]
+    },
+    {
+      "id": "camping-outdoors/summer-campfire-fun",
+      "title": "Summer Campfire Fun",
+      "category": "camping-outdoors",
+      "categoryName": "Camping & Outdoors",
+      "filename": "images/backgrounds/camping-outdoors/summer-campfire-fun.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "camping outdoors",
+        "camping & outdoors"
+      ]
+    },
+    {
+      "id": "camping-outdoors/trailhead-lantern-path",
+      "title": "Trailhead Lantern Path",
+      "category": "camping-outdoors",
+      "categoryName": "Camping & Outdoors",
+      "filename": "images/backgrounds/camping-outdoors/trailhead-lantern-path.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "camping outdoors",
+        "camping & outdoors"
+      ]
+    },
+    {
+      "id": "circus-carnival/big-top-circus-tent",
+      "title": "Big Top Circus Tent",
+      "category": "circus-carnival",
+      "categoryName": "Circus & Carnival",
+      "filename": "images/backgrounds/circus-carnival/big-top-circus-tent.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "circus carnival",
+        "circus & carnival"
+      ]
+    },
+    {
+      "id": "circus-carnival/colorful-balloon-bunch",
+      "title": "Colorful Balloon Bunch",
+      "category": "circus-carnival",
+      "categoryName": "Circus & Carnival",
+      "filename": "images/backgrounds/circus-carnival/colorful-balloon-bunch.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "circus carnival",
+        "circus & carnival"
+      ]
+    },
+    {
+      "id": "circus-carnival/spinning-ferris-wheel",
+      "title": "Spinning Ferris Wheel",
+      "category": "circus-carnival",
+      "categoryName": "Circus & Carnival",
+      "filename": "images/backgrounds/circus-carnival/spinning-ferris-wheel.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "circus carnival",
+        "circus & carnival"
+      ]
+    },
+    {
+      "id": "circus-carnival/buttery-popcorn-fun",
+      "title": "Buttery Popcorn Fun",
+      "category": "circus-carnival",
+      "categoryName": "Circus & Carnival",
+      "filename": "images/backgrounds/circus-carnival/buttery-popcorn-fun.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "circus carnival",
+        "circus & carnival"
+      ]
+    },
+    {
+      "id": "circus-carnival/purple-carnival-tent",
+      "title": "Purple Carnival Tent",
+      "category": "circus-carnival",
+      "categoryName": "Circus & Carnival",
+      "filename": "images/backgrounds/circus-carnival/purple-carnival-tent.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "circus carnival",
+        "circus & carnival"
+      ]
+    },
+    {
+      "id": "circus-carnival/rainbow-balloon-sky",
+      "title": "Rainbow Balloon Sky",
+      "category": "circus-carnival",
+      "categoryName": "Circus & Carnival",
+      "filename": "images/backgrounds/circus-carnival/rainbow-balloon-sky.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "circus carnival",
+        "circus & carnival"
+      ]
+    },
+    {
+      "id": "circus-carnival/night-carnival-lights",
+      "title": "Night Carnival Lights",
+      "category": "circus-carnival",
+      "categoryName": "Circus & Carnival",
+      "filename": "images/backgrounds/circus-carnival/night-carnival-lights.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "circus carnival",
+        "circus & carnival"
+      ]
+    },
+    {
+      "id": "circus-carnival/circus-popcorn-stand",
+      "title": "Circus Popcorn Stand",
+      "category": "circus-carnival",
+      "categoryName": "Circus & Carnival",
+      "filename": "images/backgrounds/circus-carnival/circus-popcorn-stand.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "circus carnival",
+        "circus & carnival"
+      ]
+    },
+    {
+      "id": "circus-carnival/blue-striped-big-top",
+      "title": "Blue Striped Big Top",
+      "category": "circus-carnival",
+      "categoryName": "Circus & Carnival",
+      "filename": "images/backgrounds/circus-carnival/blue-striped-big-top.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "circus carnival",
+        "circus & carnival"
+      ]
+    },
+    {
+      "id": "circus-carnival/golden-ferris-wheel",
+      "title": "Golden Ferris Wheel",
+      "category": "circus-carnival",
+      "categoryName": "Circus & Carnival",
+      "filename": "images/backgrounds/circus-carnival/golden-ferris-wheel.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "circus carnival",
+        "circus & carnival"
+      ]
+    },
+    {
+      "id": "circus-carnival/party-balloon-cluster",
+      "title": "Party Balloon Cluster",
+      "category": "circus-carnival",
+      "categoryName": "Circus & Carnival",
+      "filename": "images/backgrounds/circus-carnival/party-balloon-cluster.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "circus carnival",
+        "circus & carnival"
+      ]
+    },
+    {
+      "id": "circus-carnival/sunset-carnival-fair",
+      "title": "Sunset Carnival Fair",
+      "category": "circus-carnival",
+      "categoryName": "Circus & Carnival",
+      "filename": "images/backgrounds/circus-carnival/sunset-carnival-fair.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "circus carnival",
+        "circus & carnival"
+      ]
+    },
+    {
+      "id": "circus-carnival/green-big-top-show",
+      "title": "Green Big Top Show",
+      "category": "circus-carnival",
+      "categoryName": "Circus & Carnival",
+      "filename": "images/backgrounds/circus-carnival/green-big-top-show.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "circus carnival",
+        "circus & carnival"
+      ]
+    },
+    {
+      "id": "circus-carnival/caramel-popcorn-party",
+      "title": "Caramel Popcorn Party",
+      "category": "circus-carnival",
+      "categoryName": "Circus & Carnival",
+      "filename": "images/backgrounds/circus-carnival/caramel-popcorn-party.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "circus carnival",
+        "circus & carnival"
+      ]
+    },
+    {
+      "id": "circus-carnival/teal-carnival-delight",
+      "title": "Teal Carnival Delight",
+      "category": "circus-carnival",
+      "categoryName": "Circus & Carnival",
+      "filename": "images/backgrounds/circus-carnival/teal-carnival-delight.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "circus carnival",
+        "circus & carnival"
+      ]
+    },
+    {
+      "id": "circus-carnival/pastel-balloon-drift",
+      "title": "Pastel Balloon Drift",
+      "category": "circus-carnival",
+      "categoryName": "Circus & Carnival",
+      "filename": "images/backgrounds/circus-carnival/pastel-balloon-drift.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "circus carnival",
+        "circus & carnival"
+      ]
+    },
+    {
+      "id": "circus-carnival/twilight-ferris-wheel",
+      "title": "Twilight Ferris Wheel",
+      "category": "circus-carnival",
+      "categoryName": "Circus & Carnival",
+      "filename": "images/backgrounds/circus-carnival/twilight-ferris-wheel.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "circus carnival",
+        "circus & carnival"
+      ]
+    },
+    {
+      "id": "circus-carnival/salty-sweet-popcorn",
+      "title": "Salty Sweet Popcorn",
+      "category": "circus-carnival",
+      "categoryName": "Circus & Carnival",
+      "filename": "images/backgrounds/circus-carnival/salty-sweet-popcorn.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "circus carnival",
+        "circus & carnival"
+      ]
+    },
+    {
+      "id": "circus-carnival/red-white-big-top",
+      "title": "Red & White Big Top",
+      "category": "circus-carnival",
+      "categoryName": "Circus & Carnival",
+      "filename": "images/backgrounds/circus-carnival/red-white-big-top.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "circus carnival",
+        "circus & carnival"
+      ]
+    },
+    {
+      "id": "circus-carnival/carnival-balloon-release",
+      "title": "Carnival Balloon Release",
+      "category": "circus-carnival",
+      "categoryName": "Circus & Carnival",
+      "filename": "images/backgrounds/circus-carnival/carnival-balloon-release.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "circus carnival",
+        "circus & carnival"
+      ]
+    },
+    {
+      "id": "construction-diggers/big-dump-truck",
+      "title": "Big Dump Truck",
+      "category": "construction-diggers",
+      "categoryName": "Construction & Diggers",
+      "filename": "images/backgrounds/construction-diggers/big-dump-truck.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "construction diggers",
+        "construction & diggers"
+      ]
+    },
+    {
+      "id": "construction-diggers/tower-crane-at-work",
+      "title": "Tower Crane at Work",
+      "category": "construction-diggers",
+      "categoryName": "Construction & Diggers",
+      "filename": "images/backgrounds/construction-diggers/tower-crane-at-work.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "construction diggers",
+        "construction & diggers"
+      ]
+    },
+    {
+      "id": "construction-diggers/traffic-cone-row",
+      "title": "Traffic Cone Row",
+      "category": "construction-diggers",
+      "categoryName": "Construction & Diggers",
+      "filename": "images/backgrounds/construction-diggers/traffic-cone-row.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "construction diggers",
+        "construction & diggers"
+      ]
+    },
+    {
+      "id": "construction-diggers/hard-hat-zone",
+      "title": "Hard Hat Zone",
+      "category": "construction-diggers",
+      "categoryName": "Construction & Diggers",
+      "filename": "images/backgrounds/construction-diggers/hard-hat-zone.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "construction diggers",
+        "construction & diggers"
+      ]
+    },
+    {
+      "id": "construction-diggers/yellow-dump-trucks",
+      "title": "Yellow Dump Trucks",
+      "category": "construction-diggers",
+      "categoryName": "Construction & Diggers",
+      "filename": "images/backgrounds/construction-diggers/yellow-dump-trucks.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "construction diggers",
+        "construction & diggers"
+      ]
+    },
+    {
+      "id": "construction-diggers/red-crane-skyline",
+      "title": "Red Crane Skyline",
+      "category": "construction-diggers",
+      "categoryName": "Construction & Diggers",
+      "filename": "images/backgrounds/construction-diggers/red-crane-skyline.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "construction diggers",
+        "construction & diggers"
+      ]
+    },
+    {
+      "id": "construction-diggers/orange-cone-path",
+      "title": "Orange Cone Path",
+      "category": "construction-diggers",
+      "categoryName": "Construction & Diggers",
+      "filename": "images/backgrounds/construction-diggers/orange-cone-path.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "construction diggers",
+        "construction & diggers"
+      ]
+    },
+    {
+      "id": "construction-diggers/blue-hard-hat-crew",
+      "title": "Blue Hard Hat Crew",
+      "category": "construction-diggers",
+      "categoryName": "Construction & Diggers",
+      "filename": "images/backgrounds/construction-diggers/blue-hard-hat-crew.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "construction diggers",
+        "construction & diggers"
+      ]
+    },
+    {
+      "id": "construction-diggers/green-machine-truck",
+      "title": "Green Machine Truck",
+      "category": "construction-diggers",
+      "categoryName": "Construction & Diggers",
+      "filename": "images/backgrounds/construction-diggers/green-machine-truck.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "construction diggers",
+        "construction & diggers"
+      ]
+    },
+    {
+      "id": "construction-diggers/golden-hour-crane",
+      "title": "Golden Hour Crane",
+      "category": "construction-diggers",
+      "categoryName": "Construction & Diggers",
+      "filename": "images/backgrounds/construction-diggers/golden-hour-crane.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "construction diggers",
+        "construction & diggers"
+      ]
+    },
+    {
+      "id": "construction-diggers/cone-construction-zone",
+      "title": "Cone Construction Zone",
+      "category": "construction-diggers",
+      "categoryName": "Construction & Diggers",
+      "filename": "images/backgrounds/construction-diggers/cone-construction-zone.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "construction diggers",
+        "construction & diggers"
+      ]
+    },
+    {
+      "id": "construction-diggers/pink-hard-hat-fun",
+      "title": "Pink Hard Hat Fun",
+      "category": "construction-diggers",
+      "categoryName": "Construction & Diggers",
+      "filename": "images/backgrounds/construction-diggers/pink-hard-hat-fun.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "construction diggers",
+        "construction & diggers"
+      ]
+    },
+    {
+      "id": "construction-diggers/purple-dump-truck-fleet",
+      "title": "Purple Dump Truck Fleet",
+      "category": "construction-diggers",
+      "categoryName": "Construction & Diggers",
+      "filename": "images/backgrounds/construction-diggers/purple-dump-truck-fleet.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "construction diggers",
+        "construction & diggers"
+      ]
+    },
+    {
+      "id": "construction-diggers/night-shift-crane",
+      "title": "Night Shift Crane",
+      "category": "construction-diggers",
+      "categoryName": "Construction & Diggers",
+      "filename": "images/backgrounds/construction-diggers/night-shift-crane.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "construction diggers",
+        "construction & diggers"
+      ]
+    },
+    {
+      "id": "construction-diggers/rainbow-traffic-cones",
+      "title": "Rainbow Traffic Cones",
+      "category": "construction-diggers",
+      "categoryName": "Construction & Diggers",
+      "filename": "images/backgrounds/construction-diggers/rainbow-traffic-cones.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "construction diggers",
+        "construction & diggers"
+      ]
+    },
+    {
+      "id": "construction-diggers/teal-hard-hat-team",
+      "title": "Teal Hard Hat Team",
+      "category": "construction-diggers",
+      "categoryName": "Construction & Diggers",
+      "filename": "images/backgrounds/construction-diggers/teal-hard-hat-team.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "construction diggers",
+        "construction & diggers"
+      ]
+    },
+    {
+      "id": "construction-diggers/sunny-site-truck",
+      "title": "Sunny Site Truck",
+      "category": "construction-diggers",
+      "categoryName": "Construction & Diggers",
+      "filename": "images/backgrounds/construction-diggers/sunny-site-truck.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "construction diggers",
+        "construction & diggers"
+      ]
+    },
+    {
+      "id": "construction-diggers/sky-high-crane-lift",
+      "title": "Sky High Crane Lift",
+      "category": "construction-diggers",
+      "categoryName": "Construction & Diggers",
+      "filename": "images/backgrounds/construction-diggers/sky-high-crane-lift.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "construction diggers",
+        "construction & diggers"
+      ]
+    },
+    {
+      "id": "construction-diggers/cone-zone-party",
+      "title": "Cone Zone Party",
+      "category": "construction-diggers",
+      "categoryName": "Construction & Diggers",
+      "filename": "images/backgrounds/construction-diggers/cone-zone-party.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "construction diggers",
+        "construction & diggers"
+      ]
+    },
+    {
+      "id": "construction-diggers/builders-hard-hat-day",
+      "title": "Builder's Hard Hat Day",
+      "category": "construction-diggers",
+      "categoryName": "Construction & Diggers",
+      "filename": "images/backgrounds/construction-diggers/builders-hard-hat-day.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "construction diggers",
+        "construction & diggers"
+      ]
+    },
+    {
+      "id": "school-learning/storybook-stack",
+      "title": "Storybook Stack",
+      "category": "school-learning",
+      "categoryName": "School & Learning",
+      "filename": "images/backgrounds/school-learning/storybook-stack.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "school learning",
+        "school & learning"
+      ]
+    },
+    {
+      "id": "school-learning/pencil-case-colors",
+      "title": "Pencil Case Colors",
+      "category": "school-learning",
+      "categoryName": "School & Learning",
+      "filename": "images/backgrounds/school-learning/pencil-case-colors.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "school learning",
+        "school & learning"
+      ]
+    },
+    {
+      "id": "school-learning/apple-for-the-teacher",
+      "title": "Apple for the Teacher",
+      "category": "school-learning",
+      "categoryName": "School & Learning",
+      "filename": "images/backgrounds/school-learning/apple-for-the-teacher.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "school learning",
+        "school & learning"
+      ]
+    },
+    {
+      "id": "school-learning/ready-for-school-backpack",
+      "title": "Ready for School Backpack",
+      "category": "school-learning",
+      "categoryName": "School & Learning",
+      "filename": "images/backgrounds/school-learning/ready-for-school-backpack.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "school learning",
+        "school & learning"
+      ]
+    },
+    {
+      "id": "school-learning/blue-book-collection",
+      "title": "Blue Book Collection",
+      "category": "school-learning",
+      "categoryName": "School & Learning",
+      "filename": "images/backgrounds/school-learning/blue-book-collection.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "school learning",
+        "school & learning"
+      ]
+    },
+    {
+      "id": "school-learning/rainbow-pencil-party",
+      "title": "Rainbow Pencil Party",
+      "category": "school-learning",
+      "categoryName": "School & Learning",
+      "filename": "images/backgrounds/school-learning/rainbow-pencil-party.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "school learning",
+        "school & learning"
+      ]
+    },
+    {
+      "id": "school-learning/green-apple-orchard",
+      "title": "Green Apple Orchard",
+      "category": "school-learning",
+      "categoryName": "School & Learning",
+      "filename": "images/backgrounds/school-learning/green-apple-orchard.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "school learning",
+        "school & learning"
+      ]
+    },
+    {
+      "id": "school-learning/pink-backpack-ready",
+      "title": "Pink Backpack Ready",
+      "category": "school-learning",
+      "categoryName": "School & Learning",
+      "filename": "images/backgrounds/school-learning/pink-backpack-ready.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "school learning",
+        "school & learning"
+      ]
+    },
+    {
+      "id": "school-learning/purple-reading-corner",
+      "title": "Purple Reading Corner",
+      "category": "school-learning",
+      "categoryName": "School & Learning",
+      "filename": "images/backgrounds/school-learning/purple-reading-corner.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "school learning",
+        "school & learning"
+      ]
+    },
+    {
+      "id": "school-learning/classic-yellow-pencils",
+      "title": "Classic Yellow Pencils",
+      "category": "school-learning",
+      "categoryName": "School & Learning",
+      "filename": "images/backgrounds/school-learning/classic-yellow-pencils.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "school learning",
+        "school & learning"
+      ]
+    },
+    {
+      "id": "school-learning/golden-apple-day",
+      "title": "Golden Apple Day",
+      "category": "school-learning",
+      "categoryName": "School & Learning",
+      "filename": "images/backgrounds/school-learning/golden-apple-day.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "school learning",
+        "school & learning"
+      ]
+    },
+    {
+      "id": "school-learning/orange-backpack-adventure",
+      "title": "Orange Backpack Adventure",
+      "category": "school-learning",
+      "categoryName": "School & Learning",
+      "filename": "images/backgrounds/school-learning/orange-backpack-adventure.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "school learning",
+        "school & learning"
+      ]
+    },
+    {
+      "id": "school-learning/teal-textbook-tower",
+      "title": "Teal Textbook Tower",
+      "category": "school-learning",
+      "categoryName": "School & Learning",
+      "filename": "images/backgrounds/school-learning/teal-textbook-tower.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "school learning",
+        "school & learning"
+      ]
+    },
+    {
+      "id": "school-learning/back-to-school-pencils",
+      "title": "Back to School Pencils",
+      "category": "school-learning",
+      "categoryName": "School & Learning",
+      "filename": "images/backgrounds/school-learning/back-to-school-pencils.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "school learning",
+        "school & learning"
+      ]
+    },
+    {
+      "id": "school-learning/red-apple-classroom",
+      "title": "Red Apple Classroom",
+      "category": "school-learning",
+      "categoryName": "School & Learning",
+      "filename": "images/backgrounds/school-learning/red-apple-classroom.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "school learning",
+        "school & learning"
+      ]
+    },
+    {
+      "id": "school-learning/sky-blue-backpack-set",
+      "title": "Sky Blue Backpack Set",
+      "category": "school-learning",
+      "categoryName": "School & Learning",
+      "filename": "images/backgrounds/school-learning/sky-blue-backpack-set.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "school learning",
+        "school & learning"
+      ]
+    },
+    {
+      "id": "school-learning/sunshine-storybooks",
+      "title": "Sunshine Storybooks",
+      "category": "school-learning",
+      "categoryName": "School & Learning",
+      "filename": "images/backgrounds/school-learning/sunshine-storybooks.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "school learning",
+        "school & learning"
+      ]
+    },
+    {
+      "id": "school-learning/lavender-pencil-cup",
+      "title": "Lavender Pencil Cup",
+      "category": "school-learning",
+      "categoryName": "School & Learning",
+      "filename": "images/backgrounds/school-learning/lavender-pencil-cup.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "school learning",
+        "school & learning"
+      ]
+    },
+    {
+      "id": "school-learning/autumn-apple-harvest",
+      "title": "Autumn Apple Harvest",
+      "category": "school-learning",
+      "categoryName": "School & Learning",
+      "filename": "images/backgrounds/school-learning/autumn-apple-harvest.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "school learning",
+        "school & learning"
+      ]
+    },
+    {
+      "id": "school-learning/first-day-backpack",
+      "title": "First Day Backpack",
+      "category": "school-learning",
+      "categoryName": "School & Learning",
+      "filename": "images/backgrounds/school-learning/first-day-backpack.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "school learning",
+        "school & learning"
+      ]
+    },
+    {
+      "id": "safari-desert/desert-cactus-bloom",
+      "title": "Desert Cactus Bloom",
+      "category": "safari-desert",
+      "categoryName": "Safari & Desert",
+      "filename": "images/backgrounds/safari-desert/desert-cactus-bloom.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "safari desert",
+        "safari & desert"
+      ]
+    },
+    {
+      "id": "safari-desert/camel-caravan",
+      "title": "Camel Caravan",
+      "category": "safari-desert",
+      "categoryName": "Safari & Desert",
+      "filename": "images/backgrounds/safari-desert/camel-caravan.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "safari desert",
+        "safari & desert"
+      ]
+    },
+    {
+      "id": "safari-desert/gentle-elephant-herd",
+      "title": "Gentle Elephant Herd",
+      "category": "safari-desert",
+      "categoryName": "Safari & Desert",
+      "filename": "images/backgrounds/safari-desert/gentle-elephant-herd.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "safari desert",
+        "safari & desert"
+      ]
+    },
+    {
+      "id": "safari-desert/tall-giraffe-savanna",
+      "title": "Tall Giraffe Savanna",
+      "category": "safari-desert",
+      "categoryName": "Safari & Desert",
+      "filename": "images/backgrounds/safari-desert/tall-giraffe-savanna.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "safari desert",
+        "safari & desert"
+      ]
+    },
+    {
+      "id": "safari-desert/striped-zebra-crossing",
+      "title": "Striped Zebra Crossing",
+      "category": "safari-desert",
+      "categoryName": "Safari & Desert",
+      "filename": "images/backgrounds/safari-desert/striped-zebra-crossing.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "safari desert",
+        "safari & desert"
+      ]
+    },
+    {
+      "id": "safari-desert/green-oasis-cactus",
+      "title": "Green Oasis Cactus",
+      "category": "safari-desert",
+      "categoryName": "Safari & Desert",
+      "filename": "images/backgrounds/safari-desert/green-oasis-cactus.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "safari desert",
+        "safari & desert"
+      ]
+    },
+    {
+      "id": "safari-desert/sandy-dune-camels",
+      "title": "Sandy Dune Camels",
+      "category": "safari-desert",
+      "categoryName": "Safari & Desert",
+      "filename": "images/backgrounds/safari-desert/sandy-dune-camels.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "safari desert",
+        "safari & desert"
+      ]
+    },
+    {
+      "id": "safari-desert/baby-elephant-splash",
+      "title": "Baby Elephant Splash",
+      "category": "safari-desert",
+      "categoryName": "Safari & Desert",
+      "filename": "images/backgrounds/safari-desert/baby-elephant-splash.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "safari desert",
+        "safari & desert"
+      ]
+    },
+    {
+      "id": "safari-desert/sunset-giraffe-silhouette",
+      "title": "Sunset Giraffe Silhouette",
+      "category": "safari-desert",
+      "categoryName": "Safari & Desert",
+      "filename": "images/backgrounds/safari-desert/sunset-giraffe-silhouette.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "safari desert",
+        "safari & desert"
+      ]
+    },
+    {
+      "id": "safari-desert/zebra-herd-at-dusk",
+      "title": "Zebra Herd at Dusk",
+      "category": "safari-desert",
+      "categoryName": "Safari & Desert",
+      "filename": "images/backgrounds/safari-desert/zebra-herd-at-dusk.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "safari desert",
+        "safari & desert"
+      ]
+    },
+    {
+      "id": "safari-desert/blue-cactus-garden",
+      "title": "Blue Cactus Garden",
+      "category": "safari-desert",
+      "categoryName": "Safari & Desert",
+      "filename": "images/backgrounds/safari-desert/blue-cactus-garden.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "safari desert",
+        "safari & desert"
+      ]
+    },
+    {
+      "id": "safari-desert/golden-hour-camel-trek",
+      "title": "Golden Hour Camel Trek",
+      "category": "safari-desert",
+      "categoryName": "Safari & Desert",
+      "filename": "images/backgrounds/safari-desert/golden-hour-camel-trek.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "safari desert",
+        "safari & desert"
+      ]
+    },
+    {
+      "id": "safari-desert/pink-elephant-parade",
+      "title": "Pink Elephant Parade",
+      "category": "safari-desert",
+      "categoryName": "Safari & Desert",
+      "filename": "images/backgrounds/safari-desert/pink-elephant-parade.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "safari desert",
+        "safari & desert"
+      ]
+    },
+    {
+      "id": "safari-desert/spotted-giraffe-friends",
+      "title": "Spotted Giraffe Friends",
+      "category": "safari-desert",
+      "categoryName": "Safari & Desert",
+      "filename": "images/backgrounds/safari-desert/spotted-giraffe-friends.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "safari desert",
+        "safari & desert"
+      ]
+    },
+    {
+      "id": "safari-desert/purple-savanna-zebras",
+      "title": "Purple Savanna Zebras",
+      "category": "safari-desert",
+      "categoryName": "Safari & Desert",
+      "filename": "images/backgrounds/safari-desert/purple-savanna-zebras.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "safari desert",
+        "safari & desert"
+      ]
+    },
+    {
+      "id": "safari-desert/desert-night-cactus",
+      "title": "Desert Night Cactus",
+      "category": "safari-desert",
+      "categoryName": "Safari & Desert",
+      "filename": "images/backgrounds/safari-desert/desert-night-cactus.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "safari desert",
+        "safari & desert"
+      ]
+    },
+    {
+      "id": "safari-desert/two-hump-camel-fun",
+      "title": "Two-Hump Camel Fun",
+      "category": "safari-desert",
+      "categoryName": "Safari & Desert",
+      "filename": "images/backgrounds/safari-desert/two-hump-camel-fun.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "safari desert",
+        "safari & desert"
+      ]
+    },
+    {
+      "id": "safari-desert/elephant-friends-watering-hole",
+      "title": "Elephant & Friends Watering Hole",
+      "category": "safari-desert",
+      "categoryName": "Safari & Desert",
+      "filename": "images/backgrounds/safari-desert/elephant-friends-watering-hole.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "safari desert",
+        "safari & desert"
+      ]
+    },
+    {
+      "id": "safari-desert/rainbow-giraffe-spots",
+      "title": "Rainbow Giraffe Spots",
+      "category": "safari-desert",
+      "categoryName": "Safari & Desert",
+      "filename": "images/backgrounds/safari-desert/rainbow-giraffe-spots.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "safari desert",
+        "safari & desert"
+      ]
+    },
+    {
+      "id": "safari-desert/zebra-stripe-party",
+      "title": "Zebra Stripe Party",
+      "category": "safari-desert",
+      "categoryName": "Safari & Desert",
+      "filename": "images/backgrounds/safari-desert/zebra-stripe-party.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "safari desert",
+        "safari & desert"
+      ]
+    },
+    {
+      "id": "reptiles-amphibians/leaping-green-frogs",
+      "title": "Leaping Green Frogs",
+      "category": "reptiles-amphibians",
+      "categoryName": "Reptiles & Amphibians",
+      "filename": "images/backgrounds/reptiles-amphibians/leaping-green-frogs.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "reptiles amphibians",
+        "reptiles & amphibians"
+      ]
+    },
+    {
+      "id": "reptiles-amphibians/basking-turtle-friends",
+      "title": "Basking Turtle Friends",
+      "category": "reptiles-amphibians",
+      "categoryName": "Reptiles & Amphibians",
+      "filename": "images/backgrounds/reptiles-amphibians/basking-turtle-friends.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "reptiles amphibians",
+        "reptiles & amphibians"
+      ]
+    },
+    {
+      "id": "reptiles-amphibians/color-changing-chameleon",
+      "title": "Color-Changing Chameleon",
+      "category": "reptiles-amphibians",
+      "categoryName": "Reptiles & Amphibians",
+      "filename": "images/backgrounds/reptiles-amphibians/color-changing-chameleon.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "reptiles amphibians",
+        "reptiles & amphibians"
+      ]
+    },
+    {
+      "id": "reptiles-amphibians/friendly-garden-snake",
+      "title": "Friendly Garden Snake",
+      "category": "reptiles-amphibians",
+      "categoryName": "Reptiles & Amphibians",
+      "filename": "images/backgrounds/reptiles-amphibians/friendly-garden-snake.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "reptiles amphibians",
+        "reptiles & amphibians"
+      ]
+    },
+    {
+      "id": "reptiles-amphibians/blue-poison-frog",
+      "title": "Blue Poison Frog",
+      "category": "reptiles-amphibians",
+      "categoryName": "Reptiles & Amphibians",
+      "filename": "images/backgrounds/reptiles-amphibians/blue-poison-frog.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "reptiles amphibians",
+        "reptiles & amphibians"
+      ]
+    },
+    {
+      "id": "reptiles-amphibians/sea-turtle-cove",
+      "title": "Sea Turtle Cove",
+      "category": "reptiles-amphibians",
+      "categoryName": "Reptiles & Amphibians",
+      "filename": "images/backgrounds/reptiles-amphibians/sea-turtle-cove.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "reptiles amphibians",
+        "reptiles & amphibians"
+      ]
+    },
+    {
+      "id": "reptiles-amphibians/rainbow-chameleon-mood",
+      "title": "Rainbow Chameleon Mood",
+      "category": "reptiles-amphibians",
+      "categoryName": "Reptiles & Amphibians",
+      "filename": "images/backgrounds/reptiles-amphibians/rainbow-chameleon-mood.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "reptiles amphibians",
+        "reptiles & amphibians"
+      ]
+    },
+    {
+      "id": "reptiles-amphibians/striped-corn-snake",
+      "title": "Striped Corn Snake",
+      "category": "reptiles-amphibians",
+      "categoryName": "Reptiles & Amphibians",
+      "filename": "images/backgrounds/reptiles-amphibians/striped-corn-snake.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "reptiles amphibians",
+        "reptiles & amphibians"
+      ]
+    },
+    {
+      "id": "reptiles-amphibians/tree-frog-hideaway",
+      "title": "Tree Frog Hideaway",
+      "category": "reptiles-amphibians",
+      "categoryName": "Reptiles & Amphibians",
+      "filename": "images/backgrounds/reptiles-amphibians/tree-frog-hideaway.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "reptiles amphibians",
+        "reptiles & amphibians"
+      ]
+    },
+    {
+      "id": "reptiles-amphibians/desert-tortoise-trail",
+      "title": "Desert Tortoise Trail",
+      "category": "reptiles-amphibians",
+      "categoryName": "Reptiles & Amphibians",
+      "filename": "images/backgrounds/reptiles-amphibians/desert-tortoise-trail.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "reptiles amphibians",
+        "reptiles & amphibians"
+      ]
+    },
+    {
+      "id": "reptiles-amphibians/purple-chameleon-chill",
+      "title": "Purple Chameleon Chill",
+      "category": "reptiles-amphibians",
+      "categoryName": "Reptiles & Amphibians",
+      "filename": "images/backgrounds/reptiles-amphibians/purple-chameleon-chill.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "reptiles amphibians",
+        "reptiles & amphibians"
+      ]
+    },
+    {
+      "id": "reptiles-amphibians/emerald-garden-snake",
+      "title": "Emerald Garden Snake",
+      "category": "reptiles-amphibians",
+      "categoryName": "Reptiles & Amphibians",
+      "filename": "images/backgrounds/reptiles-amphibians/emerald-garden-snake.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "reptiles amphibians",
+        "reptiles & amphibians"
+      ]
+    },
+    {
+      "id": "reptiles-amphibians/yellow-spotted-frog",
+      "title": "Yellow Spotted Frog",
+      "category": "reptiles-amphibians",
+      "categoryName": "Reptiles & Amphibians",
+      "filename": "images/backgrounds/reptiles-amphibians/yellow-spotted-frog.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "reptiles amphibians",
+        "reptiles & amphibians"
+      ]
+    },
+    {
+      "id": "reptiles-amphibians/painted-turtle-pond",
+      "title": "Painted Turtle Pond",
+      "category": "reptiles-amphibians",
+      "categoryName": "Reptiles & Amphibians",
+      "filename": "images/backgrounds/reptiles-amphibians/painted-turtle-pond.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "reptiles amphibians",
+        "reptiles & amphibians"
+      ]
+    },
+    {
+      "id": "reptiles-amphibians/sunset-chameleon-branch",
+      "title": "Sunset Chameleon Branch",
+      "category": "reptiles-amphibians",
+      "categoryName": "Reptiles & Amphibians",
+      "filename": "images/backgrounds/reptiles-amphibians/sunset-chameleon-branch.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "reptiles amphibians",
+        "reptiles & amphibians"
+      ]
+    },
+    {
+      "id": "reptiles-amphibians/night-garden-snake",
+      "title": "Night Garden Snake",
+      "category": "reptiles-amphibians",
+      "categoryName": "Reptiles & Amphibians",
+      "filename": "images/backgrounds/reptiles-amphibians/night-garden-snake.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "reptiles amphibians",
+        "reptiles & amphibians"
+      ]
+    },
+    {
+      "id": "reptiles-amphibians/pink-poison-dart-frog",
+      "title": "Pink Poison Dart Frog",
+      "category": "reptiles-amphibians",
+      "categoryName": "Reptiles & Amphibians",
+      "filename": "images/backgrounds/reptiles-amphibians/pink-poison-dart-frog.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "reptiles amphibians",
+        "reptiles & amphibians"
+      ]
+    },
+    {
+      "id": "reptiles-amphibians/galapagos-giant-turtle",
+      "title": "Galapagos Giant Turtle",
+      "category": "reptiles-amphibians",
+      "categoryName": "Reptiles & Amphibians",
+      "filename": "images/backgrounds/reptiles-amphibians/galapagos-giant-turtle.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "reptiles amphibians",
+        "reptiles & amphibians"
+      ]
+    },
+    {
+      "id": "reptiles-amphibians/teal-chameleon-calm",
+      "title": "Teal Chameleon Calm",
+      "category": "reptiles-amphibians",
+      "categoryName": "Reptiles & Amphibians",
+      "filename": "images/backgrounds/reptiles-amphibians/teal-chameleon-calm.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "reptiles amphibians",
+        "reptiles & amphibians"
+      ]
+    },
+    {
+      "id": "reptiles-amphibians/golden-garden-snake",
+      "title": "Golden Garden Snake",
+      "category": "reptiles-amphibians",
+      "categoryName": "Reptiles & Amphibians",
+      "filename": "images/backgrounds/reptiles-amphibians/golden-garden-snake.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "reptiles amphibians",
+        "reptiles & amphibians"
+      ]
+    },
+    {
+      "id": "emoji-faces/happy-face-party",
+      "title": "Happy Face Party",
+      "category": "emoji-faces",
+      "categoryName": "Emojis & Smiley Faces",
+      "filename": "images/backgrounds/emoji-faces/happy-face-party.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "emoji faces",
+        "emojis & smiley faces"
+      ]
+    },
+    {
+      "id": "emoji-faces/cool-sunglasses-squad",
+      "title": "Cool Sunglasses Squad",
+      "category": "emoji-faces",
+      "categoryName": "Emojis & Smiley Faces",
+      "filename": "images/backgrounds/emoji-faces/cool-sunglasses-squad.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "emoji faces",
+        "emojis & smiley faces"
+      ]
+    },
+    {
+      "id": "emoji-faces/heart-eyes-everywhere",
+      "title": "Heart Eyes Everywhere",
+      "category": "emoji-faces",
+      "categoryName": "Emojis & Smiley Faces",
+      "filename": "images/backgrounds/emoji-faces/heart-eyes-everywhere.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "emoji faces",
+        "emojis & smiley faces"
+      ]
+    },
+    {
+      "id": "emoji-faces/winking-smiley-fun",
+      "title": "Winking Smiley Fun",
+      "category": "emoji-faces",
+      "categoryName": "Emojis & Smiley Faces",
+      "filename": "images/backgrounds/emoji-faces/winking-smiley-fun.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "emoji faces",
+        "emojis & smiley faces"
+      ]
+    },
+    {
+      "id": "emoji-faces/star-struck-smiles",
+      "title": "Star Struck Smiles",
+      "category": "emoji-faces",
+      "categoryName": "Emojis & Smiley Faces",
+      "filename": "images/backgrounds/emoji-faces/star-struck-smiles.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "emoji faces",
+        "emojis & smiley faces"
+      ]
+    },
+    {
+      "id": "emoji-faces/pink-happy-faces",
+      "title": "Pink Happy Faces",
+      "category": "emoji-faces",
+      "categoryName": "Emojis & Smiley Faces",
+      "filename": "images/backgrounds/emoji-faces/pink-happy-faces.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "emoji faces",
+        "emojis & smiley faces"
+      ]
+    },
+    {
+      "id": "emoji-faces/blue-sunglasses-vibes",
+      "title": "Blue Sunglasses Vibes",
+      "category": "emoji-faces",
+      "categoryName": "Emojis & Smiley Faces",
+      "filename": "images/backgrounds/emoji-faces/blue-sunglasses-vibes.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "emoji faces",
+        "emojis & smiley faces"
+      ]
+    },
+    {
+      "id": "emoji-faces/rainbow-heart-eyes",
+      "title": "Rainbow Heart Eyes",
+      "category": "emoji-faces",
+      "categoryName": "Emojis & Smiley Faces",
+      "filename": "images/backgrounds/emoji-faces/rainbow-heart-eyes.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "emoji faces",
+        "emojis & smiley faces"
+      ]
+    },
+    {
+      "id": "emoji-faces/green-winking-crew",
+      "title": "Green Winking Crew",
+      "category": "emoji-faces",
+      "categoryName": "Emojis & Smiley Faces",
+      "filename": "images/backgrounds/emoji-faces/green-winking-crew.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "emoji faces",
+        "emojis & smiley faces"
+      ]
+    },
+    {
+      "id": "emoji-faces/golden-star-smiles",
+      "title": "Golden Star Smiles",
+      "category": "emoji-faces",
+      "categoryName": "Emojis & Smiley Faces",
+      "filename": "images/backgrounds/emoji-faces/golden-star-smiles.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "emoji faces",
+        "emojis & smiley faces"
+      ]
+    },
+    {
+      "id": "emoji-faces/purple-happy-vibes",
+      "title": "Purple Happy Vibes",
+      "category": "emoji-faces",
+      "categoryName": "Emojis & Smiley Faces",
+      "filename": "images/backgrounds/emoji-faces/purple-happy-vibes.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "emoji faces",
+        "emojis & smiley faces"
+      ]
+    },
+    {
+      "id": "emoji-faces/orange-sunglasses-cool",
+      "title": "Orange Sunglasses Cool",
+      "category": "emoji-faces",
+      "categoryName": "Emojis & Smiley Faces",
+      "filename": "images/backgrounds/emoji-faces/orange-sunglasses-cool.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "emoji faces",
+        "emojis & smiley faces"
+      ]
+    },
+    {
+      "id": "emoji-faces/sweetheart-smiley-mix",
+      "title": "Sweetheart Smiley Mix",
+      "category": "emoji-faces",
+      "categoryName": "Emojis & Smiley Faces",
+      "filename": "images/backgrounds/emoji-faces/sweetheart-smiley-mix.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "emoji faces",
+        "emojis & smiley faces"
+      ]
+    },
+    {
+      "id": "emoji-faces/playful-wink-party",
+      "title": "Playful Wink Party",
+      "category": "emoji-faces",
+      "categoryName": "Emojis & Smiley Faces",
+      "filename": "images/backgrounds/emoji-faces/playful-wink-party.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "emoji faces",
+        "emojis & smiley faces"
+      ]
+    },
+    {
+      "id": "emoji-faces/night-sky-star-smiles",
+      "title": "Night Sky Star Smiles",
+      "category": "emoji-faces",
+      "categoryName": "Emojis & Smiley Faces",
+      "filename": "images/backgrounds/emoji-faces/night-sky-star-smiles.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "emoji faces",
+        "emojis & smiley faces"
+      ]
+    },
+    {
+      "id": "emoji-faces/sunny-yellow-grins",
+      "title": "Sunny Yellow Grins",
+      "category": "emoji-faces",
+      "categoryName": "Emojis & Smiley Faces",
+      "filename": "images/backgrounds/emoji-faces/sunny-yellow-grins.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "emoji faces",
+        "emojis & smiley faces"
+      ]
+    },
+    {
+      "id": "emoji-faces/teal-sunglasses-chill",
+      "title": "Teal Sunglasses Chill",
+      "category": "emoji-faces",
+      "categoryName": "Emojis & Smiley Faces",
+      "filename": "images/backgrounds/emoji-faces/teal-sunglasses-chill.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "emoji faces",
+        "emojis & smiley faces"
+      ]
+    },
+    {
+      "id": "emoji-faces/confetti-heart-eyes",
+      "title": "Confetti Heart Eyes",
+      "category": "emoji-faces",
+      "categoryName": "Emojis & Smiley Faces",
+      "filename": "images/backgrounds/emoji-faces/confetti-heart-eyes.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "emoji faces",
+        "emojis & smiley faces"
+      ]
+    },
+    {
+      "id": "emoji-faces/silly-wink-squad",
+      "title": "Silly Wink Squad",
+      "category": "emoji-faces",
+      "categoryName": "Emojis & Smiley Faces",
+      "filename": "images/backgrounds/emoji-faces/silly-wink-squad.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "emoji faces",
+        "emojis & smiley faces"
+      ]
+    },
+    {
+      "id": "emoji-faces/all-star-smiley-mix",
+      "title": "All-Star Smiley Mix",
+      "category": "emoji-faces",
+      "categoryName": "Emojis & Smiley Faces",
+      "filename": "images/backgrounds/emoji-faces/all-star-smiley-mix.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "emoji faces",
+        "emojis & smiley faces"
+      ]
+    },
+    {
+      "id": "board-games-puzzles/rolling-dice-fun",
+      "title": "Rolling Dice Fun",
+      "category": "board-games-puzzles",
+      "categoryName": "Board Games & Puzzles",
+      "filename": "images/backgrounds/board-games-puzzles/rolling-dice-fun.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "board games puzzles",
+        "board games & puzzles"
+      ]
+    },
+    {
+      "id": "board-games-puzzles/puzzle-piece-puzzle",
+      "title": "Puzzle Piece Puzzle",
+      "category": "board-games-puzzles",
+      "categoryName": "Board Games & Puzzles",
+      "filename": "images/backgrounds/board-games-puzzles/puzzle-piece-puzzle.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "board games puzzles",
+        "board games & puzzles"
+      ]
+    },
+    {
+      "id": "board-games-puzzles/playing-card-hearts",
+      "title": "Playing Card Hearts",
+      "category": "board-games-puzzles",
+      "categoryName": "Board Games & Puzzles",
+      "filename": "images/backgrounds/board-games-puzzles/playing-card-hearts.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "board games puzzles",
+        "board games & puzzles"
+      ]
+    },
+    {
+      "id": "board-games-puzzles/star-token-game-night",
+      "title": "Star Token Game Night",
+      "category": "board-games-puzzles",
+      "categoryName": "Board Games & Puzzles",
+      "filename": "images/backgrounds/board-games-puzzles/star-token-game-night.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "board games puzzles",
+        "board games & puzzles"
+      ]
+    },
+    {
+      "id": "board-games-puzzles/colorful-dice-roll",
+      "title": "Colorful Dice Roll",
+      "category": "board-games-puzzles",
+      "categoryName": "Board Games & Puzzles",
+      "filename": "images/backgrounds/board-games-puzzles/colorful-dice-roll.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "board games puzzles",
+        "board games & puzzles"
+      ]
+    },
+    {
+      "id": "board-games-puzzles/rainbow-puzzle-pieces",
+      "title": "Rainbow Puzzle Pieces",
+      "category": "board-games-puzzles",
+      "categoryName": "Board Games & Puzzles",
+      "filename": "images/backgrounds/board-games-puzzles/rainbow-puzzle-pieces.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "board games puzzles",
+        "board games & puzzles"
+      ]
+    },
+    {
+      "id": "board-games-puzzles/blue-card-deck",
+      "title": "Blue Card Deck",
+      "category": "board-games-puzzles",
+      "categoryName": "Board Games & Puzzles",
+      "filename": "images/backgrounds/board-games-puzzles/blue-card-deck.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "board games puzzles",
+        "board games & puzzles"
+      ]
+    },
+    {
+      "id": "board-games-puzzles/golden-dice-party",
+      "title": "Golden Dice Party",
+      "category": "board-games-puzzles",
+      "categoryName": "Board Games & Puzzles",
+      "filename": "images/backgrounds/board-games-puzzles/golden-dice-party.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "board games puzzles",
+        "board games & puzzles"
+      ]
+    },
+    {
+      "id": "board-games-puzzles/jigsaw-adventure",
+      "title": "Jigsaw Adventure",
+      "category": "board-games-puzzles",
+      "categoryName": "Board Games & Puzzles",
+      "filename": "images/backgrounds/board-games-puzzles/jigsaw-adventure.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "board games puzzles",
+        "board games & puzzles"
+      ]
+    },
+    {
+      "id": "board-games-puzzles/heart-card-game",
+      "title": "Heart Card Game",
+      "category": "board-games-puzzles",
+      "categoryName": "Board Games & Puzzles",
+      "filename": "images/backgrounds/board-games-puzzles/heart-card-game.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "board games puzzles",
+        "board games & puzzles"
+      ]
+    },
+    {
+      "id": "board-games-puzzles/purple-dice-tumble",
+      "title": "Purple Dice Tumble",
+      "category": "board-games-puzzles",
+      "categoryName": "Board Games & Puzzles",
+      "filename": "images/backgrounds/board-games-puzzles/purple-dice-tumble.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "board games puzzles",
+        "board games & puzzles"
+      ]
+    },
+    {
+      "id": "board-games-puzzles/puzzle-time-together",
+      "title": "Puzzle Time Together",
+      "category": "board-games-puzzles",
+      "categoryName": "Board Games & Puzzles",
+      "filename": "images/backgrounds/board-games-puzzles/puzzle-time-together.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "board games puzzles",
+        "board games & puzzles"
+      ]
+    },
+    {
+      "id": "board-games-puzzles/star-card-shuffle",
+      "title": "Star Card Shuffle",
+      "category": "board-games-puzzles",
+      "categoryName": "Board Games & Puzzles",
+      "filename": "images/backgrounds/board-games-puzzles/star-card-shuffle.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "board games puzzles",
+        "board games & puzzles"
+      ]
+    },
+    {
+      "id": "board-games-puzzles/neon-dice-night",
+      "title": "Neon Dice Night",
+      "category": "board-games-puzzles",
+      "categoryName": "Board Games & Puzzles",
+      "filename": "images/backgrounds/board-games-puzzles/neon-dice-night.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "board games puzzles",
+        "board games & puzzles"
+      ]
+    },
+    {
+      "id": "board-games-puzzles/sunny-puzzle-pieces",
+      "title": "Sunny Puzzle Pieces",
+      "category": "board-games-puzzles",
+      "categoryName": "Board Games & Puzzles",
+      "filename": "images/backgrounds/board-games-puzzles/sunny-puzzle-pieces.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "board games puzzles",
+        "board games & puzzles"
+      ]
+    },
+    {
+      "id": "board-games-puzzles/circle-token-card-game",
+      "title": "Circle Token Card Game",
+      "category": "board-games-puzzles",
+      "categoryName": "Board Games & Puzzles",
+      "filename": "images/backgrounds/board-games-puzzles/circle-token-card-game.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "board games puzzles",
+        "board games & puzzles"
+      ]
+    },
+    {
+      "id": "board-games-puzzles/cotton-candy-dice",
+      "title": "Cotton Candy Dice",
+      "category": "board-games-puzzles",
+      "categoryName": "Board Games & Puzzles",
+      "filename": "images/backgrounds/board-games-puzzles/cotton-candy-dice.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "board games puzzles",
+        "board games & puzzles"
+      ]
+    },
+    {
+      "id": "board-games-puzzles/family-puzzle-night",
+      "title": "Family Puzzle Night",
+      "category": "board-games-puzzles",
+      "categoryName": "Board Games & Puzzles",
+      "filename": "images/backgrounds/board-games-puzzles/family-puzzle-night.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "board games puzzles",
+        "board games & puzzles"
+      ]
+    },
+    {
+      "id": "board-games-puzzles/heart-star-card-mix",
+      "title": "Heart & Star Card Mix",
+      "category": "board-games-puzzles",
+      "categoryName": "Board Games & Puzzles",
+      "filename": "images/backgrounds/board-games-puzzles/heart-star-card-mix.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "board games puzzles",
+        "board games & puzzles"
+      ]
+    },
+    {
+      "id": "board-games-puzzles/game-night-dice-duo",
+      "title": "Game Night Dice Duo",
+      "category": "board-games-puzzles",
+      "categoryName": "Board Games & Puzzles",
+      "filename": "images/backgrounds/board-games-puzzles/game-night-dice-duo.svg",
+      "credit": "Original artwork generated for this app",
+      "tags": [
+        "board games puzzles",
+        "board games & puzzles"
       ]
     }
   ]

@@ -1,8 +1,8 @@
 # Backdrop Buddies 🌈
 
-A fun, colorful web app that lets kids browse and pick from **150 original
-iPad backgrounds** across 25 categories — rainbows, unicorns, dinosaurs,
-mermaids, space, sports, and more.
+A fun, colorful web app that lets kids browse and pick from **450 original
+iPad backgrounds** across 40 categories — rainbows, unicorns, dinosaurs,
+mermaids, space, sports, huskies, arctic animals, robots, pirates, and more.
 
 Open `index.html` in a browser (or serve the folder with any static file
 server) — no build step, no dependencies.
@@ -32,7 +32,7 @@ styles.css               All styling (kid-friendly, rounded, animated)
 app.js                    App logic (grid, search, favorites, preview, confetti)
 images/
   backgrounds.json        Metadata for every background (id, title, category, tags…)
-  backgrounds/<category>/ 150 original SVG background artworks, 6 per category
+  backgrounds/<category>/ 450 original SVG background artworks (6-20 per category)
   icons/                  UI icon set (heart, star, arrows, search, sound, …)
 scripts/
   generate_backgrounds.py Procedurally generates every background SVG + the

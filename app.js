@@ -57,6 +57,8 @@
     setBgBtn: document.getElementById("set-bg-btn"),
     downloadBtn: document.getElementById("download-btn"),
     setToast: document.getElementById("set-toast"),
+    setToastTitle: document.getElementById("set-toast-title"),
+    setToastSubtitle: document.getElementById("set-toast-subtitle"),
     confettiWrap: document.getElementById("confetti-canvas-wrap"),
   };
 
@@ -489,22 +491,112 @@
     if (window.resetZoom) window.resetZoom();
   }
 
-  // ---- Set as Background (visual feedback only) ------------------------------
-  el.setBgBtn.addEventListener("click", () => {
+  // ---- Set as Background -------------------------------------------------------
+  // No webpage can set a device's actual Home Screen/Lock Screen wallpaper --
+  // there's no browser API for that. The most helpful real thing we *can* do
+  // is save the image (through the native share sheet on iOS, so it lands in
+  // Photos) and tell the kid/parent exactly how to finish the job from there.
+  el.setBgBtn.addEventListener("click", async () => {
+    const bg = previewList[state.previewIndex];
+    if (!bg || el.setBgBtn.disabled) return;
+
     launchConfetti();
-    el.setToast.classList.add("show");
     playChime();
-    clearTimeout(el.setToast._t);
-    el.setToast._t = setTimeout(() => el.setToast.classList.remove("show"), 1800);
+    setBtnBusy(true);
+
+    let outcome = "error";
+    try {
+      const blob = await getShareableImageBlob(bg);
+      const ext = blob.type === "image/png" ? "png" : "jpg";
+      const shareFilename = `${slugForFilename(bg.title)}.${ext}`;
+      const file = new File([blob], shareFilename, { type: blob.type });
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({ files: [file], title: bg.title });
+        outcome = "shared";
+      } else {
+        triggerDownload(blob, shareFilename);
+        outcome = "downloaded";
+      }
+    } catch (err) {
+      outcome = (err && err.name === "AbortError") ? "cancelled" : "error";
+      if (outcome === "error") console.error("Couldn't prepare image to save", err);
+    }
+
+    setBtnBusy(false);
+    showSetBgToast(outcome);
   });
+
+  function setBtnBusy(busy) {
+    el.setBgBtn.disabled = busy;
+    el.setBgBtn.classList.toggle("is-busy", busy);
+  }
+
+  function showSetBgToast(outcome) {
+    const MESSAGES = {
+      shared: ["Nice!", "Open Photos, find it, then tap Share → Use as Wallpaper 🎉"],
+      downloaded: ["Saved!", "Open your Downloads, then set it as Wallpaper from Photos."],
+      cancelled: ["No worries!", "Tap Set as Background anytime, or use Download below."],
+      error: ["Oops!", "Try the Download button below, then set it as Wallpaper from Photos."],
+    };
+    const [title, subtitle] = MESSAGES[outcome] || MESSAGES.error;
+    el.setToastTitle.textContent = title;
+    el.setToastSubtitle.textContent = subtitle;
+    el.setToast.classList.add("show");
+    clearTimeout(el.setToast._t);
+    el.setToast._t = setTimeout(() => el.setToast.classList.remove("show"), 4200);
+  }
+
+  // Fetches the current background as a real, shareable raster image. SVGs
+  // get rasterized to PNG on a canvas first -- Photos can't store raw SVG,
+  // so sharing/downloading the XML file directly wouldn't be usable as a
+  // wallpaper. The 40 real photos are already JPGs and are fetched as-is.
+  async function getShareableImageBlob(bg) {
+    const res = await fetch(bg.filename);
+    if (!bg.filename.toLowerCase().endsWith(".svg")) {
+      return await res.blob();
+    }
+    const svgText = await res.text();
+    const url = URL.createObjectURL(new Blob([svgText], { type: "image/svg+xml" }));
+    try {
+      const img = new Image();
+      await new Promise((resolve, reject) => {
+        img.onload = resolve;
+        img.onerror = reject;
+        img.src = url;
+      });
+      const canvas = document.createElement("canvas");
+      canvas.width = img.naturalWidth || 2048;
+      canvas.height = img.naturalHeight || 2732;
+      canvas.getContext("2d").drawImage(img, 0, 0, canvas.width, canvas.height);
+      return await new Promise((resolve) => canvas.toBlob(resolve, "image/png"));
+    } finally {
+      URL.revokeObjectURL(url);
+    }
+  }
+
+  function triggerDownload(blob, filename) {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 4000);
+  }
+
+  function slugForFilename(title) {
+    return title.replace(/\s+/g, "-").toLowerCase();
+  }
 
   // ---- Download ----------------------------------------------------------------
   el.downloadBtn.addEventListener("click", () => {
     const bg = previewList[state.previewIndex];
     if (!bg) return;
+    const ext = bg.filename.slice(bg.filename.lastIndexOf(".") + 1);
     const a = document.createElement("a");
     a.href = bg.filename;
-    a.download = bg.title.replace(/\s+/g, "-").toLowerCase() + ".svg";
+    a.download = `${slugForFilename(bg.title)}.${ext}`;
     document.body.appendChild(a);
     a.click();
     a.remove();

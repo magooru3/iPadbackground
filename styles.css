@@ -26,6 +26,15 @@
   --font-display: 'Baloo 2', 'Nunito', system-ui, sans-serif;
   --font-body: 'Nunito', system-ui, sans-serif;
 
+  /* Device safe areas (notch, home indicator). Matters most in standalone
+     "Add to Home Screen" mode combined with viewport-fit=cover below --
+     without these, fixed bottom controls like Set as Background can sit
+     under the home indicator's swipe-gesture area and stop receiving taps. */
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+
   color-scheme: light;
 }
 
@@ -131,7 +140,7 @@ input {
   justify-content: space-between;
   gap: 16px;
   flex-wrap: wrap;
-  padding: 14px 20px;
+  padding: calc(14px + var(--safe-top)) calc(20px + var(--safe-right)) 14px calc(20px + var(--safe-left));
   background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(10px);
   border-bottom: 3px solid #ffe0ec;
@@ -241,7 +250,7 @@ input {
 --------------------------------------------------------- */
 .tabs-wrap {
   position: sticky;
-  top: 116px;
+  top: calc(116px + var(--safe-top));
   z-index: 34;
   background: rgba(255, 255, 255, 0.75);
   backdrop-filter: blur(8px);
@@ -249,7 +258,7 @@ input {
   padding: 10px 0;
 }
 .style-tabs-wrap {
-  top: 72px;
+  top: calc(72px + var(--safe-top));
   z-index: 35;
   background: rgba(255, 255, 255, 0.92);
   border-bottom: 2px solid #eaf2ff;
@@ -504,7 +513,7 @@ input {
   display: flex;
   align-items: center;
   gap: 14px;
-  padding: 14px 18px;
+  padding: calc(14px + var(--safe-top)) calc(18px + var(--safe-right)) 14px calc(18px + var(--safe-left));
   background: rgba(0,0,0,.35);
 }
 .preview-back {
@@ -641,7 +650,7 @@ input {
   display: flex;
   justify-content: center;
   gap: 14px;
-  padding: 18px;
+  padding: 18px calc(18px + var(--safe-right)) calc(18px + var(--safe-bottom)) calc(18px + var(--safe-left));
   background: rgba(0,0,0,.35);
   flex-wrap: wrap;
 }
@@ -659,11 +668,17 @@ a:focus-visible, button:focus-visible, input:focus-visible, .card:focus-visible 
    Small screens
 --------------------------------------------------------- */
 @media (max-width: 640px) {
-  .topbar { padding: 10px 14px; gap: 10px; }
+  .topbar {
+    padding: calc(10px + var(--safe-top)) calc(14px + var(--safe-right)) 10px calc(14px + var(--safe-left));
+    gap: 10px;
+  }
   #search-input { min-width: 140px; }
   .brand h1 { font-size: 19px; }
   .grid-view { padding: 14px 12px 50px; }
   .grid { gap: 10px; }
-  .preview-bottombar { padding: 14px; gap: 10px; }
+  .preview-bottombar {
+    padding: 14px calc(14px + var(--safe-right)) calc(14px + var(--safe-bottom)) calc(14px + var(--safe-left));
+    gap: 10px;
+  }
   .set-btn span, .download-btn span { font-size: 14px; }
 }

@@ -1,12 +1,12 @@
 /* =========================================================
-   Backdrop Buddies — app.js
+   McGraw Girls Backgrounds — app.js
    A fun, colorful iPad background picker for kids.
    ========================================================= */
 (function () {
   "use strict";
 
-  const FAV_KEY = "backdropBuddies.favorites";
-  const SOUND_KEY = "backdropBuddies.soundOn";
+  const FAV_KEY = "mcgrawGirlsBackgrounds.favorites";
+  const SOUND_KEY = "mcgrawGirlsBackgrounds.soundOn";
 
   const state = {
     all: [],
@@ -25,7 +25,8 @@
   const STYLE_LABELS = {
     all: "🎨 All Styles",
     illustrated: "🖍️ Illustrated",
-    realistic: "📷 Realistic Style",
+    realistic: "✨ Realistic Style",
+    photo: "📷 Real Photos",
   };
 
   // ---- DOM refs -----------------------------------------------------
@@ -288,10 +289,10 @@
     overlay.className = "card-overlay";
     overlay.innerHTML = `<p class="card-title">${escapeHtml(bg.title)}</p><p class="card-cat">${escapeHtml(bg.categoryName)}</p>`;
 
-    if (bg.style === "realistic") {
+    if (bg.style === "realistic" || bg.style === "photo") {
       const styleBadge = document.createElement("div");
-      styleBadge.className = "style-badge";
-      styleBadge.textContent = "📷 Realistic";
+      styleBadge.className = "style-badge" + (bg.style === "photo" ? " style-badge-photo" : "");
+      styleBadge.textContent = bg.style === "photo" ? "📷 Real Photo" : "✨ Realistic";
       card.appendChild(styleBadge);
     }
 
@@ -384,7 +385,8 @@
     if (!bg) return;
     el.previewTitle.textContent = bg.title;
     el.previewCategory.textContent = bg.categoryName;
-    el.previewCredit.textContent = bg.style === "realistic" ? (bg.credit || "") : "";
+    el.previewCredit.textContent =
+      (bg.style === "realistic" || bg.style === "photo") ? (bg.credit || "") : "";
     el.previewImg.style.animation = "none";
     void el.previewImg.offsetWidth;
     el.previewImg.style.animation = "";

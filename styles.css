@@ -1,5 +1,5 @@
 /* =========================================================
-   Backdrop Buddies — Kids iPad Background Selector
+   McGraw Girls Backgrounds — Kids iPad Background Selector
    ========================================================= */
 
 :root {
@@ -455,6 +455,9 @@ input {
   font-weight: 800;
   letter-spacing: .2px;
   z-index: 3;
+}
+.style-badge-photo {
+  background: linear-gradient(135deg, var(--green), var(--teal));
 }
 
 .empty-state {
